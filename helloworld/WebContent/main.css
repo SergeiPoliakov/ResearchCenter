@@ -1,0 +1,45 @@
+@CHARSET "UTF-8";
+
+*{
+	margin: 0px;
+	padding: 0px;
+	background-color: #f7fade;
+}
+
+
+
+.module-site{
+	width: 800px;
+	font-size: 30px;
+	
+	border: 4px double black;
+	border-radius: 10px;
+	
+	/*двигаем*/
+	position: absolute;
+	left: 300px;
+	top: 300px;
+}
+.block-title{
+	background-color: #92d36e;
+	height: 80px;
+	width: 800px;
+}
+.block-information{
+	height: 300px;
+	width: 800px;
+	
+}
+
+input[type="submit"]{
+	background-color: #fef8a0;
+	height: 50px;
+	width: 200px;
+	font-size: 30px;
+}
+input[type="text"]{
+	background-color: #f7fade;
+	font-size: 30px;
+	height: 50px;
+	width: 300px;
+}
