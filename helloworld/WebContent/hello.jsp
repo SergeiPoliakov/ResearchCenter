@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
+<%@page import="java.util.Locale"%>
 <%@page import="javax.sql.DataSource"%>
 <%@page import="java.sql.Connection" %>
 <%@page import="com.test.jdbc.htmlHelper"%>
@@ -29,10 +30,7 @@ java.sql.Statement"
 <body>
 
 	<h1>Hello world. Это h1 html</h1>
-
-
-	<div class="module-site">
-	
+	<div class="select-module">
 		<div class="block-title">
 			<%
 				String headstring="Просто селект";
@@ -40,82 +38,81 @@ java.sql.Statement"
 			%>
 		</div>
 		<div class="block-information">
-		
 			<form action="hello.jsp" method="get">
-		<input type="text" name="testquery"/>
-		<input type="submit" value="UP" />
-	</form>
-
-<%if((request.getParameter("testquery") != null)&&
-		(!request.getParameter("testquery").trim().isEmpty())) {%>
-	<%=request.getParameter("testquery") %>
-	<!--работа с бд --> 
-	<%
-	try{
-		out.println("<br/> Тут прошлfffffffffо0");
-		
-		Context initContext = new InitialContext();
-		//Context webContext = (Context)initContext.lookup("java:/comp/env");
-
-		DataSource ds = (DataSource) initContext.lookup("TestDB");
-		Connection dbCon = ds.getConnection();
-		
-		out.println("<br/> Тут прошло1");
-		
-		/*Context initContext = new InitialContext();
-		Context envContext  = (Context)initContext.lookup("java:/comp/env");
-		DataSource ds = (DataSource)envContext.lookup("jdbc/myoracle");
-		Connection connection = ds.getConnection();
-		out.println("<br/> Тут прошло");
-		
-		
-		/*Context context = new InitialContext();
-		DataSource dataSource =
-			(DataSource)context.lookup("java:comp/env/jdbc/TestDB");
-		Connection conn = dataSource.getConnection();*/
-		
+				<input type="text" name="testquery"/>
+				<input type="submit" value="UP" />
+			</form>
+			<%if((request.getParameter("testquery") != null)&&
+				(!request.getParameter("testquery").trim().isEmpty())) {%>
+				<%=request.getParameter("testquery")%><!-- содержимое запроса -->
+				<!--работа с бд --> 
+				<%
+				Connection connect = null; 
+				Statement st = null;
+				ResultSet result = null;
 	
-		for(int i=0; i<42; i++)
-			out.println("42");
-		
-	}
-	catch(Exception e){
-		out.println("<br/> Ошибка: <br/>");
-		out.println(htmlHelper.printErr(e.getMessage()));
-	}
-	%>
-	<!-- работа с бд закончена -->
-	<%}else{
-		String a = "Всем привет!";
-		out.println(a);
-	}%>
-	
-	
-	<!--  -->
-	<% 
-	/*Connection connect = null; 
-	Statement st = null;
-	ResultSet result = null;
-	
-	try{
-
-		Class.forName("oracle.jdbc.driver.OracleDriver");
-		connect =
-				DriverManager.getConnection(
+				try{
+					Locale.setDefault(Locale.ENGLISH);
+					Class.forName("oracle.jdbc.driver.OracleDriver");
+					connect = DriverManager.getConnection(
 						"jdbc:oracle:thin:@127.0.0.1:1521:XE",
-						"sys as sysdba", "1234"); 
-		out.println("<br/> Тут прошло01");
-		
-	}catch(Exception e){
-		out.println("<br/> Ошибка: <br/>");
-		out.println(htmlHelper.printErr(e.getMessage()));
-	}
-	*/
-%>
-
-	<!--  -->
+						"sys as sysdba", "1234");
+					st = connect.createStatement();
+					result = st.executeQuery(request.getParameter("testquery"));
+					result.next();
+					String text = result.getString("login");
+					out.println(text);
+				}
+				catch(Exception e){
+				out.println("<br/> Ошибка: <br/>");
+				out.println(htmlHelper.printErr(e.getMessage()));
+				}
+				finally{
+					connect.close();
+				}
+				//работа с бд закончена
+			}else{
+				String a = "Пустой запрос";
+				out.println(a);
+			}
+			%>
 		</div>
+	</div>
 	
+	<div class="priority-module">
+		<div class="block-title">
+			<%
+				//String headstring2="Просто селект";
+				out.println("Модуль приоритетов");
+			%>
+		</div>
+		<div class="block-information">
+				<%
+				Connection connect = null; 
+				Statement st = null;
+				ResultSet result = null;
+	
+				try{
+					Locale.setDefault(Locale.ENGLISH);
+					Class.forName("oracle.jdbc.driver.OracleDriver");
+					connect = DriverManager.getConnection(
+						"jdbc:oracle:thin:@127.0.0.1:1521:XE",
+						"sys as sysdba", "1234");
+					st = connect.createStatement();
+					result = st.executeQuery(request.getParameter("testquery"));
+					result.next();
+					String text = result.getString("login");
+					out.println(text);
+				}
+				catch(Exception e){
+				out.println("<br/> Ошибка: <br/>");
+				out.println(htmlHelper.printErr(e.getMessage()));
+				}
+				finally{
+					connect.close();
+				}
+			%>
+		</div>
 	</div>
 </body>
 </html>

@@ -8,7 +8,7 @@
 
 
 
-.module-site{
+.select-module{
 	width: 800px;
 	font-size: 30px;
 	
@@ -17,9 +17,23 @@
 	
 	/*двигаем*/
 	position: absolute;
-	left: 300px;
-	top: 300px;
+	left: 400px;
+	top: 10px;
 }
+
+.priority-module{
+	width: 800px;
+	font-size: 30px;
+	
+	border: 4px double black;
+	border-radius: 10px;
+	
+	/*двигаем*/
+	position: absolute;
+	left:400px;
+	top: 500px;
+}
+
 .block-title{
 	background-color: #92d36e;
 	height: 80px;
