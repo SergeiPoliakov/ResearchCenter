@@ -30,7 +30,7 @@
 							<label class="errorEnt">${incorrectLogin}</label>
 						</c:when>
 						<c:when test="${not empty multiName}">
-							<label class="errorEnt">$multiName</label>
+							<label class="errorEnt">${multiName}</label>
 						</c:when>
 					</c:choose>
 				</td>
