@@ -27,7 +27,6 @@ public class htmlHelper {
 				stringBuffer.append(object.toString());
 				stringBuffer.append("</th>");
 			}
-			
 		}
 		stringBuffer.append("</tr></table>");
 		return stringBuffer.toString();
