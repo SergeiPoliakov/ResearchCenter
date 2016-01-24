@@ -1,21 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
+<%@page import="java.sql.*"%>
 <%@page import="java.util.Locale"%>
-<%@page import="javax.sql.DataSource"%>
-<%@page import="java.sql.Connection" %>
-<%@page import="com.test.jdbc.htmlHelper"%>
-<%@page import="javax.naming.Context"%>
-<%@page import="javax.naming.InitialContext"%>
 
-
-
-
-<%@ page import = "java.sql.Connection,
-java.sql.DriverManager,
-java.sql.ResultSet,
-java.sql.SQLException,
-java.sql.Statement"
-%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -28,9 +15,8 @@ java.sql.Statement"
 	<link rel="stylesheet" href="main.css"/>
 </head>
 <body>
-
 	<h1>Hello world. Это h1 html</h1>
-	<div class="select-module">
+	<div class="module-site">
 		<div class="block-title">
 			<%
 				String headstring="Просто селект";
@@ -39,80 +25,47 @@ java.sql.Statement"
 		</div>
 		<div class="block-information">
 			<form action="hello.jsp" method="get">
-				<input type="text" name="testquery"/>
-				<input type="submit" value="UP" />
-			</form>
-			<%if((request.getParameter("testquery") != null)&&
-				(!request.getParameter("testquery").trim().isEmpty())) {%>
-				<%=request.getParameter("testquery")%><!-- содержимое запроса -->
-				<!--работа с бд --> 
-				<%
-				Connection connect = null; 
-				Statement st = null;
-				ResultSet result = null;
+		<input type="text" name="testquery"/>
+		<input type="submit" value="UP" />
+	</form>
+
+<%if((request.getParameter("testquery") != null)&&
+		(!request.getParameter("testquery").trim().isEmpty())) {%>
+	<%=request.getParameter("testquery") %>
+	<!--работа с бд --> 
+	<%
+	try{
+		Locale.setDefault(Locale.ENGLISH);
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		Connection connection = DriverManager.getConnection(
+				"jdbc:oracle:thin:@127.0.0.1:1521:XE",
+				"sys as sysdba", "1234");
+		Statement statement = connection.createStatement();
+		ResultSet resultSet = statement.executeQuery("SELECT * FROM PJ_USERS");
+		
+		ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+		out.println(resultSetMetaData.getColumnCount());
+		
+		resultSet.next();
+		out.println( resultSet.getString("login") );
+		for(int i=0; i<42; i++)
+			out.println("42");
+		
+	}
+	catch(Exception e){
+		out.println("<br/> Ошибка: <br/>");
+		out.println(e.getMessage());
+	}
+	%>
+	<!-- работа с бд закончена -->
+	<%}else{
+		String a = "Всем привет!";
+		out.println(a);
+	}%>
 	
-				try{
-					Locale.setDefault(Locale.ENGLISH);
-					Class.forName("oracle.jdbc.driver.OracleDriver");
-					connect = DriverManager.getConnection(
-						"jdbc:oracle:thin:@127.0.0.1:1521:XE",
-						"sys as sysdba", "1234");
-					st = connect.createStatement();
-					result = st.executeQuery(request.getParameter("testquery"));
-					result.next();
-					String text = result.getString("login");
-					out.println(text);
-				}
-				catch(Exception e){
-				out.println("<br/> Ошибка: <br/>");
-				out.println(htmlHelper.printErr(e.getMessage()));
-				}
-				finally{
-					connect.close();
-				}
-				//работа с бд закончена
-			}else{
-				String a = "Пустой запрос";
-				out.println(a);
-			}
-			%>
+
 		</div>
-	</div>
 	
-	<div class="priority-module">
-		<div class="block-title">
-			<%
-				//String headstring2="Просто селект";
-				out.println("Модуль приоритетов");
-			%>
-		</div>
-		<div class="block-information">
-				<%
-				Connection connect = null; 
-				Statement st = null;
-				ResultSet result = null;
-	
-				try{
-					Locale.setDefault(Locale.ENGLISH);
-					Class.forName("oracle.jdbc.driver.OracleDriver");
-					connect = DriverManager.getConnection(
-						"jdbc:oracle:thin:@127.0.0.1:1521:XE",
-						"sys as sysdba", "1234");
-					st = connect.createStatement();
-					result = st.executeQuery(request.getParameter("testquery"));
-					result.next();
-					String text = result.getString("login");
-					out.println(text);
-				}
-				catch(Exception e){
-				out.println("<br/> Ошибка: <br/>");
-				out.println(htmlHelper.printErr(e.getMessage()));
-				}
-				finally{
-					connect.close();
-				}
-			%>
-		</div>
 	</div>
 </body>
 </html>
