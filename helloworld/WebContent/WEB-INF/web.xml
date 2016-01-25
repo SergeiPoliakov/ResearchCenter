@@ -6,11 +6,12 @@
 	
 	
 	<servlet>
-		<servlet-name>hello111</servlet-name>
-		<servlet-class>com.test.jdbc.generateTable</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>hello111</servlet-name>
-		<url-pattern>*.html</url-pattern>
-	</servlet-mapping>
+    <servlet-name>hello</servlet-name>
+    <servlet-class>com.unc2016.forDataBase.generateTable</servlet-class>
+  </servlet>
+ 
+  <servlet-mapping>
+    <servlet-name>hello</servlet-name>
+    <url-pattern>/hello</url-pattern>
+  </servlet-mapping>
 </web-app>

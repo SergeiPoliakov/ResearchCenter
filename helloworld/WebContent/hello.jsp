@@ -44,11 +44,14 @@
 					"sys as sysdba", "1234");
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery(request.getParameter("testquery"));
+				
 						/*
 		 				 * Вывод названия колонок
 		 				 */
 		 		ResultSetMetaData resultSetMetaData = resultSet.getMetaData();	
 				Object[] headerTable = new Object[resultSetMetaData.getColumnCount()];
+				
+			
 		
 				for(int i=1; i<=resultSetMetaData.getColumnCount(); i++){
 					headerTable[i-1] = resultSetMetaData.getColumnName(i);
@@ -65,13 +68,17 @@
 					out.println( htmlHelper.printRow(true, row) );		
 				}
 			}
-			catch(Exception e){ out.println("<br/> Ошибка: <br/>" + e.getMessage()); }
+			catch(Exception e){ 
+				out.println("<br/> Ошибка: <br/>" + e.getMessage());}
 			finally{ connection.close(); }
 		}%>
 		</div>
-		<div>
-			<form action="test1" method="get"></form>
-		</div>
+		
+		<form action="hello" method="get">
+        <input type="submit" name="accelerate" value="accelerate"/>
+    	</form>
+		
+		<%=request.getAttribute("name") %>
 	</div>
 </body>
 </html>
