@@ -17,6 +17,8 @@
 </head>
 <body>
 <% response.setContentType("text/html;charset=Windows-1251"); %>
+
+
 	<div class="select-module">
 		<div class="block-title">
 			<%
@@ -74,12 +76,20 @@
 			finally{ connection.close(); }
 		}%>
 		</div>
-		
-		<form action="hello" method="get">
-        <input type="submit" name="accelerate" value="accelerate"/>
-    	</form>
-		
-		<%=request.getAttribute("name") %>
+	</div>
+	<div class="select-module-servlet">
+		<div class ="block-title">
+			select через сервлет
+		</div>
+		<div class="block-information">
+			<%request.setAttribute("select", request.getParameter("testquery")); %>
+			<form action="hello" method="get">
+				<input type="hidden" name="select"
+					 value="<%= request.getParameter("testquery") %>"/>
+        		<input type="submit" value="UP"/>
+    		</form>
+			<%=request.getAttribute("name") %>
+		</div>
 	</div>
 </body>
 </html>

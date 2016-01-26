@@ -26,6 +26,19 @@
 	top: 10px;
 }
 
+.select-module-servlet{
+	width: 1000px;
+	font-size: 30px;
+	
+	/*border: 4px double black;*/
+	border-radius: 10px;
+	
+	/*двигаем*/
+	position: absolute;
+	left: 400px;
+	top: 600px;
+}
+
 .priority-module{
 	width: 1000px;
 	font-size: 30px;
