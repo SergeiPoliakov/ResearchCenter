@@ -53,9 +53,6 @@
 		 				 */
 		 		ResultSetMetaData resultSetMetaData = resultSet.getMetaData();	
 				Object[] headerTable = new Object[resultSetMetaData.getColumnCount()];
-				
-			
-		
 				for(int i=1; i<=resultSetMetaData.getColumnCount(); i++){
 					headerTable[i-1] = resultSetMetaData.getColumnName(i);
 				}
@@ -88,7 +85,7 @@
 					 value="<%= request.getParameter("testquery") %>"/>
         		<input type="submit" value="UP"/>
     		</form>
-			<%=request.getAttribute("name") %>
+			<%=request.getAttribute("table") %>
 		</div>
 	</div>
 </body>

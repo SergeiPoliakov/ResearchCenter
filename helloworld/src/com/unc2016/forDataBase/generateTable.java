@@ -1,7 +1,6 @@
 package com.unc2016.forDataBase;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -15,6 +14,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.test.jdbc.htmlHelper;
 
 /**
  * Servlet implementation class generateTable
@@ -44,22 +45,13 @@ public class generateTable extends HttpServlet {
 			throws ServletException, IOException {
 		
 		String select = (String) request.getParameter("select");
-		response.setContentType("text/html;charset=Windows-1251");//указание для PrintWriter
-        
-		
-		
-		
-		
-		
-        String val = null;
+        String table = null;
 		try {
-			val = convertSelectToTable(select);
+			table = convertSelectToTable(select);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        
-		request.setAttribute("name", val);
+		request.setAttribute("table", table);
 		RequestDispatcher disp = request.getRequestDispatcher("hello.jsp");
 		disp.forward(request, response);
 	}
@@ -74,11 +66,7 @@ public class generateTable extends HttpServlet {
 	
 	
 	private String convertSelectToTable(String select) throws SQLException{
-		StringBuffer table = new StringBuffer();
-		table.append("<table>");
-		table.append("<tr><th>34</th><th>");
-		
-		
+		String table=null;
 		Connection connection = null;
 		try{
 			Locale.setDefault(Locale.ENGLISH);
@@ -88,19 +76,11 @@ public class generateTable extends HttpServlet {
 					"sys as sysdba", "1234");
 			Statement statement = connection.createStatement();
 			ResultSet resultSet = statement.executeQuery(select);
-			
-			table.append("HELLOWORLD!!!!!");
-			
+			table = htmlHelper.createTable(resultSet);
 		}
 		catch(Exception e){ System.out.println(e.getMessage()); }
 		finally{ connection.close(); }
-		
-		
-		
-		table.append("</th></tr><tr><th>65</th><th>ывапр</th></tr>");
-		
-		table.append("</table>");
-		return table.toString();
+		return table;
 	}
 
 }
