@@ -33,6 +33,9 @@ public class generateTable extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+		response.setContentType("text/html;charset=Windows-1251");//указание кодировки
 		PrintWriter pw = response.getWriter();
         pw.println("<B>hello world</B>");
         

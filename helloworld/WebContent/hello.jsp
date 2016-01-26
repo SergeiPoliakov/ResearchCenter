@@ -16,6 +16,7 @@
 	<link rel="stylesheet" href="main.css"/>
 </head>
 <body>
+<% response.setContentType("text/html;charset=Windows-1251"); %>
 	<div class="select-module">
 		<div class="block-title">
 			<%
