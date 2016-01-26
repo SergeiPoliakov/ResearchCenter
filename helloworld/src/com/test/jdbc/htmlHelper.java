@@ -8,9 +8,11 @@ public class htmlHelper {
 	public static String printRow(Object... data){
 		StringBuffer stringBuffer = new StringBuffer("<tr>");
 		if(data != null){
-			for(Object object: data){
+			//for(Object object: data){
+			for(int i=0; i<data.length; i++){
 				stringBuffer.append("<td>");
-				stringBuffer.append(object.toString());
+				stringBuffer.append(data[i]);
+				//stringBuffer.append(object.toString());
 				stringBuffer.append("</td>");
 			}
 		}
@@ -19,7 +21,20 @@ public class htmlHelper {
 	}
 	
 	
-	public static String printRow(Boolean isHeader, Object... data){
+	public static String printRow(Boolean a, String... data){//устаревший метод
+		StringBuffer stringBuffer = new StringBuffer("<tr>");
+			//for(Object object: data){
+		for(int i=0; i<data.length;i++){
+				stringBuffer.append("<td>");
+				stringBuffer.append(data[i]);
+				//stringBuffer.append(object.toString());
+				stringBuffer.append("</td>");
+			}
+		stringBuffer.append("</tr>");
+		return stringBuffer.toString();
+	}
+	
+	/*public static String printRow(Boolean isHeader, Object... data){
 		StringBuffer stringBuffer = new StringBuffer("<tr>");
 		if(data != null){
 			for(Object object: data){
@@ -30,7 +45,7 @@ public class htmlHelper {
 		}
 		stringBuffer.append("</tr>");
 		return stringBuffer.toString();
-	}
+	}*/
 	
 	
 	private static String displayTheColumns(ResultSetMetaData rsmd) throws SQLException{

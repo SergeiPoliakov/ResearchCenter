@@ -60,13 +60,17 @@
 						/*
 		 				 * Вывод результатов запроса
 		 				 */
-				while(resultSet.next()){
-					Object[] row = new Object[headerTable.length];	
-					for(int i=1; i<=row.length; i++){
-						row[i-1] = resultSet.getString(i);
+		 		try{
+					while(resultSet.next()){
+						String[] row = new String[headerTable.length];
+						for(int i=1; i<=row.length; i++){
+							row[i-1] = resultSet.getString(i);
+						}
+						out.println( htmlHelper.printRow(true, row) );//падает тут получается		
 					}
-					out.println( htmlHelper.printRow(true, row) );		
-				}
+		 		}
+				catch(Exception e1){out.println("<br/> Ошибка осталась: <br/>"
+		 			+ e1.getMessage() + "<br/>" + e1.getStackTrace());}
 			}
 			catch(Exception e){ 
 				out.println("<br/> Ошибка: <br/>" + e.getMessage());}
@@ -86,6 +90,13 @@
         		<input type="submit" value="UP"/>
     		</form>
 			<%=request.getAttribute("table") %>
+		</div>
+	</div>
+	<div class="priority-module">
+		<div class="block-title">
+			Приоритеты
+		</div>
+		<div class="block-information">
 		</div>
 	</div>
 </body>
