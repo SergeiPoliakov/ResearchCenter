@@ -18,8 +18,27 @@
 <body>
 <% response.setContentType("text/html;charset=Windows-1251"); %>
 
-
-	<div class="select-module">
+<!-- header который скорее свего будет перенесен в самостоятельную jsp страницу -->
+	<div class="header">
+		<div class="logo">214*59</div>
+		<form action="#">
+			<input type="submit" class="menu-button" value="Расходы"/>
+		</form>
+		<form action="#">
+			<input type="submit" class="fast-button" value="+" /><!-- идентифицировать -->
+		</form>
+		<form action="#">
+			<input type="submit" class="menu-button" value="Доходы"/>
+		</form>
+		<form action="#">
+			<input type="submit" class="fast-button" value="+" /><!-- идентифицировать -->
+		</form>
+		<form action="#">
+			<input type="submit" class="menu-button" value="Статистика"/>
+		</form>
+	</div>
+<!-- header закончился -->	
+	<div class="module">
 		<div class="block-title">
 			<%
 				String headstring="Просто селект";
@@ -78,7 +97,7 @@
 		}%>
 		</div>
 	</div>
-	<div class="select-module-servlet">
+	<div class="module">
 		<div class ="block-title">
 			select через сервлет
 		</div>
@@ -92,7 +111,7 @@
 			<%=request.getAttribute("table") %>
 		</div>
 	</div>
-	<div class="priority-module">
+	<div class="module">
 		<div class="block-title">
 			Приоритеты
 		</div>
