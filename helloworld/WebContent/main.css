@@ -79,3 +79,11 @@ input[type="text"]{
 	height: 50px;
 	width: 300px;
 }
+.footer{
+	height: 200px;
+	width: 100%;
+	background-color: #92d36e;
+	font-size: 12px;
+}
+
+}
