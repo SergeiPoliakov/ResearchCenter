@@ -1,7 +1,5 @@
 *.project
 *.tern-project
 *.classpath
-*.settings/
-settings/
-.settings/
+/.settings
 *build
