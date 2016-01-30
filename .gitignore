@@ -2,4 +2,6 @@
 *.tern-project
 *.classpath
 /.settings
+source/.settings
+*/.settings
 *build
