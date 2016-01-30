@@ -15,8 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.test.jdbc.htmlHelper;
-
 /**
  * Servlet implementation class generateTable
  */
@@ -36,6 +34,13 @@ public class generateTable extends HttpServlet {
 	 */
     public void init(HttpServletRequest request, HttpServletResponse response)
     	throws ServletException, IOException {
+    	Locale.setDefault(Locale.ENGLISH);
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
     
 	/**
@@ -45,14 +50,14 @@ public class generateTable extends HttpServlet {
 			throws ServletException, IOException {
 		
 		String select = (String) request.getParameter("select");
-        String table = null;
+        String htmlTable = null;
 		try {
-			table = convertSelectToTable(select);
+			htmlTable = convertSelectToTable(select);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		request.setAttribute("table", table);
-		RequestDispatcher disp = request.getRequestDispatcher("hello.jsp");
+		request.setAttribute("table", htmlTable);
+		RequestDispatcher disp = request.getRequestDispatcher("modules.jsp");
 		disp.forward(request, response);
 	}
 
@@ -68,18 +73,21 @@ public class generateTable extends HttpServlet {
 	private String convertSelectToTable(String select) throws SQLException{
 		String table=null;
 		Connection connection = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
 		try{
-			Locale.setDefault(Locale.ENGLISH);
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			connection = DriverManager.getConnection(
-					"jdbc:oracle:thin:@127.0.0.1:1521:XE",
+			connection = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:XE",
 					"sys as sysdba", "1234");
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery(select);
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(select);
 			table = htmlHelper.createTable(resultSet);
 		}
 		catch(Exception e){ System.out.println(e.getMessage()); }
-		finally{ connection.close(); }
+		finally{ 
+			connection.close();
+			statement.close();
+			resultSet.close();
+			}
 		return table;
 	}
 
