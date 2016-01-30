@@ -4,4 +4,7 @@
 /.settings
 source/.settings
 */.settings
+/.settings/*
+/.settings/
+.settings/*
 *build
