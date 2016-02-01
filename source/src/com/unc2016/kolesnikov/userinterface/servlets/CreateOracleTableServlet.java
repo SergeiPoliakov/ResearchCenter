@@ -1,4 +1,4 @@
-package com.unc2016.kolesnikov.userinterface;
+package com.unc2016.kolesnikov.userinterface.servlets;
 
 import java.io.IOException;
 import java.sql.Connection;

@@ -1,4 +1,4 @@
-package com.unc2016.kolesnikov.dao;
+package com.unc2016.kolesnikov.mvc.dao;
 
 /** sort objects of Site of priorities database
  * 

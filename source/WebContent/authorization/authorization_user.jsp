@@ -41,7 +41,7 @@
 									<input name="submit" type="submit" value = "Submit" />
 								</td>
 								<td>
-									<a href="registration_user.jsp"><label class="registr">Create new account</label></a>
+									<a href="<c:url value="/authorization/registration_user.jsp"/>"><label class="registr">Create new account</label></a>
 								</td>
 							</tr>
 							<tr>

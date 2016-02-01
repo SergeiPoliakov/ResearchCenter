@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.unc2016.kolesnikov.dao.SiteOfPrioritiesObjects;
-import com.unc2016.kolesnikov.dao.UsersDAO;
 import com.unc2016.kolesnikov.mvc.UsersPOJO;
+import com.unc2016.kolesnikov.mvc.dao.SiteOfPrioritiesObjects;
+import com.unc2016.kolesnikov.mvc.dao.UsersDAO;
 
 @WebServlet(value = "/authorization/RegistrationUserServlet")
 public class RegistrationUserServlet extends HttpServlet {

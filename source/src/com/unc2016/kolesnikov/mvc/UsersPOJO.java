@@ -5,7 +5,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import com.unc2016.kolesnikov.dao.SiteOfPrioritiesObjects;
+import com.unc2016.kolesnikov.mvc.dao.SiteOfPrioritiesObjects;
 
 public class UsersPOJO implements SiteOfPrioritiesObjects {
 	
