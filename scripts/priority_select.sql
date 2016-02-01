@@ -5,46 +5,40 @@
  *    - SUM(все ниже расположенные по иерархии элементы),
  *    - коэфицент 
  */
- 
---
-/*вывод всех параметров для всех объектов*/
-SELECT * 
-FROM FIN_OBJECTS fo 
- INNER JOIN FIN_OBJECT_TYPES fot
-  ON fo.FIN_OBJECT_TYPE_ID = fot.FIN_OBJECT_TYPE_ID
- INNER JOIN PJ_ATTRIBUTES pja
-  ON fot.FIN_OBJECT_TYPE_ID = pja.FIN_OBJECT_TYPE_ID
- INNER JOIN PARAMS par
-  ON pja.ATTRIBUTE_ID = par.ATTRIBUTE_ID
-WHERE fot.FIN_OBJECT_TYPE_NAME = 'Категория';
-
-
---
-/*иерархия продуктов*/
-SELECT *
-FROM FIN_OBJECTS
-START WITH Object_name = 'Продукты'
-CONNECT BY PRIOR FIN_OBJECT_ID =  PARENT_ID;
-
---
-/*выводим иерархию всех категорий*/
-SELECT *
-FROM FIN_OBJECTS
-START WITH FIN_OBJECT_ID = ANY 
- (
-  SELECT FIN_OBJECT_ID 
-  FROM FIN_OBJECTS fo 
-   INNER JOIN FIN_OBJECT_TYPES fot
-    ON fo.FIN_OBJECT_TYPE_ID = fot.FIN_OBJECT_TYPE_ID
-  WHERE fot.FIN_OBJECT_TYPE_NAME = 'Категория'
+--выводит иерархию где корнями являются категории(работает)
+SELECT
+ --table_objects_and_its_roots.user_id as us_id,
+ table_objects_and_its_roots.root_object_id,
+ SUM(obj_params.VALUE1) as sum_root
+FROM (
+ SELECT 
+  f_ob.USER_ID as user_id,
+  CONNECT_BY_ROOT f_ob.FIN_OBJECT_ID as root_object_id,
+  f_ob.FIN_OBJECT_ID as object_id,
+  f_ob.FIN_OBJECT_TYPE_ID as object_type
+ FROM FIN_OBJECTS f_ob
+ START WITH f_ob.FIN_OBJECT_ID = ANY(
+  SELECT join_fo.FIN_OBJECT_ID
+  FROM FIN_OBJECTS join_fo 
+   INNER JOIN FIN_OBJECT_TYPES join_fot
+    ON join_fo.FIN_OBJECT_TYPE_ID = join_fot.FIN_OBJECT_TYPE_ID
+  WHERE join_fot.FIN_OBJECT_TYPE_NAME = 'Категория'
  )
-CONNECT BY PRIOR FIN_OBJECT_ID =  PARENT_ID;
+ CONNECT BY PRIOR f_ob.FIN_OBJECT_ID = f_ob.PARENT_ID
+) table_objects_and_its_roots 
+ INNER JOIN PARAMS obj_params
+  ON table_objects_and_its_roots.object_id = obj_params.FIN_OBJECT_ID
+ INNER JOIN PJ_ATTRIBUTES obj_atr
+  ON obj_atr.FIN_OBJECT_TYPE_ID = table_objects_and_its_roots.object_type  
+WHERE obj_atr.ATTRIBUTE_NAME = 'Стоимость' AND
+ obj_params.ATTRIBUTE_ID = obj_atr.ATTRIBUTE_ID
+GROUP BY table_objects_and_its_roots.root_object_id
+;
 
---
+-----------------------
 /*
- * На данный момент 3 категории.
- * Этот запрос содержит 3 строки и подзапросы в колонках
- * Используются соотнесенные подзапросы
+ *рабочий запрос, выводящий необходимые 
+ *для раставления приоритетов категории и даные по ним
  */
 SELECT 
  main_fo.FIN_OBJECT_ID as object_ID, 
@@ -86,21 +80,35 @@ SELECT
  (SELECT SYSDATE FROM DUAL
  ) as final_date, --время до конца расчетн. периода может тоже будет влиять
  (
-  SELECT SUM(select_fo.FIN_OBJECT_ID) 
-  FROM FIN_OBJECTS select_fo 
-   INNER JOIN FIN_OBJECT_TYPES select_fot
-    ON select_fo.FIN_OBJECT_TYPE_ID = select_fot.FIN_OBJECT_TYPE_ID
-   INNER JOIN PJ_ATTRIBUTES select_pja
-    ON select_fot.FIN_OBJECT_TYPE_ID = select_pja.FIN_OBJECT_TYPE_ID
-  START WITH select_fo.FIN_OBJECT_ID = main_fo.FIN_OBJECT_ID
-  CONNECT BY PRIOR select_fo.FIN_OBJECT_ID = select_fo.PARENT_ID
- ) as sum_category--не дописано
+  SELECT
+   SUM(obj_params.VALUE1) as sum_root
+  FROM (
+   SELECT 
+    f_ob.USER_ID as user_id,
+    CONNECT_BY_ROOT f_ob.FIN_OBJECT_ID as root_object_id,
+    f_ob.FIN_OBJECT_ID as object_id,
+    f_ob.FIN_OBJECT_TYPE_ID as object_type
+   FROM FIN_OBJECTS f_ob
+   START WITH f_ob.FIN_OBJECT_ID = ANY(
+    SELECT join_fo.FIN_OBJECT_ID
+    FROM FIN_OBJECTS join_fo 
+     INNER JOIN FIN_OBJECT_TYPES join_fot
+      ON join_fo.FIN_OBJECT_TYPE_ID = join_fot.FIN_OBJECT_TYPE_ID
+    WHERE join_fot.FIN_OBJECT_TYPE_NAME = 'Категория'
+   )
+  CONNECT BY PRIOR f_ob.FIN_OBJECT_ID = f_ob.PARENT_ID
+ ) table_objects_and_its_roots 
+  INNER JOIN PARAMS obj_params
+   ON table_objects_and_its_roots.object_id = obj_params.FIN_OBJECT_ID
+  INNER JOIN PJ_ATTRIBUTES obj_atr
+   ON obj_atr.FIN_OBJECT_TYPE_ID = table_objects_and_its_roots.object_type  
+ WHERE obj_atr.ATTRIBUTE_NAME = 'Стоимость' AND
+  obj_params.ATTRIBUTE_ID = obj_atr.ATTRIBUTE_ID AND 
+  table_objects_and_its_roots.root_object_id = main_fo.FIN_OBJECT_ID
+ GROUP BY table_objects_and_its_roots.root_object_id
+) as sum_category
 FROM FIN_OBJECTS main_fo 
- INNER JOIN FIN_OBJECT_TYPES main_fot
+ LEFT JOIN FIN_OBJECT_TYPES main_fot
   ON main_fo.FIN_OBJECT_TYPE_ID = main_fot.FIN_OBJECT_TYPE_ID
 WHERE main_fot.FIN_OBJECT_TYPE_NAME = 'Категория';
-
-
---отладочный селект
-
-SELECT (COUNT(fin_object_id))*410, 4063+6260+402 FROM FIN_OBJECTS;
+------------------------

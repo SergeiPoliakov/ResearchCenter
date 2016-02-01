@@ -29,26 +29,11 @@ public class generateTable extends HttpServlet {
         super();
     }
     
-    /**
-	 * @see HttpServlet#init(HttpServletRequest request, HttpServletResponse response)
-	 */
-    public void init(HttpServletRequest request, HttpServletResponse response)
-    	throws ServletException, IOException {
-    	Locale.setDefault(Locale.ENGLISH);
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    }
-    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
-		
 		String select = (String) request.getParameter("select");
         String htmlTable = null;
 		try {
@@ -69,14 +54,16 @@ public class generateTable extends HttpServlet {
 		
 	}
 	
-	
 	private String convertSelectToTable(String select) throws SQLException{
 		String table=null;
 		Connection connection = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
 		try{
-			connection = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:XE",
+			Locale.setDefault(Locale.ENGLISH);
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			connection = DriverManager.getConnection(
+					"jdbc:oracle:thin:@127.0.0.1:1521:XE",
 					"sys as sysdba", "1234");
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(select);
@@ -84,10 +71,9 @@ public class generateTable extends HttpServlet {
 		}
 		catch(Exception e){ System.out.println(e.getMessage()); }
 		finally{ 
-			connection.close();
+			connection.close(); 
 			statement.close();
-			resultSet.close();
-			}
+			resultSet.close();}
 		return table;
 	}
 

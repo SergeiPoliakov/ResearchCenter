@@ -59,23 +59,19 @@
 	</div>
 	
 	<div class="module"> 
-		<div class ="block-title">
-			select через сервлет
-		</div>
+		<div class ="block-title">Запрашивай</div>
 		<div class="block-information">
 			<%request.setAttribute("select", request.getParameter("testquery")); %>
-			<form action="modules" method="get">
+			<form action="generateTable" method="get">
 				<input type="hidden" name="select"
 					 value="<%= request.getParameter("testquery") %>"/>
         		<input type="submit" value="UP"/>
     		</form>
-			<%=request.getAttribute("table") %>
+			<%= request.getAttribute("table") %>
 		</div>
 	</div>
 	<div class="module">
-		<div class="block-title">
-			Приоритеты
-		</div>
+		<div class="block-title">Приоритеты</div>
 		<div class="block-information">
 		</div>
 	</div>
