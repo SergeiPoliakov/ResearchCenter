@@ -23,7 +23,7 @@ public class SQL_Queries {
 	//// for fin_object_types
 	public static final String FIN_OBJECT_TYPES_SQL_INSERT = "INSERT INTO fin_object_types(fin_object_type_name) VALUES(?)";
 	public static final String FIN_OBJECT_TYPES_SQL_VIEW = "SELECT * FROM fin_object_types";
-	public static final String FIN_OBJECT_TYPES_SQL_GET = "SELECT fin_object_type_id FROM fin_object_types WHERE fin_object_name like ?";
+	public static final String FIN_OBJECT_TYPES_SQL_GET = "SELECT * FROM fin_object_types WHERE fin_object_type_name like ?";
 	
 	//// for fin_objects
 	public static final String FIN_OBJECTS_SQL_INSERT = "INSERT INTO fin_objects(parent_id, object_name, fin_object_type_id, user_id) VALUES(?, ?, ?, ?)";

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <style>
 table {
@@ -15,7 +15,7 @@ table {
 
 <body>
 
-	<form action="CreateCaseServlet" method="get">
+	<form action="CreateCase" method="get">
 		<table>
 			<tr>
 				<th>Create new case</th>
@@ -42,7 +42,7 @@ table {
 					<input type="checkbox" value="no" id="no" onclick="changeCheck(this)" checked="checked" />no
 				</td>
 				<td>
-					<select name="select" id="parentBlock" style="visibility: hidden" ></select>
+					<select name="parentBlock" id="parentBlock" style="visibility: hidden"></select>
 				</td>
 			</tr>
 			<tr>
@@ -50,8 +50,12 @@ table {
 				<td><input type="text" name="priority_case" /></td>
 			</tr>
 			<tr>
-				<td>Choose date:</td>
-				<td><input type="text" name="date_case" /></td>
+				<td>Choose end date:</td>
+				<td><input type="date" id="date_case" name="date_case"></td>
+			</tr>
+			<tr>
+				<td>Choose cost:</td>
+				<td><input type="text" name="cost_case" id="cost_case" onkeypress="validate()"/></td>
 			</tr>
 			<tr>
 				<td colspan="3"><br /></td>
@@ -64,6 +68,21 @@ table {
 
 </body>
 
+<script type="text/javascript" src="../javascripts/kol/LimitationNumbers.js"></script> 
+<script type="text/javascript">
+	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1;
+	var yyyy = today.getFullYear();
+	if(dd<10) {
+		dd="0"+dd;
+	}
+	if(mm<10) {
+		mm="0"+mm;
+	}
+	var currentDate = yyyy+"-"+mm+"-"+dd;
+	document.getElementById("date_case").setAttribute("min", currentDate);	
+</script>
 <script>
 	function printText(element) {
 		var el = element.value;

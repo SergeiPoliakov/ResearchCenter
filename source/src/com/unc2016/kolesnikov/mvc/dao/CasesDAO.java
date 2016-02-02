@@ -52,19 +52,13 @@ public class CasesDAO implements ObjectsDAO {
 				check = false;
 			}
 
-			// get fin_object_type_id for this case
-			prepare = connect.prepareStatement(SQL_Queries.FIN_OBJECT_TYPES_SQL_GET);
-			prepare.setString(1, casee.get_Fin_object_type_name());
-			result = prepare.executeQuery();
-			result.next();
-			casee.set_Fin_object_type_id(result.getInt(1));
-
 			// add new case
 			prepare = connect.prepareStatement(SQL_Queries.FIN_OBJECTS_SQL_INSERT);
 			prepare.setInt(1, casee.get_Parent_id());
 			prepare.setString(2, casee.get_Object_name());
 			prepare.setInt(3, casee.get_Fin_object_type_id());
 			prepare.setInt(4, casee.get_User_id());
+			prepare.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();

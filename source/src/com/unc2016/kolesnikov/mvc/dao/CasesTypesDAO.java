@@ -51,7 +51,17 @@ public class CasesTypesDAO implements ObjectsDAO {
 
 	@Override
 	public SiteOfPrioritiesObjects getObject(SiteOfPrioritiesObjects object) {
-		// TODO Auto-generated method stub
+		caseType = (CasesTypesPOJO) object;
+		try {
+			prepare = connect.prepareStatement(SQL_Queries.FIN_OBJECT_TYPES_SQL_GET);
+			prepare.setString(1, caseType.get_fin_object_type_name());
+			result = prepare.executeQuery();
+			result.next();
+			caseType.set_fin_object_type_id(result.getInt(1));
+			return caseType;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 

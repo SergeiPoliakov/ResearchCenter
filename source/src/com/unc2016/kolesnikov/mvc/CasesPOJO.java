@@ -1,5 +1,7 @@
 package com.unc2016.kolesnikov.mvc;
 
+import com.unc2016.kolesnikov.mvc.dao.SiteOfPrioritiesObjects;
+
 /**
  * 
  * case model from fin_objects table
@@ -7,7 +9,7 @@ package com.unc2016.kolesnikov.mvc;
  * @author Kolesnikov
  *
  */
-public class CasesPOJO {
+public class CasesPOJO implements SiteOfPrioritiesObjects {
 
 	private int fin_object_id;
 	private int parent_id;

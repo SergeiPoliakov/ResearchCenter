@@ -39,7 +39,6 @@ public class CreateCaseCategoriesServlet extends HttpServlet {
 			caseType = (CasesTypesPOJO) list.get(i);
 			categories += "<option value = \"" + caseType.get_fin_object_type_name() + "\"" + ">"
 					+ caseType.get_fin_object_type_name() + "</option> ";
-			System.out.println(caseType.get_fin_object_type_name());
 		}
 
 		out.print(categories);
