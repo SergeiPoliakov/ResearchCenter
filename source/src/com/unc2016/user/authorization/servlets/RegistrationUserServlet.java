@@ -1,4 +1,4 @@
-package com.unc2016.kolesnikov.authorization.servlets;
+package com.unc2016.user.authorization.servlets;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,16 +10,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.unc2016.mvc.dao.UserDAO;
+import com.unc2016.mvc.models.UserModel;
 
-import com.unc2016.kolesnikov.mvc.UsersPOJO;
-import com.unc2016.kolesnikov.mvc.dao.SiteOfPrioritiesObjects;
-import com.unc2016.kolesnikov.mvc.dao.UsersDAO;
-
-@WebServlet(value = "/authorization/RegistrationUserServlet")
+@WebServlet(value = "/authorization/RegistrationUser")
 public class RegistrationUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private UsersPOJO user = new UsersPOJO();
-	private UsersDAO userDAO = new UsersDAO();
+	private UserModel user = new UserModel();
+	private UserDAO userDAO = new UserDAO();
 	// regular check input data
 	private Pattern loginPat = Pattern.compile("^[A-Za-z0-9]{1,15}$");
 	private Pattern passwordPat = Pattern.compile("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).[^ ]{5,10}$");
@@ -43,14 +41,14 @@ public class RegistrationUserServlet extends HttpServlet {
 		System.out.println(password);
 		System.out.println(name);
 
-		user.setLogin(login);
+		user.set_login(login);
 		loginMat = loginPat.matcher(login);
 		// check correct login
 		if (!loginMat.matches()) {
 			request.setAttribute("incorrectLogin",
 					"Incorrect login, must consist of english letters and no more 15 symbols");
 		} else
-			user.setLogin(login);
+			user.set_login(login);
 
 		// check correct password
 		passwordMat = passwordPat.matcher(password);
@@ -59,7 +57,7 @@ public class RegistrationUserServlet extends HttpServlet {
 					"Incorrect password, must consist of english upper-lower case letters, numbers, no less 5 and no more 10 symbols");
 		} else {
 			user.createHashAndSalt(password);
-			user.setAccountType("user");
+			user.set_account_type("user");
 		}
 
 		// check correct name if have to input
@@ -69,7 +67,7 @@ public class RegistrationUserServlet extends HttpServlet {
 				request.setAttribute("incorrectName",
 						"Incorrect name, must consist of only letters and no more 10 symbols");
 			} else
-				user.setUserName(name);
+				user.set_name(name);
 		}
 
 		if (loginMat.matches() && passwordMat.matches() && name.length() < 1
@@ -77,21 +75,21 @@ public class RegistrationUserServlet extends HttpServlet {
 
 			// check login and password
 			boolean check = false;
-			List<SiteOfPrioritiesObjects> list = userDAO.getAllObjectsDB();
-			UsersPOJO userList = null;
+			List<Object> list = userDAO.getAllObjectsDB();
+			UserModel userList = null;
 
 			for (int i = 0; i < list.size(); i++) {
-				userList = (UsersPOJO) list.get(i);
-				if (user.getLogin().equals(userList.getLogin())) {
+				userList = (UserModel) list.get(i);
+				if (user.get_login().equals(userList.get_login())) {
 					check = true;
-					System.out.println(userList.getLogin());
+					System.out.println(userList.get_login());
 				}
 			}
 			// if user is real new
 			if (!check) {
 				userDAO.addObject(user);
-				user = (UsersPOJO) userDAO.getObject(user);
-				request.setAttribute("loginComplete", user.getLogin());
+				user = (UserModel) userDAO.getObject(user);
+				request.setAttribute("loginComplete", user.get_login());
 				request.setAttribute("welcomeNewUser", "Thank you and Welcome!");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/authorization/welcome_user.jsp");
 				dispatcher.include(request, response);

@@ -1,4 +1,4 @@
-package com.unc2016.kolesnikov.userinterface.servlets;
+package com.unc2016.user.interfaces.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,17 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.unc2016.kolesnikov.mvc.CasesTypesPOJO;
-import com.unc2016.kolesnikov.mvc.dao.CasesTypesDAO;
-import com.unc2016.kolesnikov.mvc.dao.SiteOfPrioritiesObjects;
+import com.unc2016.mvc.dao.CaseDAO;
+import com.unc2016.mvc.models.CaseModel;
 
-/**
- * Servlet implementation class CreateCaseCategoriesServlet
- */
 @WebServlet("/interface/CreateCaseCategories")
 public class CreateCaseCategoriesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private CasesTypesDAO caseTypeContr = new CasesTypesDAO();
+	private CaseDAO caseTypeContr = new CaseDAO();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -31,12 +27,12 @@ public class CreateCaseCategoriesServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
-		List<SiteOfPrioritiesObjects> list = caseTypeContr.getAllObjectsDB();
+		List<Object> list = caseTypeContr.getAllObjectsDB();
 		String categories = "";
-		CasesTypesPOJO caseType = new CasesTypesPOJO();
+		CaseModel caseType = new CaseModel();
 
 		for (int i = 0; i < list.size(); i++) {
-			caseType = (CasesTypesPOJO) list.get(i);
+			caseType = (CaseModel) list.get(i);
 			categories += "<option value = \"" + caseType.get_fin_object_type_name() + "\"" + ">"
 					+ caseType.get_fin_object_type_name() + "</option> ";
 		}

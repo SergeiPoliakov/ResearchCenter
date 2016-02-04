@@ -1,4 +1,4 @@
-package com.unc2016.kolesnikov.mvc;
+package com.unc2016.mvc.connection;
 
 import java.io.FileInputStream;
 import java.io.IOException;

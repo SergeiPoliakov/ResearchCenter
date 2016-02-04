@@ -1,4 +1,4 @@
-package com.unc2016.kolesnikov.userinterface.servlets;
+package com.unc2016.user.interfaces.servlets;
 
 import java.io.IOException;
 
@@ -7,20 +7,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.unc2016.kolesnikov.mvc.CasesPOJO;
-import com.unc2016.kolesnikov.mvc.CasesTypesPOJO;
-import com.unc2016.kolesnikov.mvc.dao.CasesDAO;
-import com.unc2016.kolesnikov.mvc.dao.CasesTypesDAO;
-import com.unc2016.kolesnikov.mvc.dao.SiteOfPrioritiesObjects;
+import com.unc2016.mvc.dao.CaseDAO;
+import com.unc2016.mvc.dao.CaseTypeDAO;
+import com.unc2016.mvc.models.CaseModel;
+import com.unc2016.mvc.models.CaseTypeModel;
 
 @WebServlet("/interface/CreateCase")
 public class CreateCaseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private CasesDAO caseDAO = new CasesDAO();
-	private CasesTypesDAO caseTypeDAO = new CasesTypesDAO();
-	private CasesTypesPOJO caseType = new CasesTypesPOJO();
-	private CasesPOJO casee = new CasesPOJO();
+	private CaseDAO caseDAO = new CaseDAO();
+	private CaseTypeDAO caseTypeDAO = new CaseTypeDAO();
+	private CaseTypeModel caseType = new CaseTypeModel();
+	private CaseModel casee = new CaseModel();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -34,23 +32,23 @@ public class CreateCaseServlet extends HttpServlet {
 		String caseParent = null;
 
 		// check type or create new
-		CasesTypesPOJO type = new CasesTypesPOJO();
+		CaseTypeModel type = new CaseTypeModel();
 		type.set_fin_object_type_name(caseTypeStr);
 		if (!caseTypeStr.equals("Other")) {
-			type = (CasesTypesPOJO) caseTypeDAO.getObject(type);
+			type = (CaseTypeModel) caseTypeDAO.getObject(type);
 		} else {
 			caseTypeDAO.addObject(type);
-			type = (CasesTypesPOJO) caseTypeDAO.getObject(type);
+			type = (CaseTypeModel) caseTypeDAO.getObject(type);
 		}
-		casee.set_Fin_object_type_id(type.get_fin_object_type_id());
+		casee.set_fin_object_type_id(type.get_fin_object_type_id());
 
 		// for parent id
 		if (!request.getParameter("parentBlock").isEmpty()) {
 			caseParent = request.getParameter("parentBlock");
 			// for get parent id for this case
 			caseType.set_fin_object_type_name(caseParent);
-			caseType = (CasesTypesPOJO) caseTypeDAO.getObject(caseType);
-			casee.set_Parent_id(caseType.get_fin_object_type_id());
+			caseType = (CaseTypeModel) caseTypeDAO.getObject(caseType);
+			casee.set_parent_id(caseType.get_fin_object_type_id());
 		}
 
 		String casePriority = request.getParameter("priority_case");
@@ -60,15 +58,15 @@ public class CreateCaseServlet extends HttpServlet {
 		System.out.println(
 				caseName + " " + caseTypeStr + " " + caseParent + " " + casePriority + " " + caseDate + " " + caseCost);
 
-		casee.set_Object_name(caseName);
-		casee.set_Fin_object_type_name(caseTypeStr);
+		casee.set_object_name(caseName);
+		casee.set_fin_object_type_name(caseTypeStr);
 		////
-		casee.set_User_id(1); // temporary id for work this servlet
+		casee.set_user_id(1); // temporary id for work this servlet
 
-		caseDAO.addObject((SiteOfPrioritiesObjects) casee);
+		caseDAO.addObject(casee);
 
-		System.out.println(casee.get_Object_name() + " " + casee.get_Parent_id() + " " + casee.get_Fin_object_type_id()
-				+ " " + casee.get_User_id());
+		System.out.println(casee.get_object_name() + " " + casee.get_parent_id() + " " + casee.get_fin_object_type_id()
+				+ " " + casee.get_user_id());
 
 	}
 

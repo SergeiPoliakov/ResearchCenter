@@ -1,4 +1,4 @@
-package com.unc2016.kolesnikov.userinterface.servlets;
+package com.unc2016.user.interfaces.servlets;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.unc2016.kolesnikov.mvc.ConnectionFactory;
+import com.unc2016.mvc.connection.ConnectionFactory;
 
 
 @WebServlet("/CreateOracleTable")

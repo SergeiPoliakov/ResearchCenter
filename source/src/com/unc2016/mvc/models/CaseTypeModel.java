@@ -1,15 +1,6 @@
-package com.unc2016.kolesnikov.mvc;
+package com.unc2016.mvc.models;
 
-import com.unc2016.kolesnikov.mvc.dao.SiteOfPrioritiesObjects;
-
-/**
- * 
- * case model from fin_object_types table
- * 
- * @author Kolesnikov
- *
- */
-public class CasesTypesPOJO implements SiteOfPrioritiesObjects {
+public class CaseTypeModel {
 
 	private int _fin_object_type_id;
 	private String _fin_object_type_name = null;
@@ -29,5 +20,4 @@ public class CasesTypesPOJO implements SiteOfPrioritiesObjects {
 	public void set_fin_object_type_name(String _fin_object_type_name) {
 		this._fin_object_type_name = _fin_object_type_name;
 	}
-
 }
