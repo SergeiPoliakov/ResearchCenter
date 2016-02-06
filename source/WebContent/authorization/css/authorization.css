@@ -37,5 +37,15 @@
 
 .login, .password {
 	width: 80%;
-	height: 20px;
+	height: 30px;
+}
+
+.logoutButton {
+	background-image: -webkit-linear-gradient(top, #376E00, #6CD500);
+	height: 25px;
+	width: 70px;
+	color: #00120B; /* цвет шрифта */
+	font-size: 13pt; /* размер шрифта */
+	border: 1px #004949 groove; /* рамка */
+	box-shadow: 0 0 10px #F0FFF0; /* тень рамки */
 }
