@@ -1,4 +1,4 @@
-@CHARSET "UTF-8";
+﻿@CHARSET "UTF-8";
 
 *{
 	margin: 0px;
@@ -54,7 +54,7 @@
 	background-color: #92d36e;
 }
 
-.menu-button{
+.menu-button{ 
 	
 }
 .fast-button{
