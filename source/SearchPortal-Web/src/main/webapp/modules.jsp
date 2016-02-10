@@ -11,7 +11,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Modules</title>
         <link href="css/main.css" rel="stylesheet" type="text/css"/>
-        <script src="javascripts/jquery-2.2.0.min.js"></script>
     </head>
     <body>
         <%
@@ -85,7 +84,5 @@
 			</form>
 		</div>
 	</div>
-                
-                        <%= com.netcracker.unc.priorityModule.CalculationPriority.test() %>
     </body>
 </html>
