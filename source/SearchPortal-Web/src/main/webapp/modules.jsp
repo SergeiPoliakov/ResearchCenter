@@ -12,13 +12,14 @@
         <title>Modules</title>
         <link href="css/main.css" rel="stylesheet" type="text/css"/>
         <script src="javascripts/jquery-2.2.0.min.js"></script>
+        <script src ="javascripts/mainModules.js"></script>
     </head>
     <body>
         <%
-		response.setContentType("text/html;charset=Windows-1251");
-		request.setCharacterEncoding("UTF-8");
-		response.setCharacterEncoding("UTF-8");
-	%>
+                response.setContentType("text/html;charset=Windows-1251");
+                request.setCharacterEncoding("UTF-8");
+                response.setCharacterEncoding("UTF-8");
+        %>
         <!-- header который скорее свего будет перенесен в самостоятельную jsp страницу -->
         <div class="header">
             <div class="logo">214*59</div>
@@ -36,56 +37,57 @@
                 <input type="submit" class="fast-button" value="+" />
                 <!-- идентифицировать -->
             </form>
-            <form action="#">
-                <input type="submit" class="menu-button" value="Статистика" />
-            </form>
+            <!--<form action="#">
+                <input type="submit" class="menu-button" id="stasicticMemuButton" value="Статистика" />
+            </form>-->
+            <button id ="statistic-main-button" class="menu-button">"Статистика"</button>
+        </div>
+        <div class="module"  id="select-module1">
+            <div class="block-title">
+                <%
+                        String headstring = "Просто селект";
+                        out.println(headstring);
+                %>
+            </div>
+            <div class="block-information">
+                <form action="modules.jsp" method="get">
+                    <input type="text" name="testquery" /> <input type="submit"
+                                                                  value="UP" />
+                </form>
+                <%
+                        if ((request.getParameter("testquery") != null) && (!request.getParameter("testquery").trim().isEmpty())) {
+                %>
+                <%=request.getParameter("testquery")%>
+                <%
+                        }
+                %>
+            </div>
+        </div>
+
+        <div class="module">
+            <div class="block-title">Запрашивай</div>
+            <div class="block-information">
+                <%
+                        request.setAttribute("select", request.getParameter("testquery"));
+                %>
+                <form action="generateTable" method="get">
+                    <input type="hidden" name="select"
+                           value="<%=request.getParameter("testquery")%>" /> <input
+                           type="submit" value="UP" />
+                </form>
+                <%=request.getAttribute("table")%>
+            </div>
         </div>
         <div class="module">
-		<div class="block-title">
-			<%
-				String headstring = "Просто селект";
-				out.println(headstring);
-			%>
-		</div>
-		<div class="block-information">
-			<form action="modules.jsp" method="get">
-				<input type="text" name="testquery" /> <input type="submit"
-					value="UP" />
-			</form>
-			<%
-				if ((request.getParameter("testquery") != null) && (!request.getParameter("testquery").trim().isEmpty())) {
-			%>
-			<%=request.getParameter("testquery")%>
-			<%
-				}
-			%>
-		</div>
-	</div>
+            <div class="block-title">Приоритеты</div>
+            <div class="block-information">
+                <form action="PriorityMod" method="get">
+                    <input type="hidden" name="user_id" value="1005" /> <input
+                        type="submit" value="UP" />
+                </form>
+            </div>
+        </div>
 
-	<div class="module">
-		<div class="block-title">Запрашивай</div>
-		<div class="block-information">
-			<%
-				request.setAttribute("select", request.getParameter("testquery"));
-			%>
-			<form action="generateTable" method="get">
-				<input type="hidden" name="select"
-					value="<%=request.getParameter("testquery")%>" /> <input
-					type="submit" value="UP" />
-			</form>
-			<%=request.getAttribute("table")%>
-		</div>
-	</div>
-	<div class="module">
-		<div class="block-title">Приоритеты</div>
-		<div class="block-information">
-			<form action="PriorityMod" method="get">
-				<input type="hidden" name="user_id" value="1005" /> <input
-					type="submit" value="UP" />
-			</form>
-		</div>
-	</div>
-                
-                        <%= com.netcracker.unc.priorityModule.CalculationPriority.test() %>
+        <%= com.netcracker.unc.priorityModule.CalculationPriority.test() %>
     </body>
 </html>

@@ -5,3 +5,9 @@
  */
 
 
+$(function () {
+    $("#statistic-main-button").click(function (e) {
+        $(this).text("pushed");
+        $("#select-module1").css("visibility", "hidden");
+    });
+});
