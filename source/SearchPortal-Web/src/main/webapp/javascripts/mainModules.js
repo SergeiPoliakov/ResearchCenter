@@ -6,8 +6,20 @@
 
 
 $(function () {
-    $("#statistic-main-button").click(function (e) {
-        $(this).text("pushed");
+    $("#statistic-menu-button").click(function (e) {
+        //$(this).text("pushed");
+        $("#select-module1").css("visibility", "visible");
+        
+        
+
+        $("#priority-module").css("visibility", "hidden");
+    });
+    $("#cost-menu-button").click(function (e) {
+        //$(this).text("pushed");
         $("#select-module1").css("visibility", "hidden");
+        
+        
+
+        $("#priority-module").css("visibility", "visible");
     });
 });

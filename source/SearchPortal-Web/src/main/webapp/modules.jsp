@@ -22,10 +22,11 @@
         %>
         <!-- header который скорее свего будет перенесен в самостоятельную jsp страницу -->
         <div class="header">
-            <div class="logo">214*59</div>
-            <form action="#">
+            <div id="logo" >214*59</div>
+            <!--<form action="#">
                 <input type="submit" class="menu-button" value="Расходы" />
-            </form>
+            </form>-->
+            <button id ="cost-menu-button" class="menu-button">"Расходы"</button>
             <form action="#">
                 <input type="submit" class="fast-button" value="+" />
                 <!-- идентифицировать -->
@@ -40,7 +41,7 @@
             <!--<form action="#">
                 <input type="submit" class="menu-button" id="stasicticMemuButton" value="Статистика" />
             </form>-->
-            <button id ="statistic-main-button" class="menu-button">"Статистика"</button>
+            <button id ="statistic-menu-button" class="menu-button">"Статистика"</button>
         </div>
         <div class="module"  id="select-module1">
             <div class="block-title">
@@ -78,7 +79,7 @@
                 <%=request.getAttribute("table")%>
             </div>
         </div>
-        <div class="module">
+        <div class="module" id="priority-module">
             <div class="block-title">Приоритеты</div>
             <div class="block-information">
                 <form action="PriorityMod" method="get">
