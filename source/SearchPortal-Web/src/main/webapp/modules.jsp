@@ -23,10 +23,7 @@
         <!-- header который скорее свего будет перенесен в самостоятельную jsp страницу -->
         <div class="header">
             <div id="logo" >214*59</div>
-            <!--<form action="#">
-                <input type="submit" class="menu-button" value="Расходы" />
-            </form>-->
-            <button id ="cost-menu-button" class="menu-button">"Расходы"</button>
+            <button id ="cost-menu-button" class="menu-button">Расходы</button>
             <form action="#">
                 <input type="submit" class="fast-button" value="+" />
                 <!-- идентифицировать -->
@@ -38,10 +35,7 @@
                 <input type="submit" class="fast-button" value="+" />
                 <!-- идентифицировать -->
             </form>
-            <!--<form action="#">
-                <input type="submit" class="menu-button" id="stasicticMemuButton" value="Статистика" />
-            </form>-->
-            <button id ="statistic-menu-button" class="menu-button">"Статистика"</button>
+            <button id ="statistic-menu-button" class="menu-button">Статистика</button>
         </div>
         <div class="module"  id="select-module1">
             <div class="block-title">
@@ -62,21 +56,6 @@
                 <%
                         }
                 %>
-            </div>
-        </div>
-
-        <div class="module">
-            <div class="block-title">Запрашивай</div>
-            <div class="block-information">
-                <%
-                        request.setAttribute("select", request.getParameter("testquery"));
-                %>
-                <form action="generateTable" method="get">
-                    <input type="hidden" name="select"
-                           value="<%=request.getParameter("testquery")%>" /> <input
-                           type="submit" value="UP" />
-                </form>
-                <%=request.getAttribute("table")%>
             </div>
         </div>
         <div class="module" id="priority-module">

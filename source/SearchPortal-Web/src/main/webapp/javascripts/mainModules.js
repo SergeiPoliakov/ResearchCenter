@@ -7,19 +7,11 @@
 
 $(function () {
     $("#statistic-menu-button").click(function (e) {
-        //$(this).text("pushed");
-        $("#select-module1").css("visibility", "visible");
-        
-        
-
-        $("#priority-module").css("visibility", "hidden");
+        $("#select-module1").css("display", "block");
+        $("#priority-module").css("display", "none");
     });
     $("#cost-menu-button").click(function (e) {
-        //$(this).text("pushed");
-        $("#select-module1").css("visibility", "hidden");
-        
-        
-
-        $("#priority-module").css("visibility", "visible");
+        $("#select-module1").css("display", "none");
+        $("#priority-module").css("display", "block");
     });
 });
