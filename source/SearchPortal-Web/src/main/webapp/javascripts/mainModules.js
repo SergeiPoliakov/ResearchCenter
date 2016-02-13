@@ -9,9 +9,17 @@ $(function () {
     $("#statistic-menu-button").click(function (e) {
         $("#select-module1").css("display", "block");
         $("#priority-module").css("display", "none");
+        
+        $("#test3").css("display", "block");
+        $("#test2").css("display", "block");
+        $("#test1").css("display", "none");
     });
     $("#cost-menu-button").click(function (e) {
         $("#select-module1").css("display", "none");
         $("#priority-module").css("display", "block");
+        
+        $("#test3").css("display", "none");
+        $("#test2").css("display", "none");
+        $("#test1").css("display", "block");
     });
 });

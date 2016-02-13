@@ -11,8 +11,39 @@ package com.netcracker.unc.priorityModule;
  */
 public class CalculationPriority {
     
-    public static String test(){
-        return "fghj";
+    private int userId = 0;
+    private float incomeCoefficient = 0;
+    
+    
+    public void setUserID(int userId){
+        this.userId = userId;
     }
     
+    public int getUserID(){
+        return userId;
+    }
+    
+    private void requestData(int userId){
+    
+    }
+    
+    
+    private float CompareIncomeCoefficient(){
+        return incomeCoefficient;
+    }
+    
+    @Override
+    public String toString(){
+        String statusString="Класс анализирует и возвращает статистику"
+                + " по расходам пользователя.<br/> userID = " + userId;
+        return statusString;
+    }
+    
+    CalculationPriority(){
+    
+    }
+    
+    CalculationPriority(int userId){
+        this.userId = userId;
+    }
 }
