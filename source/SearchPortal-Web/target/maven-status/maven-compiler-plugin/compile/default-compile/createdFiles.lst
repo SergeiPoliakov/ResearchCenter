@@ -1,0 +1,6 @@
+com\netcracker\unc\user\authorization\servlets\LoginUserServlet.class
+com\netcracker\unc\user\authorization\servlets\LogoutUserServlet.class
+com\netcracker\unc\user\authorization\servlets\RegistrationUserServlet.class
+com\netcracker\unc\user\interfaces\servlets\CreateOracleTableServlet.class
+com\netcracker\unc\user\interfaces\servlets\CreateCaseServlet.class
+com\netcracker\unc\user\interfaces\servlets\UpdateUserServlet.class
