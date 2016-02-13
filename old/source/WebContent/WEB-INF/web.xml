@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <welcome-file-list>
+    <welcome-file>modules.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>generateTable</servlet-name>
+    <servlet-class>com.unc2016.forDataBase.generateTable</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>generateTable</servlet-name>
+    <url-pattern>/generateTable</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>PriorityMod</servlet-name>
+    <servlet-class>com.unc2016.modulePriority.calculatePriority</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PriorityMod</servlet-name>
+    <url-pattern>/prioritymodule</url-pattern>
+  </servlet-mapping>
+</web-app>

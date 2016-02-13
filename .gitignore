@@ -1,0 +1,13 @@
+*.project
+*.tern-project
+*.classpath
+/.settings
+source/.settings
+*/.settings
+/.settings/*
+/.settings/
+.settings/*
+*build
+source/SearchPortal-Web/target/*
+source/SearchPortal-BuildProject/target/*
+source/SearchPortal-Core/target/*
