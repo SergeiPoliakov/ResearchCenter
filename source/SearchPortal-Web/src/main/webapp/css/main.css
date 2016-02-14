@@ -10,10 +10,12 @@
 .header{
     position: static;
 }
+
 #logo{
     width: 214px;
     height: 59px;
     background-color: #f7fade;
+    display: inline;
 }
 
 #logo a{

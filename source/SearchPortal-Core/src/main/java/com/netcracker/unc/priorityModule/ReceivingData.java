@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.netcracker.unc.priorityModule;
 
 /**
@@ -25,6 +20,13 @@ public class ReceivingData {
         
     }
     
+    public void detailsRow(){
+        /*
+        будет выводить детей строки если они есть.
+        */
+    }
+    
+    
     public ReceivingData() {
     }
     
@@ -38,5 +40,64 @@ public class ReceivingData {
                 + "и возвразает их на анализ."
                 + "<br/> userID = " + UserId;
         return statusString;
+    }
+    
+    
+    public class ResultCategoryRow{
+        /*
+        как вариант, создать несколько вложенных классов и отдавать лист без 
+        generic типа. Вложенные классы будут отличаться полями.
+        
+        */
+        private String Type;
+        
+        //for categories info
+        private String objectId;
+        private String objectName;
+        private String minPercent;
+        private String maxPercent;
+        private String finalDate;
+        private String sumCategory;
+        
+        
+        
+        
+        @Override
+        public String toString(){
+            String statusString = "Экземпляры этого класса - строки запроса "
+                    + "финансовых объектов пользователя, "
+                    + "возможно за некоторый период, по которым расставляются"
+                    + " приоритеты расходов. Объектный тип указывается при "
+                    + "добавлении тем или иным методом.";
+            return statusString;
+        }
+    }
+    
+    public class ResultIncomeRow{
+        /*
+        строка суммарного дохода.
+        */
+        private String Type;
+        
+        //for categories info
+        private String objectId;
+        private String objectName;
+        private String minPercent;
+        private String maxPercent;
+        private String finalDate;
+        private String sumCategory;
+        
+        
+        
+        
+        @Override
+        public String toString(){
+            String statusString = "Экземпляры этого класса - строки запроса "
+                    + "финансовых объектов пользователя, "
+                    + "возможно за некоторый период, по которым расставляются"
+                    + " приоритеты расходов. Объектный тип указывается при "
+                    + "добавлении тем или иным методом.";
+            return statusString;
+        }
     }
 }
