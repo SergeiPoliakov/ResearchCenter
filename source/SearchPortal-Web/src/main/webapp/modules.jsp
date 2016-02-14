@@ -1,3 +1,4 @@
+<%@page import="com.netcracker.unc.priorityModule.ReceivingData"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -54,6 +55,8 @@
                     <input type="hidden" name="user_id" value="1005" /> <input
                         type="submit" value="UP" />
                 </form>
+                <% com.netcracker.unc.priorityModule.ReceivingData rd = new ReceivingData();%>
+                <%= rd.toString() %>
             </div>
         </div>
         <div class="module" id="test1">
@@ -81,8 +84,6 @@
             <div class="block-information">
                 Тут какая-то информация
             </div>
-        </div>    
-        
-         
+        </div>      
     </body>
 </html>
