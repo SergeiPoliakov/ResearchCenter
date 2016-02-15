@@ -55,6 +55,7 @@
 		var select = document.getElementById("select");
 		var casesName = [];
 		var casesId = [];
+		
 
 		<%for (int i = 0; i < nameCases.size(); i++) {%>
 		casesName.push('<%=nameCases.get(i)%>');
@@ -71,6 +72,7 @@
 			for (var i = 0; i < casesName.length; i++) {
 				if (regular.test(casesName[i])) {
 					var option = document.createElement("option");
+					option.
 					option.value = casesId[i];
 					option.text = casesName[i];
 					select.appendChild(option);

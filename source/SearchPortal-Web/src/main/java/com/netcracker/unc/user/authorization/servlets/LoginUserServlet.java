@@ -48,13 +48,13 @@ public class LoginUserServlet extends HttpServlet {
 			session.setAttribute("user", user);
 			session.setMaxInactiveInterval(30*60);
 			cookie = new Cookie("userID", String.valueOf(user.get_user_id()));
-			cookie.setMaxAge(30*60);
+			cookie.setMaxAge(24*60*60);
 			response.addCookie(cookie);
-			response.sendRedirect("kolmain.jsp");
+			response.sendRedirect("modules.jsp");
 			 
 		} else {
-			request.setAttribute("errorMessage", "Incorrect login or password!");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/kolmain.jsp");
+			request.setAttribute("errorMessage", "Неправильно введен логин или пароль!");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
 			dispatcher.include(request, response);
 		}
 

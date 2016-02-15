@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Authorization user</title>
+<title>Регистрация нового пользователя</title>
 <style type="text/css">
 .login {
 	color: black
@@ -28,35 +28,35 @@
 	<div id="authorization">
 		<center>
 			<form action="LoginUser" method="get">
-				<table border="2" width="60%" height="300px" cellpadding="3"
-					rules="groups" class="table" cellspacing="10">
+				<table rules="groups" align="center" border="2px" width="50%" cellspacing="3" cellpadding="3">
 					<thead>
 						<tr>
-							<th align="center" colspan="2"><label class="title">Please
-									Log In:</label></th>
+							<th align="center" colspan="2"><label class="title">Авторизуйтесь:</label></th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td><label class="info">Login:</label></td>
+							<td><label class="info">Логин:</label></td>
 							<td align="center"><input type="text" class="login"
 								name="login" width="15px" /></td>
 						</tr>
 						<tr>
-							<td><label class="info">Password:</label></td>
+							<td><label class="info">Пароль:</label></td>
 							<td align="center"><input type="password" class="password"
 								name="password" width="15px" /></td>
 						</tr>
 						<tr>
-							<td style="padding-left: 60px"><input name="submit" type="submit" value="Submit" class="submit"/></td>
-							<td align="center"><a
-								href="<c:url value="/authorization/registration_user.jsp"/>"><label
-									class="registr">Create a new account !</label></a></td>
+							<td style="padding-left: 60px"><input name="submit"
+								type="submit" value="Ввести" class="submit" /></td>
+							<td align="center"><label onclick="createAccount()"
+								style="cursor: pointer; text-decoration: underline;">Зарегистрироваться!</label>
+							</td>
 						</tr>
 						<tr>
 							<td align="center" colspan="2"><c:if
-									test="${not empty errorMessage}"><label class="registr">
-									<c:out value="Incorrect login or password! Please try again!" />
+									test="${not empty errorMessage}">
+									<label class="registr" style="color: red;"> <c:out
+											value="${errorMessage}" />
 									</label>
 								</c:if></td>
 						</tr>
@@ -67,4 +67,5 @@
 	</div>
 
 </body>
+
 </html>

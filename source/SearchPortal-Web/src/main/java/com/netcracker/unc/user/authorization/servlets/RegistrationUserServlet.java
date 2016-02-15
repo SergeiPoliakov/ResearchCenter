@@ -7,24 +7,29 @@ import java.util.regex.Pattern;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import com.netcracker.unc.mvc.dao.UserDAO;
 import com.netcracker.unc.mvc.models.UserModel;
 
-@WebServlet(value = "/authorization/RegistrationUser")
+@WebServlet(value = "/RegistrationUser")
 public class RegistrationUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private UserModel user = new UserModel();
-	private UserDAO userDAO = new UserDAO();
+	private UserModel user = null;
+	private UserDAO userDAO = null;
 	// regular check input data
 	private Pattern loginPat = Pattern.compile("^[A-Za-z0-9]{1,15}$");
 	private Pattern passwordPat = Pattern.compile("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).[^ ]{5,10}$");
-	private Pattern namePat = Pattern.compile("^[A-Za-z�-��-�']{1,10}$");
+	private Pattern namePat = Pattern.compile("^[A-Za-zА-Яа-я']{1,10}$");
 	private Matcher loginMat = null;
 	private Matcher passwordMat = null;
 	private Matcher nameMat = null;
+	private Cookie cookie = null; // for save session by user
+	private HttpSession session = null;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -41,12 +46,15 @@ public class RegistrationUserServlet extends HttpServlet {
 		System.out.println(password);
 		System.out.println(name);
 
+		user = new UserModel();
+		userDAO = new UserDAO();
+
 		user.set_login(login);
 		loginMat = loginPat.matcher(login);
 		// check correct login
 		if (!loginMat.matches()) {
 			request.setAttribute("incorrectLogin",
-					"Incorrect login, must consist of english letters and no more 15 symbols");
+					"Логин должен состоять только из букв и цифер (не более 15 символов)");
 		} else
 			user.set_login(login);
 
@@ -54,7 +62,7 @@ public class RegistrationUserServlet extends HttpServlet {
 		passwordMat = passwordPat.matcher(password);
 		if (!passwordMat.matches()) {
 			request.setAttribute("incorrectPassword",
-					"Incorrect password, must consist of english upper-lower case letters, numbers, no less 5 and no more 10 symbols");
+					"Пароль должен состоять из цифер, латинских букв нижнего и верхнего регистров (не менее 5 и не более 10 символов)");
 		} else {
 			user.createHashAndSalt(password);
 			user.set_account_type("user");
@@ -64,8 +72,7 @@ public class RegistrationUserServlet extends HttpServlet {
 		if (!name.isEmpty()) {
 			nameMat = namePat.matcher(name);
 			if (!nameMat.matches()) {
-				request.setAttribute("incorrectName",
-						"Incorrect name, must consist of only letters and no more 10 symbols");
+				request.setAttribute("incorrectName", "Имя должно состоять только из букв (не более 10 символов)");
 			} else
 				user.set_name(name);
 		}
@@ -80,7 +87,7 @@ public class RegistrationUserServlet extends HttpServlet {
 
 			for (int i = 0; i < list.size(); i++) {
 				userList = (UserModel) list.get(i);
-				if (user.get_login().equals(userList.get_login())) {
+				if (user.get_login().toLowerCase().equals(userList.get_login().toLowerCase())) {
 					check = true;
 					System.out.println(userList.get_login());
 				}
@@ -89,18 +96,40 @@ public class RegistrationUserServlet extends HttpServlet {
 			if (!check) {
 				userDAO.addObject(user);
 				user = (UserModel) userDAO.getObject(user);
-				request.setAttribute("loginComplete", user.get_login());
-				request.setAttribute("welcomeNewUser", "Thank you and Welcome!");
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/authorization/welcome_user.jsp");
-				dispatcher.include(request, response);
 				userDAO.connectionClose();
+
+				session = request.getSession();
+				session.setAttribute("user", user);
+				session.setMaxInactiveInterval(30 * 60);
+				cookie = new Cookie("userID", String.valueOf(user.get_user_id()));
+				cookie.setMaxAge(24 * 60 * 60);
+				response.addCookie(cookie);
+
+				response.sendRedirect("modules.jsp");
+
 			} else {
-				request.setAttribute("multiName", "Sorry, this login already use");
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/authorization/registration_user.jsp");
+				for (Cookie cookie : request.getCookies()) {
+					if (cookie.getName().equals("page")) {
+						cookie.setValue("first");
+					} else {
+						cookie = new Cookie("page", "first");
+					}
+					response.addCookie(cookie);
+				}
+				request.setAttribute("multiName", "Извините, такой логин уже используется!");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 				dispatcher.include(request, response);
 			}
 		} else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/authorization/registration_user.jsp");
+			for (Cookie cookie : request.getCookies()) {
+				if (cookie.getName().equals("page")) {
+					cookie.setValue("first");
+				} else {
+					cookie = new Cookie("page", "first");
+				}
+				response.addCookie(cookie);
+			}
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
 			dispatcher.include(request, response);
 		}
 	}

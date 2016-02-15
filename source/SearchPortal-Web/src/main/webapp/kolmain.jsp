@@ -70,7 +70,6 @@
 
 	<div class="main" align="center">
 
-
 		<div class="top" align="right">
 			<c:if test="${check eq true}">
 				<div class="tools" align="right" style="display: inline-table;">

@@ -1,9 +1,10 @@
 @CHARSET "UTF-8";
 
-.info {
+.info, .column1 {
 	text-shadow: 1px 1px 2px grey;
 	color: #00120B; /* цвет шрифта */
 	font-size: 20pt; /* размер шрифта */
+	width: 30px;
 }
 
 .title {
@@ -33,11 +34,12 @@
 	font-size: 13pt; /* размер шрифта */
 	color: #00120B; /* цвет шрифта */
 	font-weight: 600; /* толщина текста */
+	color: #072F01;
 }
 
-.login, .password {
-	width: 80%;
-	height: 30px;
+.login, .password, .name {
+	width: 140px;
+	height: 20px;
 }
 
 .logoutButton {
