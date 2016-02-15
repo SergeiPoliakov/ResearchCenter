@@ -51,28 +51,30 @@ public class ReceivingData {
     
     
     public class ResultCategoryRow{
-        /*
-        как вариант, создать несколько вложенных классов и отдавать лист без 
-        generic типа. Вложенные классы будут отличаться полями.
-        
-        */
         private String Type = "Категория";
         
-        //for categories info
         private String objectId;
         private String objectName;
         private String minPercent;
         private String maxPercent;
         private String finalDate;
+        private String coeficient;
         private String sumCategory;
 
         public ResultCategoryRow() {
         }
+        public ResultCategoryRow(String objectId, String objectName,
+                String minPersent, String maxPercent, String coeficient,
+                String finalDate, String sumCategory){
+            this.objectId = objectId;
+            this.objectName = objectName;
+            this.maxPercent = maxPercent;
+            this.minPercent = minPersent;
+            this.finalDate = finalDate;
+            this.sumCategory = sumCategory;
+            this.coeficient = coeficient;
+        }
 
-        
-        
-        
-        
         
         @Override
         public String toString(){
@@ -87,7 +89,7 @@ public class ReceivingData {
     
     public class ResultIncomeRow{
         private String Type;
-        
+     
         //for categories info
         private String objectId;
         private String objectName;
