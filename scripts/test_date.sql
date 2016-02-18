@@ -36,11 +36,12 @@ INSERT INTO PJ_ATTRIBUTES(ATTRIBUTE_ID, ATTRIBUTE_NAME, FIN_OBJECT_TYPE_ID)
  
 --Пользователи
 
+--password: 123QWEasd
+INSERT INTO PJ_USERS
+ VALUES(short_table_sequence.nextval, 'neadmin', -1005244443, 'Jack D.', 'admin', 1291088537);
 /*
  *пользователи с пустыми паролями(хеш=соль=0):
  */
-INSERT INTO PJ_USERS
- VALUES(short_table_sequence.nextval, 'neadmin', 0, 'Jack D.', 'admin', 0);
 INSERT INTO PJ_USERS
  VALUES(short_table_sequence.nextval,'nedoadmin', 0, 'Вася Пупкин', 'user', 0);
 INSERT INTO PJ_USERS

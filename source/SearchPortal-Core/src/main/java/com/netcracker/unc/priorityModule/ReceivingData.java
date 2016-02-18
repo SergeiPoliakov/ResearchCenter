@@ -2,10 +2,6 @@ package com.netcracker.unc.priorityModule;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author Dmitry
- */
 public class ReceivingData {
     
     private ArrayList FinData = new ArrayList();
@@ -20,6 +16,12 @@ public class ReceivingData {
         /*
         как-то так будет выглядеть:
         */
+        /*
+         *тут обращаемся к методу дао, написанному для запроса расходов,
+         *получая от него массив данных или как общая куча,
+         *которая раскидывается по объектам и добавляется в общий 
+         *массив(это действия ниже)
+         */
         ResultCategoryRow categoryRow = new ResultCategoryRow();
         FinData.add(categoryRow);
     }
