@@ -20,7 +20,7 @@ public class CaseTypeDAO extends ObjectDAO {
 		type = (CaseTypeModel) object;
 
 		try {
-			prepare = connect.prepareStatement(SQLQuery.PJ_USERS_INSERT);
+			prepare = connect.prepareStatement(SQLQuery.SP_USERS_INSERT);
 			prepare.setString(1, type.get_fin_object_type_name());
 			prepare.executeUpdate();
 		} catch (SQLException e) {
@@ -37,12 +37,12 @@ public class CaseTypeDAO extends ObjectDAO {
 		try {
 			// if we have not case type with correct id
 			if (type.get_fin_object_type_id() == 0) {
-				prepare = connect.prepareStatement(SQLQuery.FIN_OBJECT_TYPES_GET_BY_NAME);
+				prepare = connect.prepareStatement(SQLQuery.SP_FIN_OBJECT_TYPES_GET_BY_NAME);
 				prepare.setString(1, type.get_fin_object_type_name());
 			}
 			// if case type have correct id
 			else {
-				prepare = connect.prepareStatement(SQLQuery.FIN_OBJECT_TYPES_GET_BY_ID);
+				prepare = connect.prepareStatement(SQLQuery.SP_FIN_OBJECT_TYPES_GET_BY_ID);
 				prepare.setInt(1, type.get_fin_object_type_id());
 			}
 			result = prepare.executeQuery();
@@ -63,7 +63,7 @@ public class CaseTypeDAO extends ObjectDAO {
 		type = (CaseTypeModel) object;
 
 		try {
-			prepare = connect.prepareStatement(SQLQuery.FIN_OBJECT_TYPES_UPDATE_BY_ID);
+			prepare = connect.prepareStatement(SQLQuery.SP_FIN_OBJECT_TYPES_UPDATE_BY_ID);
 			prepare.setString(1, type.get_fin_object_type_name());
 			prepare.setInt(2, type.get_fin_object_type_id());
 			prepare.executeUpdate();
@@ -77,7 +77,7 @@ public class CaseTypeDAO extends ObjectDAO {
 		type = (CaseTypeModel) object;
 
 		try {
-			prepare = connect.prepareStatement(SQLQuery.FIN_OBJECT_TYPES_DELETE_BY_ID);
+			prepare = connect.prepareStatement(SQLQuery.SP_FIN_OBJECT_TYPES_DELETE_BY_ID);
 			prepare.setInt(1, type.get_fin_object_type_id());
 			prepare.executeUpdate();
 		} catch (SQLException e) {
@@ -88,7 +88,7 @@ public class CaseTypeDAO extends ObjectDAO {
 	@Override
 	public List<Object> getAllObjectsDB() {
 		try {
-			prepare = connect.prepareStatement(SQLQuery.FIN_OBJECT_TYPES_VIEW_ALL);
+			prepare = connect.prepareStatement(SQLQuery.SP_FIN_OBJECT_TYPES_VIEW_ALL);
 			result = prepare.executeQuery();
 			List<Object> list = new ArrayList<Object>();
 

@@ -20,7 +20,7 @@ public class ParameterDAO extends ObjectDAO {
 		param = (ParameterModel) object;
 
 		try {
-			prepare = connect.prepareStatement(SQLQuery.PARAMS_INSERT);
+			prepare = connect.prepareStatement(SQLQuery.SP_PARAMS_INSERT);
 			if(param.get_value() != null)
 				prepare.setString(1, param.get_value());
 			else prepare.setNull(1, java.sql.Types.VARCHAR);
@@ -44,12 +44,12 @@ public class ParameterDAO extends ObjectDAO {
 		try {
 			// if we have not parameter with correct attribute id
 			if (param.get_attribute_id() == 0) {
-				prepare = connect.prepareStatement(SQLQuery.PARAMS_GET_BY_OBJECT_ID);
+				prepare = connect.prepareStatement(SQLQuery.SP_PARAMS_GET_BY_OBJECT_ID);
 				prepare.setInt(1, param.get_fin_object_id());
 			}
 			// if we have not parameter with correct object id
 			else {
-				prepare = connect.prepareStatement(SQLQuery.PARAMS_GET_BY_ATTRIBUTE_ID);
+				prepare = connect.prepareStatement(SQLQuery.SP_PARAMS_GET_BY_ATTRIBUTE_ID);
 				prepare.setInt(1, param.get_attribute_id());
 			}
 			result = prepare.executeQuery();
@@ -72,7 +72,7 @@ public class ParameterDAO extends ObjectDAO {
 		param = (ParameterModel) object;
 
 		try {
-			prepare = connect.prepareStatement(SQLQuery.PARAMS_UPDATE_BY_OBJECT_ID);
+			prepare = connect.prepareStatement(SQLQuery.SP_PARAMS_UPDATE_BY_OBJECT_ID);
 			prepare.setString(1, param.get_value());
 			prepare.setDate(2, param.get_value_date());
 			prepare.setInt(3, param.get_attribute_id());
@@ -91,12 +91,12 @@ public class ParameterDAO extends ObjectDAO {
 		try {
 			// if we have not parameter with correct attribute id
 			if (param.get_attribute_id() == 0) {
-				prepare = connect.prepareStatement(SQLQuery.PARAMS_DELETE_BY_OBJECT_ID);
+				prepare = connect.prepareStatement(SQLQuery.SP_PARAMS_DELETE_BY_OBJECT_ID);
 				prepare.setInt(1, param.get_fin_object_id());
 			}
 			// if we have not parameter with correct object id
 			else {
-				prepare = connect.prepareStatement(SQLQuery.PARAMS_DELETE_BY_ATTRIBUTE_ID);
+				prepare = connect.prepareStatement(SQLQuery.SP_PARAMS_DELETE_BY_ATTRIBUTE_ID);
 				prepare.setInt(1, param.get_attribute_id());
 			}
 			prepare.executeUpdate();
@@ -108,7 +108,7 @@ public class ParameterDAO extends ObjectDAO {
 	@Override
 	public List<Object> getAllObjectsDB() {
 		try {
-			prepare = connect.prepareStatement(SQLQuery.PARAMS_VIEW_ALL);
+			prepare = connect.prepareStatement(SQLQuery.SP_PARAMS_VIEW_ALL);
 			result = prepare.executeQuery();
 			List<Object> list = new ArrayList<Object>();
 

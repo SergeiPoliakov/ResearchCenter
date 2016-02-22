@@ -20,7 +20,7 @@ public class AttributeDAO extends ObjectDAO {
 		attribute = (AttributeModel) object;
 
 		try {
-			prepare = connect.prepareStatement(SQLQuery.PJ_ATTRIBUTES_INSERT);
+			prepare = connect.prepareStatement(SQLQuery.SP_ATTRIBUTES_INSERT);
 			prepare.setString(1, attribute.get_attribute_name());
 			prepare.setInt(2, attribute.get_fin_object_type_id());
 			prepare.setInt(1, attribute.get_attribute_id());
@@ -39,12 +39,12 @@ public class AttributeDAO extends ObjectDAO {
 		try {
 			// if we have not attribute with correct id
 			if (attribute.get_attribute_id() == 0) {
-				prepare = connect.prepareStatement(SQLQuery.PJ_ATTRIBUTES_GET_BY_NAME);
+				prepare = connect.prepareStatement(SQLQuery.SP_ATTRIBUTES_GET_BY_NAME);
 				prepare.setString(1, attribute.get_attribute_name());
 			}
 			// if attribute have correct id
 			else {
-				prepare = connect.prepareStatement(SQLQuery.PJ_ATTRIBUTES_GET_BY_ID);
+				prepare = connect.prepareStatement(SQLQuery.SP_ATTRIBUTES_GET_BY_ID);
 				prepare.setInt(1, attribute.get_attribute_id());
 			}
 			result = prepare.executeQuery();
@@ -66,7 +66,7 @@ public class AttributeDAO extends ObjectDAO {
 		attribute = (AttributeModel) object;
 
 		try {
-			prepare = connect.prepareStatement(SQLQuery.PJ_ATTRIBUTES_UPDATE_BY_ID);
+			prepare = connect.prepareStatement(SQLQuery.SP_ATTRIBUTES_UPDATE_BY_ID);
 			prepare.setString(1, attribute.get_attribute_name());
 			prepare.setInt(2, attribute.get_fin_object_type_id());
 			prepare.setInt(3, attribute.get_attribute_id());
@@ -81,7 +81,7 @@ public class AttributeDAO extends ObjectDAO {
 		attribute = (AttributeModel) object;
 
 		try {
-			prepare = connect.prepareStatement(SQLQuery.PJ_ATTRIBUTES_DELETE_BY_ID);
+			prepare = connect.prepareStatement(SQLQuery.SP_ATTRIBUTES_DELETE_BY_ID);
 			prepare.setInt(1, attribute.get_attribute_id());
 			prepare.executeUpdate();
 		} catch (SQLException e) {
@@ -92,7 +92,7 @@ public class AttributeDAO extends ObjectDAO {
 	@Override
 	public List<Object> getAllObjectsDB() {
 		try {
-			prepare = connect.prepareStatement(SQLQuery.FIN_OBJECT_TYPES_VIEW_ALL);
+			prepare = connect.prepareStatement(SQLQuery.SP_FIN_OBJECT_TYPES_VIEW_ALL);
 			result = prepare.executeQuery();
 			List<Object> list = new ArrayList<Object>();
 

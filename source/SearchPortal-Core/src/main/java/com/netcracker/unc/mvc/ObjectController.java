@@ -70,7 +70,7 @@ public class ObjectController {
 	public List<Object> getCaseTypeAttributes(int object_type_id) {
 		connect = ConnectionFactory.getConnection();
 		try {
-			prepare = connect.prepareStatement(SQLQuery.GET_ATTRIBUTES_BY_OBJECT_TYPE_ID);
+			prepare = connect.prepareStatement(SQLQuery.SP_GET_ATTRIBUTES_BY_OBJECT_TYPE_ID);
 			prepare.setInt(1, object_type_id);
 			result = prepare.executeQuery();
 			List<Object> list = new ArrayList<Object>();
@@ -95,7 +95,7 @@ public class ObjectController {
 		connect = ConnectionFactory.getConnection();
 		casee = new CaseModel();
 		try {
-			prepare = connect.prepareStatement(SQLQuery.GET_STANDART_CASE_BY_USER_ID);
+			prepare = connect.prepareStatement(SQLQuery.SP_GET_STANDART_CASE_BY_USER_ID);
 			prepare.setInt(1, user.get_user_id());
 			prepare.setString(2, category);
 			result = prepare.executeQuery();

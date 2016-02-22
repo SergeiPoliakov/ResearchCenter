@@ -20,7 +20,7 @@ public class TransactionDAO extends ObjectDAO {
 		trans = (TransactionModel) object;
 
 		try {
-			prepare = connect.prepareStatement(SQLQuery.TRANSACTIONS_INSERT);
+			prepare = connect.prepareStatement(SQLQuery.SP_TRANSACTIONS_INSERT);
 			prepare.setString(1, trans.get_transaction_date());
 			prepare.setInt(2, trans.get_fin_object_id());
 			prepare.setInt(3, trans.get_cost());
@@ -36,7 +36,7 @@ public class TransactionDAO extends ObjectDAO {
 		trans = (TransactionModel) object;
 
 		try {
-			prepare = connect.prepareStatement(SQLQuery.TRANSACTIONS_GET_BY_ID);
+			prepare = connect.prepareStatement(SQLQuery.SP_TRANSACTIONS_GET_BY_ID);
 			prepare.setInt(1, trans.get_transaction_id());
 			result = prepare.executeQuery();
 			result.next();
@@ -58,7 +58,7 @@ public class TransactionDAO extends ObjectDAO {
 		trans = (TransactionModel) object;
 
 		try {
-			prepare = connect.prepareStatement(SQLQuery.TRANSACTIONS_UPDATE_BY_ID);
+			prepare = connect.prepareStatement(SQLQuery.SP_TRANSACTIONS_UPDATE_BY_ID);
 			prepare.setString(1, trans.get_transaction_date());
 			prepare.setInt(2, trans.get_fin_object_id());
 			prepare.setInt(3, trans.get_cost());
@@ -75,7 +75,7 @@ public class TransactionDAO extends ObjectDAO {
 		trans = (TransactionModel) object;
 
 		try {
-			prepare = connect.prepareStatement(SQLQuery.TRANSACTIONS_DELETE_BY_ID);
+			prepare = connect.prepareStatement(SQLQuery.SP_TRANSACTIONS_DELETE_BY_ID);
 			prepare.setInt(1, trans.get_transaction_id());
 			prepare.executeUpdate();
 		} catch (SQLException e) {
@@ -86,7 +86,7 @@ public class TransactionDAO extends ObjectDAO {
 	@Override
 	public List<Object> getAllObjectsDB() {
 		try {
-			prepare = connect.prepareStatement(SQLQuery.PJ_USERS_VIEW_ALL);
+			prepare = connect.prepareStatement(SQLQuery.SP_USERS_VIEW_ALL);
 			result = prepare.executeQuery();
 			List<Object> list = new ArrayList<Object>();
 

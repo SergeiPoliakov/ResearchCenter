@@ -21,7 +21,7 @@ public class CaseDAO extends ObjectDAO {
 		casee = (CaseModel) object;
 
 		try {
-			prepare = connect.prepareStatement(SQLQuery.FIN_OBJECTS_INSERT);
+			prepare = connect.prepareStatement(SQLQuery.SP_FIN_OBJECTS_INSERT);
 			if(casee.get_parent_id() != null)
 				prepare.setInt(1, casee.get_parent_id());
 			else prepare.setNull(1, java.sql.Types.VARCHAR);
@@ -40,11 +40,11 @@ public class CaseDAO extends ObjectDAO {
 
 		try {
 			if (casee.get_fin_object_id() != 0) {
-				prepare = connect.prepareStatement(SQLQuery.FIN_OBJECTS_GET_BY_ID);
+				prepare = connect.prepareStatement(SQLQuery.SP_FIN_OBJECTS_GET_BY_ID);
 				prepare.setInt(1, casee.get_fin_object_id());
 			}
 			else {
-				prepare = connect.prepareStatement(SQLQuery.FIN_OBJECTS_GET_BY_NAME);
+				prepare = connect.prepareStatement(SQLQuery.SP_FIN_OBJECTS_GET_BY_NAME);
 				prepare.setString(1, casee.get_object_name());
 			}
 			result = prepare.executeQuery();
@@ -68,7 +68,7 @@ public class CaseDAO extends ObjectDAO {
 		casee = (CaseModel) object;
 
 		try {
-			prepare = connect.prepareStatement(SQLQuery.FIN_OBJECTS_UPDATE_BY_ID);
+			prepare = connect.prepareStatement(SQLQuery.SP_FIN_OBJECTS_UPDATE_BY_ID);
 			prepare.setInt(1, casee.get_parent_id());
 			prepare.setString(2, casee.get_object_name());
 			prepare.setInt(3, casee.get_fin_object_type_id());
@@ -85,7 +85,7 @@ public class CaseDAO extends ObjectDAO {
 		casee = (CaseModel) object;
 
 		try {
-			prepare = connect.prepareStatement(SQLQuery.FIN_OBJECTS_DELETE_BY_ID);
+			prepare = connect.prepareStatement(SQLQuery.SP_FIN_OBJECTS_DELETE_BY_ID);
 			prepare.setInt(1, casee.get_fin_object_id());
 			prepare.executeUpdate();
 		} catch (SQLException e) {
@@ -96,7 +96,7 @@ public class CaseDAO extends ObjectDAO {
 	@Override
 	public List<Object> getAllObjectsDB() {
 		try {
-			prepare = connect.prepareStatement(SQLQuery.FIN_OBJECTS_VIEW_ALL);
+			prepare = connect.prepareStatement(SQLQuery.SP_FIN_OBJECTS_VIEW_ALL);
 			result = prepare.executeQuery();
 			List<Object> list = new ArrayList<Object>();
 

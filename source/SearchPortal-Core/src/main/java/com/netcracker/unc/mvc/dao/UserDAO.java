@@ -20,7 +20,7 @@ public class UserDAO extends ObjectDAO {
 		user = (UserModel) object;
 
 		try {
-			prepare = connect.prepareStatement(SQLQuery.PJ_USERS_INSERT);
+			prepare = connect.prepareStatement(SQLQuery.SP_USERS_INSERT);
 			prepare.setString(1, user.get_login());
 			prepare.setInt(2, user.get_hash_sum());
 			prepare.setString(3, user.get_name());
@@ -41,12 +41,12 @@ public class UserDAO extends ObjectDAO {
 		try {
 			// if we have not user with correct id
 			if (user.get_user_id() == 0) {
-				prepare = connect.prepareStatement(SQLQuery.PJ_USERS_GET_BY_LOGIN);
+				prepare = connect.prepareStatement(SQLQuery.SP_USERS_GET_BY_LOGIN);
 				prepare.setString(1, user.get_login());
 			}
 			// if user have correct id
 			else {
-				prepare = connect.prepareStatement(SQLQuery.PJ_USERS_GET_BY_ID);
+				prepare = connect.prepareStatement(SQLQuery.SP_USERS_GET_BY_ID);
 				prepare.setInt(1, user.get_user_id());
 			}
 			result = prepare.executeQuery();
@@ -71,7 +71,7 @@ public class UserDAO extends ObjectDAO {
 		user = (UserModel) object;
 
 		try {
-			prepare = connect.prepareStatement(SQLQuery.PJ_USERS_UPDATE_BY_ID);
+			prepare = connect.prepareStatement(SQLQuery.SP_USERS_UPDATE_BY_ID);
 			prepare.setString(1, user.get_login());
 			prepare.setInt(2, user.get_hash_sum());
 			prepare.setString(3, user.get_name());
@@ -88,7 +88,7 @@ public class UserDAO extends ObjectDAO {
 	public void deleteObject(Object object) {
 		user = (UserModel) object;
 		try {
-			prepare = connect.prepareStatement(SQLQuery.PJ_USERS_DELETE_BY_ID);
+			prepare = connect.prepareStatement(SQLQuery.SP_USERS_DELETE_BY_ID);
 			prepare.setInt(1, user.get_user_id());
 			prepare.executeUpdate();
 		} catch (SQLException e) {
@@ -99,7 +99,7 @@ public class UserDAO extends ObjectDAO {
 	@Override
 	public List<Object> getAllObjectsDB() {
 		try {
-			prepare = connect.prepareStatement(SQLQuery.PJ_USERS_VIEW_ALL);
+			prepare = connect.prepareStatement(SQLQuery.SP_USERS_VIEW_ALL);
 			result = prepare.executeQuery();
 			List<Object> list = new ArrayList<Object>();
 

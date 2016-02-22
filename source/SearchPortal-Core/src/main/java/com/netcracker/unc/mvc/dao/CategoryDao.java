@@ -28,7 +28,7 @@ public class CategoryDao extends ObjectDAO {
     
     public String testdb(){
         try {
-            prepare = connect.prepareStatement(SQLQuery.GET_FULL_CATEGORIES);
+            prepare = connect.prepareStatement(SQLQuery.SP_GET_FULL_CATEGORIES);
             result = prepare.executeQuery();
             result.next();
             result.next();
@@ -49,7 +49,7 @@ public class CategoryDao extends ObjectDAO {
     @Override
     public List<Object> getAllObjectsDB() {
        try {
-			prepare = connect.prepareStatement(SQLQuery.GET_FULL_CATEGORIES);
+			prepare = connect.prepareStatement(SQLQuery.SP_GET_FULL_CATEGORIES);
 			result = prepare.executeQuery();
 			List<Object> list = new ArrayList<Object>();
 
