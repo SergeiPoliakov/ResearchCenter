@@ -43,7 +43,7 @@ ALTER TABLE Pj_Attributes
 
 CREATE TABLE Params
 (
-	value1               VARCHAR2(4000) NULL ,
+	value               VARCHAR2(4000) NULL ,
 	value_date           DATE NULL ,
 	Fin_object_id        INTEGER NOT NULL ,
 	Attribute_ID         INTEGER NOT NULL 

@@ -9,7 +9,7 @@
 SELECT
  --table_objects_and_its_roots.user_id as us_id,
  table_objects_and_its_roots.root_object_id,
- SUM(obj_params.VALUE1) as sum_root
+ SUM(obj_params.VALUE) as sum_root
 FROM (
  SELECT 
   f_ob.USER_ID as user_id,
@@ -45,7 +45,7 @@ SELECT
  main_fo.USER_ID,
  main_fo.OBJECT_NAME,
  (
-  SELECT select_par.VALUE1
+  SELECT select_par.VALUE
    FROM FIN_OBJECTS select_fo 
     INNER JOIN PJ_ATTRIBUTES select_pja
      ON select_fo.FIN_OBJECT_TYPE_ID = select_pja.FIN_OBJECT_TYPE_ID
@@ -56,7 +56,7 @@ SELECT
     AND main_fo.FIN_OBJECT_ID = select_par.FIN_OBJECT_ID
  ) as coefficient,
  (
-  SELECT select_par.VALUE1
+  SELECT select_par.VALUE
    FROM FIN_OBJECTS select_fo 
     INNER JOIN PJ_ATTRIBUTES select_pja
      ON select_fo.FIN_OBJECT_TYPE_ID = select_pja.FIN_OBJECT_TYPE_ID
@@ -67,7 +67,7 @@ SELECT
     AND main_fo.FIN_OBJECT_ID = select_par.FIN_OBJECT_ID
  ) as min_percent,
  (
-  SELECT select_par.VALUE1
+  SELECT select_par.VALUE
   FROM FIN_OBJECTS select_fo 
    INNER JOIN PJ_ATTRIBUTES select_pja
     ON select_fo.FIN_OBJECT_TYPE_ID = select_pja.FIN_OBJECT_TYPE_ID
@@ -81,7 +81,7 @@ SELECT
  ) as final_date, --время до конца расчетн. периода может тоже будет влиять
  (
   SELECT
-   SUM(obj_params.VALUE1) as sum_root
+   SUM(obj_params.VALUE) as sum_root
   FROM (
    SELECT 
     f_ob.USER_ID as user_id,

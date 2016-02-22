@@ -21,8 +21,8 @@ public class ParameterDAO extends ObjectDAO {
 
 		try {
 			prepare = connect.prepareStatement(SQLQuery.PARAMS_INSERT);
-			if(param.get_value1() != null)
-				prepare.setString(1, param.get_value1());
+			if(param.get_value() != null)
+				prepare.setString(1, param.get_value());
 			else prepare.setNull(1, java.sql.Types.VARCHAR);
 			if(param.get_value_date() != null)
 				prepare.setDate(2, param.get_value_date());
@@ -56,7 +56,7 @@ public class ParameterDAO extends ObjectDAO {
 			result.next();
 
 			// create current parameter from database
-			param.set_value1(result.getString(1));
+			param.set_value(result.getString(1));
 			param.set_value_date(result.getString(2));
 			param.set_fin_object_id(result.getInt(3));
 			param.set_attribute_id(result.getInt(4));
@@ -73,7 +73,7 @@ public class ParameterDAO extends ObjectDAO {
 
 		try {
 			prepare = connect.prepareStatement(SQLQuery.PARAMS_UPDATE_BY_OBJECT_ID);
-			prepare.setString(1, param.get_value1());
+			prepare.setString(1, param.get_value());
 			prepare.setDate(2, param.get_value_date());
 			prepare.setInt(3, param.get_attribute_id());
 			prepare.setInt(4, param.get_fin_object_id());
@@ -114,7 +114,7 @@ public class ParameterDAO extends ObjectDAO {
 
 			while (result.next()) {
 				param = new ParameterModel();
-				param.set_value1(result.getString(1));
+				param.set_value(result.getString(1));
 				param.set_value_date(result.getString(2));
 				param.set_fin_object_id(result.getInt(3));
 				param.set_attribute_id(result.getInt(4));

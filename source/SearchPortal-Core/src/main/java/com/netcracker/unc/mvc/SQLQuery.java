@@ -41,12 +41,12 @@ public class SQLQuery {
 	public static final String PJ_ATTRIBUTES_VIEW_ALL = "SELECT * FROM pj_attributes";
 
 	//// for params
-	public static final String PARAMS_INSERT = "INSERT INTO params(value1, value_date, fin_object_id, attribute_id) VALUES(?, ?, ?, ?)";
+	public static final String PARAMS_INSERT = "INSERT INTO params(value, value_date, fin_object_id, attribute_id) VALUES(?, ?, ?, ?)";
 	public static final String PARAMS_GET_BY_OBJECT_ID = "SELECT * FROM params WHERE fin_object_id = ?";
 	public static final String PARAMS_GET_BY_ATTRIBUTE_ID = "SELECT * FROM params WHERE attribute_id = ?";
 	public static final String PARAMS_DELETE_BY_OBJECT_ID = "DELETE FROM params WHERE fin_object_id = ?";
 	public static final String PARAMS_DELETE_BY_ATTRIBUTE_ID = "DELETE FROM params WHERE attribute_id = ?";
-	public static final String PARAMS_UPDATE_BY_OBJECT_ID = "UPDATE params SET value1 = ?, value_date = ?, attribute_id = ? WHERE fin_object_id = ?";
+	public static final String PARAMS_UPDATE_BY_OBJECT_ID = "UPDATE params SET value = ?, value_date = ?, attribute_id = ? WHERE fin_object_id = ?";
 	public static final String PARAMS_VIEW_ALL = "SELECT * FROM params";
 
 	//// for transactions
@@ -80,7 +80,7 @@ public class SQLQuery {
 " main_fo.USER_ID,\n" +
 " main_fo.OBJECT_NAME,\n" +
 " (\n" +
-"  SELECT select_par.VALUE1\n" +
+"  SELECT select_par.VALUE\n" +
 "   FROM FIN_OBJECTS select_fo \n" +
 "    INNER JOIN PJ_ATTRIBUTES select_pja\n" +
 "     ON select_fo.FIN_OBJECT_TYPE_ID = select_pja.FIN_OBJECT_TYPE_ID\n" +
@@ -91,7 +91,7 @@ public class SQLQuery {
 "    AND main_fo.FIN_OBJECT_ID = select_par.FIN_OBJECT_ID\n" +
 " ) as coefficient,\n" +
 " (\n" +
-"  SELECT select_par.VALUE1\n" +
+"  SELECT select_par.VALUE\n" +
 "   FROM FIN_OBJECTS select_fo \n" +
 "    INNER JOIN PJ_ATTRIBUTES select_pja\n" +
 "     ON select_fo.FIN_OBJECT_TYPE_ID = select_pja.FIN_OBJECT_TYPE_ID\n" +
@@ -102,7 +102,7 @@ public class SQLQuery {
 "    AND main_fo.FIN_OBJECT_ID = select_par.FIN_OBJECT_ID\n" +
 " ) as min_percent,\n" +
 " (\n" +
-"  SELECT select_par.VALUE1\n" +
+"  SELECT select_par.VALUE\n" +
 "  FROM FIN_OBJECTS select_fo \n" +
 "   INNER JOIN PJ_ATTRIBUTES select_pja\n" +
 "    ON select_fo.FIN_OBJECT_TYPE_ID = select_pja.FIN_OBJECT_TYPE_ID\n" +
@@ -116,7 +116,7 @@ public class SQLQuery {
 " ) as final_date, --время до конца расчетн. периода может тоже будет влиять\n" +
 " (\n" +
 "  SELECT\n" +
-"   SUM(obj_params.VALUE1) as sum_root\n" +
+"   SUM(obj_params.VALUE) as sum_root\n" +
 "  FROM (\n" +
 "   SELECT \n" +
 "    f_ob.USER_ID as user_id,\n" +

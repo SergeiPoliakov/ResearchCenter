@@ -6,19 +6,19 @@ import java.text.SimpleDateFormat;
 
 public class ParameterModel {
 
-	private String value1 = null;
+	private String value = null;
 	private SimpleDateFormat parse = new SimpleDateFormat("yyyy-MM-dd");
 	private Date value_date = null;
 	private int fin_object_id;
 	private int attribute_id;
 	private java.util.Date oldDate = null;
 
-	public String get_value1() {
-		return value1;
+	public String get_value() {
+		return value;
 	}
 
-	public void set_value1(String value1) {
-		this.value1 = value1;
+	public void set_value(String value) {
+		this.value = value;
 	}
 
 	public Date get_value_date() {
