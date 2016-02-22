@@ -95,5 +95,4 @@ public class CategoryModel {
         this.finalDate = finalDate;
         this.coeficient = coeficient;
     }
-    
 }

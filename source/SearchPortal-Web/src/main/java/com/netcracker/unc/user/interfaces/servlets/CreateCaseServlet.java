@@ -104,7 +104,7 @@ public class CreateCaseServlet extends HttpServlet {
 
 			if (attribute.get_attribute_name().toLowerCase().equals("стоимость")) {
 				param = new ParameterModel();
-				param.set_value1(caseCostStr);
+				param.set_value(caseCostStr);
 				param.set_fin_object_id(casee.get_fin_object_id());
 				param.set_attribute_id(attribute.get_attribute_id());
 				parameterDAO.addObject(param);
@@ -112,7 +112,7 @@ public class CreateCaseServlet extends HttpServlet {
 
 			if (attribute.get_attribute_name().toLowerCase().equals("приоритет")) {
 				param = new ParameterModel();
-				param.set_value1(casePriorityStr);
+				param.set_value(casePriorityStr);
 				param.set_fin_object_id(casee.get_fin_object_id());
 				param.set_attribute_id(attribute.get_attribute_id());
 				parameterDAO.addObject(param);

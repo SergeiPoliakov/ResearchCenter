@@ -1,4 +1,5 @@
-<%@page import="com.netcracker.unc.priorityModule.ReceivingData"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.netcracker.unc.priorityModule.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -78,9 +79,14 @@
 					type="submit" value="UP" />
 			</form>
 			<%
-				com.netcracker.unc.priorityModule.ReceivingData rd = new ReceivingData();
+                                ArrayList priorityData = new ArrayList();%>
+                                <%=FillHTMLTable.toHTMLString(priorityData)%>
+                                
+                                <%
+				ReceivingData rd = new ReceivingData();
 			%>
-			<%=rd.toString()%>
+			<%= rd.toString()%>
+                        
 		</div>
 	</div>
 	<div class="module" id="test1">
