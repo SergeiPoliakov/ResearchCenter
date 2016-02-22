@@ -52,16 +52,15 @@ public class CategoryDao extends ObjectDAO {
 			prepare = connect.prepareStatement(SQLQuery.SP_GET_FULL_CATEGORIES);
 			result = prepare.executeQuery();
 			List<Object> list = new ArrayList<Object>();
-
-			while (result.next()) {
+                        while (result.next()) {
                             category = new CategoryModel();
                             category.setObjectId(result.getString(1));
                             category.setObjectName(result.getString(3));
-                            category.setCoeficient(Float.parseFloat(result.getString(4)));
+                            //category.setCoeficient(Float.parseFloat(result.getString(4)));
                             category.setMinPercent(Integer.parseInt(result.getString(5)));
                             category.setMaxPercent(Integer.parseInt(result.getString(6)));
                             category.setFinalDate(result.getString(7));
-                            category.setSumCategory(Integer.parseInt(result.getString(8)));
+                            //category.setSumCategory(Integer.parseInt(result.getString(8)));
                             list.add(category);
 			}
 			return list;
@@ -72,22 +71,6 @@ public class CategoryDao extends ObjectDAO {
     }
 
     
-
-   
-
-    
-    
-    
-    
-    
-    
-    
-    /*
-     *
-     *
-     *not need
-     *
-     */
      @Override
     public Object getObject(Object object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

@@ -12,4 +12,7 @@ source/.settings
 source/SearchPortal-Web/target/*
 source/SearchPortal-BuildProject/target/*
 source/SearchPortal-Core/target/*
+source/SearchPortal-Core/.settings/*
+source/SearchPortal-Web/.settings/*
+source/SearchPortal-BuildProject/.settings/*
 old/*

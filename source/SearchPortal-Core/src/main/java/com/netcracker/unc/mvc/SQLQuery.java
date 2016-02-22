@@ -82,11 +82,11 @@ public class SQLQuery {
 " (\n" +
 "  SELECT select_par.VALUE\n" +
 "   FROM SP_FIN_OBJECTS select_fo \n" +
-"    INNER JOIN SP_PJ_ATTRIBUTES select_pja\n" +
+"    INNER JOIN SP_ATTRIBUTES select_pja\n" +
 "     ON select_fo.FIN_OBJECT_TYPE_ID = select_pja.FIN_OBJECT_TYPE_ID\n" +
 "    INNER JOIN SP_PARAMS select_par\n" +
 "     ON select_pja.ATTRIBUTE_ID = select_par.ATTRIBUTE_ID\n" +
-"   WHERE select_pja.ATTRIBUTE_NAME='Коэфицент приоритета'-- должно быть ФФ\n" +
+"   WHERE select_pja.ATTRIBUTE_NAME='Коэффицент приоритета'-- должно быть ФФ\n" +
 "    AND main_fo.FIN_OBJECT_ID = select_fo.FIN_OBJECT_ID\n" +
 "    AND main_fo.FIN_OBJECT_ID = select_par.FIN_OBJECT_ID\n" +
 " ) as coefficient,\n" +
@@ -104,7 +104,7 @@ public class SQLQuery {
 " (\n" +
 "  SELECT select_par.VALUE\n" +
 "  FROM SP_FIN_OBJECTS select_fo \n" +
-"   INNER JOIN SP_PJ_ATTRIBUTES select_pja\n" +
+"   INNER JOIN SP_ATTRIBUTES select_pja\n" +
 "    ON select_fo.FIN_OBJECT_TYPE_ID = select_pja.FIN_OBJECT_TYPE_ID\n" +
 "   INNER JOIN SP_PARAMS select_par\n" +
 "    ON select_pja.ATTRIBUTE_ID = select_par.ATTRIBUTE_ID\n" +
@@ -135,7 +135,7 @@ public class SQLQuery {
 " ) table_objects_and_its_roots \n" +
 "  INNER JOIN SP_PARAMS obj_params\n" +
 "   ON table_objects_and_its_roots.object_id = obj_params.FIN_OBJECT_ID\n" +
-"  INNER JOIN SP_PJ_ATTRIBUTES obj_atr\n" +
+"  INNER JOIN SP_ATTRIBUTES obj_atr\n" +
 "   ON obj_atr.FIN_OBJECT_TYPE_ID = table_objects_and_its_roots.object_type  \n" +
 " WHERE obj_atr.ATTRIBUTE_NAME = 'Стоимость' AND\n" +
 "  obj_params.ATTRIBUTE_ID = obj_atr.ATTRIBUTE_ID AND \n" +
