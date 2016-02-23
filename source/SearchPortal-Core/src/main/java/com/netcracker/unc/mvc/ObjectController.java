@@ -71,9 +71,9 @@ public class ObjectController {
 
 			while (result.next()) {
 				attribute = new AttributeModel();
-				attribute.set_attribute_name(result.getString(1));
-				attribute.set_attribute_id(result.getInt(2));
-				attribute.set_fin_object_type_id(result.getInt(3));
+				attribute.set_attribute_name(result.getString("attribute_name"));
+				attribute.set_attribute_id(result.getInt("attribute_id"));
+				attribute.set_fin_object_type_id(result.getInt("fin_object_type_id"));
 				list.add(attribute);
 			}
 			connect.close();
@@ -112,7 +112,8 @@ public class ObjectController {
 	public List<CaseModel> getUserActiveCases(int userId) {
 		connect = ConnectionFactory.getConnection();
 		try {
-			prepare = connect.prepareStatement("SELECT * FROM fin_objects WHERE user_id = ? AND parent_id IS NOT NULL");
+			prepare = connect
+					.prepareStatement("SELECT * FROM sp_fin_objects WHERE user_id = ? AND parent_id IS NOT NULL");
 			prepare.setInt(1, userId);
 			result = prepare.executeQuery();
 			List<CaseModel> list = new ArrayList<CaseModel>();
@@ -137,7 +138,7 @@ public class ObjectController {
 		connect = ConnectionFactory.getConnection();
 		try {
 			prepare = connect.prepareStatement(
-					"SELECT * FROM  fin_objects WHERE CONNECT_BY_ISLEAF = 1  START WITH fin_object_id = ? CONNECT BY PRIOR parent_id = fin_object_id");
+					"SELECT * FROM  sp_fin_objects WHERE CONNECT_BY_ISLEAF = 1  START WITH fin_object_id = ? CONNECT BY PRIOR parent_id = fin_object_id");
 			prepare.setInt(1, fin_object_id);
 			result = prepare.executeQuery();
 			casee = new CaseModel();

@@ -53,6 +53,8 @@
             <button id ="income-menu-button" class="button">Доходы</button>
             <button id ="fast-add-income" class="button">+</button>-->
 		<button id="statistic-menu-button" class="button">Статистика</button>
+		<button id="statistic-menu-button" class="button"
+			onclick="showCreateCase()">Создать</button>
 		<div class="overlayInCons">
 			<jsp:include page="/attitudes/IncomeConsumption"></jsp:include>
 		</div>
@@ -78,6 +80,14 @@
 			%>
 		</div>
 	</div>
+
+
+	<div id="animationAddCase" style="visibility: hidden"></div>
+	<div class="create-case" id="create-case" style="visibility: hidden">
+		<jsp:include page="interface/create_case.jsp" />
+	</div>
+
+
 	<div class="module" id="priority-module">
 		<div class="block-title">Приоритеты</div>
 		<div class="block-information">
@@ -89,7 +99,7 @@
 				ReceivingData rd = new ReceivingData();
 				com.netcracker.unc.mvc.dao.CategoryDao cd = new CategoryDao();
 			%>
-			 
+
 			<!--FillHTMLTable.toHTMLString(cd.getAllObjectsDB())-->
 
 			<%=rd.toString()%>
@@ -118,4 +128,5 @@
 		<div class="block-information">Тут какая-то информация</div>
 	</div>
 </body>
+<script src="javascripts/aspro.js"></script>
 </html>

@@ -3,11 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-<style>
-table {
-	
-}
-</style>
 <link type="text/css" rel="stylesheet"
 	href="interface/css/interface.css" />
 <head>
@@ -30,7 +25,7 @@ table {
 			</tr>
 			<tr>
 				<td>Введите название задачи:</td>
-				<td><input type="text" name="name_case" />
+				<td><input type="text" name="name_case" class="caseInput" />
 			</tr>
 			<tr>
 				<td>Выберите категорию:</td>
@@ -42,7 +37,8 @@ table {
 					id="selectCategories">
 						<option value="транспорт">Транспорт</option>
 						<option value="продукты">Продукты</option>
-						<option value="коммунальные услуги">Коммунальные услуги</option>
+						<option value="жкх">ЖКХ</option>
+						<option value="кредит">Кредит</option>
 				</select></td>
 			</tr>
 			<tr>
@@ -74,14 +70,14 @@ table {
 			<tr>
 				<td>Введите стоимость:</td>
 				<td><input type="text" name="cost_case" id="cost_case"
-					onkeypress="validate()" /></td>
+					onkeypress="validate()" class="caseInput" /></td>
 			</tr>
 			<tr>
 				<td colspan="3"><hr /></td>
 			</tr>
 			<tr>
 				<td colspan="3" align="center"><input class="submit"
-					type="submit" value="Создать" /></td>
+					type="submit" value="Создать" id="createCaseSubmit" /></td>
 			</tr>
 		</table>
 	</form>
@@ -131,18 +127,30 @@ table {
 </script>	-->
 
 <script>
+	var parent = document.getElementById("parentBlock");
+	var values = [];
+	
+	for (var i = 0; i < parent.length; i++) {
+		values[i] = parent.options[i].value;
+		parent.options[i].value = 0;
+	}
+
 	function changeCheck(element) {
 		var element = element.value;
 		var typeYes = document.getElementById("yes");
 		var typeNo = document.getElementById("no");
 
-		var parent = document.getElementById("parentBlock");
-
 		if (element.valueOf() == 'yes'.valueOf()) {
+			for (var i = 0; i < parent.length; i++) {
+				parent.options[i].value = values[i];
+			}
 			typeNo.checked = undefined;
 			typeYes.checked = "checked";
 			parent.style.visibility = "visible";
 		} else {
+			for (var i = 0; i < parent.length; i++) {
+				parent.options[i].value = 0;
+			}
 			typeYes.checked = undefined;
 			typeNo.checked = "checked";
 			parent.style.visibility = "hidden";

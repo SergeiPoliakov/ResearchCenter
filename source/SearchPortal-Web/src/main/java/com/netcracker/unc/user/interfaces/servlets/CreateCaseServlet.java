@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,18 +14,16 @@ import com.netcracker.unc.mvc.ObjectController;
 import com.netcracker.unc.mvc.dao.CaseDAO;
 import com.netcracker.unc.mvc.dao.CaseTypeDAO;
 import com.netcracker.unc.mvc.dao.ParameterDAO;
-import com.netcracker.unc.mvc.dao.UserDAO;
 import com.netcracker.unc.mvc.models.AttributeModel;
 import com.netcracker.unc.mvc.models.CaseModel;
 import com.netcracker.unc.mvc.models.CaseTypeModel;
 import com.netcracker.unc.mvc.models.ParameterModel;
 import com.netcracker.unc.mvc.models.UserModel;
 
-@WebServlet("/interface/CreateCase")
+@WebServlet("/CreateCase")
 public class CreateCaseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private CaseDAO caseDAO = null;
-	private UserDAO userDAO = null;
 	private CaseTypeDAO caseTypeDAO = null;
 	private UserModel user = null;
 	private ParameterDAO parameterDAO = null;
@@ -33,6 +32,7 @@ public class CreateCaseServlet extends HttpServlet {
 	private AttributeModel attribute = null;
 	private ParameterModel param = null;
 	private ObjectController controller = new ObjectController();
+	private Cookie cookie = null;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -40,12 +40,8 @@ public class CreateCaseServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-
-		userDAO = new UserDAO();
 		// user = (UserModel) request.getSession().getAttribute("user");
-		user = new UserModel();
-		user.set_login("aspron1x");
-		user = (UserModel) userDAO.getObject(user);
+		user = (UserModel) request.getSession().getAttribute("user");
 
 		String caseNameStr = request.getParameter("name_case");
 		String caseTypeStr = request.getParameter("type_case").toLowerCase();
@@ -57,7 +53,7 @@ public class CreateCaseServlet extends HttpServlet {
 		String caseCostStr = request.getParameter("cost_case");
 
 		System.out.println(caseNameStr + " " + caseTypeStr + " " + casePriorityStr + " " + caseDateStr + " "
-				+ user.get_user_id() + " " + caseCostStr);
+				+ user.get_user_id() + " " + caseCostStr + " " + caseParentInt);
 
 		CaseModel caseCategory = controller.getStandartCategory(user, caseTypeStr); // this
 																					// general
@@ -84,7 +80,6 @@ public class CreateCaseServlet extends HttpServlet {
 		caseDAO.addObject(casee);
 		casee = (CaseModel) caseDAO.getObject(casee);
 		List<Object> listAtr = controller.getCaseTypeAttributes(casee.get_fin_object_type_id());
-
 		parameterDAO = new ParameterDAO();
 		for (Object ob : listAtr) {
 			attribute = (AttributeModel) ob;
@@ -117,6 +112,7 @@ public class CreateCaseServlet extends HttpServlet {
 			}
 
 			if (attribute.get_attribute_name().toLowerCase().equals("приоритет")) {
+				System.out.println(attribute.get_attribute_name());
 				param = new ParameterModel();
 				param.set_value(casePriorityStr);
 				param.set_fin_object_id(casee.get_fin_object_id());
@@ -124,5 +120,8 @@ public class CreateCaseServlet extends HttpServlet {
 				parameterDAO.addObject(param);
 			}
 		}
+		cookie = new Cookie("caseAdd", "1");
+		response.addCookie(cookie);
+		response.sendRedirect("modules.jsp");
 	}
 }

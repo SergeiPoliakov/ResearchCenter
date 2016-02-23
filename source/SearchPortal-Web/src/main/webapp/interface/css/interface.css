@@ -25,3 +25,7 @@ td {
 	background-color: #98FB98;
 	border: 3px #004949 solid; /* рамка */
 }
+
+.caseInput {
+	height: 30px;
+}

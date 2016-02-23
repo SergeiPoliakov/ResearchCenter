@@ -128,7 +128,16 @@ public class IncomeConsumptionModel {
 
 		// column names: 1) maxCos 2) minCost 3) maxName 4) minName 5) avgCost
 		// 6) sumCosts
-		String query = "select * from(select distinct max(to_number(a1.value)) over(partition by a2.USER_ID) as maxCost, min(to_number(a1.value)) over(partition by a2.USER_ID) as minCost, FIRST_VALUE(a2.OBJECT_NAME) over(partition by a2.user_id order by a1.value) as maxName, LAST_VALUE(a2.OBJECT_NAME) over(partition by a2.user_id order by a1.value) as minName, round(avg(a1.value) over (partition by a2.user_id), 0) as avgCost, sum(a1.value) over(partition by a2.user_id) as sumCosts from sp_params a1 inner join sp_fin_objects a2 on a1.FIN_OBJECT_ID=a2.FIN_OBJECT_ID inner join sp_fin_object_types a3 on a2.FIN_OBJECT_TYPE_ID=a3.FIN_OBJECT_TYPE_ID inner join sp_ATTRIBUTES a4 on a1.ATTRIBUTE_ID=a4.ATTRIBUTE_ID where lower(a4.ATTRIBUTE_NAME) = ? and a2.USER_ID = ?) where rownum = 1";
+		String query = "select * from(select distinct max(to_number(a1.value)) over(partition by a2.USER_ID) as maxCost, "
+				+ "min(to_number(a1.value)) over(partition by a2.USER_ID) as minCost, "
+				+ "FIRST_VALUE(a2.OBJECT_NAME) over(partition by a2.user_id order by to_number(a1.value) desc) as maxName, "
+				+ "FIRST_VALUE(a2.OBJECT_NAME) over(partition by a2.user_id order by to_number(a1.value) asc) as minName, "
+				+ "round(avg(a1.value) over (partition by a2.user_id), 0) as avgCost, "
+				+ "sum(a1.value) over(partition by a2.user_id) as sumCosts "
+				+ "from sp_params a1 inner join sp_fin_objects a2 on a1.FIN_OBJECT_ID=a2.FIN_OBJECT_ID "
+				+ "inner join sp_fin_object_types a3 on a2.FIN_OBJECT_TYPE_ID=a3.FIN_OBJECT_TYPE_ID "
+				+ "inner join sp_ATTRIBUTES a4 on a1.ATTRIBUTE_ID=a4.ATTRIBUTE_ID "
+				+ "where lower(a4.ATTRIBUTE_NAME) = ? and a2.USER_ID = ?) where rownum = 1";
 		// for income
 		String where1 = "сумма дохода";
 		// for consumption

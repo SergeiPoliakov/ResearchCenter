@@ -1,6 +1,35 @@
 @CHARSET "UTF-8";
 
 .overlayInCons {
-	margin-top: 80px;
+	margin-top: 30px;
 	margin-left: 80px;
+}
+
+.create-case {
+	margin-top: 50px;
+	margin-left: 25%;
+}
+
+#createCaseSubmit {
+	height: 30px;
+	width: 70px;
+	font-size: 13px;
+}
+
+#animationCreateCase {
+	width: 30%;
+	border-radius: 18px;
+	border: 1px #004949 groove; /* рамка */
+	text-align: center;
+	margin-left: 35%;
+	margin-top: 10%;
+}
+
+#animationCCLabel {
+	font-size: 30pt; /* размер шрифта */
+	font-family: Roman; /* устанавливает шрифт */
+	font-weight: 600; /* толщина текста */
+	display: inline-block;
+	color: #072F01;
+	margin-bottom: 5px;
 }
