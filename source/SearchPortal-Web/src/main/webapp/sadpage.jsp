@@ -49,7 +49,6 @@
                     
                     //ArrayList list = new ArrayList();
                     //list.addAll(cat.getAllObjectsDB());
-                    cat.connectionClose();
                     %>
             </div>
         </div>

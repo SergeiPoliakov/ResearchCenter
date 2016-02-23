@@ -18,7 +18,7 @@
 }
 
 .module {
-	margin-top: 100px;
+	margin-top: 1%;
 }
 
 .label { /* модуль надписи добро пожалования */
@@ -44,10 +44,9 @@
 .authInclude, .registrInclude { /* отображение модуля логина юзера */
 	left: 0;
 	right: 0;
-	margin-bottom: auto;
 	margin-right: auto;
-	margin-top: 70px;
 	position: absolute;
+	top: 40%;
 }
 
 td {

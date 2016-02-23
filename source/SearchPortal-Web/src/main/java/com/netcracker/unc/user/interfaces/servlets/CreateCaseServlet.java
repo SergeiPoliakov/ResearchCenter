@@ -13,16 +13,18 @@ import com.netcracker.unc.mvc.ObjectController;
 import com.netcracker.unc.mvc.dao.CaseDAO;
 import com.netcracker.unc.mvc.dao.CaseTypeDAO;
 import com.netcracker.unc.mvc.dao.ParameterDAO;
+import com.netcracker.unc.mvc.dao.UserDAO;
 import com.netcracker.unc.mvc.models.AttributeModel;
 import com.netcracker.unc.mvc.models.CaseModel;
 import com.netcracker.unc.mvc.models.CaseTypeModel;
 import com.netcracker.unc.mvc.models.ParameterModel;
 import com.netcracker.unc.mvc.models.UserModel;
 
-@WebServlet("/CreateCase")
+@WebServlet("/interface/CreateCase")
 public class CreateCaseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private CaseDAO caseDAO = null;
+	private UserDAO userDAO = null;
 	private CaseTypeDAO caseTypeDAO = null;
 	private UserModel user = null;
 	private ParameterDAO parameterDAO = null;
@@ -39,7 +41,11 @@ public class CreateCaseServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 
-		user = (UserModel) request.getSession().getAttribute("user");
+		userDAO = new UserDAO();
+		// user = (UserModel) request.getSession().getAttribute("user");
+		user = new UserModel();
+		user.set_login("aspron1x");
+		user = (UserModel) userDAO.getObject(user);
 
 		String caseNameStr = request.getParameter("name_case");
 		String caseTypeStr = request.getParameter("type_case").toLowerCase();
@@ -118,9 +124,5 @@ public class CreateCaseServlet extends HttpServlet {
 				parameterDAO.addObject(param);
 			}
 		}
-
-		caseDAO.connectionClose();
-		caseTypeDAO.connectionClose();
-		parameterDAO.connectionClose();
 	}
 }

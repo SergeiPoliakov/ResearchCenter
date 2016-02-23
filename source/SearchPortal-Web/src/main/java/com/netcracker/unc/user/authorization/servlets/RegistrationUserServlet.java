@@ -96,7 +96,6 @@ public class RegistrationUserServlet extends HttpServlet {
 			if (!check) {
 				userDAO.addObject(user);
 				user = (UserModel) userDAO.getObject(user);
-				userDAO.connectionClose();
 
 				session = request.getSession();
 				session.setAttribute("user", user);

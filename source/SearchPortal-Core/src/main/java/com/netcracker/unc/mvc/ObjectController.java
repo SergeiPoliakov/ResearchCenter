@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import com.netcracker.unc.mvc.connection.ConnectionFactory;
-import com.netcracker.unc.mvc.dao.CaseDAO;
 import com.netcracker.unc.mvc.dao.UserDAO;
 import com.netcracker.unc.mvc.models.AttributeModel;
 import com.netcracker.unc.mvc.models.CaseModel;
@@ -19,7 +18,6 @@ public class ObjectController {
 	private UserModel userDB = null; // for user from database
 	private UserDAO userDAO = null;
 	private CaseModel casee = null;
-	private CaseDAO caseDAO = null;
 	private List<Object> listAll = null;
 
 	private AttributeModel attribute = null;
@@ -37,12 +35,10 @@ public class ObjectController {
 			for (Object ob : listAll) {
 				userDB = (UserModel) ob;
 				if (userDB.get_login().equals(user.get_login())) {
-					userDAO.connectionClose();
 					return true;
 				}
 			}
 		}
-		userDAO.connectionClose();
 		return false;
 	}
 
@@ -56,13 +52,11 @@ public class ObjectController {
 		if (userDB != null) {
 			if (user.get_login().equals(userDB.get_login()) && user.get_hash_sum() == userDB.get_hash_sum()
 					&& user.get_salt() == userDB.get_salt()) {
-				userDAO.connectionClose();
 				System.out.println(user.get_salt());
 				System.out.println(userDB.get_salt());
 				return userDB;
 			}
 		}
-		userDAO.connectionClose();
 		return null;
 	}
 
@@ -135,12 +129,10 @@ public class ObjectController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-		caseDAO.connectionClose();
 		return null;
 	}
 
-	//this method return general case of current subcase
+	// this method return general case of current subcase
 	public CaseModel getGeneralCaseCategory(int fin_object_id) {
 		connect = ConnectionFactory.getConnection();
 		try {
