@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Locale;
 import java.util.Properties;
 
 /**
@@ -24,7 +25,7 @@ public class ConnectionFactory {
 	private ConnectionFactory() {
 		try {
 			// load connection properties
-			InputStream loadPr = new FileInputStream(this.getClass().getResource("connection.properties").getPath());
+			InputStream loadPr = this.getClass().getResourceAsStream("connection.properties");
 			dbPr.load(loadPr);
 			Class.forName(dbPr.getProperty("db.driver"));
 		} catch (ClassNotFoundException | IOException e) {
@@ -36,6 +37,7 @@ public class ConnectionFactory {
 	private Connection createConnection() {
 		Connection connect = null;
 		try {
+			Locale.setDefault(Locale.ENGLISH);
 			String connectPath = dbPr.getProperty("db.type") + dbPr.getProperty("db.url") + ":"
 					+ dbPr.getProperty("db.sid");
 			connect = DriverManager.getConnection(connectPath, dbPr.getProperty("db.user"),
