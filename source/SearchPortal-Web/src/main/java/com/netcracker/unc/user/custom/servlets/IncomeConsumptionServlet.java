@@ -26,21 +26,12 @@ public class IncomeConsumptionServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		
-		
+
 		inCons.procentForBar();
 
-		int progress = (inCons.getFullIncome() * 100) / (inCons.getFullIncome() + inCons.getFullConsumption());
-
-		System.out.println(progress);
-
-		System.out.println(inCons.getMaxIncome() + " " + inCons.getMinIncome() + " " + inCons.getMaxIncomeName() + " "
-				+ inCons.getMinIncomeName() + " " + inCons.getAvgIncome() + " " + inCons.getFullIncome());
-
-		System.out.println(inCons.getMaxConsumption() + " " + inCons.getMinConsumption() + " "
-				+ inCons.getMaxConsumptionName() + " " + inCons.getMinConsumptionName() + " "
-				+ inCons.getAvgConsumption() + " " + inCons.getFullConsumption());
-		;
+		int progress = 0;
+		if (inCons.getFullConsumption() != 0)
+			progress = (inCons.getFullIncome() * 100) / (inCons.getFullIncome() + inCons.getFullConsumption());
 
 		request.setAttribute("progress", progress);
 		request.setAttribute("maxIncomeCost", inCons.getMaxIncomeName());
@@ -49,8 +40,8 @@ public class IncomeConsumptionServlet extends HttpServlet {
 		request.setAttribute("maxConsumptionCostInt", inCons.getMaxConsumption());
 		request.setAttribute("avgIncome", inCons.getAvgIncome());
 		request.setAttribute("avgConsumption", inCons.getAvgConsumption());
-		request.setAttribute("percentString", progress + "/" + (100-progress));
-		
+		request.setAttribute("percentString", progress + "/" + (100 - progress));
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/attitudes/income_consumption.jsp");
 		dispatcher.include(request, response);
 

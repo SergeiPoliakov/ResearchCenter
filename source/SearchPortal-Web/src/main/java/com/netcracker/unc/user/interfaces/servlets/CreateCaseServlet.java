@@ -34,6 +34,17 @@ public class CreateCaseServlet extends HttpServlet {
 	private ObjectController controller = new ObjectController();
 	private Cookie cookie = null;
 
+	/** for database tables */
+	// sp_fin_object_types (fin_object_type_name)
+	private String objectTypeName = "Задача";
+	// sp_attributes (attribute_name)
+	private String createDate = "Дата создания";
+	private String endDate = "Дата завершения";
+	private String cost = "Стоимость";
+	private String priority = "Приоритет";
+
+	////////
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -62,10 +73,9 @@ public class CreateCaseServlet extends HttpServlet {
 																					// category
 		casee = new CaseModel();
 		attribute = new AttributeModel();
-
 		caseType = new CaseTypeModel();
 		caseTypeDAO = new CaseTypeDAO();
-		caseType.set_fin_object_type_name("задачи");
+		caseType.set_fin_object_type_name(objectTypeName.toLowerCase());
 		caseType = (CaseTypeModel) caseTypeDAO.getObject(caseType);
 		// create model case
 		if (caseParentInt == 0) {
@@ -84,7 +94,7 @@ public class CreateCaseServlet extends HttpServlet {
 		for (Object ob : listAtr) {
 			attribute = (AttributeModel) ob;
 
-			if (attribute.get_attribute_name().toLowerCase().equals("дата создания")) {
+			if (attribute.get_attribute_name().toLowerCase().equals(createDate.toLowerCase())) {
 				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 				Date now = new Date();
 				String currentDate = format.format(now);
@@ -95,7 +105,7 @@ public class CreateCaseServlet extends HttpServlet {
 				parameterDAO.addObject(param);
 			}
 
-			if (attribute.get_attribute_name().toLowerCase().equals("дата завершения")) {
+			if (attribute.get_attribute_name().toLowerCase().equals(endDate.toLowerCase())) {
 				param = new ParameterModel();
 				param.set_value_date(caseDateStr);
 				param.set_fin_object_id(casee.get_fin_object_id());
@@ -103,7 +113,7 @@ public class CreateCaseServlet extends HttpServlet {
 				parameterDAO.addObject(param);
 			}
 
-			if (attribute.get_attribute_name().toLowerCase().equals("стоимость")) {
+			if (attribute.get_attribute_name().toLowerCase().equals(cost.toLowerCase())) {
 				param = new ParameterModel();
 				param.set_value(caseCostStr);
 				param.set_fin_object_id(casee.get_fin_object_id());
@@ -111,7 +121,7 @@ public class CreateCaseServlet extends HttpServlet {
 				parameterDAO.addObject(param);
 			}
 
-			if (attribute.get_attribute_name().toLowerCase().equals("приоритет")) {
+			if (attribute.get_attribute_name().toLowerCase().equals(priority.toLowerCase())) {
 				System.out.println(attribute.get_attribute_name());
 				param = new ParameterModel();
 				param.set_value(casePriorityStr);

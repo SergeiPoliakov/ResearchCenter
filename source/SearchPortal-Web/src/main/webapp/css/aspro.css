@@ -7,13 +7,23 @@
 
 .create-case {
 	margin-top: 50px;
-	margin-left: 25%;
 }
 
-#createCaseSubmit {
+#createCaseSubmit, #logOutSubmit {
 	height: 30px;
 	width: 70px;
 	font-size: 13px;
+}
+
+#logOutSubmit {
+	position: absolute;
+	display: block;
+	margin-top: 30px;
+	margin-left: 95%;
+}
+
+#welcomeUser {
+	position: relative;
 }
 
 #animationCreateCase {

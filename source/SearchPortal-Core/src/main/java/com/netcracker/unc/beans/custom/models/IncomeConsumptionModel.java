@@ -138,33 +138,36 @@ public class IncomeConsumptionModel {
 				+ "inner join sp_fin_object_types a3 on a2.FIN_OBJECT_TYPE_ID=a3.FIN_OBJECT_TYPE_ID "
 				+ "inner join sp_ATTRIBUTES a4 on a1.ATTRIBUTE_ID=a4.ATTRIBUTE_ID "
 				+ "where lower(a4.ATTRIBUTE_NAME) = ? and a2.USER_ID = ?) where rownum = 1";
-		// for income
-		String where1 = "сумма дохода";
-		// for consumption
-		String where2 = "стоимость";
+		String where = null;
 
 		try {
+			// for income
+			where = "сумма дохода";
 			prepare = connect.prepareStatement(query);
-			prepare.setString(1, where1);
+			prepare.setString(1, where);
 			prepare.setInt(2, user.get_user_id());
 			result = prepare.executeQuery();
-			result.next();
-			setMaxIncome(result.getInt("MAXCOST"));
-			setMinIncome(result.getInt("MINCOST"));
-			setMaxIncomeName(result.getString("MAXNAME"));
-			setMinIncomeName(result.getString("MINNAME"));
-			setAvgIncome(result.getInt("AVGCOST"));
-			setFullIncome(result.getInt("SUMCOSTS"));
+			while (result.next()) {
+				setMaxIncome(result.getInt("MAXCOST"));
+				setMinIncome(result.getInt("MINCOST"));
+				setMaxIncomeName(result.getString("MAXNAME"));
+				setMinIncomeName(result.getString("MINNAME"));
+				setAvgIncome(result.getInt("AVGCOST"));
+				setFullIncome(result.getInt("SUMCOSTS"));
+			}
 
-			prepare.setString(1, where2);
+			// for consumption
+			where = "стоимость";
+			prepare.setString(1, where);
 			result = prepare.executeQuery();
-			result.next();
-			setMaxConsumption(result.getInt("MAXCOST"));
-			setMinConsumption(result.getInt("MINCOST"));
-			setMaxConsumptionName(result.getString("MAXNAME"));
-			setMinConsumptionName(result.getString("MINNAME"));
-			setAvgConsumption(result.getInt("AVGCOST"));
-			setFullConsumption(result.getInt("SUMCOSTS"));
+			while (result.next()) {
+				setMaxConsumption(result.getInt("MAXCOST"));
+				setMinConsumption(result.getInt("MINCOST"));
+				setMaxConsumptionName(result.getString("MAXNAME"));
+				setMinConsumptionName(result.getString("MINNAME"));
+				setAvgConsumption(result.getInt("AVGCOST"));
+				setFullConsumption(result.getInt("SUMCOSTS"));
+			}
 
 			connect.close();
 		} catch (SQLException e) {

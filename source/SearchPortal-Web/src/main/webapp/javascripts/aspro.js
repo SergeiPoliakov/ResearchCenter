@@ -4,12 +4,21 @@
 
 // visible and hidden create case border
 function showCreateCase() {
+	var parent = document.getElementById("parentBlock");
+	var typeYes = document.getElementById("yes");
+	var typeNo = document.getElementById("no");
 	var createCase = document.getElementById("create-case");
+
 	if (createCase.style.visibility.valueOf() == 'hidden'.valueOf())
 		createCase.style.visibility = 'visible';
-	else
+	else {
 		createCase.style.visibility = 'hidden';
+		parent.style.visibility = "hidden";
+		typeYes.checked = undefined;
+		typeNo.checked = "checked";
+	}
 }
+
 // animation for create case
 var cookie = document.cookie;
 var matches = document.cookie.match(new RegExp('caseAdd=1'));

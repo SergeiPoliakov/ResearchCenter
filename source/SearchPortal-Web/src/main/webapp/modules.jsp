@@ -40,9 +40,15 @@
 	</c:choose>
 	<div class="header">
 		<div id="logo">214*59</div>
-		<div class="welcome" align="right" style="background-color: #92d36e;">
+
+		<div class="welcome" align="right" style="background-color: #92d36e;"
+			id="welcomeUser">
 			Добро пожаловать <label
 				style="color: red; font-size: 16pt; background-color: #92d36e; margin-right: 10px"><%=user.get_login()%></label>
+			<form action="LogoutUser">
+				<input type="submit" value="Выход" id="logOutSubmit" />
+			</form>
+
 		</div>
 		<button id="cost-menu-button" class="button">Расходы</button>
 		<!--

@@ -52,8 +52,6 @@ public class ObjectController {
 		if (userDB != null) {
 			if (user.get_login().equals(userDB.get_login()) && user.get_hash_sum() == userDB.get_hash_sum()
 					&& user.get_salt() == userDB.get_salt()) {
-				System.out.println(user.get_salt());
-				System.out.println(userDB.get_salt());
 				return userDB;
 			}
 		}
@@ -95,10 +93,10 @@ public class ObjectController {
 			result = prepare.executeQuery();
 
 			while (result.next()) {
-				casee.set_fin_object_id(result.getInt(1));
-				casee.set_object_name(result.getString(3));
-				casee.set_fin_object_type_id(result.getInt(4));
-				casee.set_user_id(result.getInt(5));
+				casee.set_fin_object_id(result.getInt("FIN_OBJECT_ID"));
+				casee.set_object_name(result.getString("OBJECT_NAME"));
+				casee.set_fin_object_type_id(result.getInt("FIN_OBJECT_TYPE_ID"));
+				casee.set_user_id(result.getInt("USER_ID"));
 			}
 			connect.close();
 			return casee;
