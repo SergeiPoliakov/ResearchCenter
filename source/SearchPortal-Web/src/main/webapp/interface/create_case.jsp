@@ -74,7 +74,7 @@
 				<tr>
 					<td>Введите стоимость:</td>
 					<td><input type="text" name="cost_case" id="cost_case"
-						onkeypress="validate()" class="caseInput" /></td>
+						onkeypress="validate(this)" class="caseInput" /></td>
 				</tr>
 				<tr>
 					<td colspan="3"><hr /></td>

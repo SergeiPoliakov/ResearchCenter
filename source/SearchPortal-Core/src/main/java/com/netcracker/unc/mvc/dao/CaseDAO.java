@@ -55,7 +55,7 @@ public class CaseDAO extends ObjectDAO {
 				prepare = connect.prepareStatement(SQLQuery.SP_FIN_OBJECTS_GET_BY_ID);
 				prepare.setInt(1, casee.get_fin_object_id());
 			} else {
-				prepare = connect.prepareStatement(SQLQuery.SP_FIN_OBJECTS_GET_BY_NAME);
+				prepare = connect.prepareStatement(SQLQuery.SP_FIN_OBJECTS_GET_LAST_BY_NAME);
 				prepare.setString(1, casee.get_object_name());
 			}
 			result = prepare.executeQuery();

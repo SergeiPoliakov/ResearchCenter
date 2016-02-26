@@ -20,13 +20,12 @@ progress.inoutProgress::-webkit-progress-bar {
 /* Chrome */
 progress.inoutProgress::-webkit-progress-value {
 	background: -webkit-linear-gradient(#1A4A20, #28A65A 50%, #4c4);
-	border-top-left-radius: 17px;
-	border-bottom-left-radius: 17px;
+	border-radius: 17px;
 	box-shadow: 0 0 2px black;
 }
 
 .percent {
 	position: absolute;
-	left: 82px;
+	left: 85px;
 	top: 3px;
 }

@@ -2,6 +2,14 @@
  * @author Kolesnikov
  */
 
+// add regular check for input button of salary add
+function regularAddSalary() {
+	var welcomeCaseInput = document.getElementById("welcomeCaseInput");
+	var matcherCostCase = new RegExp("^[0-9]{1,12}$");
+	if (!welcomeCaseInput.value.match(matcherCostCase))
+		return false;
+}
+
 // show-hide parent select on yes no toogles
 var parent = document.getElementById("parentBlock");
 var values = [];
@@ -58,12 +66,13 @@ var currentDate = yyyy + "-" + mm + "-" + dd;
 document.getElementById("date_case").setAttribute("min", currentDate);
 
 // use letters limitation as only numbers input
-function validate() {
+function validate(input) {
+	var input1 = input;
 	var element = window.event; // get screen page event
 	var key = element.which;
 	key = String.fromCharCode(key);
 	var regex = /[0-9]/; // regular
-	if (!regex.test(key)) {
+	if (!regex.test(key) || input1.value.length > 9) {
 		if (element.preventDefault) { // cancel change by event screen
 			element.preventDefault();
 		} else {

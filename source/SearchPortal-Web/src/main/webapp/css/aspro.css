@@ -43,3 +43,53 @@
 	color: #072F01;
 	margin-bottom: 5px;
 }
+
+#helloCase {
+	width: 250px;
+	border-top-left-radius: 18px;
+	border-bottom-left-radius: 18px;
+	border: 1px #004949 groove; /* рамка */
+	height: 90px;
+	position: fixed;
+	top: 25%;
+	background-color: #fef8a0;
+	right: -250px;
+}
+
+.welcomeCase {
+	font-size: 10pt; /* размер шрифта */
+	font-family: Roman; /* устанавливает шрифт */
+	color: #072F01;
+}
+
+#welcomeCase1 {
+	display: block;
+	margin-top: 8px;
+	margin-left: 35px;
+}
+
+#welcomeCase2 {
+	display: block;
+	margin-top: 4px;
+	margin-left: 7px;
+}
+
+#welcomeCaseInput {
+	width: 70px;
+	margin-left: 25px;
+	margin-top: 5px;
+	background: #fef8a0;
+	font-size: 10pt;
+	height: 15px;
+	color: darkred;
+}
+
+#addSalarySubmit {
+	height: 23px;
+	width: 60px;
+	font-size: 11px;
+	display: inline-block;
+	margin-left: 18px;
+	margin-bottom: 7px;
+	border-radius: 3px;
+}

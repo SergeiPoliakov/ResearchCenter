@@ -62,9 +62,9 @@ public class AttributeDAO extends ObjectDAO {
 			result.next();
 
 			// create current attribute from database
-			attribute.set_attribute_name(result.getString(1));
-			attribute.set_fin_object_type_id(result.getInt(2));
-			attribute.set_attribute_id(result.getInt(3));
+			attribute.set_attribute_name(result.getString("ATTRIBUTE_NAME"));
+			attribute.set_fin_object_type_id(result.getInt("FIN_OBJECT_TYPE_ID"));
+			attribute.set_attribute_id(result.getInt("ATTRIBUTE_ID"));
 			return attribute;
 		} catch (SQLException e) {
 			e.printStackTrace();

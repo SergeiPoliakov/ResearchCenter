@@ -14,8 +14,9 @@
 	<div style="margin-left: 10px; position: relative;" id="divProgress">
 		<label class="percent" onmouseover="createOverlay()"
 			onmouseout="deleteOverlay()">${percentString}</label>
-		<progress value="${progress}" max="100" class="inoutProgress"
-			onmouseover="createOverlay()" onmouseout="deleteOverlay()"></progress>
+		<progress value="${progress}" max="100" id="consumptionOverlay"
+			class="inoutProgress" onmouseover="createOverlay()"
+			onmouseout="deleteOverlay()"></progress>
 	</div>
 
 </body>
@@ -35,7 +36,6 @@
 			//document.body.removeChild(div);
 			divProgress.removeChild(div);
 		}
-		;
 	}
 
 	function createOverlay() {
@@ -44,7 +44,7 @@
 		div.id = "prog";
 
 		var label = document.createElement('label');
-		label.innerHTML = '<b style=\"color:#006400\">За последний месяц:</b> <p style=\"margin-top: 3px\"><b>Наибольший доход от:</b> '
+		label.innerHTML = '<b style=\"color:#006400\">На текущий месяц:</b> <p style=\"margin-top: 3px\"><b>Наибольший доход от:</b> '
 				+ "${maxIncomeCost} "
 				+ "(${maxIncomeCostInt} руб.)"
 				+ '<p><b>Наибольший расход от:</b> '

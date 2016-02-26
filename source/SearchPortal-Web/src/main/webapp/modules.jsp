@@ -65,6 +65,34 @@
 			<jsp:include page="/attitudes/IncomeConsumption"></jsp:include>
 		</div>
 	</div>
+
+
+
+	<%@ page import="com.netcracker.unc.beans.CheckSalary, javax.ejb.EJB"%>
+	<%!@EJB
+	CheckSalary checkSalary = new CheckSalary();%>
+	<%
+		checkSalary.checkSalary((UserModel) request.getSession().getAttribute("user"));
+	%>
+	<c:set var="checkSalary" value="<%=checkSalary.getSalary()%>"></c:set>
+	<c:if test="${checkSalary == 0}">
+		<div id="helloCase">
+			<label class="welcomeCase" id="welcomeCase1"><b>Добро
+					пожаловать на сайт <span style="margin-left: 40px">приоритетов!</span>
+			</b></label>
+			<p>
+				<label class="welcomeCase" id="welcomeCase2">Пожалуйста,
+					введите вашу зарплату:</label>
+			</p>
+			<form action="AddSalary" onsubmit="return regularAddSalary()">
+				<input type="text" id="welcomeCaseInput" name="salary"
+					onkeypress="validate(this)" /><label class="welcomeCase"
+					style="margin-left: 3px">руб.</label> <input type="submit"
+					value="ввести" id="addSalarySubmit" />
+			</form>
+		</div>
+	</c:if>
+
 	<div class="module" id="select-module1">
 		<div class="block-title">
 			<%
@@ -87,12 +115,10 @@
 		</div>
 	</div>
 
-
 	<div id="animationAddCase" style="visibility: hidden"></div>
 	<div class="create-case" id="create-case" style="visibility: hidden">
 		<jsp:include page="interface/create_case.jsp" />
 	</div>
-
 
 	<div class="module" id="priority-module">
 		<div class="block-title">Приоритеты</div>
@@ -134,5 +160,8 @@
 		<div class="block-information">Тут какая-то информация</div>
 	</div>
 </body>
+
 <script src="javascripts/aspro.js"></script>
+<script src="interface/css/create_case.js"></script>
+
 </html>

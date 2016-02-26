@@ -1,6 +1,5 @@
 package com.netcracker.unc.mvc.connection;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -51,35 +50,23 @@ public class ConnectionFactory {
 	public static Connection getConnection() {
 		return object.createConnection();
 	}
-	
-	/*    private static ConnectionFactory object = new ConnectionFactory();
 
-    private ConnectionFactory() {
-        try {
-            Locale.setDefault(Locale.ENGLISH);
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // get singleton of connection
-    private Connection createConnection() {
-        Connection connect = null;
-        try {
-            Locale.setDefault(Locale.ENGLISH);
-            //String connectPath = "jdbc:oracle:thin:@127.0.0.1:1521:XE";
-            connect = DriverManager.getConnection(
-					"jdbc:oracle:thin:@127.0.0.1:1521:XE",
-					"sys as sysdba", "1234");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return connect;
-    }
-
-    public static Connection getConnection() {
-        return object.createConnection();
-    } */
+	/*
+	 * private static ConnectionFactory object = new ConnectionFactory();
+	 * 
+	 * private ConnectionFactory() { try { Locale.setDefault(Locale.ENGLISH);
+	 * Class.forName("oracle.jdbc.driver.OracleDriver"); } catch
+	 * (ClassNotFoundException e) { e.printStackTrace(); } }
+	 * 
+	 * // get singleton of connection private Connection createConnection() {
+	 * Connection connect = null; try { Locale.setDefault(Locale.ENGLISH);
+	 * //String connectPath = "jdbc:oracle:thin:@127.0.0.1:1521:XE"; connect =
+	 * DriverManager.getConnection( "jdbc:oracle:thin:@127.0.0.1:1521:XE",
+	 * "sys as sysdba", "1234"); } catch (SQLException e) { e.printStackTrace();
+	 * } return connect; }
+	 * 
+	 * public static Connection getConnection() { return
+	 * object.createConnection(); }
+	 */
 
 }

@@ -27,7 +27,7 @@ public class SQLQuery {
 	//// for SP_fin_objects
 	public static final String SP_FIN_OBJECTS_INSERT = "INSERT INTO SP_fin_objects(parent_id, object_name, fin_object_type_id, user_id) VALUES(?, ?, ?, ?)";
 	public static final String SP_FIN_OBJECTS_GET_BY_ID = "SELECT * FROM SP_fin_objects WHERE fin_object_id = ?";
-	public static final String SP_FIN_OBJECTS_GET_BY_NAME = "SELECT * FROM SP_fin_objects WHERE LOWER(object_name) = ?";
+	public static final String SP_FIN_OBJECTS_GET_LAST_BY_NAME = "SELECT * FROM SP_fin_objects WHERE LOWER(object_name) = ? AND ROWNUM = 1 ORDER BY fin_object_id DESC";
 	public static final String SP_FIN_OBJECTS_DELETE_BY_ID = "DELETE FROM SP_fin_objects WHERE user_id = ?";
 	public static final String SP_FIN_OBJECTS_UPDATE_BY_ID = "UPDATE SP_fin_objects SET parent_id = ?, object_name = ?, fin_object_type_id = ?, user_id = ? WHERE fin_object_id = ?";
 	public static final String SP_FIN_OBJECTS_VIEW_ALL = "SELECT * FROM SP_fin_objects";
@@ -35,7 +35,7 @@ public class SQLQuery {
 	//// for SP_attributes
 	public static final String SP_ATTRIBUTES_INSERT = "INSERT INTO SP_attributes(attribute_name, fin_object_type_id, attribute_id) VALUES(?, ?, ?)";
 	public static final String SP_ATTRIBUTES_GET_BY_ID = "SELECT * FROM SP_attributes WHERE attribute_id = ?";
-	public static final String SP_ATTRIBUTES_GET_BY_NAME = "SELECT * FROM SP_attributes WHERE attribute_name like ?";
+	public static final String SP_ATTRIBUTES_GET_BY_NAME = "SELECT * FROM SP_attributes WHERE LOWER(attribute_name) like ?";
 	public static final String SP_ATTRIBUTES_DELETE_BY_ID = "DELETE FROM SP_attributes WHERE attribute_id = ?";
 	public static final String SP_ATTRIBUTES_UPDATE_BY_ID = "UPDATE SP_fin_objects SET attribute_name = ?, fin_object_type_id = ? WHERE attribute_id = ?";
 	public static final String SP_ATTRIBUTES_VIEW_ALL = "SELECT * FROM SP_attributes";

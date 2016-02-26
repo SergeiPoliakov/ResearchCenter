@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.netcracker.unc.beans.custom.models.IncomeConsumptionModel;
+import com.netcracker.unc.mvc.models.UserModel;
 
 /**
  * Servlet implementation class IncomeConsumptionServlet
@@ -27,11 +28,14 @@ public class IncomeConsumptionServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 
-		inCons.procentForBar();
+		inCons.procentForBar((UserModel) request.getSession().getAttribute("user"));
 
-		int progress = 0;
-		if (inCons.getFullConsumption() != 0)
+		long progress = 0;
+		if (inCons.getFullConsumption() != 0 || inCons.getFullIncome() != 0) {
 			progress = (inCons.getFullIncome() * 100) / (inCons.getFullIncome() + inCons.getFullConsumption());
+			request.setAttribute("percentString", progress + "/" + (100 - progress));
+		} else
+			request.setAttribute("percentString", "0/0");
 
 		request.setAttribute("progress", progress);
 		request.setAttribute("maxIncomeCost", inCons.getMaxIncomeName());
@@ -40,7 +44,6 @@ public class IncomeConsumptionServlet extends HttpServlet {
 		request.setAttribute("maxConsumptionCostInt", inCons.getMaxConsumption());
 		request.setAttribute("avgIncome", inCons.getAvgIncome());
 		request.setAttribute("avgConsumption", inCons.getAvgConsumption());
-		request.setAttribute("percentString", progress + "/" + (100 - progress));
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/attitudes/income_consumption.jsp");
 		dispatcher.include(request, response);
