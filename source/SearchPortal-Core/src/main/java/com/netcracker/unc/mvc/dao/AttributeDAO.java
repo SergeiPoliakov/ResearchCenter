@@ -27,7 +27,6 @@ public class AttributeDAO extends ObjectDAO {
 			prepare = connect.prepareStatement(SQLQuery.SP_ATTRIBUTES_INSERT);
 			prepare.setString(1, attribute.get_attribute_name());
 			prepare.setInt(2, attribute.get_fin_object_type_id());
-			prepare.setInt(1, attribute.get_attribute_id());
 			prepare.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

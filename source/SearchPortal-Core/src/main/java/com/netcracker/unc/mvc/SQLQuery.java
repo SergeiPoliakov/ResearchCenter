@@ -8,7 +8,7 @@ public class SQLQuery {
 	}
 
 	//// for SP_users table
-	public static final String SP_USERS_INSERT = "INSERT INTO SP_users(login, hash_sum, name, account_type, salt) VALUES(?, ?, ?, ?, ?)";
+	public static final String SP_USERS_INSERT = "INSERT INTO SP_users(login, hash_sum, name, account_type, salt, user_id) VALUES(?, ?, ?, ?, ?, SP_USER_ID_SEQ.nextval)";
 	public static final String SP_USERS_GET_BY_LOGIN = "SELECT * FROM SP_users WHERE login like ?";
 	public static final String SP_USERS_GET_BY_ID = "SELECT * FROM SP_users WHERE user_id = ?";
 	public static final String SP_USERS_DELETE_BY_ID = "DELETE FROM SP_users WHERE user_id = ?";
@@ -17,7 +17,7 @@ public class SQLQuery {
 	public static final String SP_USERS_GET_BY_LOGIN_AND_PASSWORD = "SELECT * FROM SP_users WHERE login like ? AND hash_sum = ? AND salt = ?";
 
 	//// for SP_fin_object_types
-	public static final String SP_FIN_OBJECT_TYPES_INSERT = "INSERT INTO SP_fin_object_types(fin_object_type_name) VALUES(?)";
+	public static final String SP_FIN_OBJECT_TYPES_INSERT = "INSERT INTO SP_fin_object_types(fin_object_type_name, fin_object_type_id) VALUES(?, SP_FIN_OBJECT_TYPE_ID_SEQ.nextval)";
 	public static final String SP_FIN_OBJECT_TYPES_VIEW_ALL = "SELECT * FROM SP_fin_object_types";
 	public static final String SP_FIN_OBJECT_TYPES_GET_BY_NAME = "SELECT * FROM SP_fin_object_types WHERE LOWER(fin_object_type_name) = ?";
 	public static final String SP_FIN_OBJECT_TYPES_GET_BY_ID = "SELECT * FROM SP_fin_object_types WHERE fin_object_type_id = ?";
@@ -25,7 +25,7 @@ public class SQLQuery {
 	public static final String SP_FIN_OBJECT_TYPES_DELETE_BY_ID = "DELETE FROM SP_fin_object_types WHERE fin_object_type_id = ?";
 
 	//// for SP_fin_objects
-	public static final String SP_FIN_OBJECTS_INSERT = "INSERT INTO SP_fin_objects(parent_id, object_name, fin_object_type_id, user_id) VALUES(?, ?, ?, ?)";
+	public static final String SP_FIN_OBJECTS_INSERT = "INSERT INTO SP_fin_objects(parent_id, object_name, fin_object_type_id, user_id, fin_object_id) VALUES(?, ?, ?, ?, SP_FIN_OBJECT_ID_SEQ .nextval)";
 	public static final String SP_FIN_OBJECTS_GET_BY_ID = "SELECT * FROM SP_fin_objects WHERE fin_object_id = ?";
 	public static final String SP_FIN_OBJECTS_GET_LAST_BY_NAME = "SELECT * FROM SP_fin_objects WHERE LOWER(object_name) = ? AND ROWNUM = 1 ORDER BY fin_object_id DESC";
 	public static final String SP_FIN_OBJECTS_DELETE_BY_ID = "DELETE FROM SP_fin_objects WHERE user_id = ?";
@@ -33,7 +33,7 @@ public class SQLQuery {
 	public static final String SP_FIN_OBJECTS_VIEW_ALL = "SELECT * FROM SP_fin_objects";
 
 	//// for SP_attributes
-	public static final String SP_ATTRIBUTES_INSERT = "INSERT INTO SP_attributes(attribute_name, fin_object_type_id, attribute_id) VALUES(?, ?, ?)";
+	public static final String SP_ATTRIBUTES_INSERT = "INSERT INTO SP_attributes(attribute_name, fin_object_type_id, attribute_id) VALUES(?, ?, SP_ATTRIBUTE_ID_SEQ.nextval)";
 	public static final String SP_ATTRIBUTES_GET_BY_ID = "SELECT * FROM SP_attributes WHERE attribute_id = ?";
 	public static final String SP_ATTRIBUTES_GET_BY_NAME = "SELECT * FROM SP_attributes WHERE LOWER(attribute_name) like ?";
 	public static final String SP_ATTRIBUTES_DELETE_BY_ID = "DELETE FROM SP_attributes WHERE attribute_id = ?";
@@ -50,7 +50,7 @@ public class SQLQuery {
 	public static final String SP_PARAMS_VIEW_ALL = "SELECT * FROM SP_params";
 
 	//// for transactions
-	public static final String SP_TRANSACTIONS_INSERT = "INSERT INTO SP_transactions(transaction_date, fin_object_id, cost, user_id) VALUES(?, ?, ?, ?)";
+	public static final String SP_TRANSACTIONS_INSERT = "INSERT INTO SP_transactions(transaction_date, fin_object_id, cost, user_id, transaction_id) VALUES(?, ?, ?, ?, SP_Transaction_ID_SEQ.nextval)";
 	public static final String SP_TRANSACTIONS_GET_BY_ID = "SELECT * FROM SP_transactions WHERE transaction_id = ?";
 	public static final String SP_TRANSACTIONS_DELETE_BY_ID = "DELETE FROM SP_transactions WHERE transaction_id = ?";
 	public static final String SP_TRANSACTIONS_UPDATE_BY_ID = "UPDATE SP_transactions SET transaction_date = ?, fin_object_id = ?, cost = ?, user_id = ? WHERE transaction_id = ?";

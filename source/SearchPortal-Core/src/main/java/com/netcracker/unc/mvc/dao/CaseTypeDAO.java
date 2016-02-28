@@ -24,7 +24,7 @@ public class CaseTypeDAO extends ObjectDAO {
 		type = (CaseTypeModel) object;
 
 		try {
-			prepare = connect.prepareStatement(SQLQuery.SP_USERS_INSERT);
+			prepare = connect.prepareStatement(SQLQuery.SP_FIN_OBJECT_TYPES_INSERT);
 			prepare.setString(1, type.get_fin_object_type_name());
 			prepare.executeUpdate();
 		} catch (SQLException e) {

@@ -28,6 +28,7 @@ public class IncomeConsumptionServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 
+		inCons = new IncomeConsumptionModel();
 		inCons.procentForBar((UserModel) request.getSession().getAttribute("user"));
 
 		long progress = 0;

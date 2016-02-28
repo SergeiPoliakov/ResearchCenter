@@ -124,8 +124,6 @@ public class IncomeConsumptionModel {
 
 	public void procentForBar(UserModel user) {
 		// refresh
-		setFullConsumption(0);
-		setFullIncome(0);
 
 		int id = user.get_user_id();
 		connect = ConnectionFactory.getConnection();
