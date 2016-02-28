@@ -28,28 +28,8 @@
         <div class="module" id="priority-module">
             <div class="block-title">Приоритеты</div>
             <div class="block-information">
-                <form action="PriorityMod" method="get">
-                    <input type="hidden" name="user_id" value="1005" /> <input
-                        type="submit" value="UP" />
-                </form>
-                
-                <%
-                    com.netcracker.unc.mvc.models.CategoryModel catMod =
-                            new CategoryModel();
-                    out.println("<br/>" + catMod.toString());
-                    
-                    com.netcracker.unc.mvc.dao.CategoryDao catDao = 
-                            new CategoryDao();
-                    out.println("<br/>" + catDao.toString());
-                    
-                    
-                    com.netcracker.unc.mvc.dao.CategoryDao cat =
-                            new CategoryDao();
-                    out.println("<br/>" +cat.testdb());
-                    
-                    //ArrayList list = new ArrayList();
-                    //list.addAll(cat.getAllObjectsDB());
-                    %>
+               <% CategoryDao cd = new CategoryDao(); %>
+               <%= cd.testdb() %> 
             </div>
         </div>
     </body>

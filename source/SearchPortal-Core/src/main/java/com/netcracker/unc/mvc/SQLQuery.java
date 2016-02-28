@@ -137,7 +137,7 @@ public class SQLQuery {
 "   ON table_objects_and_its_roots.object_id = obj_params.FIN_OBJECT_ID\n" +
 "  INNER JOIN SP_ATTRIBUTES obj_atr\n" +
 "   ON obj_atr.FIN_OBJECT_TYPE_ID = table_objects_and_its_roots.object_type  \n" +
-" WHERE obj_atr.ATTRIBUTE_NAME = 'Стоимость' AND\n" +
+" WHERE obj_atr.ATTRIBUTE_NAME = 'Сумма расхода' AND\n" +
 "  obj_params.ATTRIBUTE_ID = obj_atr.ATTRIBUTE_ID AND \n" +
 "  table_objects_and_its_roots.root_object_id = main_fo.FIN_OBJECT_ID\n" +
 " GROUP BY table_objects_and_its_roots.root_object_id\n" +

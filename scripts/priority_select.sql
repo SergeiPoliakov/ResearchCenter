@@ -1,8 +1,3 @@
-
-/*
- *рабочий запрос, выводящий необходимые 
- *для раставления приоритетов категории и даные по ним
- */
 SELECT 
  main_fo.FIN_OBJECT_ID as object_ID, 
  main_fo.USER_ID,
@@ -14,7 +9,7 @@ SELECT
      ON select_fo.FIN_OBJECT_TYPE_ID = select_pja.FIN_OBJECT_TYPE_ID
     INNER JOIN SP_PARAMS select_par
      ON select_pja.ATTRIBUTE_ID = select_par.ATTRIBUTE_ID
-   WHERE select_pja.ATTRIBUTE_NAME='Коэффицент приоритета'-- должно быть ФФ
+   WHERE select_pja.ATTRIBUTE_NAME='Коэффицент приоритета'
     AND main_fo.FIN_OBJECT_ID = select_fo.FIN_OBJECT_ID
     AND main_fo.FIN_OBJECT_ID = select_par.FIN_OBJECT_ID
  ) as coefficient,
@@ -65,7 +60,7 @@ SELECT
    ON table_objects_and_its_roots.object_id = obj_params.FIN_OBJECT_ID
   INNER JOIN SP_ATTRIBUTES obj_atr
    ON obj_atr.FIN_OBJECT_TYPE_ID = table_objects_and_its_roots.object_type  
- WHERE obj_atr.ATTRIBUTE_NAME = 'Стоимость' AND
+ WHERE obj_atr.ATTRIBUTE_NAME = 'Сумма расхода' AND
   obj_params.ATTRIBUTE_ID = obj_atr.ATTRIBUTE_ID AND 
   table_objects_and_its_roots.root_object_id = main_fo.FIN_OBJECT_ID
  GROUP BY table_objects_and_its_roots.root_object_id

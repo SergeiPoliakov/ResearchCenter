@@ -5,10 +5,7 @@
  */
 package com.netcracker.unc.mvc.models;
 
-/**
- *
- * @author Dmitry
- */
+
 public class CategoryModel {
 
     public final String Type = "Категория";

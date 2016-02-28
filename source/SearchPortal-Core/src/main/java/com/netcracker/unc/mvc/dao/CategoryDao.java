@@ -18,10 +18,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Dmitry
- */
+
 public class CategoryDao extends ObjectDAO {
 
 	private PreparedStatement prepare = null;
@@ -36,7 +33,7 @@ public class CategoryDao extends ObjectDAO {
 			result = prepare.executeQuery();
 			result.next();
 			result.next();
-			String t = result.getNString(2);
+			String t = result.getString(2);
 			return t;
 		} catch (SQLException ex) {
 			Logger.getLogger(CategoryDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -47,7 +44,7 @@ public class CategoryDao extends ObjectDAO {
 				e.printStackTrace();
 			}
 		}
-		return null;
+		return "hi";
 	}
 
 	@Override
