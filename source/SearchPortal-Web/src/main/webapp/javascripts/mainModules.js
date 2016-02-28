@@ -13,6 +13,7 @@ $(function () {
         $("#test3").css("display", "block");
         $("#test2").css("display", "block");
         $("#test1").css("display", "none");
+        $("#add-sum").css("display", "none");
     });
     $("#cost-menu-button").click(function (e) {
         $("#select-module1").css("display", "none");
@@ -21,5 +22,10 @@ $(function () {
         $("#test3").css("display", "none");
         $("#test2").css("display", "none");
         $("#test1").css("display", "block");
+        $("#add-sum").css("display", "none");
+    });
+    $("#add-sum-button").click(function (e) {
+        $("#add-sum").css("display", "block");
+        
     });
 });
