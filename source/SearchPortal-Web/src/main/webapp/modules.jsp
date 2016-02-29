@@ -127,14 +127,6 @@
 				<input type="hidden" name="user_id" value="1005" /> <input
 					type="submit" value="UP" />
 			</form>
-			<%
-				ReceivingData rd = new ReceivingData();
-				com.netcracker.unc.mvc.dao.CategoryDao cd = new CategoryDao();
-			%>
-
-			<!--FillHTMLTable.toHTMLString(cd.getAllObjectsDB())-->
-
-			<%=rd.toString()%>
 
 		</div>
 	</div>
