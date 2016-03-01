@@ -4,14 +4,14 @@ import java.util.List;
 
 public interface ObjectDAO {
 
-    List<Object> getAllObjectsDB();
+	public abstract List<Object> getAllObjectsDB();
 
-    void addObject(Object object);
+	public abstract void addObject(Object object);
 
-    Object getObject(Object object);
+	public abstract Object getObject(Object object);
 
-    void updateObject(Object object);
+	public abstract void updateObject(Object object);
 
-    void deleteObject(Object object);
+	public abstract void deleteObject(Object object);
 
 }

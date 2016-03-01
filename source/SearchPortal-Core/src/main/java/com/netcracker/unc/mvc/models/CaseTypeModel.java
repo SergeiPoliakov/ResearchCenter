@@ -2,22 +2,22 @@ package com.netcracker.unc.mvc.models;
 
 public class CaseTypeModel {
 
-    private int finObjectTypeId;
-    private String finObjectTypeName = null;
+	private int _fin_object_type_id;
+	private String _fin_object_type_name = null;
 
-    public int getFinObjectTypeId() {
-        return finObjectTypeId;
-    }
+	public int get_fin_object_type_id() {
+		return _fin_object_type_id;
+	}
 
-    public void setFinObjectTypeId(int finObjectTypeId) {
-        this.finObjectTypeId = finObjectTypeId;
-    }
+	public void set_fin_object_type_id(int _fin_object_type_id) {
+		this._fin_object_type_id = _fin_object_type_id;
+	}
 
-    public String getFinObjectTypeName() {
-        return finObjectTypeName;
-    }
+	public String get_fin_object_type_name() {
+		return _fin_object_type_name;
+	}
 
-    public void setFinObjectTypeName(String finObjectTypeName) {
-        this.finObjectTypeName = finObjectTypeName;
-    }
+	public void set_fin_object_type_name(String _fin_object_type_name) {
+		this._fin_object_type_name = _fin_object_type_name;
+	}
 }

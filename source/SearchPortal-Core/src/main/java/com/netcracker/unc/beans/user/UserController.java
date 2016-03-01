@@ -14,30 +14,30 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class UserController {
 
-    @Autowired
-    @Qualifier("userDAO")
-    UserDAO userDAO;
+	@Autowired
+	@Qualifier("userDAO")
+	UserDAO userDAO;
+	
+	@RequestMapping(value = "testing/users", method = RequestMethod.GET)
+	public ModelAndView getAllUsers(ModelAndView modelAndView) {
+		List<User> list = new ArrayList<User>();
+		User user = null;
+		for (Object object : userDAO.getAllObjectsDB()) {
+			user = (User) object;
+			list.add(user);
+		}
+		modelAndView.addObject("list", list);
+		modelAndView.setViewName("test");
+		modelAndView.addObject("report", "Модель работает");
+		return modelAndView;
+	}
 
-    @RequestMapping(value = "testing/users", method = RequestMethod.GET)
-    public ModelAndView getAllUsers(ModelAndView modelAndView) {
-        List<User> list = new ArrayList<User>();
-        User user = null;
-        for (Object object : userDAO.getAllObjectsDB()) {
-            user = (User) object;
-            list.add(user);
-        }
-        modelAndView.addObject("list", list);
-        modelAndView.setViewName("test");
-        modelAndView.addObject("report", "Модель работает");
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "testing/getUser", method = RequestMethod.GET)
-    public ModelAndView getUser(@ModelAttribute("user") User user) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("test");
-        user = (User) userDAO.getObject(user);
-        modelAndView.addObject("user", user);
-        return modelAndView;
-    }
+	@RequestMapping(value = "testing/getUser", method = RequestMethod.GET)
+	public ModelAndView getUser(@ModelAttribute("user") User user) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("test");
+		user = (User) userDAO.getObject(user);
+		modelAndView.addObject("user", user);
+		return modelAndView;
+	}
 }

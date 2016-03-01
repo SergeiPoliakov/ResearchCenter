@@ -2,50 +2,50 @@ package com.netcracker.unc.mvc.models;
 
 public class TransactionModel {
 
-    private int transactionId;
-    private String transactionDate = null;
-    private int finObjectId;
-    private int cost;
-    private int userId;
+	private int _transaction_id;
+	private String _transaction_date = null;
+	private int _fin_object_id;
+	private int _cost;
+	private int _user_id;
 
-    public int getTransactionId() {
-        return transactionId;
-    }
+	public int get_transaction_id() {
+		return _transaction_id;
+	}
 
-    public void setTransactionId(int transactionId) {
-        this.transactionId = transactionId;
-    }
+	public void set_transaction_id(int _transaction_id) {
+		this._transaction_id = _transaction_id;
+	}
 
-    public String getTransactionDate() {
-        return transactionDate;
-    }
+	public String get_transaction_date() {
+		return _transaction_date;
+	}
 
-    public void setTransactionDate(String transactionDate) {
-        this.transactionDate = transactionDate;
-    }
+	public void set_transaction_date(String _transaction_date) {
+		this._transaction_date = _transaction_date;
+	}
 
-    public int getFinObjectId() {
-        return finObjectId;
-    }
+	public int get_fin_object_id() {
+		return _fin_object_id;
+	}
 
-    public void setFinObjectId(int finObjectId) {
-        this.finObjectId = finObjectId;
-    }
+	public void set_fin_object_id(int _fin_object_id) {
+		this._fin_object_id = _fin_object_id;
+	}
 
-    public int getCost() {
-        return cost;
-    }
+	public int get_cost() {
+		return _cost;
+	}
 
-    public void setCost(int cost) {
-        this.cost = cost;
-    }
+	public void set_cost(int _cost) {
+		this._cost = _cost;
+	}
 
-    public int getUserId() {
-        return userId;
-    }
+	public int get_user_id() {
+		return _user_id;
+	}
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
+	public void set_user_id(int _user_id) {
+		this._user_id = _user_id;
+	}
 
 }

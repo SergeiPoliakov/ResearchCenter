@@ -7,78 +7,78 @@ import java.security.NoSuchAlgorithmException;
 
 public class UserModel {
 
-    private int userId;
-    private String login = null;
-    private int hashSum;
-    private String name = null;
-    private String accountType = null;
-    private int salt;
+	private int user_id;
+	private String login = null;
+	private int hash_sum;
+	private String name = null;
+	private String account_type = null;
+	private int salt;
 
-    public int getUserId() {
-        return userId;
-    }
+	public int get_user_id() {
+		return user_id;
+	}
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
+	public void set_user_id(int user_id) {
+		this.user_id = user_id;
+	}
 
-    public String getLogin() {
-        return login.toLowerCase();
-    }
+	public String get_login() {
+		return login.toLowerCase();
+	}
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
+	public void set_login(String login) {
+		this.login = login;
+	}
 
-    public int getHashSum() {
-        return hashSum;
-    }
+	public int get_hash_sum() {
+		return hash_sum;
+	}
 
-    public void setHashSum(int hashSum) {
-        this.hashSum = hashSum;
-    }
+	public void set_hash_sum(int hash_sum) {
+		this.hash_sum = hash_sum;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String get_name() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void set_name(String name) {
+		this.name = name;
+	}
 
-    public String getAccountType() {
-        return accountType;
-    }
+	public String get_account_type() {
+		return account_type;
+	}
 
-    public void setAccountType(String accountType) {
-        this.accountType = accountType;
-    }
+	public void set_account_type(String _account_type) {
+		this.account_type = _account_type;
+	}
 
-    public int getSalt() {
-        return salt;
-    }
+	public int get_salt() {
+		return salt;
+	}
 
-    public void setSalt(int salt) {
-        this.salt = salt;
-    }
+	public void set_salt(int salt) {
+		this.salt = salt;
+	}
 
-    public void createHashAndSalt(String password) {
-        setHashSum(password.hashCode());
-        setSalt(createSalt(password));
-    }
+	public void createHashAndSalt(String password) {
+		set_hash_sum(password.hashCode());
+		set_salt(createSalt(password));
+	}
 
-    // md5 hash
-    private Integer createSalt(String salt) {
-        byte[] bytePassword;
-        try {
-            bytePassword = salt.getBytes("UTF-8");
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] res = md.digest(bytePassword);
-            BigInteger bi = new BigInteger(1, res);
-            return bi.intValue();
-        } catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+	// md5 hash
+	private Integer createSalt(String salt) {
+		byte[] bytePassword;
+		try {
+			bytePassword = salt.getBytes("UTF-8");
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			byte[] res = md.digest(bytePassword);
+			BigInteger bi = new BigInteger(1, res);
+			return bi.intValue();
+		} catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

@@ -6,48 +6,48 @@ import java.text.SimpleDateFormat;
 
 public class ParameterModel {
 
-    private String value = null;
-    private SimpleDateFormat parse = new SimpleDateFormat("yyyy-MM-dd");
-    private Date valueDate = null;
-    private int finObjectId;
-    private int attributeId;
-    private java.util.Date oldDate = null;
+	private String value = null;
+	private SimpleDateFormat parse = new SimpleDateFormat("yyyy-MM-dd");
+	private Date value_date = null;
+	private int fin_object_id;
+	private int attribute_id;
+	private java.util.Date oldDate = null;
 
-    public String getValue() {
-        return value;
-    }
+	public String get_value() {
+		return value;
+	}
 
-    public void setValue(String value) {
-        this.value = value;
-    }
+	public void set_value(String value) {
+		this.value = value;
+	}
 
-    public Date getValueDate() {
-        return valueDate;
-    }
+	public Date get_value_date() {
+		return value_date;
+	}
 
-    public void setValueDate(String valueDate) {
-        try {
-            oldDate = parse.parse(valueDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        this.valueDate = new Date(oldDate.getTime());
-    }
+	public void set_value_date(String value_date) {
+		try {
+			oldDate = parse.parse(value_date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		this.value_date = new Date(oldDate.getTime());
+	}
 
-    public int getFinObjectId() {
-        return finObjectId;
-    }
+	public int get_fin_object_id() {
+		return fin_object_id;
+	}
 
-    public void setFinObjectId(int finObjectId) {
-        this.finObjectId = finObjectId;
-    }
+	public void set_fin_object_id(int fin_object_id) {
+		this.fin_object_id = fin_object_id;
+	}
 
-    public int getAttributeId() {
-        return attributeId;
-    }
+	public int get_attribute_id() {
+		return attribute_id;
+	}
 
-    public void setAttributeId(int attributeId) {
-        this.attributeId = attributeId;
-    }
+	public void set_attribute_id(int attribute_id) {
+		this.attribute_id = attribute_id;
+	}
 
 }

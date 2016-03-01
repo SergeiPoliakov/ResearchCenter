@@ -13,159 +13,157 @@ import com.netcracker.unc.mvc.models.ParameterModel;
 
 public class ParameterDAO extends ObjectDAO {
 
-    private PreparedStatement prepare = null;
-    private ParameterModel param = null;
-    private ResultSet result = null;
-    private Connection connect = null;
+	private PreparedStatement prepare = null;
+	private ParameterModel param = null;
+	private ResultSet result = null;
+	private Connection connect = null;
 
-    @Override
-    public void addObject(Object object) {
-        connect = ConnectionFactory.getConnection();
-        param = (ParameterModel) object;
+	@Override
+	public void addObject(Object object) {
+		connect = ConnectionFactory.getConnection();
+		param = (ParameterModel) object;
 
-        try {
-            prepare = connect.prepareStatement(SQLQuery.SP_PARAMS_INSERT);
-            if (param.getValue() != null) {
-                prepare.setString(1, param.getValue());
-            } else {
-                prepare.setNull(1, java.sql.Types.VARCHAR);
-            }
-            if (param.getValueDate() != null) {
-                prepare.setDate(2, param.getValueDate());
-            } else {
-                prepare.setNull(2, java.sql.Types.DATE);
-            }
-            prepare.setInt(3, param.getFinObjectId());
-            prepare.setInt(4, param.getAttributeId());
-            prepare.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                connect.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+		try {
+			prepare = connect.prepareStatement(SQLQuery.SP_PARAMS_INSERT);
+			if (param.get_value() != null)
+				prepare.setString(1, param.get_value());
+			else
+				prepare.setNull(1, java.sql.Types.VARCHAR);
+			if (param.get_value_date() != null)
+				prepare.setDate(2, param.get_value_date());
+			else
+				prepare.setNull(2, java.sql.Types.DATE);
+			prepare.setInt(3, param.get_fin_object_id());
+			prepare.setInt(4, param.get_attribute_id());
+			prepare.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
-    // this method can choose input parameter between fin_object_id and
-    // attribute_id (check which not empty)
-    @Override
-    public Object getObject(Object object) {
-        connect = ConnectionFactory.getConnection();
-        param = (ParameterModel) object;
+	// this method can choose input parameter between fin_object_id and
+	// attribute_id (check which not empty)
+	@Override
+	public Object getObject(Object object) {
+		connect = ConnectionFactory.getConnection();
+		param = (ParameterModel) object;
 
-        try {
-            // if we have not parameter with correct attribute id
-            if (param.getAttributeId() == 0) {
-                prepare = connect.prepareStatement(SQLQuery.SP_PARAMS_GET_BY_OBJECT_ID);
-                prepare.setInt(1, param.getFinObjectId());
-            }
-            // if we have not parameter with correct object id
-            else {
-                prepare = connect.prepareStatement(SQLQuery.SP_PARAMS_GET_BY_ATTRIBUTE_ID);
-                prepare.setInt(1, param.getAttributeId());
-            }
-            result = prepare.executeQuery();
-            result.next();
+		try {
+			// if we have not parameter with correct attribute id
+			if (param.get_attribute_id() == 0) {
+				prepare = connect.prepareStatement(SQLQuery.SP_PARAMS_GET_BY_OBJECT_ID);
+				prepare.setInt(1, param.get_fin_object_id());
+			}
+			// if we have not parameter with correct object id
+			else {
+				prepare = connect.prepareStatement(SQLQuery.SP_PARAMS_GET_BY_ATTRIBUTE_ID);
+				prepare.setInt(1, param.get_attribute_id());
+			}
+			result = prepare.executeQuery();
+			result.next();
 
-            // create current parameter from database
-            param.setValue(result.getString(1));
-            param.setValueDate(result.getString(2));
-            param.setFinObjectId(result.getInt(3));
-            param.setAttributeId(result.getInt(4));
-            return param;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        } finally {
-            try {
-                connect.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+			// create current parameter from database
+			param.set_value(result.getString(1));
+			param.set_value_date(result.getString(2));
+			param.set_fin_object_id(result.getInt(3));
+			param.set_attribute_id(result.getInt(4));
+			return param;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
-    @Override
-    public void updateObject(Object object) {
-        connect = ConnectionFactory.getConnection();
-        param = (ParameterModel) object;
+	@Override
+	public void updateObject(Object object) {
+		connect = ConnectionFactory.getConnection();
+		param = (ParameterModel) object;
 
-        try {
-            prepare = connect.prepareStatement(SQLQuery.SP_PARAMS_UPDATE_BY_OBJECT_ID);
-            prepare.setString(1, param.getValue());
-            prepare.setDate(2, param.getValueDate());
-            prepare.setInt(3, param.getAttributeId());
-            prepare.setInt(4, param.getFinObjectId());
-            prepare.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                connect.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+		try {
+			prepare = connect.prepareStatement(SQLQuery.SP_PARAMS_UPDATE_BY_OBJECT_ID);
+			prepare.setString(1, param.get_value());
+			prepare.setDate(2, param.get_value_date());
+			prepare.setInt(3, param.get_attribute_id());
+			prepare.setInt(4, param.get_fin_object_id());
+			prepare.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
-    // this method can choose input parameter between fin_object_id and
-    // attribute_id (check which not empty)
-    @Override
-    public void deleteObject(Object object) {
-        connect = ConnectionFactory.getConnection();
-        param = (ParameterModel) object;
-        try {
-            // if we have not parameter with correct attribute id
-            if (param.getAttributeId() == 0) {
-                prepare = connect.prepareStatement(SQLQuery.SP_PARAMS_DELETE_BY_OBJECT_ID);
-                prepare.setInt(1, param.getFinObjectId());
-            }
-            // if we have not parameter with correct object id
-            else {
-                prepare = connect.prepareStatement(SQLQuery.SP_PARAMS_DELETE_BY_ATTRIBUTE_ID);
-                prepare.setInt(1, param.getAttributeId());
-            }
-            prepare.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                connect.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+	// this method can choose input parameter between fin_object_id and
+	// attribute_id (check which not empty)
+	@Override
+	public void deleteObject(Object object) {
+		connect = ConnectionFactory.getConnection();
+		param = (ParameterModel) object;
+		try {
+			// if we have not parameter with correct attribute id
+			if (param.get_attribute_id() == 0) {
+				prepare = connect.prepareStatement(SQLQuery.SP_PARAMS_DELETE_BY_OBJECT_ID);
+				prepare.setInt(1, param.get_fin_object_id());
+			}
+			// if we have not parameter with correct object id
+			else {
+				prepare = connect.prepareStatement(SQLQuery.SP_PARAMS_DELETE_BY_ATTRIBUTE_ID);
+				prepare.setInt(1, param.get_attribute_id());
+			}
+			prepare.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
-    @Override
-    public List<Object> getAllObjectsDB() {
-        try {
-            connect = ConnectionFactory.getConnection();
-            prepare = connect.prepareStatement(SQLQuery.SP_PARAMS_VIEW_ALL);
-            result = prepare.executeQuery();
-            List<Object> list = new ArrayList<Object>();
+	@Override
+	public List<Object> getAllObjectsDB() {
+		try {
+			connect = ConnectionFactory.getConnection();
+			prepare = connect.prepareStatement(SQLQuery.SP_PARAMS_VIEW_ALL);
+			result = prepare.executeQuery();
+			List<Object> list = new ArrayList<Object>();
 
-            while (result.next()) {
-                param = new ParameterModel();
-                param.setValue(result.getString(1));
-                param.setValueDate(result.getString(2));
-                param.setFinObjectId(result.getInt(3));
-                param.setAttributeId(result.getInt(4));
-                list.add(param);
-            }
-            return list;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                connect.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return null;
-    }
+			while (result.next()) {
+				param = new ParameterModel();
+				param.set_value(result.getString(1));
+				param.set_value_date(result.getString(2));
+				param.set_fin_object_id(result.getInt(3));
+				param.set_attribute_id(result.getInt(4));
+				list.add(param);
+			}
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
 }

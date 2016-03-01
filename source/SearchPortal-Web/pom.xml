@@ -48,8 +48,8 @@
 		</dependency>
 		<dependency>
 			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc6</artifactId>
-			<version>11.2.0</version>
+			<artifactId>ojdbc</artifactId>
+			<version>11.2.1</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -67,26 +67,10 @@
 			<version>4.0.0-b01</version>
 		</dependency>
 		<dependency>
-			<groupId>org.mockito</groupId>
-  			<artifactId>mockito-core</artifactId>
- 		 	<version>RELEASE</version>
-  			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-  			<artifactId>junit</artifactId>
-  			<version>4.12</version>
-		</dependency>
-		<dependency>
 			<groupId>com.netcracker.unc</groupId>
 			<artifactId>SearchPortal-Core</artifactId>
 			<version>1.0-SNAPSHOT</version>
 			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>com.netcracker.unc</groupId>
-			<artifactId>SearchPortal-Core</artifactId>
-			<version>1.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 	<build>
