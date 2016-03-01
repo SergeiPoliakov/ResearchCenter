@@ -1,4 +1,6 @@
-<%@page import="com.netcracker.unc.priorityModule.ReceivingData"%>
+<%@page import="com.netcracker.unc.mvc.dao.CategoryDao"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.netcracker.unc.priorityModule.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -9,6 +11,9 @@
 <link href="css/main.css" rel="stylesheet" type="text/css" />
 <script src="javascripts/jquery-2.2.0.min.js"></script>
 <script src="javascripts/mainModules.js"></script>
+<link href="attitudes/css/attitude.css" rel="stylesheet" type="text/css" />
+<link href="css/aspro.css" rel="stylesheet" type="text/css" />
+<title>Добро пожаловать на сайт приоритетов</title>
 </head>
 <body>
 	<%@ page
@@ -35,9 +40,15 @@
 	</c:choose>
 	<div class="header">
 		<div id="logo">214*59</div>
-		<div class="welcome" align="right" style="background-color: #92d36e;">
+
+		<div class="welcome" align="right" style="background-color: #92d36e;"
+			id="welcomeUser">
 			Добро пожаловать <label
 				style="color: red; font-size: 16pt; background-color: #92d36e; margin-right: 10px"><%=user.get_login()%></label>
+			<form action="LogoutUser">
+				<input type="submit" value="Выход" id="logOutSubmit" />
+			</form>
+
 		</div>
 		<button id="cost-menu-button" class="button">Расходы</button>
 		<!--
@@ -48,7 +59,40 @@
             <button id ="income-menu-button" class="button">Доходы</button>
             <button id ="fast-add-income" class="button">+</button>-->
 		<button id="statistic-menu-button" class="button">Статистика</button>
+		<button id="statistic-menu-button" class="button"
+			onclick="showCreateCase()">Создать</button>
+		<div class="overlayInCons">
+			<jsp:include page="/attitudes/IncomeConsumption"></jsp:include>
+		</div>
 	</div>
+
+
+
+	<%@ page import="com.netcracker.unc.beans.CheckSalary, javax.ejb.EJB"%>
+	<%!@EJB
+	CheckSalary checkSalary = new CheckSalary();%>
+	<%
+		checkSalary.checkSalary((UserModel) request.getSession().getAttribute("user"));
+	%>
+	<c:set var="checkSalary" value="<%=checkSalary.getSalary()%>"></c:set>
+	<c:if test="${checkSalary == 0}">
+		<div id="helloCase">
+			<label class="welcomeCase" id="welcomeCase1"><b>Добро
+					пожаловать на сайт <span style="margin-left: 40px">приоритетов!</span>
+			</b></label>
+			<p>
+				<label class="welcomeCase" id="welcomeCase2">Пожалуйста,
+					введите вашу зарплату:</label>
+			</p>
+			<form action="AddSalary" onsubmit="return regularAddSalary()">
+				<input type="text" id="welcomeCaseInput" name="salary"
+					onkeypress="validate(this)" /><label class="welcomeCase"
+					style="margin-left: 3px">руб.</label> <input type="submit"
+					value="ввести" id="addSalarySubmit" />
+			</form>
+		</div>
+	</c:if>
+
 	<div class="module" id="select-module1">
 		<div class="block-title">
 			<%
@@ -70,6 +114,12 @@
 			%>
 		</div>
 	</div>
+
+	<div id="animationAddCase" style="visibility: hidden"></div>
+	<div class="create-case" id="create-case" style="visibility: hidden">
+		<jsp:include page="interface/create_case.jsp" />
+	</div>
+
 	<div class="module" id="priority-module">
 		<div class="block-title">Приоритеты</div>
 		<div class="block-information">
@@ -77,10 +127,7 @@
 				<input type="hidden" name="user_id" value="1005" /> <input
 					type="submit" value="UP" />
 			</form>
-			<%
-				com.netcracker.unc.priorityModule.ReceivingData rd = new ReceivingData();
-			%>
-			<%=rd.toString()%>
+
 		</div>
 	</div>
 	<div class="module" id="test1">
@@ -105,4 +152,8 @@
 		<div class="block-information">Тут какая-то информация</div>
 	</div>
 </body>
+
+<script src="javascripts/aspro.js"></script>
+<script src="interface/css/create_case.js"></script>
+
 </html>

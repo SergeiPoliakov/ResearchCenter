@@ -1,5 +1,6 @@
 package com.netcracker.unc.mvc.dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.netcracker.unc.mvc.SQLQuery;
+import com.netcracker.unc.mvc.connection.ConnectionFactory;
 import com.netcracker.unc.mvc.models.CaseTypeModel;
 
 public class CaseTypeDAO extends ObjectDAO {
@@ -14,17 +16,25 @@ public class CaseTypeDAO extends ObjectDAO {
 	private PreparedStatement prepare = null;
 	private CaseTypeModel type = null;
 	private ResultSet result = null;
+	private Connection connect = null;
 
 	@Override
 	public void addObject(Object object) {
+		connect = ConnectionFactory.getConnection();
 		type = (CaseTypeModel) object;
 
 		try {
-			prepare = connect.prepareStatement(SQLQuery.PJ_USERS_INSERT);
+			prepare = connect.prepareStatement(SQLQuery.SP_FIN_OBJECT_TYPES_INSERT);
 			prepare.setString(1, type.get_fin_object_type_name());
 			prepare.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -32,17 +42,18 @@ public class CaseTypeDAO extends ObjectDAO {
 	// fin_object_type_name (check which not empty)
 	@Override
 	public Object getObject(Object object) {
+		connect = ConnectionFactory.getConnection();
 		type = (CaseTypeModel) object;
 
 		try {
 			// if we have not case type with correct id
 			if (type.get_fin_object_type_id() == 0) {
-				prepare = connect.prepareStatement(SQLQuery.FIN_OBJECT_TYPES_GET_BY_NAME);
+				prepare = connect.prepareStatement(SQLQuery.SP_FIN_OBJECT_TYPES_GET_BY_NAME);
 				prepare.setString(1, type.get_fin_object_type_name());
 			}
 			// if case type have correct id
 			else {
-				prepare = connect.prepareStatement(SQLQuery.FIN_OBJECT_TYPES_GET_BY_ID);
+				prepare = connect.prepareStatement(SQLQuery.SP_FIN_OBJECT_TYPES_GET_BY_ID);
 				prepare.setInt(1, type.get_fin_object_type_id());
 			}
 			result = prepare.executeQuery();
@@ -55,40 +66,61 @@ public class CaseTypeDAO extends ObjectDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
+		} finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	@Override
 	public void updateObject(Object object) {
+		connect = ConnectionFactory.getConnection();
 		type = (CaseTypeModel) object;
 
 		try {
-			prepare = connect.prepareStatement(SQLQuery.FIN_OBJECT_TYPES_UPDATE_BY_ID);
+			prepare = connect.prepareStatement(SQLQuery.SP_FIN_OBJECT_TYPES_UPDATE_BY_ID);
 			prepare.setString(1, type.get_fin_object_type_name());
 			prepare.setInt(2, type.get_fin_object_type_id());
 			prepare.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	@Override
 	public void deleteObject(Object object) {
+		connect = ConnectionFactory.getConnection();
 		type = (CaseTypeModel) object;
 
 		try {
-			prepare = connect.prepareStatement(SQLQuery.FIN_OBJECT_TYPES_DELETE_BY_ID);
+			prepare = connect.prepareStatement(SQLQuery.SP_FIN_OBJECT_TYPES_DELETE_BY_ID);
 			prepare.setInt(1, type.get_fin_object_type_id());
 			prepare.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	@Override
 	public List<Object> getAllObjectsDB() {
 		try {
-			prepare = connect.prepareStatement(SQLQuery.FIN_OBJECT_TYPES_VIEW_ALL);
+			connect = ConnectionFactory.getConnection();
+			prepare = connect.prepareStatement(SQLQuery.SP_FIN_OBJECT_TYPES_VIEW_ALL);
 			result = prepare.executeQuery();
 			List<Object> list = new ArrayList<Object>();
 
@@ -101,6 +133,12 @@ public class CaseTypeDAO extends ObjectDAO {
 			return list;
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return null;
 	}

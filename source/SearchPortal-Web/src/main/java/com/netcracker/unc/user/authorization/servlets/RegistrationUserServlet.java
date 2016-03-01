@@ -13,14 +13,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.netcracker.unc.mvc.dao.CaseDAO;
+import com.netcracker.unc.mvc.dao.CaseTypeDAO;
 import com.netcracker.unc.mvc.dao.UserDAO;
+import com.netcracker.unc.mvc.models.CaseModel;
+import com.netcracker.unc.mvc.models.CaseTypeModel;
 import com.netcracker.unc.mvc.models.UserModel;
 
 @WebServlet(value = "/RegistrationUser")
 public class RegistrationUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UserModel user = null;
+	private CaseModel casee = null;
 	private UserDAO userDAO = null;
+	private CaseDAO caseDAO = null;
+	private CaseTypeDAO caseTypeDAO = null;
+	private CaseTypeModel caseType = null;
+
+	// standart object types
+	private String objectType = "Категория";
+
+	// standart objects
+	private String object1 = "Транспорт";
+	private String object2 = "ЖКХ";
+	private String object3 = "Продукты";
+	private String object4 = "Кредит";
+	private String object5 = "Другое";
+
 	// regular check input data
 	private Pattern loginPat = Pattern.compile("^[A-Za-z0-9]{1,15}$");
 	private Pattern passwordPat = Pattern.compile("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).[^ ]{5,10}$");
@@ -94,9 +113,30 @@ public class RegistrationUserServlet extends HttpServlet {
 			}
 			// if user is real new
 			if (!check) {
+
 				userDAO.addObject(user);
 				user = (UserModel) userDAO.getObject(user);
-				userDAO.connectionClose();
+
+				// create standart objects
+				caseType = new CaseTypeModel();
+				caseTypeDAO = new CaseTypeDAO();
+				caseType.set_fin_object_type_name(objectType.toLowerCase());
+				caseType = (CaseTypeModel) caseTypeDAO.getObject(caseType);
+
+				caseDAO = new CaseDAO();
+				casee = new CaseModel();
+				casee.set_fin_object_type_id(caseType.get_fin_object_type_id());
+				casee.set_object_name(object1);
+				casee.set_user_id(user.get_user_id());
+				caseDAO.addObject(casee);
+				casee.set_object_name(object2);
+				caseDAO.addObject(casee);
+				casee.set_object_name(object3);
+				caseDAO.addObject(casee);
+				casee.set_object_name(object4);
+				caseDAO.addObject(casee);
+				casee.set_object_name(object5);
+				caseDAO.addObject(casee);
 
 				session = request.getSession();
 				session.setAttribute("user", user);

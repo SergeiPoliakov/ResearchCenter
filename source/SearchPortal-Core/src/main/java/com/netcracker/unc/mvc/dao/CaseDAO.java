@@ -1,5 +1,6 @@
 package com.netcracker.unc.mvc.dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.netcracker.unc.mvc.SQLQuery;
+import com.netcracker.unc.mvc.connection.ConnectionFactory;
 import com.netcracker.unc.mvc.models.CaseModel;
 
 public class CaseDAO extends ObjectDAO {
@@ -15,36 +17,45 @@ public class CaseDAO extends ObjectDAO {
 	private PreparedStatement prepare = null;
 	private CaseModel casee = null;
 	private ResultSet result = null;
+	private Connection connect = null;
 
 	@Override
 	public void addObject(Object object) {
+		connect = ConnectionFactory.getConnection();
 		casee = (CaseModel) object;
 
 		try {
-			prepare = connect.prepareStatement(SQLQuery.FIN_OBJECTS_INSERT);
-			if(casee.get_parent_id() != null)
+			prepare = connect.prepareStatement(SQLQuery.SP_FIN_OBJECTS_INSERT);
+			if (casee.get_parent_id() != null)
 				prepare.setInt(1, casee.get_parent_id());
-			else prepare.setNull(1, java.sql.Types.VARCHAR);
+			else
+				prepare.setNull(1, java.sql.Types.VARCHAR);
 			prepare.setString(2, casee.get_object_name());
 			prepare.setInt(3, casee.get_fin_object_type_id());
 			prepare.setInt(4, casee.get_user_id());
 			prepare.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	@Override
 	public Object getObject(Object object) {
+		connect = ConnectionFactory.getConnection();
 		casee = (CaseModel) object;
 
 		try {
 			if (casee.get_fin_object_id() != 0) {
-				prepare = connect.prepareStatement(SQLQuery.FIN_OBJECTS_GET_BY_ID);
+				prepare = connect.prepareStatement(SQLQuery.SP_FIN_OBJECTS_GET_BY_ID);
 				prepare.setInt(1, casee.get_fin_object_id());
-			}
-			else {
-				prepare = connect.prepareStatement(SQLQuery.FIN_OBJECTS_GET_BY_NAME);
+			} else {
+				prepare = connect.prepareStatement(SQLQuery.SP_FIN_OBJECTS_GET_LAST_BY_NAME);
 				prepare.setString(1, casee.get_object_name());
 			}
 			result = prepare.executeQuery();
@@ -60,15 +71,22 @@ public class CaseDAO extends ObjectDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
+		} finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	@Override
 	public void updateObject(Object object) {
+		connect = ConnectionFactory.getConnection();
 		casee = (CaseModel) object;
 
 		try {
-			prepare = connect.prepareStatement(SQLQuery.FIN_OBJECTS_UPDATE_BY_ID);
+			prepare = connect.prepareStatement(SQLQuery.SP_FIN_OBJECTS_UPDATE_BY_ID);
 			prepare.setInt(1, casee.get_parent_id());
 			prepare.setString(2, casee.get_object_name());
 			prepare.setInt(3, casee.get_fin_object_type_id());
@@ -77,26 +95,40 @@ public class CaseDAO extends ObjectDAO {
 			prepare.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	@Override
 	public void deleteObject(Object object) {
+		connect = ConnectionFactory.getConnection();
 		casee = (CaseModel) object;
 
 		try {
-			prepare = connect.prepareStatement(SQLQuery.FIN_OBJECTS_DELETE_BY_ID);
+			prepare = connect.prepareStatement(SQLQuery.SP_FIN_OBJECTS_DELETE_BY_ID);
 			prepare.setInt(1, casee.get_fin_object_id());
 			prepare.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	@Override
 	public List<Object> getAllObjectsDB() {
 		try {
-			prepare = connect.prepareStatement(SQLQuery.FIN_OBJECTS_VIEW_ALL);
+			connect = ConnectionFactory.getConnection();
+			prepare = connect.prepareStatement(SQLQuery.SP_FIN_OBJECTS_VIEW_ALL);
 			result = prepare.executeQuery();
 			List<Object> list = new ArrayList<Object>();
 
@@ -112,6 +144,12 @@ public class CaseDAO extends ObjectDAO {
 			return list;
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return null;
 	}

@@ -30,9 +30,6 @@ public class LoginUserServlet extends HttpServlet {
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
 
-		System.out.println(login);
-		System.out.println(password);
-
 		user.set_login(login);
 		user.createHashAndSalt(password); // hash md5 user password and set
 											// it
@@ -43,15 +40,15 @@ public class LoginUserServlet extends HttpServlet {
 															// and password
 
 		if (user != null) { // if login is correct
-			
+
 			session = request.getSession();
 			session.setAttribute("user", user);
-			session.setMaxInactiveInterval(30*60);
+			session.setMaxInactiveInterval(30 * 60);
 			cookie = new Cookie("userID", String.valueOf(user.get_user_id()));
-			cookie.setMaxAge(24*60*60);
+			cookie.setMaxAge(24 * 60 * 60);
 			response.addCookie(cookie);
 			response.sendRedirect("modules.jsp");
-			 
+
 		} else {
 			request.setAttribute("errorMessage", "Неправильно введен логин или пароль!");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");

@@ -1,11 +1,8 @@
-package com.netcracker.unc.mvc.dao;
+package com.netcracker.unc.beans;
 
-import java.sql.Connection;
 import java.util.List;
 
-public abstract class ObjectDAO {
-
-	protected Connection connect = null;
+public interface ObjectDAO {
 
 	public abstract List<Object> getAllObjectsDB();
 

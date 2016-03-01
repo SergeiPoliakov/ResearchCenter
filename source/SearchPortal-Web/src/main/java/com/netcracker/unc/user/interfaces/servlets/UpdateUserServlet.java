@@ -53,9 +53,6 @@ public class UpdateUserServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/interface/update_user.jsp");
 			dispatcher.include(request, response);
 		}
-
-		userDAO.connectionClose();
-
 	}
 
 }

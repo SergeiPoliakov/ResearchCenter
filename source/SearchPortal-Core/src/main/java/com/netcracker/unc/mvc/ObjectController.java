@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import com.netcracker.unc.mvc.connection.ConnectionFactory;
-import com.netcracker.unc.mvc.dao.CaseDAO;
 import com.netcracker.unc.mvc.dao.UserDAO;
 import com.netcracker.unc.mvc.models.AttributeModel;
 import com.netcracker.unc.mvc.models.CaseModel;
@@ -19,7 +18,6 @@ public class ObjectController {
 	private UserModel userDB = null; // for user from database
 	private UserDAO userDAO = null;
 	private CaseModel casee = null;
-	private CaseDAO caseDAO = null;
 	private List<Object> listAll = null;
 
 	private AttributeModel attribute = null;
@@ -37,12 +35,10 @@ public class ObjectController {
 			for (Object ob : listAll) {
 				userDB = (UserModel) ob;
 				if (userDB.get_login().equals(user.get_login())) {
-					userDAO.connectionClose();
 					return true;
 				}
 			}
 		}
-		userDAO.connectionClose();
 		return false;
 	}
 
@@ -56,13 +52,9 @@ public class ObjectController {
 		if (userDB != null) {
 			if (user.get_login().equals(userDB.get_login()) && user.get_hash_sum() == userDB.get_hash_sum()
 					&& user.get_salt() == userDB.get_salt()) {
-				userDAO.connectionClose();
-				System.out.println(user.get_salt());
-				System.out.println(userDB.get_salt());
 				return userDB;
 			}
 		}
-		userDAO.connectionClose();
 		return null;
 	}
 
@@ -70,16 +62,16 @@ public class ObjectController {
 	public List<Object> getCaseTypeAttributes(int object_type_id) {
 		connect = ConnectionFactory.getConnection();
 		try {
-			prepare = connect.prepareStatement(SQLQuery.GET_ATTRIBUTES_BY_OBJECT_TYPE_ID);
+			prepare = connect.prepareStatement(SQLQuery.SP_GET_ATTRIBUTES_BY_OBJECT_TYPE_ID);
 			prepare.setInt(1, object_type_id);
 			result = prepare.executeQuery();
 			List<Object> list = new ArrayList<Object>();
 
 			while (result.next()) {
 				attribute = new AttributeModel();
-				attribute.set_attribute_name(result.getString(1));
-				attribute.set_attribute_id(result.getInt(2));
-				attribute.set_fin_object_type_id(result.getInt(3));
+				attribute.set_attribute_name(result.getString("attribute_name"));
+				attribute.set_attribute_id(result.getInt("attribute_id"));
+				attribute.set_fin_object_type_id(result.getInt("fin_object_type_id"));
 				list.add(attribute);
 			}
 			connect.close();
@@ -95,16 +87,16 @@ public class ObjectController {
 		connect = ConnectionFactory.getConnection();
 		casee = new CaseModel();
 		try {
-			prepare = connect.prepareStatement(SQLQuery.GET_STANDART_CASE_BY_USER_ID);
+			prepare = connect.prepareStatement(SQLQuery.SP_GET_STANDART_CASE_BY_USER_ID);
 			prepare.setInt(1, user.get_user_id());
 			prepare.setString(2, category);
 			result = prepare.executeQuery();
 
 			while (result.next()) {
-				casee.set_fin_object_id(result.getInt(1));
-				casee.set_object_name(result.getString(3));
-				casee.set_fin_object_type_id(result.getInt(4));
-				casee.set_user_id(result.getInt(5));
+				casee.set_fin_object_id(result.getInt("FIN_OBJECT_ID"));
+				casee.set_object_name(result.getString("OBJECT_NAME"));
+				casee.set_fin_object_type_id(result.getInt("FIN_OBJECT_TYPE_ID"));
+				casee.set_user_id(result.getInt("USER_ID"));
 			}
 			connect.close();
 			return casee;
@@ -118,7 +110,8 @@ public class ObjectController {
 	public List<CaseModel> getUserActiveCases(int userId) {
 		connect = ConnectionFactory.getConnection();
 		try {
-			prepare = connect.prepareStatement("SELECT * FROM fin_objects WHERE user_id = ? AND parent_id IS NOT NULL");
+			prepare = connect
+					.prepareStatement("SELECT * FROM sp_fin_objects WHERE user_id = ? AND parent_id IS NOT NULL");
 			prepare.setInt(1, userId);
 			result = prepare.executeQuery();
 			List<CaseModel> list = new ArrayList<CaseModel>();
@@ -135,17 +128,15 @@ public class ObjectController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-		caseDAO.connectionClose();
 		return null;
 	}
 
-	//this method return general case of current subcase
+	// this method return general case of current subcase
 	public CaseModel getGeneralCaseCategory(int fin_object_id) {
 		connect = ConnectionFactory.getConnection();
 		try {
 			prepare = connect.prepareStatement(
-					"SELECT * FROM  fin_objects WHERE CONNECT_BY_ISLEAF = 1  START WITH fin_object_id = ? CONNECT BY PRIOR parent_id = fin_object_id");
+					"SELECT * FROM  sp_fin_objects WHERE CONNECT_BY_ISLEAF = 1  START WITH fin_object_id = ? CONNECT BY PRIOR parent_id = fin_object_id");
 			prepare.setInt(1, fin_object_id);
 			result = prepare.executeQuery();
 			casee = new CaseModel();

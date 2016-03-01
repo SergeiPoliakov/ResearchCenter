@@ -7,7 +7,7 @@
 <head>
 <link href="css/index.css" rel="stylesheet" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Insert title here</title>
+<title>Добро пожаловать на сайт приоритетов</title>
 </head>
 <body>
 
@@ -74,7 +74,7 @@
 				<c:otherwise>
 					<div class="authInclude" id="authInclude"
 						style="visibility: hidden">
-						<jsp:include page="/authorization/authorization_user.jsp" />
+						<jsp:include page="/authorization/authorization_user.jsp"/>
 					</div>
 					<div class="registrInclude" id="registrInclude"
 						style="visibility: visible">

@@ -33,6 +33,6 @@ public class LogoutUserServlet extends HttpServlet {
 		if (session != null) {
 			request.getSession().invalidate();
 		}
-		response.sendRedirect("kolmain.jsp");
+		response.sendRedirect("index.jsp");
 	}
 }

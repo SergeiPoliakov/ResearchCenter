@@ -5,20 +5,17 @@
  */
 package com.netcracker.unc.mvc.models;
 
-/**
- *
- * @author Dmitry
- */
+
 public class CategoryModel {
 
     public final String Type = "Категория";
     private String objectId;
     private String objectName;
-    private float minPercent;
-    private float maxPercent;
+    private int minPercent;
+    private int maxPercent;
     private String finalDate;
     private float coeficient;
-    private int sumCategory = 0;
+    private int sumCategory;
 
     public String getObjectId() {
         return objectId;
@@ -40,7 +37,7 @@ public class CategoryModel {
         return minPercent;
     }
 
-    public void setMinPercent(float minPercent) {
+    public void setMinPercent(int minPercent) {
         this.minPercent = minPercent;
     }
 
@@ -48,7 +45,7 @@ public class CategoryModel {
         return maxPercent;
     }
 
-    public void setMaxPercent(float maxPercent) {
+    public void setMaxPercent(int maxPercent) {
         this.maxPercent = maxPercent;
     }
 
@@ -78,16 +75,15 @@ public class CategoryModel {
     
     @Override
     public String toString(){
-        return "Объектный тип <Категория>. "
-                + "Имеет доп. поля, которые при потребности "
-                + "заполняются суммой детей категории";
+        return "Объектный тип <Категория>.<br/> objectId = " + objectId +"; "
+                + "objectName = " + objectName;
     }
 
     public CategoryModel() {
     }
 
-    public CategoryModel(String objectId, String objectName, float minPercent,
-            float maxPercent, String finalDate, float coeficient, int sumCategory) {
+    public CategoryModel(String objectId, String objectName, int minPercent,
+            int maxPercent, String finalDate, float coeficient, int sumCategory) {
         this.objectId = objectId;
         this.objectName = objectName;
         this.minPercent = minPercent;
@@ -95,5 +91,4 @@ public class CategoryModel {
         this.finalDate = finalDate;
         this.coeficient = coeficient;
     }
-    
 }
