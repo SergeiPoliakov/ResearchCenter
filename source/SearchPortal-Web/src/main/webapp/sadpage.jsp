@@ -6,6 +6,13 @@
     For tests.
 --%>
 
+<%@page import="com.netcracker.unc.priorityModule.FillHTMLTable"%>
+<%@page import="com.netcracker.unc.priorityModule.CalculationPriority"%>
+<%@page import="com.netcracker.unc.priorityModule.CategoryModelForTable"%>
+<%@page import="java.util.List"%>
+<%@page import="com.netcracker.unc.mvc.CategoryController"%>
+<%@page import="com.netcracker.unc.mvc.models.UserModel"%>
+<%@page import="com.netcracker.unc.mvc.ObjectController"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.netcracker.unc.mvc.dao.CategoryDao"%>
 <%@page import="com.netcracker.unc.mvc.models.CategoryModel"%>
@@ -29,9 +36,82 @@
 		<div class="block-title">Приоритеты</div>
 		<div class="block-information">
 			<%
-				CategoryDao cd = new CategoryDao();
+				/*
+				Алгоритм:
+					1.Передаю userDao в Controller, возвращаю сюда list categoryModel
+					2.CategoryModule закидываю в Calkulation, получаю list categoryModelForTable
+					3. categoryModuleForTable закидываю в StringHtml
+					4. вывожу на экран stringHtml
+				
+				*/
+				CalculationPriority calculationPriority = new CalculationPriority();
+				FillHTMLTable fillHTMLTable = new FillHTMLTable();
+				List userCategoryList = new ArrayList<CategoryModel>();
+				List userCategoryListForTable = new ArrayList<CategoryModelForTable>();
+
+				String htmlUserCategoriesTable = "";
+
+				try {
+					if ((UserModel) request.getSession().getAttribute("user") != null) {
+						CategoryController categoryController = new CategoryController(
+								(UserModel) request.getSession().getAttribute("user"));
+			
+				userCategoryList = categoryController.getAllUserCategories();
+						if (userCategoryList != null && !userCategoryList.isEmpty()) {
+							out.print(userCategoryList.size());
+							for(Object o: userCategoryList){%>
+							<%= o.toString()%>
+							<%
+							}
+							//!!!!!
+
+							userCategoryListForTable = calculationPriority.convertToTableView(userCategoryList);
+
+							if (userCategoryListForTable != null && !userCategoryListForTable.isEmpty()) {
+								out.print(userCategoryListForTable.size());
+								for(Object o: userCategoryListForTable){%>
+								<%= o.toString()%>
+								<% 
+								}
+							} else {
+								out.print("массив userCategoryListForTable пуст");
+							}
+
+						} else {
+							out.print("массив userCategoryList пуст");
+							if (userCategoryList != null) {
+								out.print("все плохо, массив вообще null");
+							}
+						}
+
+					}
+
+					if (userCategoryListForTable != null && !userCategoryListForTable.isEmpty()) {
+						htmlUserCategoriesTable = fillHTMLTable.toHTMLString(userCategoryListForTable);
+						
+						
+						
+						%>
+						<%=htmlUserCategoriesTable %>
+						<%
+					}
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				/*
+				****
+				*/
+				//CategoryDao cd = new CategoryDao();
+
+				//request.getSession().getAttribute("user");// потом 
+				//ObjectController controller = 
+				UserModel userModel = (UserModel) request.getSession().getAttribute("user");
 			%>
-			<%=cd.testdb()%>
+			<%/*=cd.testdb()*/%>
+			<%=request.getSession().getAttribute("user")%>
+			<%=userModel.get_login()%>
+			<%=userModel.get_user_id()%>
 		</div>
 	</div>
 </body>

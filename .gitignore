@@ -16,3 +16,4 @@ source/SearchPortal-Core/.settings/*
 source/SearchPortal-Web/.settings/*
 source/SearchPortal-BuildProject/.settings/*
 old/*
+source/SearchPortal-Core/src/main/java/com/netcracker/unc/mvc/connection/*

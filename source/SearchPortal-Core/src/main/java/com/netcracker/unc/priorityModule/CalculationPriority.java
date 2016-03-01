@@ -14,15 +14,15 @@ import java.util.List;
 import com.netcracker.unc.mvc.models.CategoryModel;
 
 public class CalculationPriority {
-	private int userId = 0;
+	//private int userId = 0;
 
-	public void prepareDataForUser(int user_id) {
+	/*public void prepareDataForUser(int user_id) {
 		this.userId = user_id;
 		
 
-	}
+	}*/
 
-	private List<CategoryModelForTable> convertToTableView(List<CategoryModel> categoryModel) {
+	public List<CategoryModelForTable> convertToTableView(List<CategoryModel> categoryModel) {
 
 		List<CategoryModelForTable> resultCategoryList;
 		CategoryModelForTable categoryModelForTable = null;
@@ -33,13 +33,12 @@ public class CalculationPriority {
 
 				categoryModelForTable = new CategoryModelForTable();
 				categoryModelForTable.setObjectName(catmod.getObjectName());
-				categoryModelForTable.setCalculatedValue(calcPriorValueColumn(catmod));
+				//categoryModelForTable.setCalculatedValue(calcPriorValueColumn(catmod));
 				resultCategoryList.add(categoryModelForTable);
 			}
 		} else {
 			resultCategoryList = Collections.emptyList();
 		}
-
 		return resultCategoryList;
 	}
 	
@@ -67,16 +66,7 @@ public class CalculationPriority {
 	
 	@Override
 	public String toString() {
-		String statusString = "Класс анализирует и возвращает статистику" + " по расходам пользователя.<br/> userID = "
-				+ userId;
+		String statusString = "Класс анализирует и возвращает статистику" + " по расходам пользователя.";
 		return statusString;
-	}
-
-	CalculationPriority() {
-
-	}
-
-	CalculationPriority(int userId) {
-		this.userId = userId;
 	}
 }

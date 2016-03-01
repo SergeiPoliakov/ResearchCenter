@@ -30,4 +30,10 @@ public class CategoryModelForTable {
 		this.objectName = objectName;
 		this.calculatedValue = calculatedValue;
 	}
+	
+	@Override
+	public String toString(){
+		
+		return "objectName: " + objectName + "; calculatedValue: " + calculatedValue  ;
+	}
 }
