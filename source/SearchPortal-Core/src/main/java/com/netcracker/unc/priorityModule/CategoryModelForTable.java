@@ -3,31 +3,31 @@ package com.netcracker.unc.priorityModule;
 import java.math.BigInteger;
 
 public class CategoryModelForTable {
-	private String objectName;
-	//private BigInteger calculatedValue; 
-	private int calculatedValue;
-	
-	public CategoryModelForTable() {
-	}
+    private String objectName;
+    //private BigInteger calculatedValue;
+    private int calculatedValue;
 
-	public String getObjectName() {
-		return objectName;
-	}
+    public CategoryModelForTable() {
+    }
 
-	public void setObjectName(String objectName) {
-		this.objectName = objectName;
-	}
+    public String getObjectName() {
+        return objectName;
+    }
 
-	public int getCalculatedValue() {
-		return calculatedValue;
-	}
+    public void setObjectName(String objectName) {
+        this.objectName = objectName;
+    }
 
-	public void setCalculatedValue(int calculatedValue) {
-		this.calculatedValue = calculatedValue;
-	}
+    public int getCalculatedValue() {
+        return calculatedValue;
+    }
 
-	public CategoryModelForTable(String objectName, int calculatedValue) {
-		this.objectName = objectName;
-		this.calculatedValue = calculatedValue;
-	}
+    public void setCalculatedValue(int calculatedValue) {
+        this.calculatedValue = calculatedValue;
+    }
+
+    public CategoryModelForTable(String objectName, int calculatedValue) {
+        this.objectName = objectName;
+        this.calculatedValue = calculatedValue;
+    }
 }

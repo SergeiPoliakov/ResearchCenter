@@ -21,63 +21,65 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 
 import com.netcracker.unc.mvc.dao.UserDAO;
+
 @RunWith(MockitoJUnitRunner.class)
 public class UserDAOTest {
-	@Mock
-	DataSource mockDataSource;
-	@Mock
-	Connection mockConnection;
-	@Mock
-	PreparedStatement mockPrepStatement;
-	@Mock
-	ResultSet mockResultSet;
-	
-	
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
+    @Mock
+    DataSource mockDataSource;
+    @Mock
+    Connection mockConnection;
+    @Mock
+    PreparedStatement mockPrepStatement;
+    @Mock
+    ResultSet mockResultSet;
 
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
 
-	@Before
-	public void setUp() throws SQLException{
-		when(mockDataSource.getConnection()).thenReturn(mockConnection);
-		when(mockDataSource.getConnection(anyString(), anyString())).thenReturn(mockConnection);
+    @BeforeClass
+    public static void setUpBeforeClass() throws Exception {
+    }
+
+    @AfterClass
+    public static void tearDownAfterClass() throws Exception {
+    }
+
+    @Before
+    public void setUp() throws SQLException {
+        when(mockDataSource.getConnection()).thenReturn(mockConnection);
+        when(mockDataSource.getConnection(anyString(), anyString())).thenReturn(mockConnection);
         doNothing().when(mockConnection).commit();
         when(mockConnection.prepareStatement(anyString(), anyInt())).thenReturn(mockPrepStatement);
         doNothing().when(mockPrepStatement).setString(anyInt(), anyString());
         when(mockPrepStatement.execute()).thenReturn(Boolean.TRUE);
         when(mockPrepStatement.getGeneratedKeys()).thenReturn(mockResultSet);
         when(mockResultSet.next()).thenReturn(Boolean.TRUE, Boolean.FALSE);
-       // when(mockResultSet.getInt()).thenReturn(userId);
-	}
-	@Test
-	public void testGetAllObjectsDB() {
-		fail("Not yet implemented");
-	}
+        // when(mockResultSet.getInt()).thenReturn(userId);
+    }
 
-	@Test
-	public void testAddObject() {
-		UserDAO instance = new UserDAO();//нужно сделать mock connectiona из ObjectDAO
-		
-		
-	}
+    @Test
+    public void testGetAllObjectsDB() {
+        fail("Not yet implemented");
+    }
 
-	@Test
-	public void testGetObject() {
-		fail("Not yet implemented");
-	}
+    @Test
+    public void testAddObject() {
+        UserDAO instance = new UserDAO();//нужно сделать mock connectiona из ObjectDAO
 
-	@Test
-	public void testUpdateObject() {
-		fail("Not yet implemented");
-	}
 
-	@Test
-	public void testDeleteObject() {
-		fail("Not yet implemented");
-	}
+    }
+
+    @Test
+    public void testGetObject() {
+        fail("Not yet implemented");
+    }
+
+    @Test
+    public void testUpdateObject() {
+        fail("Not yet implemented");
+    }
+
+    @Test
+    public void testDeleteObject() {
+        fail("Not yet implemented");
+    }
 
 }

@@ -72,10 +72,10 @@ public class CategoryModel {
     public void setSumCategory(int sumCategory) {
         this.sumCategory = sumCategory;
     }
-    
+
     @Override
-    public String toString(){
-        return "Объектный тип <Категория>.<br/> objectId = " + objectId +"; "
+    public String toString() {
+        return "Объектный тип <Категория>.<br/> objectId = " + objectId + "; "
                 + "objectName = " + objectName;
     }
 
@@ -83,7 +83,7 @@ public class CategoryModel {
     }
 
     public CategoryModel(String objectId, String objectName, int minPercent,
-            int maxPercent, String finalDate, float coeficient, int sumCategory) {
+                         int maxPercent, String finalDate, float coeficient, int sumCategory) {
         this.objectId = objectId;
         this.objectName = objectName;
         this.minPercent = minPercent;
