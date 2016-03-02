@@ -63,7 +63,7 @@ public class CategoryDao extends ObjectDAO {
 			List<Object> list = new ArrayList<Object>();
 			while (result.next()) {
 				category = new CategoryModel();
-				category.setObjectId(result.getString(1));
+				//category.setObjectId(result.getString(1));
 				// category.setObjectName(result.getString(3));
 				// category.setCoeficient(Float.parseFloat(result.getString(4)));
 				// category.setMinPercent(Integer.parseInt(result.getString(5)));

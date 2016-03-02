@@ -5,35 +5,24 @@
  */
 package com.netcracker.unc.priorityModule;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 import com.netcracker.unc.mvc.models.CategoryModel;
 
 public class CalculationPriority {
-	//private int userId = 0;
-
-	/*public void prepareDataForUser(int user_id) {
-		this.userId = user_id;
-		
-
-	}*/
 
 	public List<CategoryModelForTable> convertToTableView(List<CategoryModel> categoryModel) {
 
 		List<CategoryModelForTable> resultCategoryList;
 		CategoryModelForTable categoryModelForTable = null;
 		if (categoryModel != null && !categoryModel.isEmpty()) {
-
 			resultCategoryList = new ArrayList<CategoryModelForTable>();
 			for (CategoryModel catmod : categoryModel) {
-
 				categoryModelForTable = new CategoryModelForTable();
 				categoryModelForTable.setObjectName(catmod.getObjectName());
-				//categoryModelForTable.setCalculatedValue(calcPriorValueColumn(catmod));
+				categoryModelForTable.setCalculatedValue(catmod.getSumCategory());
 				resultCategoryList.add(categoryModelForTable);
 			}
 		} else {
@@ -41,9 +30,8 @@ public class CalculationPriority {
 		}
 		return resultCategoryList;
 	}
-	
-	
-	private int getDifferenceCoefficient(){
+
+	private int getDifferenceCoefficient() {
 		return 1;
 	}
 
@@ -56,14 +44,14 @@ public class CalculationPriority {
 	}
 
 	private int getAVGPriorValue() {
-		
+
 		return 0;
 	}
 
 	private int calcPriorValueColumn(CategoryModel catmod) {
 		return 0;
 	}
-	
+
 	@Override
 	public String toString() {
 		String statusString = "Класс анализирует и возвращает статистику" + " по расходам пользователя.";

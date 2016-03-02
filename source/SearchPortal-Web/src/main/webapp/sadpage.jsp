@@ -55,24 +55,19 @@
 					if ((UserModel) request.getSession().getAttribute("user") != null) {
 						CategoryController categoryController = new CategoryController(
 								(UserModel) request.getSession().getAttribute("user"));
-			
-				userCategoryList = categoryController.getAllUserCategories();
+
+						userCategoryList = categoryController.getAllUserCategories();
 						if (userCategoryList != null && !userCategoryList.isEmpty()) {
-							out.print(userCategoryList.size());
-							for(Object o: userCategoryList){%>
-							<%= o.toString()%>
-							<%
-							}
-							//!!!!!
 
 							userCategoryListForTable = calculationPriority.convertToTableView(userCategoryList);
 
 							if (userCategoryListForTable != null && !userCategoryListForTable.isEmpty()) {
 								out.print(userCategoryListForTable.size());
-								for(Object o: userCategoryListForTable){%>
-								<%= o.toString()%>
-								<% 
-								}
+								for (Object o : userCategoryListForTable) {
+			%>
+			<%=o.toString()%>
+			<%
+				}
 							} else {
 								out.print("массив userCategoryListForTable пуст");
 							}
@@ -88,27 +83,20 @@
 
 					if (userCategoryListForTable != null && !userCategoryListForTable.isEmpty()) {
 						htmlUserCategoriesTable = fillHTMLTable.toHTMLString(userCategoryListForTable);
-						
-						
-						
-						%>
-						<%=htmlUserCategoriesTable %>
-						<%
-					}
+			%>
+			<%=htmlUserCategoriesTable%>
+			<%
+				}
 
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				/*
-				****
-				*/
-				//CategoryDao cd = new CategoryDao();
-
-				//request.getSession().getAttribute("user");// потом 
-				//ObjectController controller = 
+				
 				UserModel userModel = (UserModel) request.getSession().getAttribute("user");
 			%>
-			<%/*=cd.testdb()*/%>
+			<%
+				/*=cd.testdb()*/
+			%>
 			<%=request.getSession().getAttribute("user")%>
 			<%=userModel.get_login()%>
 			<%=userModel.get_user_id()%>

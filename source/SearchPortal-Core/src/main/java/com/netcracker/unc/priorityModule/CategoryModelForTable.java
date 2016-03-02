@@ -1,12 +1,12 @@
 package com.netcracker.unc.priorityModule;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 
 public class CategoryModelForTable {
 	private String objectName;
-	//private BigInteger calculatedValue; 
-	private int calculatedValue;
-	
+	private BigDecimal calculatedValue;
+
 	public CategoryModelForTable() {
 	}
 
@@ -18,22 +18,37 @@ public class CategoryModelForTable {
 		this.objectName = objectName;
 	}
 
-	public int getCalculatedValue() {
+	public BigDecimal getCalculatedValue() {
 		return calculatedValue;
 	}
 
-	public void setCalculatedValue(int calculatedValue) {
+	public void setCalculatedValue(BigDecimal calculatedValue) {
 		this.calculatedValue = calculatedValue;
 	}
 
-	public CategoryModelForTable(String objectName, int calculatedValue) {
+	public CategoryModelForTable(String objectName, BigDecimal calculatedValue) {
 		this.objectName = objectName;
 		this.calculatedValue = calculatedValue;
 	}
-	
+
 	@Override
-	public String toString(){
-		
-		return "objectName: " + objectName + "; calculatedValue: " + calculatedValue  ;
+	public String toString() {
+
+		StringBuilder classString = new StringBuilder("<br/>Коллекция подготовленная для вывода на экран<br/> ");
+
+		if (objectName != null) {
+			classString.append("<br/> objectName = ");
+			classString.append(objectName);
+		} else {
+			classString.append("<br/> objectName пуст");
+		}
+		if (objectName != null) {
+			classString.append("<br/> calculatedValue = ");
+			classString.append(calculatedValue.toString());
+		} else {
+			classString.append("<br/> calculatedValue пуст");
+		}
+
+		return classString.toString();
 	}
 }

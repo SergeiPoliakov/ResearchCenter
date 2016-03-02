@@ -77,7 +77,7 @@ public class SQLQuery {
 			+ "   FROM SP_FIN_OBJECTS select_fo \n" + "    INNER JOIN SP_ATTRIBUTES select_pja\n"
 			+ "     ON select_fo.FIN_OBJECT_TYPE_ID = select_pja.FIN_OBJECT_TYPE_ID\n"
 			+ "    INNER JOIN SP_PARAMS select_par\n" + "     ON select_pja.ATTRIBUTE_ID = select_par.ATTRIBUTE_ID\n"
-			+ "   WHERE select_pja.ATTRIBUTE_NAME='Коэффицент приоритета'-- должно быть ФФ\n"
+			+ "   WHERE select_pja.ATTRIBUTE_NAME='Коэффициент приоритета'\n"
 			+ "    AND main_fo.FIN_OBJECT_ID = select_fo.FIN_OBJECT_ID\n"
 			+ "    AND main_fo.FIN_OBJECT_ID = select_par.FIN_OBJECT_ID\n" + " ) as coefficient,\n" + " (\n"
 			+ "  SELECT select_par.VALUE\n" + "   FROM SP_FIN_OBJECTS select_fo \n"
@@ -117,12 +117,12 @@ public class SQLQuery {
 			+ "  ON main_fo.FIN_OBJECT_TYPE_ID = main_fot.FIN_OBJECT_TYPE_ID\n"
 			+ "WHERE main_fot.FIN_OBJECT_TYPE_NAME = 'Категория'";
 
-	public static final String SP_GET_FULL_USER_CATEGORIES = "SELECT \n" + " main_fo.FIN_OBJECT_ID as object_ID, \n"
-			+ " main_fo.USER_ID,\n" + " main_fo.OBJECT_NAME,\n" + " (\n" + "  SELECT select_par.VALUE\n"
-			+ "   FROM SP_FIN_OBJECTS select_fo \n" + "    INNER JOIN SP_ATTRIBUTES select_pja\n"
+	public static final String SP_GET_USER_CATEGORIES = "SELECT \n" + " main_fo.FIN_OBJECT_ID as object_ID, \n"
+			+ " main_fo.OBJECT_NAME,\n" + " (\n" + "  SELECT select_par.VALUE\n" + "   FROM SP_FIN_OBJECTS select_fo \n"
+			+ "    INNER JOIN SP_ATTRIBUTES select_pja\n"
 			+ "     ON select_fo.FIN_OBJECT_TYPE_ID = select_pja.FIN_OBJECT_TYPE_ID\n"
 			+ "    INNER JOIN SP_PARAMS select_par\n" + "     ON select_pja.ATTRIBUTE_ID = select_par.ATTRIBUTE_ID\n"
-			+ "   WHERE select_pja.ATTRIBUTE_NAME='Коэффицент приоритета'-- должно быть ФФ\n"
+			+ "   WHERE select_pja.ATTRIBUTE_NAME='Коэффициент приоритета'\n"
 			+ "    AND main_fo.FIN_OBJECT_ID = select_fo.FIN_OBJECT_ID\n"
 			+ "    AND main_fo.FIN_OBJECT_ID = select_par.FIN_OBJECT_ID\n" + " ) as coefficient,\n" + " (\n"
 			+ "  SELECT select_par.VALUE\n" + "   FROM SP_FIN_OBJECTS select_fo \n"
@@ -160,5 +160,5 @@ public class SQLQuery {
 			+ " GROUP BY table_objects_and_its_roots.root_object_id\n" + ") as sum_category\n"
 			+ "FROM SP_FIN_OBJECTS main_fo \n" + " LEFT JOIN SP_FIN_OBJECT_TYPES main_fot\n"
 			+ "  ON main_fo.FIN_OBJECT_TYPE_ID = main_fot.FIN_OBJECT_TYPE_ID\n"
-			+ "WHERE main_fot.FIN_OBJECT_TYPE_NAME = 'Категория' AND main_fo.USER_ID = ?";
+			+ "WHERE main_fot.FIN_OBJECT_TYPE_NAME = 'Категория'";
 }
