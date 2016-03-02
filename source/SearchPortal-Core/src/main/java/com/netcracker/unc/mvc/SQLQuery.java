@@ -161,4 +161,44 @@ public class SQLQuery {
 			+ "FROM SP_FIN_OBJECTS main_fo \n" + " LEFT JOIN SP_FIN_OBJECT_TYPES main_fot\n"
 			+ "  ON main_fo.FIN_OBJECT_TYPE_ID = main_fot.FIN_OBJECT_TYPE_ID\n"
 			+ "WHERE main_fot.FIN_OBJECT_TYPE_NAME = 'Категория'";
+	
+	
+	
+	//Invoice object types
+	
+	 public static final String invoice_id = "5";    
+	 public static final String get_invoice_for_user_by_invoice_id = "select FIN_OBJECT_ID, OBJECT_NAME from SP_FIN_OBJECTS where USER_ID = ? and FIN_OBJECT_ID = ?";
+	 public static final String get_balance_by_invoice_id = "select p.value from SP_PARAMS p, SP_FIN_OBJECTS o\n"+
+			 												"where p.FIN_OBJECT_ID = o.FIN_OBJECT_ID and o.USER_ID=?\n"+ 
+			 												"and p.ATTRIBUTE_ID=1 and o.FIN_OBJECT_ID=? and o.FIN_OBJECT_TYPE_ID="+ invoice_id;
+	 public static final String get_credit_by_invoice_id = "select p.value from SP_PARAMS p, SP_FIN_OBJECTS o\n"+
+			 												"where p.FIN_OBJECT_ID = o.FIN_OBJECT_ID and o.USER_ID=?\n"+ 
+			 												"and p.ATTRIBUTE_ID=2 and p.value in ('true','false') and o.FIN_OBJECT_ID=? and o.FIN_OBJECT_TYPE_ID="+ invoice_id;
+	 public static final String get_percent_by_invoice_id = "select p.value from SP_PARAMS p, SP_FIN_OBJECTS o\n"+
+			 												"where p.FIN_OBJECT_ID = o.FIN_OBJECT_ID and o.USER_ID=?\n"+ 
+			 												"and p.ATTRIBUTE_ID=3 and o.FIN_OBJECT_ID=? and o.FIN_OBJECT_TYPE_ID="+ invoice_id;
+	 public static final String get_balance_credit_and_percent_by_invoice_id = "select p.value, a.VALUE, r.VALUE\n"+
+			 																	"from SP_PARAMS p, SP_PARAMS a, SP_PARAMS r, SP_FIN_OBJECTS o\n"+
+			 																	"where p.FIN_OBJECT_ID = o.FIN_OBJECT_ID and  a.FIN_OBJECT_ID = o.FIN_OBJECT_ID and  r.FIN_OBJECT_ID = o.FIN_OBJECT_ID and\n"+
+			 																	"o.USER_ID=? and p.ATTRIBUTE_ID=1 and a.ATTRIBUTE_ID=2 and r.ATTRIBUTE_ID=3\n"+
+			 																	"and o.FIN_OBJECT_ID=? and a.value in ('true','false')and o.FIN_OBJECT_TYPE_ID= "+ invoice_id;
+	 public static final String get_invoices_count_for_user = "select count(fin_object_type_ID from SP_FIN_OBJECTS where USER_ID = ? and FIN_OBJECT_TYPE_ID= "+ invoice_id;
+	 public static final String get_all_invoices_for_user_by_user_id = "select fin_object_id, OBJECT_NAME from SP_FIN_OBJECTS where  USER_ID= ? and FIN_OBJECT_TYPE_ID="+invoice_id;
+	 public static final String get_all_invoices_and_balances_for_user = "select o.OBJECT_NAME, p.value from SP_FIN_OBJECTS o, SP_PARAMS p where USER_ID= ? and p.ATTRIBUTE_ID=1 and o.FIN_OBJECT_TYPE_ID="+invoice_id;
+	 public static final String get_sum_all_balances_for_users_by_user_id = "select SUM(p.VALUE) from SP_FIN_OBJECTS o, SP_PARAMS p where p.FIN_OBJECT_ID=o.FIN_OBJECT_ID and USER_ID=? and p.ATTRIBUTE_ID=1 and o.FIN_OBJECT_TYPE_ID="+invoice_id;
+	 public static final String get_invoices_and_balance_and_credit_and_percent = "select o.OBJECT_NAME, p.VALUE, a.VALUE, r.VALUE\n"+
+			 																	  "from SP_FIN_OBJECTS o, SP_PARAMS p, SP_PARAMS a, SP_PARAMS r\n"+
+			 																	  "where  p.FIN_OBJECT_ID=o.FIN_OBJECT_ID and a.FIN_OBJECT_ID=o.FIN_OBJECT_ID and r.FIN_OBJECT_ID=o.FIN_OBJECT_ID and o.USER_ID= ?\n"+ 
+			 																	  "and p.ATTRIBUTE_ID=1 and a.ATTRIBUTE_ID=2 and r.ATTRIBUTE_ID=3 and o.FIN_OBJECT_TYPE_ID="+invoice_id;
+	 public static final String set_new_invoice_for_user = "insert into SP_FIN_OBJECTS(FIN_OBJECT_ID, OBJECT_NAME, FIN_OBJECT_TYPE_ID, user_id) values(?, ?, ?, ?); ";
+	 public static final String set_new_balance_in_invoice = "insert into SP_PARAMS(ATTRIBUTE_ID, FIN_OBJECT_ID, VALUE) values (1, ?, ?)";
+	 public static final String set_new_credit_in_invoice = "insert into SP_PARAMS(ATTRIBUTE_ID, FIN_OBJECT_ID, VALUE) values (2, ?, ?)";
+	 public static final String set_new_percent_in_invoice = "insert into SP_PARAMS(ATTRIBUTE_ID, FIN_OBJECT_ID, VALUE) values (3, ?, ?)";
+
+	 public static final String update_invoise_by_id = "update SP_FIN_OBJECTS set Object_name = ? where user_id = ?";
+	 public static final String update_balance_in_invoice = "UPDATE SP_params SET value = ? WHERE ATTRIBUTE_ID=1 and fin_object_id =?";
+	 public static final String update_credit_in_invoice = "UPDATE SP_params SET value = ? WHERE fin_object_id = ? and ATTRIBUTE_ID=2";
+	 public static final String update_percent_in_invoice = "UPDATE SP_params SET value = ? WHERE fin_object_id = ? and ATTRIBUTE_ID=3";
+
+	 public static final String delete_invoice_by_id = " delete from SP_FIN_OBJECTS where FIN_OBJECT_ID = ? and user_id= ?";
 }

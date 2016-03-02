@@ -17,8 +17,12 @@
 </head>
 <body>
 	<%@ page
-		import="com.netcracker.unc.mvc.dao.UserDAO, com.netcracker.unc.mvc.models.UserModel"%>
+		import="com.netcracker.unc.mvc.dao.UserDAO, com.netcracker.unc.mvc.models.UserModel"
+		import="com.netcracker.unc.mvc.dao.InvoiceDAO, com.netcracker.unc.mvc.models.InvoiceModel"%>
 	<%!private UserModel user = null;%>
+	<%!private InvoiceModel invoice = new InvoiceModel(); 
+	   InvoiceDAO invoicedao = new InvoiceDAO();
+	  //UserDAO userdao = new UserDAO();%>
 
 	<%
 		response.setContentType("text/html;charset=Windows-1251");
@@ -31,6 +35,8 @@
 			<%
 				if (request.getSession().getAttribute("user") != null) {
 							user = (UserModel) request.getSession().getAttribute("user");
+							invoice = (InvoiceModel)invoicedao.getInvoiceById(1, user);
+							
 						}
 			%>
 		</c:when>
@@ -60,22 +66,22 @@
 		<div class="module" id="add-sum">
 		<div class="block-title">Мгновенное попонение счёта</div>
 		<div class="block-information">
-		    <div>Текущий баланс: <label><%=user.get_account_type()%></label></div>
+		    <div>Текущий баланс: <label><%=invoicedao.getSumBalance()%></label></div>
 		    <p>Укажите вносимую сумму (кратную 50-ти)</p>
 		    <form action="incoming.jsp" method="get">
 		      <input type="number" name="add-sum-val" value="0" min="0" size="5" step="50"/>
 		      <input type="submit" value="добавить" />
 		    </form>
-            <%String addSumVal;
-            if ((request.getParameter("add-sum-val") != null) && (!request.getParameter("add-sum-val").trim().isEmpty())) {
-            	addSumVal = user.get_account_type()+(String)request.getParameter("add-sum-val");
-            	user.set_account_type(addSumVal);
-            	UserDAO userdao = new UserDAO();
-            	userdao.updateObject(user);
+            <% int addSumVal;
+              if ((request.getParameter("add-sum-val") != null) && (!request.getParameter("add-sum-val").trim().isEmpty())) {
+            	addSumVal = invoice.getBalance()+ Integer.parseInt(request.getParameter("add-sum-val"));
+                invoice.setBalance(addSumVal);
+                invoicedao.updateBalance(invoice);
+            	
             	
     				}
     		%>
-    		<p>Обновленный баланс: <lable><%=user.get_account_type()%></lable></p>
+    		<p>Обновленный баланс: <lable><%=invoicedao.getSumBalance()%></lable></p>
 		</div>
 	</div>
 </body>
