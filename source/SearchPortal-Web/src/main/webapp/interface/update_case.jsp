@@ -6,33 +6,84 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style>
+.title {
+	font-size: 12pt;
+}
+
+.result {
+	font-size: 9pt;
+}
+
+td {
+	width: 7%
+}
+
+input[type="text"] {
+	width: 100%;
+	font-size: 8pt;
+}
+
+input[type="date"] {
+	width: 100%;
+	font-size: 8pt;
+}
+
+select {
+	width: 100%;
+	font-size: 8pt;
+}
+</style>
 </head>
 <body>
 
-	<jsp:useBean id="cases" class="com.netcracker.unc.mvc.ObjectController"></jsp:useBean>
+	<jsp:useBean id="cases" class="com.netcracker.unc.mvc.ObjectController" />
+	<jsp:useBean id="activeCasesController"
+		class="com.netcracker.unc.beans.ActiveCasesController" />
 
-	<%@ page import="java.util.List, java.util.ArrayList"%>
-	<%!List<String> nameCases = new ArrayList<String>();
-	List<Integer> idCases = new ArrayList<Integer>();
-	String name = null;
-	int id;%>
+	<form id="updateCaseTable">
+		<div>
+			<input type="text" onkeypress="help()" onkeydown="backspaceHelp()"
+				id="input" style="margin-bottom: 7px; width: 20%" /><br />
 
-	<c:forEach var="casee" items="${cases.getUserActiveCases(1)}">
-		<c:set var="name" value="${casee.get_object_name()}" scope="request"></c:set>
-		<c:set var="id" value="${casee.get_fin_object_id()}" scope="request"></c:set>
-		<%
-			name = (String) request.getAttribute("name");
-			nameCases.add(name.toLowerCase());
-			id = (Integer)request.getAttribute("id");
-			idCases.add(id);
-		%>
-	</c:forEach>
-
-	<div>
-		<input type="text" name="input" onkeypress="help()" id="input" /> <br>
-		<select style="visibility: hidden;" id="select" onclick="record(this)">
-		</select>
-	</div>
+			<table border="1">
+				<thead align="center">
+					<tr>
+						<th class="title">Название</th>
+						<th class="title">Выделено денег</th>
+						<th class="title">Дата создания</th>
+						<th class="title">Дата окончания</th>
+						<th class="title">Подзадача для</th>
+						<th class="title">Приоритет</th>
+						<th class="title">Правка</th>
+					</tr>
+				</thead>
+				<tbody id="tableBody">
+					<c:forEach var="activeCase"
+						items="${activeCasesController.getActiveCases(sessionScope.user)}">
+						<c:set var="caseID" value="${activeCase.getObjectId()}"
+							scope="session"></c:set>
+						<tr>
+							<td class="result">${activeCase.getSpace()}<c:if
+									test="${activeCase.getSpace() != ''}">
+							&#8627&nbsp;
+							</c:if> ${activeCase.getCaseName()}
+							</td>
+							<td class="result">${activeCase.getSpace()}${activeCase.getCaseCost()}</td>
+							<td class="result">${activeCase.getSpace()}${activeCase.getStartDate()}</td>
+							<td class="result">${activeCase.getSpace()}${activeCase.getEndDate()}</td>
+							<td class="result">${activeCase.getSpace()}${activeCase.getParentName()}</td>
+							<td class="result">${activeCase.getSpace()}${activeCase.getPriorityStr()}</td>
+							<td align="center" valign="middle"><label
+								style="font-size: 7pt; color: blue; cursor: pointer; text-decoration: underline;"
+								onclick="changeCase(this)">изменить</label><input type="hidden"
+								value="${activeCase.getObjectId()}" /></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+	</form>
 
 </body>
 
@@ -43,44 +94,249 @@
 		var input = document.getElementById("input");
 		input.value = select;
 	}
-
 </script>
 
 <!-- this script allow to help to find input cases name which user have to update -->
 <script>
-	function help() {
-		var event = window.event; // get screen page event
-		var key = event.which;
-		var text = document.getElementById("input");
-		var select = document.getElementById("select");
-		var casesName = [];
-		var casesId = [];
-		
+	var nameCases = [];
+	var costCases = [];
+	var dateCases = [];
+	var priorityCases = [];
 
-		<%for (int i = 0; i < nameCases.size(); i++) {%>
-		casesName.push('<%=nameCases.get(i)%>');
-		casesId.push(<%=idCases.get(i)%>);
-		<%}%>
+	var allRows = document.getElementById('tableBody').getElementsByTagName(
+			'tr');
 
-		while(select.options.length > 0) {
-			select.remove(0);
-		}
-	
-		if (text.value.length >= 3) {
-			var regular = new RegExp("^" + text.value.toLowerCase()
-					+ String.fromCharCode(key) + ".*");
-			for (var i = 0; i < casesName.length; i++) {
-				if (regular.test(casesName[i])) {
-					var option = document.createElement("option");
-					option.
-					option.value = casesId[i];
-					option.text = casesName[i];
-					select.appendChild(option);
-					select.style.visibility = "visible";
-				} else {
-					select.style.visibility = "hidden";
-				}
+	// for save column values
+	for (var i = 0; i < allRows.length; i++) {
+		nameCases.push(allRows[i].getElementsByTagName('td')[0].innerHTML);
+		costCases.push(allRows[i].getElementsByTagName('td')[1].innerHTML);
+		dateCases.push(allRows[i].getElementsByTagName('td')[3].innerHTML);
+		priorityCases.push(allRows[i].getElementsByTagName('td')[5].innerHTML);
+	}
+
+	function changeCase(element) {
+
+		var row = element.parentElement.parentElement;
+		var cells = row.getElementsByTagName('td');
+		var hide = cells[6].getElementsByTagName('input')[0];
+		ref = cells[6].getElementsByTagName('label')[0];
+		if (ref.innerHTML.valueOf() == 'изменить'.valueOf()) {
+			// for 1 column
+			hide.name = 'caseId';
+			var name = cells[0].innerHTML;
+			var expect1 = /(?!&nbsp;)+[ ].*/;
+			var expect2 = /(?!&nbsp;)+[0-9.]+/;
+			var expect3 = /(?!&nbsp;)+[0-9-]+/;
+			var expect4 = /(?!&nbsp;)+[А-Яа-я]+/;
+			name = name.match(expect1);
+			cells[0].innerHTML = '';
+			var input = document.createElement('input');
+			input.setAttribute("type", "text");
+			input.setAttribute("name", "nameCase");
+			input.setAttribute("value", name);
+			cells[0].appendChild(input);
+			////
+			// for 2 column
+			name = cells[1].innerHTML;
+			name = name.match(expect2);
+			cells[1].innerHTML = '';
+			input = document.createElement('input');
+			input.setAttribute("type", "text");
+			input.setAttribute("name", "costCase");
+			input.setAttribute("value", name);
+			cells[1].appendChild(input);
+			////
+			// for 4 column
+			name = cells[3].innerHTML;
+			name = name.match(expect3);
+			cells[3].innerHTML = '';
+			input = document.createElement('input');
+			input.setAttribute("type", "date");
+			input.setAttribute("name", "dateCase");
+			//block date
+			var today = new Date();
+			var dd = today.getDate() + 1;
+			var mm = today.getMonth() + 1;
+			var yyyy = today.getFullYear();
+			if (dd < 10) {
+				dd = "0" + dd;
 			}
+			if (mm < 10) {
+				mm = "0" + mm;
+			}
+			var currentDate = yyyy + "-" + mm + "-" + dd;
+			//
+			input.setAttribute("min", currentDate);
+			input.value = name;
+			cells[3].appendChild(input);
+			////
+			// for 6 column
+			name = cells[5].innerHTML;
+			name = name.match(expect4);
+			cells[5].innerHTML = '';
+			input = document.createElement('select');
+			input.name = 'priorityCase';
+			var option = document.createElement('option');
+			option.value = name;
+			option.innerHTML = name;
+			input.appendChild(option);
+			option = document.createElement('option');
+			if (name.valueOf() == 'высокий'.valueOf()) {
+				option = document.createElement('option');
+				option.value = 'средний';
+				option.innerHTML = 'средний';
+				input.appendChild(option);
+				option = document.createElement('option');
+				option.value = 'низкий';
+				option.innerHTML = 'низкий';
+				input.appendChild(option);
+			}
+			if (name.valueOf() == 'средний'.valueOf()) {
+				option = document.createElement('option');
+				option.value = 'высокий';
+				option.innerHTML = 'высокий';
+				input.appendChild(option);
+				option = document.createElement('option');
+				option.value = 'низкий';
+				option.innerHTML = 'низкий';
+				input.appendChild(option);
+			}
+			if (name.valueOf() == 'низкий'.valueOf()) {
+				option = document.createElement('option');
+				option.value = 'высокий';
+				option.innerHTML = 'высокий';
+				input.appendChild(option);
+				option = document.createElement('option');
+				option.value = 'средний';
+				option.innerHTML = 'средний';
+				input.appendChild(option);
+			}
+			cells[5].appendChild(input);
+		}
+		// for redirect to servlet
+		if (ref.innerHTML.valueOf() == 'применить'.valueOf())
+			ref.onclick = new function() {
+				var form = document.getElementById('updateCaseTable');
+				form.setAttribute('action', 'UpdateCase');
+				form.setAttribute('method', 'get');
+				form.submit();
+			};
+		ref.innerHTML = 'применить';
+
+		// for return values if cancel change
+		for (var i = 0; i < allRows.length; i++) {
+			if (allRows[i].getElementsByTagName('td')[6]
+					.getElementsByTagName('label')[0].innerHTML.valueOf() == 'применить'
+					.valueOf()
+					&& allRows[i].getElementsByTagName('td')[6]
+							.getElementsByTagName('label')[0] != element) {
+
+				allRows[i].getElementsByTagName('td')[6]
+						.getElementsByTagName('input')[0].name = undefined;
+				var cell = allRows[i].getElementsByTagName('td')[0];
+				var input = cell.getElementsByTagName('input')[0];
+				cell.removeChild(input);
+				cell.innerHTML = nameCases[i];
+
+				cell = allRows[i].getElementsByTagName('td')[1];
+				input = cell.getElementsByTagName('input')[0];
+				cell.removeChild(input);
+				cell.innerHTML = costCases[i];
+
+				cell = allRows[i].getElementsByTagName('td')[3];
+				input = cell.getElementsByTagName('input')[0];
+				cell.removeChild(input);
+				cell.innerHTML = dateCases[i];
+
+				cell = allRows[i].getElementsByTagName('td')[5];
+				input = cell.getElementsByTagName('select')[0];
+				cell.removeChild(input);
+				cell.innerHTML = priorityCases[i];
+
+				cell = allRows[i].getElementsByTagName('td')[6];
+				var label = cell.getElementsByTagName('label')[0];
+				label.innerHTML = 'изменить';
+				label.onclick = changeCase(this);
+			}
+		}
+	}
+	////
+
+	// for refresh ative cases
+	function refreshActiveCases() {
+		for (var i = 0; i < allRows.length; i++) {
+			if (allRows[i].getElementsByTagName('td')[6]
+					.getElementsByTagName('label')[0].innerHTML.valueOf() == 'применить'
+					.valueOf()) {
+				var cell = allRows[i].getElementsByTagName('td')[0];
+				var input = cell.getElementsByTagName('input')[0];
+				cell.removeChild(input);
+				cell.innerHTML = nameCases[i];
+
+				cell = allRows[i].getElementsByTagName('td')[1];
+				input = cell.getElementsByTagName('input')[0];
+				cell.removeChild(input);
+				cell.innerHTML = costCases[i];
+
+				cell = allRows[i].getElementsByTagName('td')[3];
+				input = cell.getElementsByTagName('input')[0];
+				cell.removeChild(input);
+				cell.innerHTML = dateCases[i];
+
+				cell = allRows[i].getElementsByTagName('td')[5];
+				input = cell.getElementsByTagName('select')[0];
+				cell.removeChild(input);
+				cell.innerHTML = priorityCases[i];
+
+				cell = allRows[i].getElementsByTagName('td')[6];
+				var label = cell.getElementsByTagName('label')[0];
+				label.innerHTML = 'изменить';
+			}
+		}
+	}
+
+	//check backspace for help
+	function backspaceHelp() {
+		var key = event.keyCode;
+		if (key == 8) {
+			help();
+		}
+	}
+
+	//help to find cases by user in database
+	function help() {
+		var input = document.getElementById("input");
+		var text = input.value;
+		var tableBody = document.getElementById("tableBody");
+		var element = window.event; // get screen page event
+		var key = element.which;
+
+		var rows = [];
+
+		for (var i = 0; i < tableBody.rows.length; i++) {
+			rows.push(tableBody.rows[i].getElementsByTagName('td'));
+		}
+		if (text.length >= 3) {
+			for (var i = 0; i < rows.length; i++) {
+				var name = rows[i][0].innerHTML;
+				// check regex
+				if (key != 8)
+					var regular = new RegExp(".*" + text.toLowerCase()
+							+ String.fromCharCode(key) + ".*");
+				else
+					var regular = new RegExp(".*" + text.toLowerCase() + ".*");
+
+				if (name.match(regular)) {
+					tableBody.rows[i].style.visibility = 'visible';
+				} else
+					tableBody.rows[i].style.visibility = 'hidden';
+			}
+		}
+		if (key == 8) {
+			if (text.length - 2 < 3)
+				for (var i = 0; i < rows.length; i++) {
+					tableBody.rows[i].style.visibility = 'visible';
+				}
 		}
 	}
 </script>

@@ -12,7 +12,7 @@ import java.util.List;
 import com.netcracker.unc.mvc.models.CategoryModel;
 
 public class CalculationPriority {
-
+/*
 	public List<CategoryModelForTable> convertToTableView(List<CategoryModel> categoryModel) {
 
 		List<CategoryModelForTable> resultCategoryList;
@@ -57,4 +57,5 @@ public class CalculationPriority {
 		String statusString = "Класс анализирует и возвращает статистику" + " по расходам пользователя.";
 		return statusString;
 	}
+	*/
 }

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-
 import com.netcracker.unc.mvc.connection.ConnectionFactory;
 import com.netcracker.unc.mvc.dao.CategoryDao;
 import com.netcracker.unc.mvc.models.CategoryModel;
@@ -25,7 +24,7 @@ public class CategoryController {
 	private PreparedStatement prepare = null;
 	private ResultSet result = null;
 	private Connection connect = null;
-
+	/* errors
 	public List<CategoryModel> getAllUserCategories() {
 
 		List<CategoryModel> categoryList = new ArrayList<CategoryModel>();
@@ -101,4 +100,5 @@ public class CategoryController {
 	public CategoryController(UserModel UserFromPage) {
 		user = UserFromPage;
 	}
+	*/
 }

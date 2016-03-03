@@ -123,7 +123,7 @@ public class AttributeDAO extends ObjectDAO {
 	public List<Object> getAllObjectsDB() {
 		try {
 			connect = ConnectionFactory.getConnection();
-			prepare = connect.prepareStatement(SQLQuery.SP_FIN_OBJECT_TYPES_VIEW_ALL);
+			prepare = connect.prepareStatement(SQLQuery.SP_ATTRIBUTES_VIEW_ALL);
 			result = prepare.executeQuery();
 			List<Object> list = new ArrayList<Object>();
 

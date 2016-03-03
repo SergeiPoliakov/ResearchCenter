@@ -50,9 +50,10 @@ public class ParameterDAO extends ObjectDAO {
 	// this method can choose input parameter between fin_object_id and
 	// attribute_id (check which not empty)
 	@Override
-	public Object getObject(Object object) {
+	public List<Object> getObject(Object object) {
 		connect = ConnectionFactory.getConnection();
 		param = (ParameterModel) object;
+		List<Object> list = new ArrayList<Object>();
 
 		try {
 			// if we have not parameter with correct attribute id
@@ -66,14 +67,17 @@ public class ParameterDAO extends ObjectDAO {
 				prepare.setInt(1, param.get_attribute_id());
 			}
 			result = prepare.executeQuery();
-			result.next();
+			while (result.next()) {
 
-			// create current parameter from database
-			param.set_value(result.getString(1));
-			param.set_value_date(result.getString(2));
-			param.set_fin_object_id(result.getInt(3));
-			param.set_attribute_id(result.getInt(4));
-			return param;
+				param = new ParameterModel();
+				// create current parameter from database
+				param.set_value(result.getString(1));
+				param.set_value_date(result.getString(2));
+				param.set_fin_object_id(result.getInt(3));
+				param.set_attribute_id(result.getInt(4));
+				list.add(param);
+			}
+			return list;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
@@ -92,9 +96,15 @@ public class ParameterDAO extends ObjectDAO {
 		param = (ParameterModel) object;
 
 		try {
-			prepare = connect.prepareStatement(SQLQuery.SP_PARAMS_UPDATE_BY_OBJECT_ID);
-			prepare.setString(1, param.get_value());
-			prepare.setDate(2, param.get_value_date());
+			prepare = connect.prepareStatement(SQLQuery.SP_PARAMS_UPDATE_BY_ATTRIBUTE_ID_AND_OBJECT_ID);
+			if (param.get_value() != null)
+				prepare.setString(1, param.get_value());
+			else
+				prepare.setNull(1, java.sql.Types.VARCHAR);
+			if (param.get_value_date() != null)
+				prepare.setDate(2, param.get_value_date());
+			else
+				prepare.setNull(2, java.sql.Types.DATE);
 			prepare.setInt(3, param.get_attribute_id());
 			prepare.setInt(4, param.get_fin_object_id());
 			prepare.executeUpdate();

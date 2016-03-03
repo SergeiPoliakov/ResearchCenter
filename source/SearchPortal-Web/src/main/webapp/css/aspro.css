@@ -7,6 +7,17 @@
 
 .create-case {
 	margin-top: 50px;
+	width: 50%;
+	left: 25%;
+	right: 25%;
+	position: absolute;
+}
+
+#updateCase {
+	margin-top: 50px;
+	margin-left: 5%;
+	margin-right: 5%;
+	position: absolute;
 }
 
 #createCaseSubmit, #logOutSubmit {

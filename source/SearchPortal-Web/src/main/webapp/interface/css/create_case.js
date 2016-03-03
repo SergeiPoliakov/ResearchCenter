@@ -11,15 +11,17 @@ function regularAddSalary() {
 }
 
 // show-hide parent select on yes no toogles
-var parent = document.getElementById("parentBlock");
 var values = [];
-
+var parent = document.getElementById("parentBlock");
 for (var i = 0; i < parent.length; i++) {
-	values[i] = parent.options[i].value;
-	parent.options[i].value = 0;
+	values.push(new Number(parent.options[i].value));
 }
 
 function changeCheck(element) {
+
+	for (var i = 0; i < parent.length; i++) {
+		parent.options[i].value = 0;
+	}
 	var element = element.value;
 	var typeYes = document.getElementById("yes");
 	var typeNo = document.getElementById("no");

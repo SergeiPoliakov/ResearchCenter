@@ -26,12 +26,14 @@ public class ParameterModel {
 	}
 
 	public void set_value_date(String value_date) {
-		try {
-			oldDate = parse.parse(value_date);
-		} catch (ParseException e) {
-			e.printStackTrace();
+		if (value_date != null) {
+			try {
+				oldDate = parse.parse(value_date);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			this.value_date = new Date(oldDate.getTime());
 		}
-		this.value_date = new Date(oldDate.getTime());
 	}
 
 	public int get_fin_object_id() {

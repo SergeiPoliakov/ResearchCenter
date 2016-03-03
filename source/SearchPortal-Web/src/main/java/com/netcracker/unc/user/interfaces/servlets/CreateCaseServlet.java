@@ -56,9 +56,7 @@ public class CreateCaseServlet extends HttpServlet {
 
 		String caseNameStr = request.getParameter("name_case");
 		String caseTypeStr = request.getParameter("type_case").toLowerCase();
-		int caseParentInt = 0;
-		if (!request.getParameter("parentBlock").isEmpty())
-			caseParentInt = Integer.valueOf(request.getParameter("parentBlock"));
+		int caseParentInt = Integer.valueOf(request.getParameter("parentBlock"));
 		String casePriorityStr = request.getParameter("priority");
 		String caseDateStr = request.getParameter("date_case");
 		String caseCostStr = request.getParameter("cost_case");
@@ -102,7 +100,6 @@ public class CreateCaseServlet extends HttpServlet {
 				param.set_value_date(currentDate);
 				param.set_fin_object_id(casee.get_fin_object_id());
 				param.set_attribute_id(attribute.get_attribute_id());
-				parameterDAO.addObject(param);
 			}
 
 			if (attribute.get_attribute_name().toLowerCase().equals(endDate.toLowerCase())) {
@@ -110,7 +107,6 @@ public class CreateCaseServlet extends HttpServlet {
 				param.set_value_date(caseDateStr);
 				param.set_fin_object_id(casee.get_fin_object_id());
 				param.set_attribute_id(attribute.get_attribute_id());
-				parameterDAO.addObject(param);
 			}
 
 			if (attribute.get_attribute_name().toLowerCase().equals(cost.toLowerCase())) {
@@ -118,7 +114,6 @@ public class CreateCaseServlet extends HttpServlet {
 				param.set_value(caseCostStr);
 				param.set_fin_object_id(casee.get_fin_object_id());
 				param.set_attribute_id(attribute.get_attribute_id());
-				parameterDAO.addObject(param);
 			}
 
 			if (attribute.get_attribute_name().toLowerCase().equals(priority.toLowerCase())) {
@@ -127,8 +122,8 @@ public class CreateCaseServlet extends HttpServlet {
 				param.set_value(casePriorityStr);
 				param.set_fin_object_id(casee.get_fin_object_id());
 				param.set_attribute_id(attribute.get_attribute_id());
-				parameterDAO.addObject(param);
 			}
+			parameterDAO.addObject(param);
 		}
 		cookie = new Cookie("caseAdd", "1");
 		response.addCookie(cookie);

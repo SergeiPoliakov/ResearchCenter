@@ -61,6 +61,8 @@
 		<button id="statistic-menu-button" class="button">Статистика</button>
 		<button id="statistic-menu-button" class="button"
 			onclick="showCreateCase()">Создать</button>
+		<button id="statistic-menu-button" class="button"
+			onclick="showActiveCases()">Текущие</button>
 		<div class="overlayInCons">
 			<jsp:include page="/attitudes/IncomeConsumption"></jsp:include>
 		</div>
@@ -113,6 +115,10 @@
 				}
 			%>
 		</div>
+	</div>
+
+	<div id="updateCase" style="visibility: hidden;">
+		<jsp:include page="interface/update_case.jsp" />
 	</div>
 
 	<div id="animationAddCase" style="visibility: hidden"></div>

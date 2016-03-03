@@ -59,16 +59,33 @@ var animationAddCase = setInterval(function() {
 // visible and hidden create case border
 function showCreateCase() {
 	var parent = document.getElementById("parentBlock");
+	var no = document.getElementById('no');
 	var typeYes = document.getElementById("yes");
 	var typeNo = document.getElementById("no");
 	var createCase = document.getElementById("create-case");
 
-	if (createCase.style.visibility.valueOf() == 'hidden'.valueOf())
+	if (createCase.style.visibility.valueOf() == 'hidden'.valueOf()) {
 		createCase.style.visibility = 'visible';
+		changeCheck(no);
+	}
+
 	else {
 		createCase.style.visibility = 'hidden';
 		parent.style.visibility = "hidden";
 		typeYes.checked = undefined;
 		typeNo.checked = "checked";
 	}
+}
+
+// hide-show update cases
+function showActiveCases() {
+	var activeCases = document.getElementById('updateCase');
+	if (activeCases.style.visibility.valueOf() == 'hidden'.valueOf()) {
+		activeCases.style.visibility = 'visible';
+	}
+	else {
+		activeCases.style.visibility = 'hidden';
+		refreshActiveCases();
+	}
+
 }

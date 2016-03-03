@@ -46,7 +46,7 @@ public class SQLQuery {
 	public static final String SP_PARAMS_GET_BY_ATTRIBUTE_ID = "SELECT * FROM SP_params WHERE attribute_id = ?";
 	public static final String SP_PARAMS_DELETE_BY_OBJECT_ID = "DELETE FROM SP_params WHERE fin_object_id = ?";
 	public static final String SP_PARAMS_DELETE_BY_ATTRIBUTE_ID = "DELETE FROM SP_params WHERE attribute_id = ?";
-	public static final String SP_PARAMS_UPDATE_BY_OBJECT_ID = "UPDATE SP_params SET value = ?, value_date = ?, attribute_id = ? WHERE fin_object_id = ?";
+	public static final String SP_PARAMS_UPDATE_BY_ATTRIBUTE_ID_AND_OBJECT_ID = "UPDATE SP_params SET value = ?, value_date = ? WHERE attribute_id = ? AND fin_object_id = ?";
 	public static final String SP_PARAMS_VIEW_ALL = "SELECT * FROM SP_params";
 
 	//// for transactions

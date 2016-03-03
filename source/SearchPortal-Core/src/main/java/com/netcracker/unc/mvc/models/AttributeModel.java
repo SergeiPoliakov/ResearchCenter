@@ -11,7 +11,7 @@ public class AttributeModel {
 	}
 
 	public void set_attribute_name(String _attribute_name) {
-		this._attribute_name = _attribute_name;
+		this._attribute_name = _attribute_name.toLowerCase();
 	}
 
 	public int get_fin_object_type_id() {
