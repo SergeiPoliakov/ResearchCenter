@@ -42,6 +42,23 @@ if (matches) {
 	document.cookie = 'caseAdd' + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
 
+// use letters limitation as only numbers input
+function validate(input) {
+	var input1 = input;
+	var element = window.event; // get screen page event
+	var key = element.which;
+	key = String.fromCharCode(key);
+	var regex = /[0-9]/; // regular
+	if (!regex.test(key) || input1.value.length > 9) {
+		if (element.preventDefault) { // cancel change by event screen
+			element.preventDefault();
+		} else {
+			element.returnValue = false; // //cancel change by event screen
+			// for ie8
+		}
+	}
+}
+
 // add animation for check-salary module
 var helloCase = document.getElementById("helloCase");
 var addSalaryPlace = -250;
@@ -82,10 +99,12 @@ function showActiveCases() {
 	var activeCases = document.getElementById('updateCase');
 	if (activeCases.style.visibility.valueOf() == 'hidden'.valueOf()) {
 		activeCases.style.visibility = 'visible';
-	}
-	else {
+	} else {
 		activeCases.style.visibility = 'hidden';
 		refreshActiveCases();
+		var helpInput = document.getElementById('inputUpdateCase');
+		helpInput.value = 'Быстрый поиск';
+		helpInput.style.color = 'grey';
 	}
 
 }

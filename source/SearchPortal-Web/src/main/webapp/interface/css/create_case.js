@@ -67,23 +67,6 @@ if (mm < 10) {
 var currentDate = yyyy + "-" + mm + "-" + dd;
 document.getElementById("date_case").setAttribute("min", currentDate);
 
-// use letters limitation as only numbers input
-function validate(input) {
-	var input1 = input;
-	var element = window.event; // get screen page event
-	var key = element.which;
-	key = String.fromCharCode(key);
-	var regex = /[0-9]/; // regular
-	if (!regex.test(key) || input1.value.length > 9) {
-		if (element.preventDefault) { // cancel change by event screen
-			element.preventDefault();
-		} else {
-			element.returnValue = false; // //cancel change by event screen
-			// for ie8
-		}
-	}
-}
-
 // for check input case for regular
 function checkRegExp() {
 
