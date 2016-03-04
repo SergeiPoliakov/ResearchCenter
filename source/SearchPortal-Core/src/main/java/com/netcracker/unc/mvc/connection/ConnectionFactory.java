@@ -19,15 +19,30 @@ public class ConnectionFactory {
 	// use application.properties for connect to database
 	private Properties dbPr = new Properties();
 
+	private String jdbcDriverPath;
+	private String connectPath;
+	private String user;
+	private String password;
+
 	private static ConnectionFactory object = new ConnectionFactory();
 
 	private ConnectionFactory() {
+
+		// load connection properties
+		InputStream loadPr = this.getClass().getResourceAsStream("connection.properties");
 		try {
-			// load connection properties
-			InputStream loadPr = this.getClass().getResourceAsStream("connection.properties");
-			dbPr.load(loadPr);
-			Class.forName(dbPr.getProperty("db.driver"));
-		} catch (ClassNotFoundException | IOException e) {
+			if (loadPr != null) {
+				dbPr.load(loadPr);
+				jdbcDriverPath = dbPr.getProperty("db.driver");
+				connectPath = dbPr.getProperty("db.type") + dbPr.getProperty("db.url") + ":"
+						+ dbPr.getProperty("db.sid");
+				user = dbPr.getProperty("db.user");
+				password = dbPr.getProperty("db.password");
+			} else {
+				alternativeConectionData();
+			}
+
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
@@ -37,11 +52,9 @@ public class ConnectionFactory {
 		Connection connect = null;
 		try {
 			Locale.setDefault(Locale.ENGLISH);
-			String connectPath = dbPr.getProperty("db.type") + dbPr.getProperty("db.url") + ":"
-					+ dbPr.getProperty("db.sid");
-			connect = DriverManager.getConnection(connectPath, dbPr.getProperty("db.user"),
-					dbPr.getProperty("db.password"));
-		} catch (SQLException e) {
+			Class.forName(jdbcDriverPath);
+			connect = DriverManager.getConnection(connectPath, user, password);
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		return connect;
@@ -51,22 +64,11 @@ public class ConnectionFactory {
 		return object.createConnection();
 	}
 
-	/*
-	 * private static ConnectionFactory object = new ConnectionFactory();
-	 * 
-	 * private ConnectionFactory() { try { Locale.setDefault(Locale.ENGLISH);
-	 * Class.forName("oracle.jdbc.driver.OracleDriver"); } catch
-	 * (ClassNotFoundException e) { e.printStackTrace(); } }
-	 * 
-	 * // get singleton of connection private Connection createConnection() {
-	 * Connection connect = null; try { Locale.setDefault(Locale.ENGLISH);
-	 * //String connectPath = "jdbc:oracle:thin:@127.0.0.1:1521:XE"; connect =
-	 * DriverManager.getConnection( "jdbc:oracle:thin:@127.0.0.1:1521:XE",
-	 * "sys as sysdba", "1234"); } catch (SQLException e) { e.printStackTrace();
-	 * } return connect; }
-	 * 
-	 * public static Connection getConnection() { return
-	 * object.createConnection(); }
-	 */
+	private void alternativeConectionData() {
+		jdbcDriverPath = "oracle.jdbc.driver.OracleDriver";
+		connectPath = "jdbc:oracle:thin:@127.0.0.1:1521:XE";
+		user = "sys as sysdba";
+		password = "1234";
+	}
 
 }
