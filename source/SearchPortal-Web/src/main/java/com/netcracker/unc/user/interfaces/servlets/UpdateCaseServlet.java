@@ -80,7 +80,9 @@ public class UpdateCaseServlet extends HttpServlet {
 		// change case
 		casee.set_object_name(nameCase.trim());
 		caseDAO.updateObject(casee);
-
+		
+		cookie = new Cookie("caseUpdate", "1");
+		response.addCookie(cookie);
 		response.sendRedirect("modules.jsp");
 
 	}

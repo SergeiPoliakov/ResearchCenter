@@ -86,6 +86,9 @@ function showActiveCases() {
 	else {
 		activeCases.style.visibility = 'hidden';
 		refreshActiveCases();
+		var helpInput = document.getElementById('inputUpdateCase');
+		helpInput.value = 'Быстрый поиск';
+		helpInput.style.color = 'grey';
 	}
 
 }
