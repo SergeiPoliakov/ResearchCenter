@@ -43,7 +43,7 @@
 					3. categoryModuleForTable закидываю в StringHtml
 					4. вывожу на экран stringHtml
 				
-				*/
+				
 				CalculationPriority calculationPriority = new CalculationPriority();
 				FillHTMLTable fillHTMLTable = new FillHTMLTable();
 				List userCategoryList = new ArrayList<CategoryModel>();
@@ -63,10 +63,10 @@
 
 							if (userCategoryListForTable != null && !userCategoryListForTable.isEmpty()) {
 								out.print(userCategoryListForTable.size());
-								for (Object o : userCategoryListForTable) {
+								for (Object o : userCategoryListForTable) {*/
 			%>
-			<%=o.toString()%>
-			<%
+			 <%/*=o.toString()*/%>
+			<%/*
 				}
 							} else {
 								out.print("массив userCategoryListForTable пуст");
@@ -83,9 +83,9 @@
 
 					if (userCategoryListForTable != null && !userCategoryListForTable.isEmpty()) {
 						htmlUserCategoriesTable = fillHTMLTable.toHTMLString(userCategoryListForTable);
-			%>
-			<%=htmlUserCategoriesTable%>
-			<%
+			*/%>
+			<%/*=htmlUserCategoriesTable*/%>
+			<%/*
 				}
 
 				} catch (Exception e) {
@@ -93,13 +93,12 @@
 				}
 				
 				UserModel userModel = (UserModel) request.getSession().getAttribute("user");
-			%>
+				request.getSession().getAttribute("user");
+				userModel.get_user_id();
+			*/%>
 			<%
 				/*=cd.testdb()*/
 			%>
-			<%=request.getSession().getAttribute("user")%>
-			<%=userModel.get_login()%>
-			<%=userModel.get_user_id()%>
 		</div>
 	</div>
 </body>

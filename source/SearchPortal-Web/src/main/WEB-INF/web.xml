@@ -4,9 +4,17 @@
     <servlet-name>income-consumption</servlet-name>
     <servlet-class>com.netcracker.unc.user.custom.servlets.IncomeConsumptionServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>controller-priorities</servlet-name>
+    <servlet-class>com.netcracker.unc.modules.servlets.controllerPriorities</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>income-consumption</servlet-name>
     <url-pattern>/attitudes/IncomeConsumption</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>controller-priorities</servlet-name>
+    <url-pattern>/controllerPriorities</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
