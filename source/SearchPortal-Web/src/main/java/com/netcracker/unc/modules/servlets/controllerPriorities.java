@@ -48,16 +48,16 @@ public class controllerPriorities extends HttpServlet {
 		 * calculationpriority, получаем resultList 6.resultList в
 		 * FillhtmlTable, получаем htmlResultString 7.Выводим ее на jsp
 		 */
+		String userId = (String) request.getParameter("userId");
 		String resultHTMLString;
-		try{
-		List<CategoryModel> categoryList = new ArrayList<CategoryModel>();
-		double sumInvoice = 0;
-		double sumIncome = 0;
-		List<ModelForTable> resultList = new ArrayList<ModelForTable>(
-				CalculationPriority.convertToTableView(categoryList, sumInvoice, sumIncome));
-		resultHTMLString = FillHTMLTable.toHTMLString(resultList);
-		}
-		catch(Exception e){
+		try {
+			List<CategoryModel> categoryList = new ArrayList<CategoryModel>();
+			double sumInvoice = 5000;// заглушка
+			double sumIncome = 5000;// заглушка
+			List<ModelForTable> resultList = new ArrayList<ModelForTable>(
+					CalculationPriority.convertToTableView(categoryList, sumInvoice, sumIncome));
+			resultHTMLString = FillHTMLTable.toHTMLString(resultList);
+		} catch (Exception e) {
 			resultHTMLString = "error in servlet";
 		}
 		request.setAttribute("resultHTMLString", resultHTMLString);

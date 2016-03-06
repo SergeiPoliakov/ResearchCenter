@@ -21,37 +21,44 @@ public class CategoryDao extends ObjectDAO {
 	private ResultSet result = null;
 	private Connection connect = null;
 
-	public String testdb() {
+	public List<CategoryModel> getAllCategoriesUser(int userId) {
+
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+
+		List<CategoryModel> listOfCategories = new ArrayList<CategoryModel>();
+
 		try {
-			connect = ConnectionFactory.getConnection();
-			if (connect == null) {
-				return "нет подключения";
+			connection = ConnectionFactory.getConnection();
+			preparedStatement = connection.prepareStatement(SQLQuery.SP_GET_USER_CATEGORIES);
+			preparedStatement.setInt(1, userId);
+			resultSet = preparedStatement.executeQuery();
+			while(resultSet.next()){
+				
 			}
-			prepare = connect.prepareStatement(SQLQuery.SP_GET_FULL_CATEGORIES);
-			result = prepare.executeQuery();
-			result.next();
-			String t = result.getString(2);
-			return t;
-		} catch (SQLException ex) {
-			Logger.getLogger(CategoryDao.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (SQLException e) {
+			e.printStackTrace();
 		} finally {
+			if (listOfCategories.isEmpty()) {
+				listOfCategories = Collections.emptyList();
+			}
+
 			try {
-				if (result != null && !result.isClosed())
-					result.close();
-				if (prepare != null && !prepare.isClosed())
-					prepare.close();
-				if (connect != null && !connect.isClosed())
-					connect.close();
+				if (connection != null && !connection.isClosed()) {
+					connection.close();
+				}
+				if (preparedStatement != null && !preparedStatement.isClosed()) {
+					preparedStatement.close();
+				}
+				if (resultSet != null && !resultSet.isClosed()) {
+					resultSet.close();
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		return "hi";
-	}
-
-	@Override
-	public String toString() {
-		return "Реализация обращения к базе за объектами <Категория>";
+		return listOfCategories;
 	}
 
 	@Override
@@ -63,7 +70,7 @@ public class CategoryDao extends ObjectDAO {
 			List<Object> list = new ArrayList<Object>();
 			while (result.next()) {
 				category = new CategoryModel();
-				//category.setObjectId(result.getString(1));
+				// category.setObjectId(result.getString(1));
 				// category.setObjectName(result.getString(3));
 				// category.setCoeficient(Float.parseFloat(result.getString(4)));
 				// category.setMinPercent(Integer.parseInt(result.getString(5)));
@@ -90,7 +97,6 @@ public class CategoryDao extends ObjectDAO {
 		List<Object> list = Collections.emptyList();
 		return list;
 	}
-	
 
 	@Override
 	public Object getObject(Object object) {

@@ -12,7 +12,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Sad page</title><?xml version="1.0" encoding="UTF-8" ?>
+<title>Sad page</title>
+<?xml version="1.0" encoding="UTF-8" ?>
 <link href="css/main.css" rel="stylesheet" type="text/css" />
 <script src="javascripts/jquery-2.2.0.min.js"></script>
 <script src="javascripts/mainModules.js"></script>
@@ -27,13 +28,13 @@
 		<div class="block-title">Приоритеты</div>
 		<div class="block-information">
 			<form action="controllerPriorities" method="get">
-				<input type="hidden" name="user_id" value="1005" /> <input
+				<input type="hidden" name="userId" value="1" /> <input
 					type="submit" value="UP" />
 			</form>
 
 
 
-			<%= request.getAttribute("resultHTMLString")%>
+			<%=request.getAttribute("resultHTMLString")%>
 
 
 			<%

@@ -13,7 +13,8 @@ import com.netcracker.unc.mvc.models.CategoryModel;
 
 public class CalculationPriority {
 
-	public static List<ModelForTable> convertToTableView(List<CategoryModel> categoryModel,double sumInvoice, double sumIncome) {
+	public static List<ModelForTable> convertToTableView(List<CategoryModel> categoryModel, double sumInvoice,
+			double sumIncome) {
 
 		List<ModelForTable> resultCategoryList;
 		ModelForTable modelForTable = null;
@@ -35,14 +36,6 @@ public class CalculationPriority {
 		return 1;
 	}
 
-	private int getSumIncome(List incomeModel) {// <IncomeModel>
-		return 0;
-	}
-
-	private int getSumAccount(List AccountModel) {// <AccountModel>
-		return 0;
-	}
-
 	private int getAVGPriorValue() {
 
 		return 0;
@@ -50,11 +43,5 @@ public class CalculationPriority {
 
 	private int calcPriorValueColumn(CategoryModel catmod) {
 		return 0;
-	}
-
-	@Override
-	public String toString() {
-		String statusString = "Класс анализирует и возвращает статистику" + " по расходам пользователя.";
-		return statusString;
 	}
 }
