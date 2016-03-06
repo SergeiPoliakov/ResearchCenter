@@ -9,17 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 import com.netcracker.unc.mvc.models.CategoryModel;
 
-/**
- *
- * @author Dmitry
- */
+
 public class FillHTMLTable {
 
-	public String toHTMLString(List<CategoryModelForTable> list) {
+	public static String toHTMLString(List<ModelForTable> resultList) {
 		StringBuilder htmlString = new StringBuilder("<div class = \"priority-table\"><table>");
 
 		try {
-			for (CategoryModelForTable modelForTable : list) {
+			for (ModelForTable modelForTable : resultList) {
 
 				htmlString.append("<tr>");
 				htmlString.append(addRow(modelForTable));
@@ -33,10 +30,10 @@ public class FillHTMLTable {
 		return htmlString.toString();
 	}
 
-	private String addRow(CategoryModelForTable listEl) {
+	private static String addRow(ModelForTable modelForTable) {
 
 		// пока будет элементарно
-		String label = "<td>" + listEl.getObjectName() + "</td>" + "<td>" + listEl.getCalculatedValue().toString()
+		String label = "<td>" + modelForTable.getName() + "</td>" + "<td>" + modelForTable.getValue()
 				+ "</td>";
 
 		return label;

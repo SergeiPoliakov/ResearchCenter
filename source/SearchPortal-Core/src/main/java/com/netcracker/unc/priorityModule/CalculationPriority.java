@@ -13,17 +13,17 @@ import com.netcracker.unc.mvc.models.CategoryModel;
 
 public class CalculationPriority {
 
-	public List<CategoryModelForTable> convertToTableView(List<CategoryModel> categoryModel) {
+	public static List<ModelForTable> convertToTableView(List<CategoryModel> categoryModel,double sumInvoice, double sumIncome) {
 
-		List<CategoryModelForTable> resultCategoryList;
-		CategoryModelForTable categoryModelForTable = null;
+		List<ModelForTable> resultCategoryList;
+		ModelForTable modelForTable = null;
 		if (categoryModel != null && !categoryModel.isEmpty()) {
-			resultCategoryList = new ArrayList<CategoryModelForTable>();
+			resultCategoryList = new ArrayList<ModelForTable>();
 			for (CategoryModel catmod : categoryModel) {
-				categoryModelForTable = new CategoryModelForTable();
-				categoryModelForTable.setObjectName(catmod.getObjectName());
-				categoryModelForTable.setCalculatedValue(catmod.getSumCategory());
-				resultCategoryList.add(categoryModelForTable);
+				modelForTable = new ModelForTable();
+				modelForTable.setName(catmod.getObjectName());
+				modelForTable.setValue(catmod.getSumCategory().doubleValue());
+				resultCategoryList.add(modelForTable);
 			}
 		} else {
 			resultCategoryList = Collections.emptyList();
