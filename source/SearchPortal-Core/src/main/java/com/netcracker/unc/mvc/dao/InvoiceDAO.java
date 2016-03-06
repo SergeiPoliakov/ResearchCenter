@@ -9,37 +9,30 @@ import java.util.List;
 
 import com.netcracker.unc.mvc.*;
 import com.netcracker.unc.mvc.connection.ConnectionFactory;
-import com.netcracker.unc.mvc.models.CategoryModel;
 import com.netcracker.unc.mvc.models.UserModel;
 import com.netcracker.unc.mvc.models.InvoiceModel;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 public class InvoiceDAO {
 	
-	private PreparedStatement prepare = null;
-	private InvoiceModel invoice = null;
-	private UserModel user;
-	private ResultSet result = null;
-	private Connection connect = null;
+	UserModel user;
 	
 	
-	public List<Object> getAllInvoice() {
+	public List<InvoiceModel> getAllInvoice() {
+		
+		InvoiceModel invoice;
+		Connection connect = ConnectionFactory.getConnection();
+		List<InvoiceModel> listGetAllInvoice = new ArrayList<InvoiceModel>();
 		try {
-			connect = ConnectionFactory.getConnection();
-			prepare = connect.prepareStatement(SQLQuery.get_all_invoices_for_user_by_user_id);
+			PreparedStatement prepare = connect.prepareStatement(SQLQuery.get_all_invoices_for_user_by_user_id);
 			prepare.setInt(1, user.get_user_id());
-			result = prepare.executeQuery();
-			List<Object> list = new ArrayList<Object>();
+			ResultSet result = prepare.executeQuery();
 
 			while (result.next()) {
 				invoice = new InvoiceModel();
-				invoice.setInvoice_id(result.getInt(1));
+				invoice.setInvoiceId(result.getInt(1));
 				invoice.setInvoiceName(result.getString(2));
-				list.add(invoice);
+				listGetAllInvoice.add(invoice);
 			}
-			return list;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -49,19 +42,20 @@ public class InvoiceDAO {
 				e.printStackTrace();
 			}
 		}
-		return null;
+		return listGetAllInvoice;
 	}
 
 	public void addInvoice(Object object) {
-		connect = ConnectionFactory.getConnection();
-		invoice = (InvoiceModel) object;
+		PreparedStatement prepare;
+		Connection connect = ConnectionFactory.getConnection();
+		InvoiceModel invoice = (InvoiceModel) object;
 
 		try {
 			prepare = connect.prepareStatement(SQLQuery.set_new_invoice_for_user);
 			prepare.setInt(4,user.get_user_id());
-			prepare.setInt(1, invoice.getInvoice_id());
+			prepare.setInt(1, invoice.getInvoiceId());
 			prepare.setString(2, invoice.getInvoiceName());
-			prepare.setInt(3, invoice.getObject_type_id());
+			prepare.setInt(3, invoice.getObjectTypeId());
 			prepare.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -76,9 +70,11 @@ public class InvoiceDAO {
 	}
 
 	public Object getInvoiceById(int invoiceId, UserModel object) {
-		connect = ConnectionFactory.getConnection();
-		invoice = new InvoiceModel();
-		invoice.setInvoice_id(invoiceId);
+		PreparedStatement prepare;
+		ResultSet result;
+		Connection connect = ConnectionFactory.getConnection();
+		InvoiceModel invoice = new InvoiceModel();
+		invoice.setInvoiceId(invoiceId);
 		user = object;
 		
 		
@@ -118,8 +114,9 @@ public class InvoiceDAO {
 	}
 
 	public void updateInvoice(Object object) {
-		connect = ConnectionFactory.getConnection();
-		invoice = (InvoiceModel) object;
+		PreparedStatement prepare;
+		Connection connect = ConnectionFactory.getConnection();
+		InvoiceModel invoice = (InvoiceModel) object;
 
 		try {
 			prepare = connect.prepareStatement(SQLQuery.update_invoise_by_id);
@@ -139,12 +136,13 @@ public class InvoiceDAO {
 		
 
 	public void deleteInvoice(Object object) {
-		connect = ConnectionFactory.getConnection();
-		invoice = (InvoiceModel) object;
+		PreparedStatement prepare;
+		Connection connect = ConnectionFactory.getConnection();
+		InvoiceModel invoice = (InvoiceModel) object;
 
 		try {
 			prepare = connect.prepareStatement(SQLQuery.delete_invoice_by_id);
-			prepare.setInt(1, invoice.getInvoice_id());
+			prepare.setInt(1, invoice.getInvoiceId());
 			prepare.setInt(2, user.get_user_id());
 			prepare.executeUpdate();
 		} catch (SQLException e) {
@@ -159,7 +157,9 @@ public class InvoiceDAO {
 		}
 	
 	public int getSumBalance() {
-		connect = ConnectionFactory.getConnection();
+		PreparedStatement prepare;
+		ResultSet result;
+		Connection connect = ConnectionFactory.getConnection();
 
 		try {
 			prepare = connect.prepareStatement(SQLQuery.get_sum_all_balances_for_users_by_user_id);
@@ -182,13 +182,14 @@ public class InvoiceDAO {
 	}
 	
 	public void updateBalance(Object object) {
-		connect = ConnectionFactory.getConnection();
-		invoice = (InvoiceModel) object;
+		PreparedStatement prepare;
+		Connection connect = ConnectionFactory.getConnection();
+		InvoiceModel invoice = (InvoiceModel) object;
 
 		try {
 			prepare = connect.prepareStatement(SQLQuery.update_balance_in_invoice);
 			prepare.setInt(1, invoice.getBalance());
-			prepare.setInt(2,invoice.getInvoice_id());
+			prepare.setInt(2,invoice.getInvoiceId());
 			prepare.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
