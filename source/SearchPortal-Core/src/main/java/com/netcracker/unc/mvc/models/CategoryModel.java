@@ -9,15 +9,13 @@ import java.math.BigDecimal;
 import java.sql.Date;
 
 public class CategoryModel {
-
-	public final String Type = "Категория";
-	private Integer objectId;
-	private String objectName;
-	private BigDecimal minPercent;
-	private BigDecimal maxPercent;
-	private Date finalDate;
-	private BigDecimal coeficient;
-	private BigDecimal sumCategory;
+	private Integer objectId = 0;
+	private String objectName = null;
+	private BigDecimal minPercent = null;
+	private BigDecimal maxPercent = null;
+	private Date finalDate = null;
+	private BigDecimal coeficient = null;
+	private BigDecimal sumCategory = null;
 
 	public Integer getObjectId() {
 		return objectId;

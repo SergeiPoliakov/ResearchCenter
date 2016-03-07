@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.netcracker.unc.mvc.dao.CategoryDao;
 import com.netcracker.unc.mvc.models.CategoryModel;
 import com.netcracker.unc.priorityModule.CalculationPriority;
 import com.netcracker.unc.priorityModule.FillHTMLTable;
@@ -38,9 +39,6 @@ public class controllerPriorities extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
-
-		// String select = (String) request.getParameter("select"); получение id
-		// от jsp страницы
 		/*
 		 * 1.Получаем id 2.Передаем его в categoryDao, получаем categoryList
 		 * 3.Передаем id, получаем сумму доходов 4.Передаем id, получаем сумму
@@ -48,17 +46,18 @@ public class controllerPriorities extends HttpServlet {
 		 * calculationpriority, получаем resultList 6.resultList в
 		 * FillhtmlTable, получаем htmlResultString 7.Выводим ее на jsp
 		 */
-		String userId = (String) request.getParameter("userId");
+		int userId = Integer.parseInt(request.getParameter("userId"));
 		String resultHTMLString;
 		try {
-			List<CategoryModel> categoryList = new ArrayList<CategoryModel>();
+			CategoryDao categoryDao = new CategoryDao();
+			List<CategoryModel> categoryList = new ArrayList<CategoryModel>(categoryDao.getAllCategoriesUser(userId));
 			double sumInvoice = 5000;// заглушка
 			double sumIncome = 5000;// заглушка
 			List<ModelForTable> resultList = new ArrayList<ModelForTable>(
 					CalculationPriority.convertToTableView(categoryList, sumInvoice, sumIncome));
 			resultHTMLString = FillHTMLTable.toHTMLString(resultList);
 		} catch (Exception e) {
-			resultHTMLString = "error in servlet";
+			resultHTMLString = "error in servlet.<br/>" + e.getMessage();
 		}
 		request.setAttribute("resultHTMLString", resultHTMLString);
 		RequestDispatcher disp = request.getRequestDispatcher("/sadpage.jsp");

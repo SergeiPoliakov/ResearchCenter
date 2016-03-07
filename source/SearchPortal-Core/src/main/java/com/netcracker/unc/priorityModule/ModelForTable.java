@@ -4,7 +4,8 @@ public class ModelForTable {
 
 	private String name;
 	private double value;
-	private String parentName;
+	private String parentName;// скорее всего не нужно, будет сортированная
+								// коллекция
 
 	public String getName() {
 		return name;
