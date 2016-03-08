@@ -11,10 +11,9 @@
 </head>
 <body>
 
-	<%@ page
-		import="com.netcracker.unc.mvc.dao.UserDAO, com.netcracker.unc.mvc.models.UserModel"%>
-	<%!private UserModel user = new UserModel();
-	private UserDAO userDAO = new UserDAO(); //for save user in session%>
+	<jsp:useBean id="userController"
+		class="com.netcracker.unc.newmvc.dao.UserDAO" />
+	<jsp:useBean id="user" class="com.netcracker.unc.newmvc.dao.UserModel" />
 
 	<!-- for change authorization and registration -->
 	<c:set var="check" value="false" />
@@ -29,15 +28,10 @@
 					<c:when test="${not empty sessionScope.user}">
 						<!-- set attribute for other jsp pages -->
 						<c:redirect url="modules.jsp"></c:redirect>
-						<c:set var="user" value="${sessionScope.user}" scope="session" />
 					</c:when>
 					<c:otherwise>
-						<c:set var="id" value="${userCookie.value}" scope="request" />
-						<%
-							user.set_user_id(Integer.valueOf((String) request.getAttribute("id")));
-												user = (UserModel) userDAO.getObject(user);
-												request.getSession().setAttribute("user", user);
-						%>
+						<c:set var="checkCookie" value="ok" scope="request" />
+						<jsp:include page="/authorization" />
 						<c:redirect url="modules.jsp"></c:redirect>
 					</c:otherwise>
 				</c:choose>
@@ -74,7 +68,7 @@
 				<c:otherwise>
 					<div class="authInclude" id="authInclude"
 						style="visibility: hidden">
-						<jsp:include page="/authorization/authorization_user.jsp"/>
+						<jsp:include page="/authorization/authorization_user.jsp" />
 					</div>
 					<div class="registrInclude" id="registrInclude"
 						style="visibility: visible">

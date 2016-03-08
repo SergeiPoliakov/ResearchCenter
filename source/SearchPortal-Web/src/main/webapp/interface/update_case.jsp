@@ -37,9 +37,8 @@ select {
 </head>
 <body>
 
-	<jsp:useBean id="cases" class="com.netcracker.unc.mvc.ObjectController" />
 	<jsp:useBean id="activeCasesController"
-		class="com.netcracker.unc.beans.ActiveCasesController" />
+		class="com.netcracker.unc.newmvc.dao.ActiveCasesDAO" />
 
 	<input type="text" onkeypress="help()" onkeydown="backspaceHelp()"
 		id="inputUpdateCase" style="margin-bottom: 7px; width: 20%"
@@ -62,7 +61,7 @@ select {
 				</thead>
 				<tbody id="tableBody">
 					<c:forEach var="activeCase"
-						items="${activeCasesController.getActiveCases(sessionScope.user)}">
+						items="${activeCasesController.getActiveCases(sessionScope.user.getUserId())}">
 						<c:set var="caseID" value="${activeCase.getObjectId()}"
 							scope="session"></c:set>
 						<tr>

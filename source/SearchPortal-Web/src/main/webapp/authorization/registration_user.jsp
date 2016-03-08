@@ -11,15 +11,17 @@
 	font-size: 8pt;
 	color: red;
 }
-
 </style>
 </head>
 <body>
-	<form action="RegistrationUser" method="get">
-		<table rules="groups" align="center" border="2px" cellspacing="3" cellpadding="3" width="50%">
+	<form action="authorization" method="post">
+		<input type="hidden" value="userRegistration" name="authorization" />
+		<table rules="groups" align="center" border="2px" cellspacing="3"
+			cellpadding="3" width="50%">
 			<thead>
 				<tr>
-					<th align="center" colspan="3"><label class="title">Регистрация нового пользователя:</label></th>
+					<th align="center" colspan="3"><label class="title">Регистрация
+							нового пользователя:</label></th>
 				</tr>
 			</thead>
 			<tbody>

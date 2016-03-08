@@ -16,9 +16,25 @@
 <title>Добро пожаловать на сайт приоритетов</title>
 </head>
 <body>
-	<%@ page
-		import="com.netcracker.unc.mvc.dao.UserDAO, com.netcracker.unc.mvc.models.UserModel"%>
-	<%!private UserModel user = null;%>
+	<jsp:useBean id="userDAO" class="com.netcracker.unc.newmvc.dao.UserDAO" />
+	<jsp:useBean id="user" class="com.netcracker.unc.newmvc.dao.UserModel" />
+	<c:set var="checkCookie" value="error"></c:set>
+	<c:forEach var="userCookie" items="${pageContext.request.cookies}">
+		<c:choose>
+			<c:when test="${userCookie.name == 'userID'}">
+				<c:set var="checkCookie" value="ok"></c:set>
+				<!-- check user session -->
+				<c:if test="${empty sessionScope.user}">
+					<c:set var="checkCookie" value="ok" scope="request" />
+					<jsp:include page="/authorization" />
+				</c:if>
+			</c:when>
+		</c:choose>
+	</c:forEach>
+	<c:if test="${checkCookie == 'error'}">
+		<c:redirect url="index.jsp" />
+	</c:if>
+	<jsp:include page="/custom"></jsp:include>
 
 	<%
 		response.setContentType("text/html;charset=Windows-1251");
@@ -26,30 +42,20 @@
 		response.setCharacterEncoding("UTF-8");
 	%>
 
-	<c:choose>
-		<c:when test="${not empty sessionScope.user }">
-			<%
-				if (request.getSession().getAttribute("user") != null) {
-							user = (UserModel) request.getSession().getAttribute("user");
-						}
-			%>
-		</c:when>
-		<c:otherwise>
-			<c:redirect url="index.jsp" />
-		</c:otherwise>
-	</c:choose>
 	<div class="header">
 		<div id="logo">214*59</div>
 
 		<div class="welcome" align="right" style="background-color: #92d36e;"
 			id="welcomeUser">
 			Добро пожаловать <label
-				style="color: red; font-size: 16pt; background-color: #92d36e; margin-right: 10px"><%=user.get_login()%></label>
+				style="color: red; font-size: 16pt; background-color: #92d36e; margin-right: 10px"><c:out
+					value="${sessionScope.user.getLogin()}" /></label>
 			<form action="LogoutUser">
-				<input type="submit" value="Выход" id="logOutSubmit" />
+				<input type="hidden" value="logOut" name="authorization" /> <input
+					type="submit" value="Выход" id="logOutSubmit" />
 			</form>
-
 		</div>
+
 		<button id="cost-menu-button" class="button">Расходы</button>
 		<!--
             
@@ -64,20 +70,11 @@
 		<button id="statistic-menu-button" class="button"
 			onclick="showActiveCases()">Текущие</button>
 		<div class="overlayInCons">
-			<jsp:include page="/attitudes/IncomeConsumption"></jsp:include>
+			<jsp:include page="/attitudes/income_consumption.jsp"></jsp:include>
 		</div>
 	</div>
 
-
-
-	<%@ page import="com.netcracker.unc.beans.CheckSalary, javax.ejb.EJB"%>
-	<%!@EJB
-	CheckSalary checkSalary = new CheckSalary();%>
-	<%
-		checkSalary.checkSalary((UserModel) request.getSession().getAttribute("user"));
-	%>
-	<c:set var="checkSalary" value="<%=checkSalary.getSalary()%>"></c:set>
-	<c:if test="${checkSalary == 0}">
+	<c:if test="${checkSalary == 'false'}">
 		<div id="helloCase">
 			<label class="welcomeCase" id="welcomeCase1"><b>Добро
 					пожаловать на сайт <span style="margin-left: 40px">приоритетов!</span>
@@ -86,8 +83,9 @@
 				<label class="welcomeCase" id="welcomeCase2">Пожалуйста,
 					введите вашу зарплату:</label>
 			</p>
-			<form action="AddSalary" onsubmit="return regularAddSalary()">
-				<input type="text" id="welcomeCaseInput" name="salary"
+			<form action="custom" onsubmit="return regularAddSalary()">
+				<input type="hidden" value="addSalary" name="custom" /> <input
+					type="text" id="welcomeCaseInput" name="salary"
 					onkeypress="validate(this)" /><label class="welcomeCase"
 					style="margin-left: 3px">руб.</label> <input type="submit"
 					value="ввести" id="addSalarySubmit" />
@@ -122,6 +120,7 @@
 	</div>
 
 	<div id="animationAddCase" style="visibility: hidden"></div>
+
 	<div class="create-case" id="create-case" style="visibility: hidden">
 		<jsp:include page="interface/create_case.jsp" />
 	</div>

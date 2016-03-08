@@ -13,11 +13,12 @@
 <body>
 
 	<jsp:useBean id="listCases"
-		class="com.netcracker.unc.mvc.ObjectController"></jsp:useBean>
+		class="com.netcracker.unc.newmvc.dao.UserDAO"></jsp:useBean>
 
 	<div align="center" id="createCaseDiv">
-		<form onsubmit="return checkRegExp()" action="CreateCase" method="get"
+		<form onsubmit="return checkRegExp()" action="interface" method="get"
 			id="createCaseForm">
+			<input type="hidden" value="createCase" name="interfaces" />
 			<table class="createCase">
 				<tr>
 					<th colspan="3">Создание новой задачи</th>
@@ -54,8 +55,8 @@
 					<td><select name="parentBlock" id="parentBlock"
 						style="visibility: hidden">
 							<c:forEach var="category"
-								items="${listCases.getUserActiveCases(sessionScope.user.get_user_id())}">
-								<option value="${category.get_fin_object_id()}">${category.get_object_name()}</option>
+								items="${listCases.getUserActiveCases(sessionScope.user.getUserId())}">
+								<option value="${category.getFinObjectId()}">${category.getObjectName()}</option>
 							</c:forEach>
 					</select></td>
 				</tr>

@@ -27,7 +27,8 @@
 
 	<div id="authorization">
 		<center>
-			<form action="LoginUser" method="get">
+			<form action="authorization" method="post">
+			<input type="hidden" value="userLogin" name="authorization"/>
 				<table rules="groups" align="center" border="2px" width="50%" cellspacing="3" cellpadding="3">
 					<thead>
 						<tr>
