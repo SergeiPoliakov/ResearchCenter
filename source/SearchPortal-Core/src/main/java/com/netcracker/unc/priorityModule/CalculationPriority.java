@@ -13,23 +13,58 @@ import com.netcracker.unc.mvc.models.CategoryModel;
 
 public class CalculationPriority {
 
-	public static List<ModelForTable> convertToTableView(List<CategoryModel> categoryModel, double sumInvoice,
-			double sumIncome) {
+	private List<IntermediateModel> intermediateModelList = null;
 
-		List<ModelForTable> resultCategoryList;
-		ModelForTable modelForTable = null;
-		if (categoryModel != null && !categoryModel.isEmpty()) {
-			resultCategoryList = new ArrayList<ModelForTable>();
-			for (CategoryModel catmod : categoryModel) {
-				modelForTable = new ModelForTable();
-				modelForTable.setName(catmod.getObjectName());
-				modelForTable.setValue(catmod.getSumCategory().doubleValue());
-				resultCategoryList.add(modelForTable);
+	public List<ModelForTable> convertToTableView(List<CategoryModel> categoryList, double sumInvoice,
+			double sumIncome) {
+		List<ModelForTable> resultList = new ArrayList<ModelForTable>();
+
+		if (categoryList != null && !categoryList.isEmpty()) {
+			for (CategoryModel cm : categoryList) {
+				addCategoryToIntermediateList(cm);
 			}
 		} else {
-			resultCategoryList = Collections.emptyList();
+			resultList = Collections.emptyList();
 		}
-		return resultCategoryList;
+		/*
+		 * List<ModelForTable> resultCategoryList; ModelForTable modelForTable =
+		 * null; if (categoryModel != null && !categoryModel.isEmpty()) {
+		 * resultCategoryList = new ArrayList<ModelForTable>(); for
+		 * (CategoryModel catmod : categoryModel) { modelForTable = new
+		 * ModelForTable(); modelForTable.setName(catmod.getObjectName());
+		 * modelForTable.setValue(catmod.getSumCategory().doubleValue());
+		 * resultCategoryList.add(modelForTable); }
+		 */
+		return resultList;
+	}
+
+	private void addCategoryToIntermediateList(CategoryModel categoryModel) {
+		if (intermediateModelList == null) {
+			intermediateModelList = new ArrayList<IntermediateModel>();
+		}
+		IntermediateModel intermediateModel = new IntermediateModel();
+		intermediateModel.setObjectId(categoryModel.getObjectId());
+		intermediateModel.setObjectName(categoryModel.getObjectName());
+		intermediateModel.setValue(calculationValue(categoryModel));
+	}
+
+	private double calculationValue(CategoryModel cm) {
+		double value = 0;
+		value = cm.getCoeficient().doubleValue() * cm.getSumCategory().doubleValue();
+		return value;
+	}
+
+	private double centerValueInCategories() {
+		int count = 0;
+		double sum = 0;
+		if (intermediateModelList != null && !intermediateModelList.isEmpty()) {
+			for (IntermediateModel inter : intermediateModelList) {
+				sum = inter.value + sum;
+				count++;
+			}
+		} else
+			count = 1;
+		return sum / count;
 	}
 
 	private int getDifferenceCoefficient() {
@@ -41,7 +76,42 @@ public class CalculationPriority {
 		return 0;
 	}
 
-	private int calcPriorValueColumn(CategoryModel catmod) {
-		return 0;
+	private class IntermediateModel {
+		private int objectId = 0;
+		private String objectName = null;
+		private double value = 0;
+		private int parentId = 0;
+
+		public int getObjectId() {
+			return objectId;
+		}
+
+		public void setObjectId(int objectId) {
+			this.objectId = objectId;
+		}
+
+		public String getObjectName() {
+			return objectName;
+		}
+
+		public void setObjectName(String objectName) {
+			this.objectName = objectName;
+		}
+
+		public double getValue() {
+			return value;
+		}
+
+		public void setValue(double value) {
+			this.value = value;
+		}
+
+		public int getParentId() {
+			return parentId;
+		}
+
+		public void setParentId(int parentId) {
+			this.parentId = parentId;
+		}
 	}
 }

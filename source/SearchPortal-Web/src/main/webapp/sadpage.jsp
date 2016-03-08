@@ -1,3 +1,9 @@
+<%@page import="com.netcracker.unc.priorityModule.ModelForTable"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.util.Locale"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.DriverManager"%>
 <%@page import="com.netcracker.unc.priorityModule.FillHTMLTable"%>
 <%@page import="com.netcracker.unc.priorityModule.CalculationPriority"%>
 <%@page import="java.util.List"%>
@@ -31,12 +37,11 @@
 				<input type="hidden" name="userId" value="1" /> <input
 					type="submit" value="UP" />
 			</form>
-
-
-
-			<%=request.getAttribute("resultHTMLString")%>
-
-
+			<%
+				List<ModelForTable> dataForPriorityList = new ArrayList<ModelForTable>();
+				dataForPriorityList = (List<ModelForTable>) request.getAttribute("dataForPriorityList");
+			%>
+			<%=FillHTMLTable.toHTMLString(dataForPriorityList)%>
 			<%
 				/*
 				CalculationPriority calculationPriority = new CalculationPriority();

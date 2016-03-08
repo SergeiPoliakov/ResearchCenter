@@ -2,6 +2,7 @@ package com.netcracker.unc.modules.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -47,19 +48,21 @@ public class controllerPriorities extends HttpServlet {
 		 * FillhtmlTable, получаем htmlResultString 7.Выводим ее на jsp
 		 */
 		int userId = Integer.parseInt(request.getParameter("userId"));
-		String resultHTMLString;
+		List<ModelForTable> resultList = new ArrayList<ModelForTable>();
 		try {
 			CategoryDao categoryDao = new CategoryDao();
 			List<CategoryModel> categoryList = new ArrayList<CategoryModel>(categoryDao.getAllCategoriesUser(userId));
 			double sumInvoice = 5000;// заглушка
 			double sumIncome = 5000;// заглушка
-			List<ModelForTable> resultList = new ArrayList<ModelForTable>(
-					CalculationPriority.convertToTableView(categoryList, sumInvoice, sumIncome));
-			resultHTMLString = FillHTMLTable.toHTMLString(resultList);
+			CalculationPriority calculationPriority = new CalculationPriority();
+			resultList = new ArrayList<ModelForTable>(
+					calculationPriority.convertToTableView(categoryList, sumInvoice, sumIncome));
+			//в jsp resultHTMLString = FillHTMLTable.toHTMLString(resultList);
 		} catch (Exception e) {
-			resultHTMLString = "error in servlet.<br/>" + e.getMessage();
+			System.out.println(e.getMessage());
+			resultList = Collections.emptyList();
 		}
-		request.setAttribute("resultHTMLString", resultHTMLString);
+		request.setAttribute("dataForPriorityList", resultList);
 		RequestDispatcher disp = request.getRequestDispatcher("/sadpage.jsp");
 		disp.forward(request, response);
 	}
