@@ -40,13 +40,6 @@ public class controllerPriorities extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
-		/*
-		 * 1.Получаем id 2.Передаем его в categoryDao, получаем categoryList
-		 * 3.Передаем id, получаем сумму доходов 4.Передаем id, получаем сумму
-		 * счетов 5.Закидываем 2,3,4 параметрами в метод класса
-		 * calculationpriority, получаем resultList 6.resultList в
-		 * FillhtmlTable, получаем htmlResultString 7.Выводим ее на jsp
-		 */
 		int userId = Integer.parseInt(request.getParameter("userId"));
 		List<ModelForTable> resultList = new ArrayList<ModelForTable>();
 		try {

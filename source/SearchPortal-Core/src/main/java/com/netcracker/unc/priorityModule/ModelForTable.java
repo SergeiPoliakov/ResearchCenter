@@ -4,9 +4,7 @@ public class ModelForTable {
 
 	private String name;
 	private double value;
-	private String parentName;// скорее всего не нужно, будет сортированная
-								// коллекция
-
+	private int parentId;
 	public String getName() {
 		return name;
 	}
@@ -23,12 +21,12 @@ public class ModelForTable {
 		this.value = value;
 	}
 
-	public String getParentName() {
-		return parentName;
+	public int getParentId() {
+		return parentId;
 	}
 
-	public void setParentName(String parentName) {
-		this.parentName = parentName;
+	public void setParentId(int parentId) {
+		this.parentId = parentId;
 	}
 
 }

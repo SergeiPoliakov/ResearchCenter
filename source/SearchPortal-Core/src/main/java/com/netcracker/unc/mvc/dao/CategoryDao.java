@@ -26,7 +26,7 @@ public class CategoryDao extends ObjectDAO {
 
 		try {
 			connection = ConnectionFactory.getConnection();
-			preparedStatement = connection.prepareStatement(SQLQuery.SP_GET_FULL_CATEGORIES);
+			preparedStatement = connection.prepareStatement("SELECT 1+5 FROM DUAL");//SQLQuery.SP_GET_FULL_CATEGORIES);
 			// preparedStatement =
 			// connection.prepareStatement(SQLQuery.SP_GET_USER_CATEGORIES);
 			// preparedStatement.setInt(1, userId);

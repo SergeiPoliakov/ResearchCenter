@@ -18,11 +18,29 @@ public class CalculationPriority {
 	public List<ModelForTable> convertToTableView(List<CategoryModel> categoryList, double sumInvoice,
 			double sumIncome) {
 		List<ModelForTable> resultList = new ArrayList<ModelForTable>();
-
+		double centerPoint = 0;
+		double differenceCoefficient = 0;
 		if (categoryList != null && !categoryList.isEmpty()) {
+
+			differenceCoefficient = getDifferenceCoefficient(categoryList, sumInvoice, sumIncome);
+
 			for (CategoryModel cm : categoryList) {
 				addCategoryToIntermediateList(cm);
 			}
+
+			centerPoint = centerValueInCategories();
+
+			for (IntermediateModel im : intermediateModelList) {
+				im.setPercent(getpositionOnAxis(im.getValue(), centerPoint) * differenceCoefficient);
+			}
+			// intermediateModelList.sort(c); //прикрутить сортировку
+			for (IntermediateModel im : intermediateModelList) {
+				ModelForTable modelForTable = new ModelForTable();
+				modelForTable.setName(im.getObjectName());
+				modelForTable.setValue(im.getValue());
+				modelForTable.setParentId(im.getParentId());
+			}
+
 		} else {
 			resultList = Collections.emptyList();
 		}
@@ -49,8 +67,9 @@ public class CalculationPriority {
 	}
 
 	private double calculationValue(CategoryModel cm) {
-		double value = 0;
-		value = cm.getCoeficient().doubleValue() * cm.getSumCategory().doubleValue();
+		double value = 1;
+		value = value * cm.getCoeficient().doubleValue();
+		value = value * cm.getSumCategory().doubleValue();
 		return value;
 	}
 
@@ -67,13 +86,20 @@ public class CalculationPriority {
 		return sum / count;
 	}
 
-	private int getDifferenceCoefficient() {
-		return 1;
+	private double getDifferenceCoefficient(List<CategoryModel> categoryModels, double sumIncome, double sumInvoice) {
+		double sum = 0;
+		if (categoryModels != null && !categoryModels.isEmpty()) {
+			for (CategoryModel cm : categoryModels) {
+				sum = sum + cm.getSumCategory().doubleValue();
+			}
+		}
+
+		return sum / (sumIncome + sumInvoice);
 	}
 
-	private int getAVGPriorValue() {
-
-		return 0;
+	private double getpositionOnAxis(double value, double centerPoint) {
+		double x = 0;
+		return x;
 	}
 
 	private class IntermediateModel {
@@ -81,6 +107,7 @@ public class CalculationPriority {
 		private String objectName = null;
 		private double value = 0;
 		private int parentId = 0;
+		private double percent = 0;
 
 		public int getObjectId() {
 			return objectId;
@@ -112,6 +139,14 @@ public class CalculationPriority {
 
 		public void setParentId(int parentId) {
 			this.parentId = parentId;
+		}
+
+		public double getPercent() {
+			return percent;
+		}
+
+		public void setPercent(double percent) {
+			this.percent = percent;
 		}
 	}
 }
