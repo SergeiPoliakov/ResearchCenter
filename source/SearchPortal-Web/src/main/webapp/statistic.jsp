@@ -68,7 +68,6 @@
 		    <div>Зарезервированно средств: <label><%=invoicedao.getConsumptionSum()%></label></div>
 		    <div>Свободные средства: <label><%=invoicedao.getSumBalance()-invoicedao.getConsumptionSum()%></label></div>
 		</div>
-		</div>
 		<script type="text/javascript">
 		var pieData = [
 						{
@@ -89,7 +88,6 @@
 						var ctx = document.getElementById("chart-area").getContext("2d");
 						window.myPie = new Chart(ctx).Pie(pieData);
 					};
-			</script>
 		</script>
 	</div>
 </body>
