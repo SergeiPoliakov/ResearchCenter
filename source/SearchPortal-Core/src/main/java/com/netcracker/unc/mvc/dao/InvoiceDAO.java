@@ -180,6 +180,30 @@ public class InvoiceDAO {
 			}
 		}
 	}
+	public int getConsumptionSum() {
+		PreparedStatement prepare;
+		ResultSet result;
+		Connection connect = ConnectionFactory.getConnection();
+
+		try {
+			prepare = connect.prepareStatement(SQLQuery.get_sum_all_consumption_for_users_by_user_id);
+			prepare.setInt(1, user.get_user_id());
+			result = prepare.executeQuery();
+			result.next();
+
+			return result.getInt(1);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		} finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	
 	public void updateBalance(Object object) {
 		PreparedStatement prepare;
