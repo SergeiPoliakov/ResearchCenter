@@ -65,8 +65,8 @@
 		<div class="block-title">Статистика</div>
 		<div class="block-information">
 		    <div>Текущий баланс: <label><%=invoicedao.getSumBalance()%></label></div>
-		   <%-- <div>Зарезервированно средств: <label><%=invoicedao.getSumBalance()%></label></div>
-			<div>Свободные средства: <label><%=invoicedao.getSumBalance()%></label></div> --%>
+		    <div>Зарезервированно средств: <label><%=invoicedao.getConsumptionSum()%></label></div>
+		    <div>Свободные средства: <label><%=invoicedao.getSumBalance()%></label></div>
 		   
 		</div>
 	</div>
