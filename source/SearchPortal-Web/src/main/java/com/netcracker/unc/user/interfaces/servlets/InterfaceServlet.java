@@ -162,6 +162,8 @@ public class InterfaceServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		response.setContentType("text/html;charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
+
 		String interfaces = request.getParameter("interfaces");
 
 		if (interfaces.equals("updateCase"))

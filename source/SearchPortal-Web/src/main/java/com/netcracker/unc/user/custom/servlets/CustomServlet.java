@@ -117,6 +117,8 @@ public class CustomServlet extends HttpServlet {
 
 		Cookie cookie = new Cookie("caseAdd", "1");
 		response.addCookie(cookie);
+
+		request.getSession().setAttribute("user", userDAO.getUser(user.getUserId()));
 		response.sendRedirect("modules.jsp");
 
 	}
@@ -125,12 +127,13 @@ public class CustomServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		UserModel user = (UserModel) request.getSession().getAttribute("user");
-		request.setAttribute("checkSalary", "false");
+		request.setAttribute("checkSalary", "error");
 		for (ObjectModel object : user.getAllObjects()) {
 			if (object.getObjectName().toLowerCase().equals(objectName.toLowerCase())) {
 				for (ParamModel param : object.getAllParams()) {
 					if (param.getValue() != null && param.getValue().toLowerCase().equals(valueCheck.toLowerCase()))
-						request.setAttribute("checkSalary", "true");
+
+						request.setAttribute("checkSalary", "ok");
 					else
 						continue;
 				}
@@ -143,7 +146,6 @@ public class CustomServlet extends HttpServlet {
 
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		response.setCharacterEncoding("UTF-8");
 
 		String custom = request.getParameter("custom");
 		checkSalary(request, response);

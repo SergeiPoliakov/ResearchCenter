@@ -74,7 +74,8 @@
 		</div>
 	</div>
 
-	<c:if test="${checkSalary == 'false'}">
+	<c:set var="checkSalaryBro" value="${checkSalary }" scope="page" />
+	<c:if test="${checkSalaryBro == 'error'}">
 		<div id="helloCase">
 			<label class="welcomeCase" id="welcomeCase1"><b>Добро
 					пожаловать на сайт <span style="margin-left: 40px">приоритетов!</span>
