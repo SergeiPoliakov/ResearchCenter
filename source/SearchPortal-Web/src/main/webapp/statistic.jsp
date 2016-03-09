@@ -11,6 +11,7 @@
 <link href="css/main.css" rel="stylesheet" type="text/css" />
 <script src="javascripts/jquery-2.2.0.min.js"></script>
 <script src="javascripts/mainModules.js"></script>
+<script src="javascripts/Chart.js"></script>
 <link href="attitudes/css/attitude.css" rel="stylesheet" type="text/css" />
 <link href="css/aspro.css" rel="stylesheet" type="text/css" />
 <title>Добро пожаловать на сайт приоритетов</title>
