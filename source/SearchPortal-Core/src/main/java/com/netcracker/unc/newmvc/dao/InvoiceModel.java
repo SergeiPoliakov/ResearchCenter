@@ -1,4 +1,4 @@
-package com.netcracker.unc.newmvc.dao;
+package com.netcracker.unc.mvc.models;
 
 
 public class InvoiceModel {
