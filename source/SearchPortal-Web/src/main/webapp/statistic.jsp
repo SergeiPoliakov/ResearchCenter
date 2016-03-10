@@ -66,9 +66,29 @@
 		<div class="block-information">
 		    <div>Текущий баланс: <label><%=invoicedao.getSumBalance()%></label></div>
 		    <div>Зарезервированно средств: <label><%=invoicedao.getConsumptionSum()%></label></div>
-		    <div>Свободные средства: <label><%=invoicedao.getSumBalance()%></label></div>
-		   
+		    <div>Свободные средства: <label><%=invoicedao.getSumBalance()-invoicedao.getConsumptionSum()%></label></div>
 		</div>
+		<script type="text/javascript">
+		var pieData = [
+						{
+							value: invoicedao.getConsumptionSum(),
+							color:"#F7464A",
+							highlight: "#FF5A5E",
+							label: "Зарезервировано"
+						},
+						{
+							value: invoicedao.getSumBalance()-invoicedao.getConsumptionSum(),
+							color: "#46BFBD",
+							highlight: "#5A D3D1",
+							label: "Свободно"
+						},
+						
+					];
+					window.onload = function(){
+						var ctx = document.getElementById("chart-area").getContext("2d");
+						window.myPie = new Chart(ctx).Pie(pieData);
+					};
+		</script>
 	</div>
 </body>
 
