@@ -1,4 +1,4 @@
-<%@page import="com.netcracker.unc.mvc.dao.CategoryDao"%>
+<%@page import="com.netcracker.unc.newmvc.dao.CategoryDao"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.netcracker.unc.priorityModule.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -18,8 +18,9 @@
 </head>
 <body>
 	<%@ page
-		import="com.netcracker.unc.mvc.dao.UserDAO, com.netcracker.unc.mvc.models.UserModel"
-		import="com.netcracker.unc.mvc.dao.InvoiceDAO, com.netcracker.unc.mvc.models.InvoiceModel"%>
+		import="com.netcracker.unc.newmvc.dao.UserDAO, com.netcracker.unc.mvc.models.UserModel"
+		import="com.netcracker.unc.newmvc.dao.InvoiceDAO, com.netcracker.unc.mvc.models.InvoiceModel"
+		import="com.netcracker.unc.newmvc.dao.StatisticDAO%>
 	<%!private UserModel user = null;%>
 	<%!private InvoiceModel invoice = new InvoiceModel(); 
 	   InvoiceDAO invoicedao = new InvoiceDAO();
@@ -64,20 +65,20 @@
 		<div class="module" id="diagram">
 		<div class="block-title">Статистика</div>
 		<div class="block-information">
-		    <div>Текущий баланс: <label><%=invoicedao.getSumBalance()%></label></div>
-		    <div>Зарезервированно средств: <label><%=invoicedao.getConsumptionSum()%></label></div>
-		    <div>Свободные средства: <label><%=invoicedao.getSumBalance()-invoicedao.getConsumptionSum()%></label></div>
+		    <div>Текущий баланс: <label><%=statisticdao.getSumBalance()%></label></div>
+		    <div>Зарезервированно средств: <label><%=statisticdao.getConsumptionSum()%></label></div>
+		    <div>Свободные средства: <label><%=statisticdao.getSumBalance()-statisticdao.getConsumptionSum()%></label></div>
 		</div>
 		<script type="text/javascript">
 		var pieData = [
 						{
-							value: invoicedao.getConsumptionSum(),
+							value: statisticdao.getConsumptionSum(),
 							color:"#F7464A",
 							highlight: "#FF5A5E",
 							label: "Зарезервировано"
 						},
 						{
-							value: invoicedao.getSumBalance()-invoicedao.getConsumptionSum(),
+							value: statisticdao.getSumBalance()-invoicedao.getConsumptionSum(),
 							color: "#46BFBD",
 							highlight: "#5A D3D1",
 							label: "Свободно"
