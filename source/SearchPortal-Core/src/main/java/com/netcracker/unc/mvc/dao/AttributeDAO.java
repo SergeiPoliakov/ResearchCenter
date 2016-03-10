@@ -25,8 +25,8 @@ public class AttributeDAO extends ObjectDAO {
 
 		try {
 			prepare = connect.prepareStatement(SQLQuery.SP_ATTRIBUTES_INSERT);
-			prepare.setString(1, attribute.get_attribute_name());
-			prepare.setInt(2, attribute.get_fin_object_type_id());
+			prepare.setString(1, attribute.getAttributeName());
+			prepare.setInt(2, attribute.getFinObjectTypeID());
 			prepare.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -48,22 +48,22 @@ public class AttributeDAO extends ObjectDAO {
 
 		try {
 			// if we have not attribute with correct id
-			if (attribute.get_attribute_id() == 0) {
+			if (attribute.getAttributeID() == 0) {
 				prepare = connect.prepareStatement(SQLQuery.SP_ATTRIBUTES_GET_BY_NAME);
-				prepare.setString(1, attribute.get_attribute_name());
+				prepare.setString(1, attribute.getAttributeName());
 			}
 			// if attribute have correct id
 			else {
 				prepare = connect.prepareStatement(SQLQuery.SP_ATTRIBUTES_GET_BY_ID);
-				prepare.setInt(1, attribute.get_attribute_id());
+				prepare.setInt(1, attribute.getAttributeID());
 			}
 			result = prepare.executeQuery();
 			result.next();
 
 			// create current attribute from database
-			attribute.set_attribute_name(result.getString("ATTRIBUTE_NAME"));
-			attribute.set_fin_object_type_id(result.getInt("FIN_OBJECT_TYPE_ID"));
-			attribute.set_attribute_id(result.getInt("ATTRIBUTE_ID"));
+			attribute.setAttributeName(result.getString("ATTRIBUTE_NAME"));
+			attribute.setFinObjectTypeID(result.getInt("FIN_OBJECT_TYPE_ID"));
+			attribute.setAttributeID(result.getInt("ATTRIBUTE_ID"));
 			return attribute;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -84,9 +84,9 @@ public class AttributeDAO extends ObjectDAO {
 
 		try {
 			prepare = connect.prepareStatement(SQLQuery.SP_ATTRIBUTES_UPDATE_BY_ID);
-			prepare.setString(1, attribute.get_attribute_name());
-			prepare.setInt(2, attribute.get_fin_object_type_id());
-			prepare.setInt(3, attribute.get_attribute_id());
+			prepare.setString(1, attribute.getAttributeName());
+			prepare.setInt(2, attribute.getFinObjectTypeID());
+			prepare.setInt(3, attribute.getAttributeID());
 			prepare.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -106,7 +106,7 @@ public class AttributeDAO extends ObjectDAO {
 
 		try {
 			prepare = connect.prepareStatement(SQLQuery.SP_ATTRIBUTES_DELETE_BY_ID);
-			prepare.setInt(1, attribute.get_attribute_id());
+			prepare.setInt(1, attribute.getAttributeID());
 			prepare.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -129,9 +129,9 @@ public class AttributeDAO extends ObjectDAO {
 
 			while (result.next()) {
 				attribute = new AttributeModel();
-				attribute.set_attribute_name(result.getString(1));
-				attribute.set_fin_object_type_id(result.getInt(2));
-				attribute.set_attribute_id(result.getInt(3));
+				attribute.setAttributeName(result.getString(1));
+				attribute.setFinObjectTypeID(result.getInt(2));
+				attribute.setAttributeID(result.getInt(3));
 				list.add(attribute);
 			}
 			return list;

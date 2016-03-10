@@ -92,36 +92,36 @@ public class CreateCaseServlet extends HttpServlet {
 		for (Object ob : listAtr) {
 			attribute = (AttributeModel) ob;
 
-			if (attribute.get_attribute_name().toLowerCase().equals(createDate.toLowerCase())) {
+			if (attribute.getAttributeName().toLowerCase().equals(createDate.toLowerCase())) {
 				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 				Date now = new Date();
 				String currentDate = format.format(now);
 				param = new ParameterModel();
 				param.set_value_date(currentDate);
 				param.set_fin_object_id(casee.get_fin_object_id());
-				param.set_attribute_id(attribute.get_attribute_id());
+				param.set_attribute_id(attribute.getAttributeID());
 			}
 
-			if (attribute.get_attribute_name().toLowerCase().equals(endDate.toLowerCase())) {
+			if (attribute.getAttributeName().toLowerCase().equals(endDate.toLowerCase())) {
 				param = new ParameterModel();
 				param.set_value_date(caseDateStr);
 				param.set_fin_object_id(casee.get_fin_object_id());
-				param.set_attribute_id(attribute.get_attribute_id());
+				param.set_attribute_id(attribute.getAttributeID());
 			}
 
-			if (attribute.get_attribute_name().toLowerCase().equals(cost.toLowerCase())) {
+			if (attribute.getAttributeName().toLowerCase().equals(cost.toLowerCase())) {
 				param = new ParameterModel();
 				param.set_value(caseCostStr);
 				param.set_fin_object_id(casee.get_fin_object_id());
-				param.set_attribute_id(attribute.get_attribute_id());
+				param.set_attribute_id(attribute.getAttributeID());
 			}
 
-			if (attribute.get_attribute_name().toLowerCase().equals(priority.toLowerCase())) {
-				System.out.println(attribute.get_attribute_name());
+			if (attribute.getAttributeName().toLowerCase().equals(priority.toLowerCase())) {
+				System.out.println(attribute.getAttributeName());
 				param = new ParameterModel();
 				param.set_value(casePriorityStr);
 				param.set_fin_object_id(casee.get_fin_object_id());
-				param.set_attribute_id(attribute.get_attribute_id());
+				param.set_attribute_id(attribute.getAttributeID());
 			}
 			parameterDAO.addObject(param);
 		}

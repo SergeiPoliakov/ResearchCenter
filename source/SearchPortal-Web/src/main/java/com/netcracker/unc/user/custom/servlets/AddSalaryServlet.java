@@ -70,30 +70,30 @@ public class AddSalaryServlet extends HttpServlet {
 		Date now = new Date();
 		String currentDate = format.format(now);
 		attribute = new AttributeModel();
-		attribute.set_attribute_name(atrDate.toLowerCase());
+		attribute.setAttributeName(atrDate.toLowerCase());
 		attribute = (AttributeModel) attributeDAO.getObject(attribute);
 		parameter = new ParameterModel();
-		parameter.set_attribute_id(attribute.get_attribute_id());
+		parameter.set_attribute_id(attribute.getAttributeID());
 		parameter.set_value_date(currentDate);
 		parameter.set_fin_object_id(casee.get_fin_object_id());
 		parameterDAO.addObject(parameter);
 
 		// for salary
 		attribute = new AttributeModel();
-		attribute.set_attribute_name(atrIncome.toLowerCase());
+		attribute.setAttributeName(atrIncome.toLowerCase());
 		attribute = (AttributeModel) attributeDAO.getObject(attribute);
 		parameter = new ParameterModel();
-		parameter.set_attribute_id(attribute.get_attribute_id());
+		parameter.set_attribute_id(attribute.getAttributeID());
 		parameter.set_value(salary);
 		parameter.set_fin_object_id(casee.get_fin_object_id());
 		parameterDAO.addObject(parameter);
 
 		// for check salary
 		attribute = new AttributeModel();
-		attribute.set_attribute_name(atrCheck.toLowerCase());
+		attribute.setAttributeName(atrCheck.toLowerCase());
 		attribute = (AttributeModel) attributeDAO.getObject(attribute);
 		parameter = new ParameterModel();
-		parameter.set_attribute_id(attribute.get_attribute_id());
+		parameter.set_attribute_id(attribute.getAttributeID());
 		parameter.set_value(valueCheck);
 		parameter.set_fin_object_id(casee.get_fin_object_id());
 		parameterDAO.addObject(parameter);

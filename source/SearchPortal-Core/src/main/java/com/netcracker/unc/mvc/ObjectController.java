@@ -69,9 +69,9 @@ public class ObjectController {
 
 			while (result.next()) {
 				attribute = new AttributeModel();
-				attribute.set_attribute_name(result.getString("attribute_name"));
-				attribute.set_attribute_id(result.getInt("attribute_id"));
-				attribute.set_fin_object_type_id(result.getInt("fin_object_type_id"));
+				attribute.setAttributeName(result.getString("attribute_name"));
+				attribute.setAttributeID(result.getInt("attribute_id"));
+				attribute.setFinObjectTypeID(result.getInt("fin_object_type_id"));
 				list.add(attribute);
 			}
 			connect.close();

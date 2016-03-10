@@ -59,16 +59,16 @@ public class UpdateCaseServlet extends HttpServlet {
 			param = (ParameterModel) object;
 			for (Object objectAtr : listAtr) {
 				atr = (AttributeModel) objectAtr;
-				if (atr.get_attribute_id() == param.get_attribute_id()) {
-					if (atr.get_attribute_name().equals("стоимость")) {
+				if (atr.getAttributeID() == param.get_attribute_id()) {
+					if (atr.getAttributeName().equals("стоимость")) {
 						param.set_value(costCase);
 						paramDAO.updateObject(param);
 					}
-					if (atr.get_attribute_name().equals("дата завершения")) {
+					if (atr.getAttributeName().equals("дата завершения")) {
 						param.set_value_date(dateCase);
 						paramDAO.updateObject(param);
 					}
-					if (atr.get_attribute_name().equals("приоритет")) {
+					if (atr.getAttributeName().equals("приоритет")) {
 						param.set_value(priorityCase);
 						paramDAO.updateObject(param);
 					} else
