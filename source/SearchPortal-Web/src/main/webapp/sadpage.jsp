@@ -1,3 +1,4 @@
+<%@page import="com.netcracker.unc.priorityModule.CalculationPriority"%>
 <%@page import="com.netcracker.unc.priorityModule.FillHTMLTable"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
@@ -29,8 +30,10 @@
 				CategoryController categoryController = new CategoryController(user.getUserId());
 				List<CategoryModel> categoryList = new ArrayList<CategoryModel>(
 						categoryController.getCategoriesWithPriorities());
+				CalculationPriority calculationPriority = new CalculationPriority();
+				calculationPriority.runCalculaton();
 			%><%=FillHTMLTable.toHtmlString(categoryList)%>
-			
+
 			<%=user.getUserId()%>
 		</div>
 	</div>

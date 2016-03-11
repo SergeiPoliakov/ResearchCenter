@@ -5,16 +5,38 @@
  */
 package com.netcracker.unc.priorityModule;
 
+import java.util.ArrayList;
 
+import com.netcracker.unc.newmvc.dao.CategoryModel;
 
 public class CalculationPriority {
 
-	public static double calculationPrePersent(){
+	
+	private double centerValue = 0;
+	
+	
+	public void runCalculaton(){
+		
+	}
+	
+	
+	private void calculationPersent(){
+		
+	}
+	
+	private double calculationPrePersent(){
 		return 0;
 	}
 	
-	public static double centerValueInCategories(){
-		return 0;
+	private void centerValueInCategories(){
+		centerValue = 5+7+9;
+	}
+	
+	public CalculationPriority() {
+	}
+	
+	public CalculationPriority(ArrayList<CategoryModel> categoryList){
+		
 	}
 	
 	/*private List<IntermediateModel> intermediateModelList = null;

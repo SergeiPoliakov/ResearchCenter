@@ -1,4 +1,3 @@
-<%@page import="com.netcracker.unc.mvc.dao.CategoryDao"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.netcracker.unc.priorityModule.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

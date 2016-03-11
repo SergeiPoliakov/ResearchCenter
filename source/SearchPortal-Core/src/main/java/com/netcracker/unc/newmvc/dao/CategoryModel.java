@@ -11,7 +11,6 @@ public class CategoryModel {
 	private Date finalDate = null;
 	private BigDecimal coeficient = null;
 	private BigDecimal sumCategory = null;
-	private double prePersent = 0;
 	private double persent = 0;
 
 	public Integer getObjectId() {
@@ -20,14 +19,6 @@ public class CategoryModel {
 
 	public void setObjectId(Integer objectId) {
 		this.objectId = objectId;
-	}
-
-	public double getPrePersent() {
-		return prePersent;
-	}
-
-	public void setPrePersent(double prePersent) {
-		this.prePersent = prePersent;
 	}
 
 	public double getPersent() {

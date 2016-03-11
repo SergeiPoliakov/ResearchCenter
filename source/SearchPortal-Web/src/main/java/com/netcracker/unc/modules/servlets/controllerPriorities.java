@@ -11,8 +11,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.netcracker.unc.mvc.dao.CategoryDao;
 import com.netcracker.unc.priorityModule.CalculationPriority;
 import com.netcracker.unc.priorityModule.FillHTMLTable;
 
