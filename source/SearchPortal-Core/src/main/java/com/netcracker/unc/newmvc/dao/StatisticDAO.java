@@ -22,7 +22,7 @@ public StatisticDAO() {
 		this.user = user;
 	}
 	
-	public int getSumBalance() {
+	/*public int getSumBalance() {
 		PreparedStatement prepare;
 		ResultSet result;
 		Connection connect = ConnectionFactory.getConnection();
@@ -70,6 +70,6 @@ public StatisticDAO() {
 				e.printStackTrace();
 			}
 		}
-	}
+	}*/
 
 }

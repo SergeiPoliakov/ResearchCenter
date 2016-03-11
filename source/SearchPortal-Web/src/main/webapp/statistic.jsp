@@ -1,4 +1,4 @@
-<%@page import="com.netcracker.unc.newmvc.dao.CategoryDao"%>
+<%/*@page import="com.netcracker.unc.newmvc.dao.CategoryDao"*/%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.netcracker.unc.priorityModule.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -17,25 +17,25 @@
 <title>Добро пожаловать на сайт приоритетов</title>
 </head>
 <body>
-	<%@ page
+	<%/*@ page
 		import="com.netcracker.unc.newmvc.dao.UserDAO, com.netcracker.unc.mvc.models.UserModel"
 		import="com.netcracker.unc.newmvc.dao.InvoiceDAO, com.netcracker.unc.mvc.models.InvoiceModel"
-		import="com.netcracker.unc.newmvc.dao.StatisticDAO%>
-	<%!private UserModel user = null;%>
-	<%!private InvoiceModel invoice = new InvoiceModel(); 
-	   InvoiceDAO invoicedao = new InvoiceDAO();
+		import="com.netcracker.unc.newmvc.dao.StatisticDAO*/%>
+	<%/*!private UserModel user = null;*/%>
+	<%/*!private InvoiceModel invoice = new InvoiceModel(); 
+	   InvoiceDAO invoicedao = new InvoiceDAO();*/
 	  //UserDAO userdao = new UserDAO();%>
-	<%
+	<%/*
 		response.setContentType("text/html;charset=Windows-1251");
 		request.setCharacterEncoding("UTF-8");
-		response.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");*/
 	%>
 	<c:choose>
 		<c:when test="${not empty sessionScope.user }">
 			<%
 				if (request.getSession().getAttribute("user") != null) {
-							user = (UserModel) request.getSession().getAttribute("user");
-							invoice = (InvoiceModel)invoicedao.getInvoiceById(1, user);
+			//				user = (UserModel) request.getSession().getAttribute("user");
+				//			invoice = (InvoiceModel)invoicedao.getInvoiceById(1, user);
 							
 						}
 			%>
@@ -48,7 +48,7 @@
 		<div class="welcome" align="right" style="background-color: #92d36e;"
 			id="welcomeUser">
 			Добро пожаловать <label
-				style="color: red; font-size: 16pt; background-color: #92d36e; margin-right: 10px"><%=user.get_login()%></label>
+				style="color: red; font-size: 16pt; background-color: #92d36e; margin-right: 10px"><%=/*user.get_login()*/%></label>
 			<form action="LogoutUser">
 				<input type="submit" value="Выход" id="logOutSubmit" />
 			</form>
@@ -65,9 +65,9 @@
 		<div class="module" id="diagram">
 		<div class="block-title">Статистика</div>
 		<div class="block-information">
-		    <div>Текущий баланс: <label><%=statisticdao.getSumBalance()%></label></div>
-		    <div>Зарезервированно средств: <label><%=statisticdao.getConsumptionSum()%></label></div>
-		    <div>Свободные средства: <label><%=statisticdao.getSumBalance()-statisticdao.getConsumptionSum()%></label></div>
+		    <div>Текущий баланс: <label><%/*=statisticdao.getSumBalance()*/%></label></div>
+		    <div>Зарезервированно средств: <label><%/*=statisticdao.getConsumptionSum()*/%></label></div>
+		    <div>Свободные средства: <label><%/*=statisticdao.getSumBalance()-statisticdao.getConsumptionSum()*/%></label></div>
 		</div>
 		<script type="text/javascript">
 		var pieData = [
