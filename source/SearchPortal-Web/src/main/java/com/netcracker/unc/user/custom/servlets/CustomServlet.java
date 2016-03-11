@@ -1,7 +1,9 @@
 package com.netcracker.unc.user.custom.servlets;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -10,11 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.netcracker.unc.newmvc.dao.IncomeConsumptionDAO;
 import com.netcracker.unc.newmvc.dao.IncomeConsumptionModel;
+import com.netcracker.unc.newmvc.dao.ObjectController;
 import com.netcracker.unc.newmvc.dao.ObjectDAO;
 import com.netcracker.unc.newmvc.dao.ObjectModel;
 import com.netcracker.unc.newmvc.dao.ParamController;
-import com.netcracker.unc.newmvc.dao.ParamDAO;
 import com.netcracker.unc.newmvc.dao.ParamModel;
+import com.netcracker.unc.newmvc.dao.SalaryDAO;
+import com.netcracker.unc.newmvc.dao.SalaryModel;
 import com.netcracker.unc.newmvc.dao.UserDAO;
 import com.netcracker.unc.newmvc.dao.UserModel;
 
@@ -23,11 +27,8 @@ public class CustomServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	// columns names od fatabase
-	private final int incomeType = 2;
+	private final int incomeType = 2; // Доход
 	private final String objectName = "Зарплата";
-	private final int atrIncome = 5;
-	private final int atrDate = 4;
-	private final int atrCheck = 9;
 	private final String valueCheck = "true";
 	/////////////
 
@@ -96,24 +97,8 @@ public class CustomServlet extends HttpServlet {
 
 		ParamController paramController = new ParamController();
 		ParamModel param = new ParamModel();
-		ParamDAO paramDAO = new ParamDAO();
-
-		param.setAttributeId(atrIncome);
-		param.setFinObjectId(object.getFinObjectId());
-		param.setValue(salary);
-		paramDAO.addParam(param);
-
-		param = new ParamModel();
-		param.setAttributeId(atrDate);
-		param.setFinObjectId(object.getFinObjectId());
 		paramController.setParamCurrentDate(param);
-		paramDAO.addParam(param);
-
-		param = new ParamModel();
-		param.setAttributeId(atrCheck);
-		param.setFinObjectId(object.getFinObjectId());
-		param.setValue(valueCheck);
-		paramDAO.addParam(param);
+		paramController.addRegularSalaryParams(salary, object.getFinObjectId(), param.getValueDate());
 
 		Cookie cookie = new Cookie("caseAdd", "1");
 		response.addCookie(cookie);
@@ -132,13 +117,88 @@ public class CustomServlet extends HttpServlet {
 			if (object.getObjectName().toLowerCase().equals(objectName.toLowerCase())) {
 				for (ParamModel param : object.getAllParams()) {
 					if (param.getValue() != null && param.getValue().toLowerCase().equals(valueCheck.toLowerCase()))
-
 						request.setAttribute("checkSalary", "ok");
 					else
 						continue;
 				}
 			}
 		}
+		if (request.getAttribute("checkSalary").equals("ok"))
+			controlSalary(request, response, user);
+	}
+
+	private void controlSalary(HttpServletRequest request, HttpServletResponse response, UserModel user)
+			throws ServletException, IOException {
+
+		SalaryDAO salaryDAO = new SalaryDAO();
+		SalaryModel salary = salaryDAO.getLastCheckSalary(user.getUserId());
+		if (salary.getDateCount() > 0 && request.getAttribute("checkSalaryBro") == null)
+			request.setAttribute("controlSalary", salary);
+		else
+			request.setAttribute("controlSalary", null);
+	}
+
+	private void recordMissSalary(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		UserModel user = (UserModel) request.getSession().getAttribute("user");
+		UserDAO userDAO = new UserDAO();
+		SalaryModel salary = (SalaryModel) request.getAttribute("controlSalary");
+		String[] mounthsControl = request.getParameterValues("controlSalaryInputTable");
+		String newSalary = request.getParameter("controlSalaryInput");
+		boolean checkSameSalary = true;
+		String previous = mounthsControl[0];
+		for (String i : mounthsControl) {
+			if (!previous.equals(i))
+				checkSameSalary = false;
+			else
+				continue;
+		}
+		ObjectModel object;
+		ObjectDAO objectDAO = new ObjectDAO();
+		ObjectController objectController = new ObjectController();
+		ParamController paramController = new ParamController();
+		Date date = salary.getLastCheckDate();
+		Calendar cal = Calendar.getInstance();
+
+		// if user set not same salaries
+		if (checkSameSalary == false) {
+			for (String valueSalary : mounthsControl) {
+				object = new ObjectModel();
+				object.setFinObjectTypeId(incomeType);
+				object.setObjectName(objectName);
+				object.setUserId(user.getUserId());
+				objectDAO.addObject(object);
+				object = objectController.getLastCreatingObject(user.getAllObjects(), user.getUserId());
+				user = userDAO.getUser(user.getUserId());
+
+				cal.setTimeInMillis(date.getTime());
+				cal.add(Calendar.MONTH, 1);
+				date.setTime(cal.getTimeInMillis());
+				paramController.addRegularSalaryParams(valueSalary, object.getFinObjectId(), date);
+
+			}
+		} else {
+			for (int i = 0; i < salary.getDateCount(); i++) {
+				object = new ObjectModel();
+				object.setFinObjectTypeId(incomeType);
+				object.setObjectName(objectName);
+				object.setUserId(user.getUserId());
+				objectDAO.addObject(object);
+				object = objectController.getLastCreatingObject(user.getAllObjects(), user.getUserId());
+				user = userDAO.getUser(user.getUserId());
+
+				cal.setTimeInMillis(date.getTime());
+				cal.add(Calendar.MONTH, 1);
+				date.setTime(cal.getTimeInMillis());
+				paramController.addRegularSalaryParams(newSalary, object.getFinObjectId(), date);
+			}
+		}
+		Cookie cookie = new Cookie("caseAdd", "1");
+		response.addCookie(cookie);
+
+		request.getSession().setAttribute("user", userDAO.getUser(user.getUserId()));
+		response.sendRedirect("modules.jsp");
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -154,6 +214,8 @@ public class CustomServlet extends HttpServlet {
 		if (custom != null) {
 			if (custom.equals("addSalary"))
 				addSalary(request, response);
+			else if (custom.equals("controlSalary"))
+				recordMissSalary(request, response);
 		}
 	}
 

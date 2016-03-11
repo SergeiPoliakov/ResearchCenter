@@ -58,9 +58,9 @@
 		<button id="statistic-menu-button" class="button">Статистика</button>
 		<button id="statistic-menu-button" class="button" onclick="showCreateCase()">Создать</button>
 		<button id="add-sum-button" class="button">+</button>
-		<div class="overlayInCons">
+		<!--  <div class="overlayInCons">
 			<jsp:include page="/attitudes/IncomeConsumption"></jsp:include>
-		</div>
+		</div> -->
 	</div>
 		<div class="module" id="diagram">
 		<div class="block-title">Статистика</div>

@@ -50,7 +50,7 @@
 			Добро пожаловать <label
 				style="color: red; font-size: 16pt; background-color: #92d36e; margin-right: 10px"><c:out
 					value="${sessionScope.user.getLogin()}" /></label>
-			<form action="LogoutUser">
+			<form action="authorization">
 				<input type="hidden" value="logOut" name="authorization" /> <input
 					type="submit" value="Выход" id="logOutSubmit" />
 			</form>
@@ -72,6 +72,10 @@
 		<div class="overlayInCons">
 			<jsp:include page="/attitudes/income_consumption.jsp"></jsp:include>
 		</div>
+	</div>
+
+	<div class="controlSalary" id="controlSalaryMain">
+		<jsp:include page="attitudes/salary_control.jsp"></jsp:include>
 	</div>
 
 	<c:set var="checkSalaryBro" value="${checkSalary }" scope="page" />

@@ -2,6 +2,19 @@
  * @author Kolesnikov
  */
 
+// animation for control salary
+var controlSal = document.getElementById("controlSalaryMain");
+var addSalaryControlPlace = -25;
+controlSal.style.right = addSalaryControlPlace + '%';
+var animationControlSalary = setInterval(function() {
+	if (addSalaryControlPlace < 0) {
+		addSalaryControlPlace += 1;
+		controlSal.style.right = addSalaryControlPlace + '%';
+	} else {
+		clearInterval(animationControlSalary);
+	}
+}, 13);
+
 // animation for create case
 var cookie = document.cookie;
 var matches = document.cookie.match(new RegExp('caseAdd=1'));

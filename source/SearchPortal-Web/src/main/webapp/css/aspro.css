@@ -104,3 +104,10 @@
 	margin-bottom: 7px;
 	border-radius: 3px;
 }
+
+#controlSalaryMain {
+	position: fixed;
+	margin-top: 25px;
+	width: 50%;
+	right: -25%;
+}

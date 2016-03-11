@@ -4,10 +4,6 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	version="3.0">
 	<servlet>
-		<servlet-name>income-consumption</servlet-name>
-		<servlet-class>com.netcracker.unc.user.custom.servlets.IncomeConsumptionServlet</servlet-class>
-	</servlet>
-	<servlet>
 		<servlet-name>controller-priorities</servlet-name>
 		<servlet-class>com.netcracker.unc.modules.servlets.controllerPriorities</servlet-class>
 	</servlet>
@@ -19,10 +15,6 @@
 		<servlet-name>authorization</servlet-name>
 		<servlet-class>com.netcracker.unc.user.authorization.servlets.AuthorizationServlet</servlet-class>
 	</servlet>
-	<servlet-mapping>
-		<servlet-name>income-consumption</servlet-name>
-		<url-pattern>/attitudes/IncomeConsumption</url-pattern>
-	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>authorization</servlet-name>
 		<url-pattern>/authorization</url-pattern>

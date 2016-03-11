@@ -9,6 +9,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.netcracker.unc.newmvc.dao.ObjectController;
 import com.netcracker.unc.newmvc.dao.ObjectDAO;
 import com.netcracker.unc.newmvc.dao.ObjectModel;
 import com.netcracker.unc.newmvc.dao.ParamController;
@@ -116,15 +118,11 @@ public class InterfaceServlet extends HttpServlet {
 		object.setObjectName(caseNameStr);
 		object.setFinObjectTypeId(caseType);
 		object.setUserId(user.getUserId());
+		ObjectController objectController = new ObjectController();
 		objectDAO.addObject(object);
 
+		object = objectController.getLastCreatingObject(user.getAllObjects(), user.getUserId());
 		user = userDAO.getUser(user.getUserId());
-		for (ObjectModel obj : user.getAllObjects()) {
-			for (Integer id : objectsId) {
-				if (obj.getFinObjectId() != id)
-					object = obj;
-			}
-		}
 
 		ParamModel param = new ParamModel();
 		ParamController paramController = new ParamController();
