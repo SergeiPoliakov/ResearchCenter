@@ -3,7 +3,6 @@ package com.netcracker.unc.mvc.dao;
 
 import com.netcracker.unc.mvc.SQLQuery;
 import com.netcracker.unc.mvc.connection.ConnectionFactory;
-import com.netcracker.unc.mvc.models.CategoryModel;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -16,7 +15,7 @@ import java.util.List;
 
 public class CategoryDao extends ObjectDAO {
 
-	public List<CategoryModel> getAllCategoriesUser(int userId) {
+	/*public List<CategoryModel> getAllCategoriesUser(int userId) {
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -87,7 +86,7 @@ public class CategoryDao extends ObjectDAO {
 			}
 		}
 		return listOfCategories;
-	}
+	}*/
 
 	@Override
 	public List<Object> getAllObjectsDB() {

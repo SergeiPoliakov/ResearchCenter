@@ -1,50 +1,28 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.netcracker.unc.priorityModule;
 
+import java.util.List;
 
-
+import com.netcracker.unc.newmvc.dao.CategoryModel;
 
 public class FillHTMLTable {
 
-	/*public static String toHTMLString(List<ModelForTable> resultList) {
+	public static String toHtmlString(List<CategoryModel> categoryList) {
 		StringBuilder htmlString = new StringBuilder("<div class = \"priority-table\"><table>");
-
-		try {
-			for (ModelForTable modelForTable : resultList) {
-
-				htmlString.append("<tr>");
-				htmlString.append(addRow(modelForTable));
-				htmlString.append("</tr>");
+		if (categoryList != null && !categoryList.isEmpty()) {
+			for (CategoryModel cm : categoryList) {
+				htmlString.append(addCategoryString(cm));
 			}
-		} catch (Exception e) {
-			htmlString.append(e.getMessage());
 		}
-
 		htmlString.append("</table></div>");
 		return htmlString.toString();
 	}
 
-	private static String addRow(ModelForTable modelForTable) {
+	private static String addCategoryString(CategoryModel categoryModel) {
+		StringBuilder categoryString = new StringBuilder("<tr><td>");
 
-		// пока будет элементарно
-		String label = "<td>" + modelForTable.getName() + "</td>" + "<td>" + modelForTable.getValue()
-				+ "</td>";
+		categoryString.append(categoryModel.getObjectName());
 
-		return label;
+		categoryString.append("</td></tr>");
+		return categoryString.toString();
 	}
-
-	private String useCategoryOption() {
-		return "";
-	}*/
-
-	/*
-	 * пока без вложений таблицы
-	 * 
-	 * private String useSubOption() { return ""; }
-	 */
-
 }

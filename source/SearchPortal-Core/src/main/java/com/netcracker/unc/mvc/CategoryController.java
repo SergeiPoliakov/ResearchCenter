@@ -12,14 +12,13 @@ import java.util.List;
 
 import com.netcracker.unc.mvc.connection.ConnectionFactory;
 import com.netcracker.unc.mvc.dao.CategoryDao;
-import com.netcracker.unc.mvc.models.CategoryModel;
 import com.netcracker.unc.mvc.models.UserModel;
 
 public class CategoryController {
 
 	private UserModel user;
 
-	private CategoryModel categoryModel = null;
+	/*private CategoryModel categoryModel = null;
 	private CategoryDao categoryDao = null;
 
 	private PreparedStatement prepare = null;
@@ -100,5 +99,5 @@ public class CategoryController {
 
 	public CategoryController(UserModel UserFromPage) {
 		user = UserFromPage;
-	}
+	}*/
 }
