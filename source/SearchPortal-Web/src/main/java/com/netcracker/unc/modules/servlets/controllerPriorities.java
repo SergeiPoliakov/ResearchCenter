@@ -16,7 +16,6 @@ import com.netcracker.unc.mvc.dao.CategoryDao;
 import com.netcracker.unc.mvc.models.CategoryModel;
 import com.netcracker.unc.priorityModule.CalculationPriority;
 import com.netcracker.unc.priorityModule.FillHTMLTable;
-import com.netcracker.unc.priorityModule.ModelForTable;
 
 /**
  * Servlet implementation class controllerPriorities
@@ -41,7 +40,7 @@ public class controllerPriorities extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
 		int userId = Integer.parseInt(request.getParameter("userId"));
-		List<ModelForTable> resultList = new ArrayList<ModelForTable>();
+		/*List<ModelForTable> resultList = new ArrayList<ModelForTable>();
 		try {
 			CategoryDao categoryDao = new CategoryDao();
 			List<CategoryModel> categoryList = new ArrayList<CategoryModel>(categoryDao.getAllCategoriesUser(userId));
@@ -57,7 +56,7 @@ public class controllerPriorities extends HttpServlet {
 		}
 		request.setAttribute("dataForPriorityList", resultList);
 		RequestDispatcher disp = request.getRequestDispatcher("/sadpage.jsp");
-		disp.forward(request, response);
+		disp.forward(request, response);*/
 	}
 
 	/**

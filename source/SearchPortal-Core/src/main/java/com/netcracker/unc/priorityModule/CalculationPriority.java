@@ -5,15 +5,19 @@
  */
 package com.netcracker.unc.priorityModule;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
-import com.netcracker.unc.mvc.models.CategoryModel;
 
 public class CalculationPriority {
 
-	private List<IntermediateModel> intermediateModelList = null;
+	public static double calculationPrePersent(){
+		return 0;
+	}
+	
+	public static double centerValueInCategories(){
+		return 0;
+	}
+	
+	/*private List<IntermediateModel> intermediateModelList = null;
 
 	public List<ModelForTable> convertToTableView(List<CategoryModel> categoryList, double sumInvoice,
 			double sumIncome) {
@@ -44,15 +48,7 @@ public class CalculationPriority {
 		} else {
 			resultList = Collections.emptyList();
 		}
-		/*
-		 * List<ModelForTable> resultCategoryList; ModelForTable modelForTable =
-		 * null; if (categoryModel != null && !categoryModel.isEmpty()) {
-		 * resultCategoryList = new ArrayList<ModelForTable>(); for
-		 * (CategoryModel catmod : categoryModel) { modelForTable = new
-		 * ModelForTable(); modelForTable.setName(catmod.getObjectName());
-		 * modelForTable.setValue(catmod.getSumCategory().doubleValue());
-		 * resultCategoryList.add(modelForTable); }
-		 */
+		
 		return resultList;
 	}
 
@@ -148,5 +144,5 @@ public class CalculationPriority {
 		public void setPercent(double percent) {
 			this.percent = percent;
 		}
-	}
+	}*/
 }

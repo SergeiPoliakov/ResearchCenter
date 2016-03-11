@@ -1,18 +1,8 @@
-<%@page import="com.netcracker.unc.priorityModule.ModelForTable"%>
-<%@page import="java.sql.PreparedStatement"%>
-<%@page import="java.util.Locale"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.Connection"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="com.netcracker.unc.priorityModule.FillHTMLTable"%>
-<%@page import="com.netcracker.unc.priorityModule.CalculationPriority"%>
 <%@page import="java.util.List"%>
-<%@page import="com.netcracker.unc.mvc.CategoryController"%>
-<%@page import="com.netcracker.unc.mvc.models.UserModel"%>
-<%@page import="com.netcracker.unc.mvc.ObjectController"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.netcracker.unc.mvc.dao.CategoryDao"%>
-<%@page import="com.netcracker.unc.mvc.models.CategoryModel"%>
+<%@page import="com.netcracker.unc.newmvc.dao.CategoryModel"%>
+<%@page import="com.netcracker.unc.newmvc.dao.CategoryController"%>
+<%@page import="com.netcracker.unc.newmvc.dao.UserModel"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -33,15 +23,42 @@
 	<div class="module" id="priority-module">
 		<div class="block-title">Приоритеты</div>
 		<div class="block-information">
-			<form action="controllerPriorities" method="get">
+			<!--  <form action="controllerPriorities" method="get">
 				<input type="hidden" name="userId" value="1" /> <input
 					type="submit" value="UP" />
-			</form>
+			</form>-->
 			<%
-				List<ModelForTable> dataForPriorityList = new ArrayList<ModelForTable>();
-				dataForPriorityList = (List<ModelForTable>) request.getAttribute("dataForPriorityList");
+				UserModel user = (UserModel) request.getSession().getAttribute("user");
+				CategoryController categoryController = new CategoryController(user.getUserId());
+				List<CategoryModel> categoryList = new ArrayList<CategoryModel>(
+						categoryController.getCategoriesWithPriorities());
+				if (categoryList != null && !categoryList.isEmpty()) {
+					for (CategoryModel cm : categoryList) {
 			%>
-			<%=FillHTMLTable.toHTMLString(dataForPriorityList)%>
+			<%=cm.getObjectName()%>
+			<%
+				}
+				} else {
+					if (categoryList == null) {
+			%>
+			<p>List null</p>
+			<%
+				} else {
+			%>
+			<p>List is empty</p>
+			<%
+				}
+				}
+			%>
+			<%=user.getUserId()%>
+
+			<%
+				//List<ModelForTable> dataForPriorityList = new ArrayList<ModelForTable>();
+				//dataForPriorityList = (List<ModelForTable>) request.getAttribute("dataForPriorityList");
+			%>
+			<%
+				/*=FillHTMLTable.toHTMLString(dataForPriorityList)*/
+			%>
 			<%
 				/*
 				CalculationPriority calculationPriority = new CalculationPriority();
@@ -93,7 +110,7 @@
 			%>
 			<%
 				/*
-								}
+								//}
 				
 								} catch (Exception e) {
 									e.printStackTrace();

@@ -5,14 +5,12 @@
  */
 package com.netcracker.unc.priorityModule;
 
-import java.util.ArrayList;
-import java.util.List;
-import com.netcracker.unc.mvc.models.CategoryModel;
+
 
 
 public class FillHTMLTable {
 
-	public static String toHTMLString(List<ModelForTable> resultList) {
+	/*public static String toHTMLString(List<ModelForTable> resultList) {
 		StringBuilder htmlString = new StringBuilder("<div class = \"priority-table\"><table>");
 
 		try {
@@ -41,7 +39,7 @@ public class FillHTMLTable {
 
 	private String useCategoryOption() {
 		return "";
-	}
+	}*/
 
 	/*
 	 * пока без вложений таблицы
