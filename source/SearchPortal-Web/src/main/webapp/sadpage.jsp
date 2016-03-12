@@ -28,12 +28,8 @@
 			<%
 				UserModel user = (UserModel) request.getSession().getAttribute("user");
 				CategoryController categoryController = new CategoryController(user.getUserId());
-				List<CategoryModel> categoryList = new ArrayList<CategoryModel>(
-						categoryController.getCategoriesWithPriorities());
-				CalculationPriority calculationPriority = new CalculationPriority();
-				calculationPriority.runCalculaton();
-			%><%=FillHTMLTable.toHtmlString(categoryList)%>
-
+			%>
+			<%=FillHTMLTable.toHtmlString(categoryController.getCategoriesWithPriorities())%>
 			<%=user.getUserId()%>
 		</div>
 	</div>
