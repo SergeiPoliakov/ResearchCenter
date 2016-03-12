@@ -21,7 +21,8 @@ public class FillHTMLTable {
 		StringBuilder categoryString = new StringBuilder("<tr><td>");
 
 		categoryString.append(categoryModel.getObjectName());
-
+		categoryString.append("</td><td>");
+		categoryString.append(categoryModel.getPercent());
 		categoryString.append("</td></tr>");
 		return categoryString.toString();
 	}

@@ -27,7 +27,7 @@
 		<div class="block-information">
 			<%
 				UserModel user = (UserModel) request.getSession().getAttribute("user");
-				CategoryController categoryController = new CategoryController(user.getUserId());
+				CategoryController categoryController = new CategoryController(user);
 			%>
 			<%=FillHTMLTable.toHtmlString(categoryController.getCategoriesWithPriorities())%>
 			<%=user.getUserId()%>

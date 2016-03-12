@@ -11,7 +11,7 @@ public class CategoryModel {
 	private Date finalDate = null;
 	private BigDecimal coeficient = null;
 	private BigDecimal sumCategory = null;
-	private double persent = 0;
+	private double percent = 0;
 
 	public Integer getObjectId() {
 		return objectId;
@@ -21,12 +21,12 @@ public class CategoryModel {
 		this.objectId = objectId;
 	}
 
-	public double getPersent() {
-		return persent;
+	public double getPercent() {
+		return percent;
 	}
 
-	public void setPersent(double persent) {
-		this.persent = persent;
+	public void setPercent(double percent) {
+		this.percent = percent;
 	}
 
 	public String getObjectName() {
