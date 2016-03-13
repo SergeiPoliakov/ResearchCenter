@@ -14,38 +14,37 @@ import com.netcracker.unc.newmvc.dao.CategoryModel;
 public class CalculationPriority {
 
 	private List<CategoryModel> categoryList;
-	private double centerValue = 0; // 50%
 	private double sumIncome = 0;
 
 	public List<CategoryModel> toCalculate() {
-
-		centerValue = centerValueInCategories();
-
-		for (CategoryModel cm : categoryList) {
-			double percent = 0.5 * calculationIntermediateValue(cm) / centerValue;
-			// еще нужно будет умножить на коэффициент разности доходов-расходов
-			
-			cm.setPercent(percent);
-		}
-
+		double onePercent = getOnePercentValue();
+			for (CategoryModel cm : categoryList) {
+				double percent = calculationIntermediateValue(cm) / onePercent;
+				cm.setPercent(percent);
+			}
 		if (categoryList.isEmpty())
 			categoryList = Collections.emptyList();
 		return categoryList;
 	}
-
-	private double centerValueInCategories() {
+	
+	private double getOnePercentValue(){
 		double sumValue = 0;
 		for (CategoryModel cm : categoryList) {
 			sumValue = sumValue + calculationIntermediateValue(cm);
 		}
-		return sumValue / categoryList.size();
+		return sumValue/100;
 	}
 
 	private double calculationIntermediateValue(CategoryModel cm) {
-		double value = cm.getCoeficient().doubleValue()
-				* (sumIncome * (cm.getMaxPercent().doubleValue() + cm.getMinPercent().doubleValue()) / (2 * 100)
-						- cm.getSumCategory().doubleValue());
-		return value;
+		if (sumIncome * (cm.getMaxPercent().doubleValue() / 100) - cm.getSumCategory().doubleValue() < 0) {
+			return 0;
+		} else {
+
+			double value = cm.getCoeficient().doubleValue()
+					* (sumIncome * (cm.getMaxPercent().doubleValue() + cm.getMinPercent().doubleValue()) / (2 * 100)
+							- cm.getSumCategory().doubleValue());
+			return value;
+		}
 	}
 
 	public CalculationPriority(List<CategoryModel> categoryList, double sumIncome) {
