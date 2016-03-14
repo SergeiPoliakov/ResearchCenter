@@ -6,41 +6,57 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link type="text/css" rel="stylesheet"
+	href="interface/css/update_user.css" />
 </head>
 <body>
 	<div class="updateUser">
-		<form action="UpdateUser">
-			<table cellspacing="10px">
+		<form action="interface" onsubmit="return checkUpdateUserRegExp()">
+			<input type="hidden" value="updateUser" name="interfaces" />
+			<table cellspacing="2" rules="groups" border="2" height="180px">
 				<thead>
 					<tr>
-						<th>Редактировать свой профиль:</th>
+						<th colspan="4">Редактировать свой профиль:</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="updateUserTBody">
 					<tr>
-						<td>Смена имени:</td>
-						<td><input type="text" name="name" /></td>
+						<td class="upUsLab"><label class="editUserLabel">Смена
+								имени:</label></td>
+						<td colspan="1" align="center"><input type="text" name="name"
+							id="editUserInputName" /></td>
+						<td colspan="2"><label id="errorNameLabel">имя должно
+								состоять только из букв (не более 15 символов)</label></td>
 					</tr>
 					<tr>
-						<td>Смена пароля:</td>
-						<td><input type="password" name="oldPas" /></td>
-						<td><input type="password" name="newPas" /></td>
-						<td><c:if test="${not empty errorPassword}">
-							${errorPassword}
-						</c:if></td>
+						<td class="upUsLab"><label class="editUserLabel">Старый
+								пароль:</label></td>
+						<td colspan="1" align="center"><input type="password"
+							name="oldPas" id="oldPas" /></td>
+						<td colspan="2"><label id="errorPasswordLabel"></label></td>
+					</tr>
+					<tr>
+						<td class="upUsLab"><label class="editUserLabel">Новый
+								пароль:</label></td>
+						<td align="center"><input type="password" name="newPas"
+							id="newPas" /></td>
+						<td><label style="margin-left: 1%">подтвердить:</label></td>
+						<td align="left"><input type="password" name="newPasTwice"
+							id="newPasTwice" /></td>
 					</tr>
 				</tbody>
 				<tfoot>
 					<tr>
-						<td><input type="submit" value="Изменить" /></td>
+						<td colspan="4"><input type="submit" value="Изменить"
+							id="editUserSubmit" /></td>
 					</tr>
 				</tfoot>
 			</table>
 		</form>
 	</div>
 
-
-
-
 </body>
+
+<script src="interface/js/updateUser.js"></script>
+
 </html>

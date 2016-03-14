@@ -29,7 +29,7 @@
 #logOutSubmit {
 	position: absolute;
 	display: block;
-	margin-top: 30px;
+	margin-top: 1%;
 	margin-left: 95%;
 }
 
@@ -110,4 +110,21 @@
 	margin-top: 25px;
 	width: 50%;
 	right: -25%;
+}
+
+#editUserLabel {
+	font-family: Roman; /* устанавливает шрифт */
+	cursor: pointer;
+	color: blue;
+	font-size: 15px;
+	margin-right: 1%;
+}
+
+#editUser {
+	margin-top: 50px;
+	width: 50%;
+	height: 500px;
+	position: absolute;
+	left: 25%;
+	right: 25%;
 }

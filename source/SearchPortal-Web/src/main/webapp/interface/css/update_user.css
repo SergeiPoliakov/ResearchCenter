@@ -1,0 +1,34 @@
+@CHARSET "UTF-8";
+
+#editUserSubmit {
+	width: 12%;
+	height: 30px;
+	font-size: 14px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 10px;
+}
+
+#editUserInputName {
+	width: 90%;
+	height: 15px;
+	font-size: 15px;
+}
+
+.editUserLabel {
+	margin-left: 7px;
+}
+
+#errorNameLabel, #errorPasswordLabel {
+	visibility: hidden;
+	font-size: 10px;
+	color: red;
+}
+
+#newPasTwice {
+	margin-left: 5%;
+}
+
+.upUsLab {
+	width: 20%;
+}

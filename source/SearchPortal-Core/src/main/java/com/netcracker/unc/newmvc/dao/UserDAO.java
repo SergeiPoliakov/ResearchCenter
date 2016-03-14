@@ -82,6 +82,29 @@ public class UserDAO {
 		}
 	}
 
+	public void updateUser(UserModel user) {
+		Connection connect = ConnectionFactory.getConnection();
+
+		try {
+			PreparedStatement prepare = connect.prepareStatement(UserQueries.SP_USERS_UPDATE_BY_ID);
+			prepare.setString(1, user.getLogin());
+			prepare.setInt(2, user.getHashSum());
+			prepare.setString(3, user.getName());
+			prepare.setString(4, user.getAccountType());
+			prepare.setInt(5, user.getSalt());
+			prepare.setInt(6, user.getUserId());
+			prepare.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 	public UserModel getUser(int userId) {
 		Connection connect = ConnectionFactory.getConnection();
 		UserModel user = new UserModel();

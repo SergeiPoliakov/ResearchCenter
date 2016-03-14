@@ -13,6 +13,7 @@ import com.netcracker.unc.newmvc.dao.ParamDAO;
 import com.netcracker.unc.newmvc.dao.UserDAO;
 import com.netcracker.unc.newmvc.dao.controllers.ObjectController;
 import com.netcracker.unc.newmvc.dao.controllers.ParamController;
+import com.netcracker.unc.newmvc.dao.controllers.UserController;
 import com.netcracker.unc.newmvc.dao.models.ObjectModel;
 import com.netcracker.unc.newmvc.dao.models.ParamModel;
 import com.netcracker.unc.newmvc.dao.models.UserModel;
@@ -156,6 +157,33 @@ public class InterfaceServlet extends HttpServlet {
 
 	}
 
+	private void updateUser(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String userName = request.getParameter("name");
+		String oldPas = request.getParameter("oldPas");
+		String newPas = request.getParameter("newPas");
+		request.setAttribute("errorOldPassword", "ok");
+
+		UserModel user = (UserModel) request.getSession().getAttribute("user");
+		UserController userController = new UserController();
+		UserDAO userDAO = new UserDAO();
+		// if old password incorrect
+		if (userController.createSalt(oldPas) != user.getSalt()) {
+			Cookie cookie = new Cookie("errorUpdateUser", "1");
+			response.addCookie(cookie);
+			response.sendRedirect("modules.jsp");
+		} else {
+			user.setLogin(user.getLogin());
+			user.setName(userName);
+			user.setHashSum(newPas.hashCode());
+			user.setSalt(userController.createSalt(newPas));
+			userDAO.updateUser(user);
+			request.getSession().setAttribute("user", user);
+			response.sendRedirect("modules.jsp");
+		}
+	}
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -168,6 +196,9 @@ public class InterfaceServlet extends HttpServlet {
 			updateCases(request, response);
 		else if (interfaces.equals("createCase"))
 			createCase(request, response);
+		else if (interfaces.equals("updateUser")) {
+			updateUser(request, response);
+		}
 
 	}
 
