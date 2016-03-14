@@ -13,7 +13,8 @@
 
 	<jsp:useBean id="userController"
 		class="com.netcracker.unc.newmvc.dao.UserDAO" />
-	<jsp:useBean id="user" class="com.netcracker.unc.newmvc.dao.UserModel" />
+	<jsp:useBean id="user"
+		class="com.netcracker.unc.newmvc.dao.models.UserModel" />
 
 	<!-- for change authorization and registration -->
 	<c:set var="check" value="false" />

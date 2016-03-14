@@ -2,22 +2,20 @@ package com.netcracker.unc.user.interfaces.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.netcracker.unc.newmvc.dao.ObjectController;
 import com.netcracker.unc.newmvc.dao.ObjectDAO;
-import com.netcracker.unc.newmvc.dao.ObjectModel;
-import com.netcracker.unc.newmvc.dao.ParamController;
 import com.netcracker.unc.newmvc.dao.ParamDAO;
-import com.netcracker.unc.newmvc.dao.ParamModel;
 import com.netcracker.unc.newmvc.dao.UserDAO;
-import com.netcracker.unc.newmvc.dao.UserModel;
+import com.netcracker.unc.newmvc.dao.controllers.ObjectController;
+import com.netcracker.unc.newmvc.dao.controllers.ParamController;
+import com.netcracker.unc.newmvc.dao.models.ObjectModel;
+import com.netcracker.unc.newmvc.dao.models.ParamModel;
+import com.netcracker.unc.newmvc.dao.models.UserModel;
 
 @WebServlet("/interface")
 public class InterfaceServlet extends HttpServlet {
@@ -50,6 +48,7 @@ public class InterfaceServlet extends HttpServlet {
 			priorityCase = "0.35";
 
 		UserModel user = (UserModel) request.getSession().getAttribute("user");
+		UserDAO userDAO = new UserDAO();
 		ObjectModel object = null;
 		ObjectDAO objectDAO = new ObjectDAO();
 		ParamDAO paramDAO = new ParamDAO();
@@ -79,6 +78,7 @@ public class InterfaceServlet extends HttpServlet {
 		// change case
 		object.setObjectName(nameCase.trim());
 		objectDAO.updateObject(object);
+		request.getSession().setAttribute("user", userDAO.getUser(user.getUserId()));
 
 		Cookie cookie = new Cookie("caseUpdate", "1");
 		response.addCookie(cookie);

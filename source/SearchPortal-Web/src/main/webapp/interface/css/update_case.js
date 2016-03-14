@@ -144,7 +144,7 @@ function changeCase(element) {
 	if (ref.innerHTML.valueOf() == 'применить'.valueOf())
 		ref.onclick = new function() {
 			var form = document.getElementById('updateCaseTable');
-			form.setAttribute('action', 'UpdateCase');
+			form.setAttribute('action', 'interface');
 			form.setAttribute('method', 'get');
 			form.submit();
 		};

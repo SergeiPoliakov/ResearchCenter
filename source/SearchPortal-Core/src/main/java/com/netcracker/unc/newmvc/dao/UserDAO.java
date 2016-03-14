@@ -6,7 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import com.netcracker.unc.mvc.connection.ConnectionFactory;
+import com.netcracker.unc.newmvc.connection.ConnectionFactory;
+import com.netcracker.unc.newmvc.dao.models.ObjectModel;
+import com.netcracker.unc.newmvc.dao.models.ParamModel;
+import com.netcracker.unc.newmvc.dao.models.UserModel;
+import com.netcracker.unc.newmvc.dao.queries.ObjectQueries;
+import com.netcracker.unc.newmvc.dao.queries.UserQueries;
 
 public class UserDAO {
 

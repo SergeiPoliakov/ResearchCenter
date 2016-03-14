@@ -1,4 +1,4 @@
-<%@page import="java.util.ArrayList"%>
+<%-- <%@page import="java.util.ArrayList"%>
 <%@page import="com.netcracker.unc.priorityModule.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -88,4 +88,4 @@
 <script src="javascripts/aspro.js"></script>
 <script src="interface/css/create_case.js"></script>
 
-</html>
+</html> --%>

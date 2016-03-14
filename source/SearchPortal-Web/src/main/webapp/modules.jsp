@@ -16,7 +16,8 @@
 </head>
 <body>
 	<jsp:useBean id="userDAO" class="com.netcracker.unc.newmvc.dao.UserDAO" />
-	<jsp:useBean id="user" class="com.netcracker.unc.newmvc.dao.UserModel" />
+	<jsp:useBean id="user"
+		class="com.netcracker.unc.newmvc.dao.models.UserModel" />
 	<c:set var="checkCookie" value="error"></c:set>
 	<c:forEach var="userCookie" items="${pageContext.request.cookies}">
 		<c:choose>
@@ -64,6 +65,7 @@
             <button id ="income-menu-button" class="button">Доходы</button>
             <button id ="fast-add-income" class="button">+</button>-->
 		<button id="statistic-menu-button" class="button">Статистика</button>
+
 		<button id="statistic-menu-button" class="button"
 			onclick="showCreateCase()">Создать</button>
 		<button id="statistic-menu-button" class="button"
