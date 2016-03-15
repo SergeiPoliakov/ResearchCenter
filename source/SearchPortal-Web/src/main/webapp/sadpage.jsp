@@ -3,9 +3,9 @@
 <%@page import="com.netcracker.unc.priorityModule.FillHTMLTable"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.netcracker.unc.newmvc.dao.CategoryModel"%>
-<%@page import="com.netcracker.unc.newmvc.dao.CategoryController"%>
-<%@page import="com.netcracker.unc.newmvc.dao.UserModel"%>
+<%@page import="com.netcracker.unc.newmvc.dao.models.CategoryModel"%>
+<%@page import="com.netcracker.unc.newmvc.dao.controllers.CategoryController"%>
+<%@page import="com.netcracker.unc.newmvc.dao.models.UserModel"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

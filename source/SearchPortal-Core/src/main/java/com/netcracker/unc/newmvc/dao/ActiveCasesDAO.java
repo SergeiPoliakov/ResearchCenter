@@ -6,8 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.netcracker.unc.mvc.connection.ConnectionFactory;
+import com.netcracker.unc.newmvc.connection.ConnectionFactory;
+import com.netcracker.unc.newmvc.dao.controllers.ActiveCasesController;
+import com.netcracker.unc.newmvc.dao.models.ActiveCasesModel;
 
 public class ActiveCasesDAO {
 

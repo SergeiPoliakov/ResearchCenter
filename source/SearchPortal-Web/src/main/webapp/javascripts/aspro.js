@@ -2,6 +2,52 @@
  * @author Kolesnikov
  */
 
+// to save show edit user module
+var matches = document.cookie.match(new RegExp('errorUpdateUser=1'));
+var divEditUser = document.getElementById("editUser");
+var errorPasswordLabel = document.getElementById("errorPasswordLabel");
+if (matches) {
+	errorPasswordLabel.innerHTML = 'старый пароль введен неверно';
+	errorPasswordLabel.style.visibility = 'visible';
+	divEditUser.style.visibility = 'visible';
+	// for delete cookie
+	document.cookie = 'errorUpdateUser'
+			+ '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+} else {
+	errorPasswordLabel.innerHTML = "";
+	errorPasswordLabel.style.visibility = 'hidden';
+	divEditUser.style.visibility = 'hidden';
+}
+
+// show-hide edit user module
+function showHideUpdateUser() {
+	var div = document.getElementById("editUser");
+	var errorPasswordLabel = document.getElementById("errorPasswordLabel");
+	var errorNameLabel = document.getElementById("errorNameLabel");
+	if (div.style.visibility.valueOf() == 'hidden'.valueOf()) {
+		div.style.visibility = 'visible';
+	} else {
+		errorPasswordLabel.style.visibility = 'hidden';
+		errorNameLabel.style.visibility = 'hidden';
+		div.style.visibility = 'hidden';
+	}
+}
+
+// animation for case interview
+if (document.getElementById("caseInterview") != null) {
+	var caseInterviewDiv = document.getElementById("caseInterview");
+	var addSalaryControlPlace = -25;
+	caseInterviewDiv.style.right = addSalaryControlPlace + '%';
+	var animationCaseInterview = setInterval(function() {
+		if (addSalaryControlPlace < 0) {
+			addSalaryControlPlace += 1;
+			caseInterviewDiv.style.right = addSalaryControlPlace + '%';
+		} else {
+			clearInterval(animationCaseInterview);
+		}
+	}, 20);
+}
+
 // animation for control salary
 var controlSal = document.getElementById("controlSalaryMain");
 var addSalaryControlPlace = -25;
@@ -13,7 +59,7 @@ var animationControlSalary = setInterval(function() {
 	} else {
 		clearInterval(animationControlSalary);
 	}
-}, 13);
+}, 20);
 
 // animation for create case
 var cookie = document.cookie;

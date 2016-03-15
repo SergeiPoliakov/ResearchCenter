@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import com.netcracker.unc.newmvc.dao.UserController;
 import com.netcracker.unc.newmvc.dao.UserDAO;
-import com.netcracker.unc.newmvc.dao.UserModel;
+import com.netcracker.unc.newmvc.dao.controllers.UserController;
+import com.netcracker.unc.newmvc.dao.models.UserModel;
 
 @WebServlet("/authorization")
 public class AuthorizationServlet extends HttpServlet {

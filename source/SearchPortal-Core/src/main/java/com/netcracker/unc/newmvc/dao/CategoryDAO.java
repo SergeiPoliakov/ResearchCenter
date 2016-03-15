@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.netcracker.unc.mvc.connection.ConnectionFactory;
+import com.netcracker.unc.newmvc.connection.ConnectionFactory;
+import com.netcracker.unc.newmvc.dao.models.CategoryModel;
+import com.netcracker.unc.newmvc.dao.queries.CategoryQueries;
 
 public class CategoryDAO {
 

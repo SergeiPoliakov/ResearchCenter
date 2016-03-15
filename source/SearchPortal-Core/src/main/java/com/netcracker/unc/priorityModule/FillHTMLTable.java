@@ -2,7 +2,7 @@ package com.netcracker.unc.priorityModule;
 
 import java.util.List;
 
-import com.netcracker.unc.newmvc.dao.CategoryModel;
+import com.netcracker.unc.newmvc.dao.models.CategoryModel;
 
 public class FillHTMLTable {
 

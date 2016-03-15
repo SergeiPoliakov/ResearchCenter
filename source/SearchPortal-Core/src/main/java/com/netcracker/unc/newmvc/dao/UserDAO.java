@@ -6,7 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import com.netcracker.unc.mvc.connection.ConnectionFactory;
+import com.netcracker.unc.newmvc.connection.ConnectionFactory;
+import com.netcracker.unc.newmvc.dao.models.ObjectModel;
+import com.netcracker.unc.newmvc.dao.models.ParamModel;
+import com.netcracker.unc.newmvc.dao.models.UserModel;
+import com.netcracker.unc.newmvc.dao.queries.ObjectQueries;
+import com.netcracker.unc.newmvc.dao.queries.UserQueries;
 
 public class UserDAO {
 
@@ -65,6 +70,29 @@ public class UserDAO {
 				prepare.setNull(1, java.sql.Types.VARCHAR);
 			prepare.setString(4, user.getAccountType());
 			prepare.setInt(5, user.getSalt());
+			prepare.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void updateUser(UserModel user) {
+		Connection connect = ConnectionFactory.getConnection();
+
+		try {
+			PreparedStatement prepare = connect.prepareStatement(UserQueries.SP_USERS_UPDATE_BY_ID);
+			prepare.setString(1, user.getLogin());
+			prepare.setInt(2, user.getHashSum());
+			prepare.setString(3, user.getName());
+			prepare.setString(4, user.getAccountType());
+			prepare.setInt(5, user.getSalt());
+			prepare.setInt(6, user.getUserId());
 			prepare.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

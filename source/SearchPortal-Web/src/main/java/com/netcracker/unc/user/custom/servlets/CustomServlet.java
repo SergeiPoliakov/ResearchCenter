@@ -11,16 +11,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.netcracker.unc.newmvc.dao.IncomeConsumptionDAO;
-import com.netcracker.unc.newmvc.dao.IncomeConsumptionModel;
-import com.netcracker.unc.newmvc.dao.ObjectController;
 import com.netcracker.unc.newmvc.dao.ObjectDAO;
-import com.netcracker.unc.newmvc.dao.ObjectModel;
-import com.netcracker.unc.newmvc.dao.ParamController;
-import com.netcracker.unc.newmvc.dao.ParamModel;
 import com.netcracker.unc.newmvc.dao.SalaryDAO;
-import com.netcracker.unc.newmvc.dao.SalaryModel;
 import com.netcracker.unc.newmvc.dao.UserDAO;
-import com.netcracker.unc.newmvc.dao.UserModel;
+import com.netcracker.unc.newmvc.dao.controllers.ObjectController;
+import com.netcracker.unc.newmvc.dao.controllers.ParamController;
+import com.netcracker.unc.newmvc.dao.models.IncomeConsumptionModel;
+import com.netcracker.unc.newmvc.dao.models.ObjectModel;
+import com.netcracker.unc.newmvc.dao.models.ParamModel;
+import com.netcracker.unc.newmvc.dao.models.SalaryModel;
+import com.netcracker.unc.newmvc.dao.models.UserModel;
 
 @WebServlet("/custom")
 public class CustomServlet extends HttpServlet {

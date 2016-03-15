@@ -16,7 +16,8 @@
 </head>
 <body>
 	<jsp:useBean id="userDAO" class="com.netcracker.unc.newmvc.dao.UserDAO" />
-	<jsp:useBean id="user" class="com.netcracker.unc.newmvc.dao.UserModel" />
+	<jsp:useBean id="user"
+		class="com.netcracker.unc.newmvc.dao.models.UserModel" />
 	<c:set var="checkCookie" value="error"></c:set>
 	<c:forEach var="userCookie" items="${pageContext.request.cookies}">
 		<c:choose>
@@ -49,6 +50,9 @@
 			Добро пожаловать <label
 				style="color: red; font-size: 16pt; background-color: #92d36e; margin-right: 10px"><c:out
 					value="${sessionScope.user.getLogin()}" /></label>
+			<p />
+			<label id="editUserLabel" onclick="showHideUpdateUser()">редактировать
+				профиль</label>
 			<form action="authorization">
 				<input type="hidden" value="logOut" name="authorization" /> <input
 					type="submit" value="Выход" id="logOutSubmit" />
@@ -64,8 +68,10 @@
             <button id ="income-menu-button" class="button">Доходы</button>
             <button id ="fast-add-income" class="button">+</button>-->
 		<button id="statistic-menu-button" class="button">Статистика</button>
+
 		<button id="statistic-menu-button" class="button"
 			onclick="showCreateCase()">Создать</button>
+
 		<button id="statistic-menu-button" class="button"
 			onclick="showActiveCases()">Текущие</button>
 		<div class="overlayInCons">
@@ -77,7 +83,7 @@
 		<jsp:include page="attitudes/salary_control.jsp"></jsp:include>
 	</div>
 
-	<c:set var="checkSalaryBro" value="${checkSalary }" scope="page" />
+	<c:set var="checkSalaryBro" value="${checkSalary}" scope="page" />
 	<c:if test="${checkSalaryBro == 'error'}">
 		<div id="helloCase">
 			<label class="welcomeCase" id="welcomeCase1"><b>Добро
@@ -121,6 +127,22 @@
 
 	<div id="updateCase" style="visibility: hidden;">
 		<jsp:include page="interface/update_case.jsp" />
+	</div>
+
+	<!-- needPay is test parameter which contain payment object -->
+	<c:set var="needPay" value="no" scope="page" />
+	<c:if test="${checkSalaryBro == 'ok'}">
+		<c:if test="${empty controlSalary}">
+			<c:if test="${needPay == 'yes' }">
+				<div id="caseInterview">
+					<jsp:include page="/control"></jsp:include>
+				</div>
+			</c:if>
+		</c:if>
+	</c:if>
+
+	<div id="editUser" style="visibility: hidden">
+		<jsp:include page="/interface/update_user.jsp"></jsp:include>
 	</div>
 
 	<div id="animationAddCase" style="visibility: hidden"></div>

@@ -46,6 +46,7 @@ select {
 		onsubmit="return false" />
 	<br />
 	<form id="updateCaseTable">
+		<input type="hidden" name="interfaces" value="updateCase" />
 		<div>
 			<table border="1">
 				<thead align="center">

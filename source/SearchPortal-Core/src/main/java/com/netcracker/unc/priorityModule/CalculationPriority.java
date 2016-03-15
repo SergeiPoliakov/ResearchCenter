@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.netcracker.unc.newmvc.dao.CategoryModel;
+import com.netcracker.unc.newmvc.dao.models.CategoryModel;
 
 public class CalculationPriority {
 

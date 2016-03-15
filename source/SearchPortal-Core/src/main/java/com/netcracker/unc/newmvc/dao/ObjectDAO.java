@@ -3,7 +3,9 @@ package com.netcracker.unc.newmvc.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import com.netcracker.unc.mvc.connection.ConnectionFactory;
+import com.netcracker.unc.newmvc.connection.ConnectionFactory;
+import com.netcracker.unc.newmvc.dao.models.ObjectModel;
+import com.netcracker.unc.newmvc.dao.queries.ObjectQueries;
 
 public class ObjectDAO {
 
