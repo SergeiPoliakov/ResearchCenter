@@ -9,6 +9,7 @@ $(function () {
     $("#statistic-menu-button").click(function (e) {
         $("#select-module1").css("display", "block");
         $("#priority-module").css("display", "none");
+        $("#categories-module").css("display", "none");
         
         $("#test3").css("display", "block");
         $("#test2").css("display", "block");
@@ -23,6 +24,7 @@ $(function () {
         $("#test2").css("display", "none");
         $("#test1").css("display", "block");
         $("#add-sum").css("display", "none");
+        $("#categories-module").css("none", "none");
     });
     $("#add-sum-button").click(function (e) {
         $("#add-sum").css("display", "block");

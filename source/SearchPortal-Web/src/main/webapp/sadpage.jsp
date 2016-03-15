@@ -1,3 +1,4 @@
+<%@page import="com.netcracker.unc.newmvc.dao.ObjectModel"%>
 <%@page import="com.netcracker.unc.priorityModule.CalculationPriority"%>
 <%@page import="com.netcracker.unc.priorityModule.FillHTMLTable"%>
 <%@page import="java.util.List"%>
@@ -18,13 +19,13 @@
 <script src="javascripts/googleApiCharts.js"></script>
 <script src="javascripts/priorityHistogram.js"></script>
 </head>
-<body>
+<body><h1>t1</h1>
 	<div class="header">
 		<div id="logo">214*59</div>
 		<button id="cost-menu-button" class="button">Расходы</button>
 		<button id="statistic-menu-button" class="button">Статистика</button>
 	</div>
-	<div id="top_x_div" style="width: 900px; height: 500px;"></div>
+	<h1>t2</h1>
 	<div class="module" id="priority-module">
 		<div class="block-title">Приоритеты</div>
 		<div class="block-information">
@@ -36,5 +37,14 @@
 			<%=user.getUserId()%>
 		</div>
 	</div>
+	<h1>t3</h1>
+	<div id="top_x_div" style="width: 900px; height: 500px;"></div>
+			<%List<ObjectModel> userObjects = new ArrayList<ObjectModel>(user.getAllObjects());
+			for(ObjectModel om: userObjects){
+				if(om.getFinObjectTypeId() == 1){%>
+				<%=	om.getObjectName()%>
+				<%}
+			}%>
+			<h1>t4</h1>
 </body>
 </html>

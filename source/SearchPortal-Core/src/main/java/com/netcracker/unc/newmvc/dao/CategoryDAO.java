@@ -48,9 +48,7 @@ public class CategoryDAO {
 				} else {
 					categoryModel.setMaxPercent(new BigDecimal(0));
 				}
-				if (resultSet.getObject("FINAL_DATE") != null) {
-					categoryModel.setFinalDate(resultSet.getDate("FINAL_DATE"));
-				}
+				
 				if (resultSet.getObject("SUM_CATEGORY") != null) {
 					categoryModel.setSumCategory(resultSet.getBigDecimal("SUM_CATEGORY"));
 				} else {
@@ -80,5 +78,14 @@ public class CategoryDAO {
 			}
 		}
 		return listOfCategories;
+	}
+	
+	public void addCategory(CategoryModel categoryModel){
+		Connection connection = ConnectionFactory.getConnection();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(" ");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

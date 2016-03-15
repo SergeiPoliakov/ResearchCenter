@@ -8,7 +8,6 @@ public class CategoryModel {
 	private String objectName = null;
 	private BigDecimal minPercent = null;
 	private BigDecimal maxPercent = null;
-	private Date finalDate = null;
 	private BigDecimal coeficient = null;
 	private BigDecimal sumCategory = null;
 	private double percent = 0;
@@ -51,14 +50,6 @@ public class CategoryModel {
 
 	public void setMaxPercent(BigDecimal maxPercent) {
 		this.maxPercent = maxPercent;
-	}
-
-	public Date getFinalDate() {
-		return finalDate;
-	}
-
-	public void setFinalDate(Date finalDate) {
-		this.finalDate = finalDate;
 	}
 
 	public BigDecimal getCoeficient() {

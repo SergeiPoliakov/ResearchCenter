@@ -5,12 +5,11 @@ google.charts.setOnLoadCallback(drawStuff);
 
 function drawStuff() {
 	var data = new google.visualization.arrayToDataTable([
-			[ 'Opening Move', 'Percentage' ], [ "King's pawn (e4)", 44 ],
-			[ "Продукты", 31 ], [ "ЖКХ", 72 ],
-			[ "Queen's bishop pawn (c4)", 10 ], [ 'Other', 3 ] ]);
+			[ 'Opening Move', 'Percentage', { role: 'style' }], [ "King's pawn (e4)", 44, 'color: green'],
+			[ "Продукты", 31, 'color: #cbe8ba' ], [ "ЖКХ", 72, 'color: #cbe8ba' ],
+			[ "Queen's bishop pawn (c4)", 10, 'color: #cbe8ba' ], [ 'Other', 3, 'color: #cbe8ba' ] ]);
 
 	var options = {
-		title : 'Chess opening moves',
 		width : 900,
 		legend : {
 			position : 'none'
@@ -20,7 +19,7 @@ function drawStuff() {
 			x : {
 				0 : {
 					side : 'top',
-					label : 'Percentage'
+					label : 'Проценты'
 				}
 			// Top x-axis.
 			}
