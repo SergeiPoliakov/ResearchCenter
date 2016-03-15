@@ -11,35 +11,30 @@ public class IncomeConsumptionDAO {
 
 	// name columns of database
 	private final int typeIncomeInt = 2;
-	private final String checkRegularIncome = "true";
 	private final int typeConsumptionInt = 4;
-	private final int attributeIncomeInt = 5;
+	private final int attributeIncomeInt = 5; // Сумма дохода
 	private final int attributeConsumptionInt = 12;
 
 	public IncomeConsumptionModel procentForBar(IncomeConsumptionModel inCon, int userId) {
 
 		Connection connect = ConnectionFactory.getConnection();
 		// System.out.println(user.get_user_id());
-		// column names: 1) maxCos 2) minCost 3) maxName 4) minName 5) avgCost
+		// column names: 1) maxCost 2) minCost 3) maxName 4) minName 5) avgCost
 		// 6) sumCosts
-		String query = "select max(to_number(q1.VALUE)) over() as maxcost, min(to_number(q1.VALUE)) "
-				+ "over() as mincost, first_value(q2.object_name) "
-				+ "over(order by to_number(q1.VALUE) desc) as maxname, "
-				+ "first_value(q2.object_name) over(order by to_number(q1.VALUE)) as "
-				+ "minname, sum(to_number(q1.VALUE)) over() as sumcost from SP_PARAMS q1 "
-				+ "right join (select c1.FIN_OBJECT_ID, c2.fin_object_type_id, "
-				+ "c2.OBJECT_NAME from SP_PARAMS c1 inner join SP_FIN_OBJECTS c2 on "
-				+ "c1.FIN_OBJECT_ID = c2.FIN_OBJECT_ID where c2.FIN_OBJECT_TYPE_ID = ? "
-				+ "and c2.USER_ID = ? and lower(c1.VALUE) = ?) q2 on "
-				+ "q1.FIN_OBJECT_ID = q2.fin_object_id where q1.ATTRIBUTE_ID = ?";
+		String query = "select max(to_number(q1.VALUE)) over() as maxcost, min(to_number(q1.VALUE)) over() as mincost, "
+				+ "first_value(q3.object_name) over(order by to_number(q1.VALUE) desc) as maxname, first_value(q3.object_name) "
+				+ "over(order by to_number(q1.VALUE)) as minname, sum(to_number(q1.VALUE)) over() as sumcost, avg(to_number(q1.VALUE))over() "
+				+ "as avgcost from sp_params q1 right join (select n1.FIN_OBJECT_ID from (select s1.FIN_OBJECT_ID from sp_fin_objects s1 "
+				+ "where s1.USER_ID = ? and s1.FIN_OBJECT_TYPE_ID = ?) n1 right join sp_params n2 on n1.FIN_OBJECT_ID = n2.FIN_OBJECT_ID "
+				+ "where TRUNC(MONTHS_BETWEEN(sysdate, n2.value_date), 0) = 0) q2 on q1.FIN_OBJECT_ID = q2.FIN_OBJECT_ID right join "
+				+ "SP_FIN_OBJECTS q3 on q2.FIN_OBJECT_ID = q3.FIN_OBJECT_ID where q1.ATTRIBUTE_ID = ?";
 
 		try {
 			// for income
 			PreparedStatement prepare = connect.prepareStatement(query);
-			prepare.setInt(1, typeIncomeInt);
-			prepare.setInt(2, userId);
-			prepare.setString(3, checkRegularIncome.toLowerCase());
-			prepare.setInt(4, attributeIncomeInt);
+			prepare.setInt(1, userId);
+			prepare.setInt(2, typeIncomeInt);
+			prepare.setInt(3, attributeIncomeInt);
 			ResultSet result = prepare.executeQuery();
 			while (result.next()) {
 				inCon.setMaxIncome(result.getLong("MAXCOST"));
@@ -48,19 +43,6 @@ public class IncomeConsumptionDAO {
 				inCon.setMinIncomeName(result.getString("MINNAME"));
 				// setAvgIncome(result.getLong("AVGCOST"));
 				inCon.setFullIncome(result.getLong("SUMCOST"));
-			}
-			prepare.close();
-
-			query = "select avg(w1.VALUE) as avgcost from sp_params w1 inner join "
-					+ "SP_FIN_OBJECTS w2 on w1.FIN_OBJECT_ID = w2.FIN_OBJECT_ID "
-					+ "where w2.FIN_OBJECT_TYPE_ID = ? and w1.ATTRIBUTE_ID = ? " + "and w2.USER_ID = ?";
-
-			prepare = connect.prepareStatement(query);
-			prepare.setInt(1, typeIncomeInt);
-			prepare.setInt(2, attributeIncomeInt);
-			prepare.setInt(3, userId);
-			result = prepare.executeQuery();
-			while (result.next()) {
 				inCon.setAvgIncome(result.getLong("AVGCOST"));
 			}
 			prepare.close();

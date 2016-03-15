@@ -13,7 +13,7 @@ public class ParamController {
 	// database attributes
 	private final int atrIncome = 5; // Сумма дохода
 	private final int atrDate = 4; // Дата дохода
-	private final int atrCheck = 9; // Ежемесячный расход
+	private final int atrCheck = 6; // Ежемесячный доход
 	private final String valueCheck = "true";
 
 	public Date convertToDate(String date) {
