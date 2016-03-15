@@ -16,6 +16,18 @@ public class ParamController {
 	private final int atrCheck = 9; // Ежемесячный расход
 	private final String valueCheck = "true";
 
+	public Date convertToDate(String date) {
+		java.util.Date oldDate;
+		Date sqlDate = null;
+		try {
+			oldDate = parse.parse(date);
+			sqlDate = new Date(oldDate.getTime());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return sqlDate;
+	}
+
 	public ParamModel setParamDate(String date, ParamModel param) {
 		java.util.Date oldDate;
 		try {

@@ -1,0 +1,42 @@
+@CHARSET "UTF-8";
+
+#caseIntDiv {
+	border-top-left-radius: 18px;
+	border-bottom-left-radius: 18px;
+	border: 1px #004949 groove; /* рамка */
+	float: right;
+	width: 15%;
+	background: #fef8a0;
+}
+
+#caseIntObjectName, .caseIntAte {
+	color: red;
+	font-family: Roman; /* устанавливает шрифт */
+	font-weight: 600; /* толщина текста */
+	font-size: 14px;
+}
+
+.caseIntLabel {
+	font-family: Roman; /* устанавливает шрифт */
+	font-size: 13px;
+	margin-left: 15px;
+}
+
+#interviewCaseButton {
+	width: 25%;
+	font-size: 10px;
+	height: 20px;
+	margin-left: 7%;
+	margin-top: 3px;
+	margin-bottom: 5px;
+}
+
+#interviewCaseRadioYes, #interviewCaseRadioNo {
+	margin-left: 2%;
+	margin-right: -1%;
+}
+
+#caseIntText {
+	width: 20%;
+	height: 10px;
+}

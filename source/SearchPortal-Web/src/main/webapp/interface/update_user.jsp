@@ -32,17 +32,17 @@
 						<td class="upUsLab"><label class="editUserLabel">Старый
 								пароль:</label></td>
 						<td colspan="1" align="center"><input type="password"
-							name="oldPas" id="oldPas" /></td>
+							name="oldPas" id="oldPas" class="upUseInp"/></td>
 						<td colspan="2"><label id="errorPasswordLabel"></label></td>
 					</tr>
 					<tr>
 						<td class="upUsLab"><label class="editUserLabel">Новый
 								пароль:</label></td>
 						<td align="center"><input type="password" name="newPas"
-							id="newPas" /></td>
+							id="newPas" class="upUseInp"/></td>
 						<td><label style="margin-left: 1%">подтвердить:</label></td>
 						<td align="left"><input type="password" name="newPasTwice"
-							id="newPasTwice" /></td>
+							id="newPasTwice" class="upUseInp"/></td>
 					</tr>
 				</tbody>
 				<tfoot>

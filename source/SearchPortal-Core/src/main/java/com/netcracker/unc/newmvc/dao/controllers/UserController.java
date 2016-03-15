@@ -18,6 +18,7 @@ public class UserController {
 	private final String object3 = "Продукты";
 	private final String object4 = "Кредит";
 	private final String object5 = "Другое";
+	private final int atributeCategory = 1; // Категория
 
 	// md5 hash
 	public int createSalt(String salt) {
@@ -59,7 +60,7 @@ public class UserController {
 
 			object = new ObjectModel();
 			object.setUserId(userDAO.getUserByLogin(user.getLogin()).getUserId());
-			object.setFinObjectTypeId(4);
+			object.setFinObjectTypeId(atributeCategory);
 
 			// add standard objects
 			object.setObjectName(object1);

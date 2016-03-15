@@ -41,4 +41,13 @@ public class ObjectController {
 		return object;
 	}
 
+	public ObjectModel getObjectById(UserModel user, int objectId) {
+		ObjectModel object = new ObjectModel();
+		for (ObjectModel obj : user.getAllObjects()) {
+			if (obj.getFinObjectId() == objectId)
+				object = obj;
+		}
+		return object;
+	}
+
 }

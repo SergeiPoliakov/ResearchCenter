@@ -33,6 +33,21 @@ function showHideUpdateUser() {
 	}
 }
 
+// animation for case interview
+if (document.getElementById("caseInterview") != null) {
+	var caseInterviewDiv = document.getElementById("caseInterview");
+	var addSalaryControlPlace = -25;
+	caseInterviewDiv.style.right = addSalaryControlPlace + '%';
+	var animationCaseInterview = setInterval(function() {
+		if (addSalaryControlPlace < 0) {
+			addSalaryControlPlace += 1;
+			caseInterviewDiv.style.right = addSalaryControlPlace + '%';
+		} else {
+			clearInterval(animationCaseInterview);
+		}
+	}, 20);
+}
+
 // animation for control salary
 var controlSal = document.getElementById("controlSalaryMain");
 var addSalaryControlPlace = -25;
@@ -44,7 +59,7 @@ var animationControlSalary = setInterval(function() {
 	} else {
 		clearInterval(animationControlSalary);
 	}
-}, 13);
+}, 20);
 
 // animation for create case
 var cookie = document.cookie;

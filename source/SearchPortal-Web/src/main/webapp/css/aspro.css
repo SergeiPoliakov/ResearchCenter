@@ -128,3 +128,9 @@
 	left: 25%;
 	right: 25%;
 }
+
+#caseInterview {
+	position: fixed;
+	width: 100%;
+	right: -25%;
+}
