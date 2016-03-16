@@ -1,4 +1,4 @@
-<%@page import="com.netcracker.unc.newmvc.dao.ObjectModel"%>
+<%@page import="com.netcracker.unc.newmvc.dao.models.ObjectModel"%>
 <%@page import="com.netcracker.unc.priorityModule.CalculationPriority"%>
 <%@page import="com.netcracker.unc.priorityModule.FillHTMLTable"%>
 <%@page import="java.util.List"%>

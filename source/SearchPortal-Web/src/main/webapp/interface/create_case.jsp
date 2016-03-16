@@ -90,6 +90,6 @@
 
 </body>
 
-<script src="interface/css/create_case.js"></script>
+<script src="interface/js/create_case.js"></script>
 
 </html>

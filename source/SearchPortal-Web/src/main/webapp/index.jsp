@@ -86,6 +86,16 @@
 </script>
 <script type="text/javascript">
 	function createAccount() {
+		var errorLogLabel = document.getElementById('errorRegLogLabel');
+		var errorPasLabel = document.getElementById('errorRegPasLabel');
+		var errorNameLabel = document.getElementById('errorRegNameLabel');
+		var logErrorLabel = document.getElementById('logErrorLabel');
+		var logLogin = document.getElementById("logLogin");
+		var logPas = document.getElementById("logPas");
+		var login = document.getElementById("login");
+		var password = document.getElementById("password");
+		var name = document.getElementById("name");
+
 		var auth = document.getElementById("authInclude");
 		var registr = document.getElementById("registrInclude");
 		if (auth.style.visibility.valueOf() == 'visible'.valueOf()) {
@@ -99,6 +109,19 @@
 			document.cookie = 'page=second'; // for check open registration window
 			auth.style.visibility = 'visible';
 			registr.style.visibility = 'hidden';
+
+			errorLogLabel.innerHTML = "";
+			errorLogLabel.style.display = 'none';
+			errorPasLabel.innerHTML = "";
+			errorPasLabel.style.display = 'none';
+			errorNameLabel.innerHTML = "";
+			errorNameLabel.style.display = 'none';
+			login.value = '';
+			password.value = '';
+			name.value = '';
+			logErrorLabel.innerHTML = '';
+			logLogin.value = '';
+			logPas.value = '';
 		}
 	}
 </script>

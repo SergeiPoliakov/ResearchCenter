@@ -14,7 +14,8 @@
 </style>
 </head>
 <body>
-	<form action="authorization" method="post">
+	<form action="authorization" method="post"
+		onsubmit="return checkRegistrRegular()">
 		<input type="hidden" value="userRegistration" name="authorization" />
 		<table rules="groups" align="center" border="2px" cellspacing="3"
 			cellpadding="3" width="50%">
@@ -27,7 +28,7 @@
 			<tbody>
 				<tr>
 					<td class="column1">Логин:</td>
-					<td><input type="text" class="login" name="login"></td>
+					<td><input type="text" class="login" name="login" id="login"></td>
 					<td><c:choose>
 							<c:when test="${not empty incorrectLogin}">
 								<label class="errorEnt">${incorrectLogin}</label>
@@ -39,15 +40,15 @@
 				</tr>
 				<tr>
 					<td class="column1">Пароль:</td>
-					<td><input type="password" class="password" name="password">
-					</td>
+					<td><input type="password" class="password" name="password"
+						id="password"></td>
 					<td><c:if test="${not empty incorrectPassword}">
 							<label class="errorEnt">${incorrectPassword}</label>
 						</c:if></td>
 				</tr>
 				<tr>
 					<td class="column1">Имя:</td>
-					<td><input type="text" class="name" name="name"></td>
+					<td><input type="text" class="name" name="name" id="name"></td>
 					<td><c:if test="${not empty incorrectName}">
 							<label class="errorEnt">${incorrectName}</label>
 						</c:if></td>
@@ -61,7 +62,46 @@
 				</tr>
 			</tbody>
 		</table>
+		<label id="errorRegLogLabel"></label> <label id="errorRegPasLabel"></label>
+		<label id="errorRegNameLabel"></label>
 	</form>
 </body>
+
+<script>
+	function checkRegistrRegular() {
+		var loginReg = /^[A-Za-z0-9]{1,15}$/;
+		var passwordReg = /^[^ ]{4,10}$/;
+		var nameReg = new RegExp("^[^ ][A-Za-zА-Яа-я' ]{1,15}[^ ]$");
+		var login = document.getElementById("login");
+		var password = document.getElementById("password");
+		var name = document.getElementById("name");
+		var errorLogLabel = document.getElementById('errorRegLogLabel');
+		var errorPasLabel = document.getElementById('errorRegPasLabel');
+		var errorNameLabel = document.getElementById('errorRegNameLabel');
+		var check = true;
+		errorLogLabel.innerHTML = "";
+		errorLogLabel.style.display = 'none';
+		errorPasLabel.innerHTML = "";
+		errorPasLabel.style.display = 'none';
+		errorNameLabel.innerHTML = "";
+		errorNameLabel.style.display = 'none';
+		if (!login.value.match(loginReg)) {
+			errorLogLabel.innerHTML = 'Логин должен состоять только из латинских букв и цифр (не более 15 символов без пробелов)';
+			errorLogLabel.style.display = 'block';
+			check = false;
+		}
+		if (!password.value.match(passwordReg)) {
+			errorPasLabel.innerHTML = 'Пароль должен состоять только из латинских букв, цифр и символов (от 4 до 10)';
+			errorPasLabel.style.display = 'block';
+			check = false;
+		}
+		if (!name.value.match(nameReg)) {
+			errorNameLabel.innerHTML = 'Имя должно состоять только из букв (не более 15 символов)';
+			errorNameLabel.style.display = 'block';
+			check = false
+		}
+		return check;
+	}
+</script>
 
 </html>

@@ -89,6 +89,6 @@ select {
 
 </body>
 
-<script src="interface/css/update_case.js"></script>
+<script src="interface/js/update_case.js"></script>
 
 </html>

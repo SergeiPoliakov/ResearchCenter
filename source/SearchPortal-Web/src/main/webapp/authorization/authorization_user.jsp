@@ -27,9 +27,11 @@
 
 	<div id="authorization">
 		<center>
-			<form action="authorization" method="post">
-			<input type="hidden" value="userLogin" name="authorization"/>
-				<table rules="groups" align="center" border="2px" width="50%" cellspacing="3" cellpadding="3">
+			<form action="authorization" method="post"
+				onsubmit="return checkLogEmpty()">
+				<input type="hidden" value="userLogin" name="authorization" />
+				<table rules="groups" align="center" border="2px" width="50%"
+					cellspacing="3" cellpadding="3">
 					<thead>
 						<tr>
 							<th align="center" colspan="2"><label class="title">Авторизуйтесь:</label></th>
@@ -39,12 +41,12 @@
 						<tr>
 							<td><label class="info">Логин:</label></td>
 							<td align="center"><input type="text" class="login"
-								name="login" width="15px" /></td>
+								name="login" width="15px" id="logLogin" /></td>
 						</tr>
 						<tr>
 							<td><label class="info">Пароль:</label></td>
 							<td align="center"><input type="password" class="password"
-								name="password" width="15px" /></td>
+								name="password" width="15px" id="logPas" /></td>
 						</tr>
 						<tr>
 							<td style="padding-left: 60px"><input name="submit"
@@ -54,12 +56,11 @@
 							</td>
 						</tr>
 						<tr>
-							<td align="center" colspan="2"><c:if
-									test="${not empty errorMessage}">
-									<label class="registr" style="color: red;"> <c:out
-											value="${errorMessage}" />
-									</label>
-								</c:if></td>
+							<td align="center" colspan="2"><label class="registr"
+								style="color: red;" id="logErrorLabel"><c:if
+										test="${not empty errorMessage}">
+										<c:out value="${errorMessage}" />
+									</c:if></label></td>
 						</tr>
 					</tbody>
 				</table>
@@ -68,5 +69,21 @@
 	</div>
 
 </body>
+
+<script type="text/javascript">
+	function checkLogEmpty() {
+		var login = document.getElementById("logLogin");
+		var pas = document.getElementById("logPas");
+		var errorLabel = document.getElementById('logErrorLabel');
+		errorLabel.innerHTML = "";
+
+		if (login.value.valueOf() == "".valueOf()
+				|| pas.value.valueOf() == "".valueOf()) {
+			errorLabel.innerHTML = 'Поля логин и пароль не могут быть пустыми';
+			return false;
+		}
+		return true;
+	}
+</script>
 
 </html>

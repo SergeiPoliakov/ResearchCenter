@@ -59,3 +59,11 @@ td {
 body {
 	background-color: #f7fade;
 }
+
+#errorRegNameLabel, #errorRegPasLabel, #errorRegLogLabel {
+	display: none;
+	color: red;
+	font-family: Roman; /* устанавливает шрифт */
+	font-size: 14px; /* размер шрифта */
+	font-weight: 600; /* толщина текста */
+}
