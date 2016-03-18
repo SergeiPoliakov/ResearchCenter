@@ -1,10 +1,12 @@
+<%@page import="com.netcracker.unc.newmvc.dao.CategoryDAO"%>
 <%@page import="com.netcracker.unc.newmvc.dao.models.ObjectModel"%>
 <%@page import="com.netcracker.unc.priorityModule.CalculationPriority"%>
 <%@page import="com.netcracker.unc.priorityModule.FillHTMLTable"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.netcracker.unc.newmvc.dao.models.CategoryModel"%>
-<%@page import="com.netcracker.unc.newmvc.dao.controllers.CategoryController"%>
+<%@page
+	import="com.netcracker.unc.newmvc.dao.controllers.CategoryController"%>
 <%@page import="com.netcracker.unc.newmvc.dao.models.UserModel"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -37,16 +39,31 @@
 		</div>
 	</div>
 	<h1>t3</h1>
-	<%String test = "testString"; %>
+	<%
+		String test = "testString";
+	%>
 	<div class="module" id="category-module">
 		<div class="block-title">Категории</div>
 		<div class="block-information">
-			<%= test %>
+			<%
+				//CategoryDAO categoryDAO = new CategoryDAO();
+				//categoryDAO.addCategory();
+			%>
+
+
+			<form action="CategoryServlet" method="get">
+				<input type="hidden" name="user_id" value="1005" /> <input
+					type="submit" value="UP" />
+			</form>
+
+
+			<%=test%>
+
 		</div>
 	</div>
 	<div id="top_x_div" style="width: 900px; height: 500px;"></div>
-			
-			<%= test %>
-			<h1>t4</h1>
+
+	<%=test%>
+	<h1>t4</h1>
 </body>
 </html>

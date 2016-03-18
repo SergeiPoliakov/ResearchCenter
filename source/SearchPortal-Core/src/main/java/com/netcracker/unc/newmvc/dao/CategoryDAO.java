@@ -1,6 +1,7 @@
 package com.netcracker.unc.newmvc.dao;
 
 import java.math.BigDecimal;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,8 +24,9 @@ public class CategoryDAO {
 		try {
 			connection = ConnectionFactory.getConnection();
 			preparedStatement = connection.prepareStatement(CategoryQueries.SP_GET_FULL_CATEGORIES_WITH_SUM);
-			//preparedStatement = connection.prepareStatement(CategoryQueries.SP_GET_USER_CATEGORIES_WITH_SUM);
-			//preparedStatement.setInt(1, userId);
+			// preparedStatement =
+			// connection.prepareStatement(CategoryQueries.SP_GET_USER_CATEGORIES_WITH_SUM);
+			// preparedStatement.setInt(1, userId);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				CategoryModel categoryModel = new CategoryModel();
@@ -50,7 +52,7 @@ public class CategoryDAO {
 				} else {
 					categoryModel.setMaxPercent(new BigDecimal(0));
 				}
-				
+
 				if (resultSet.getObject("SUM_CATEGORY") != null) {
 					categoryModel.setSumCategory(resultSet.getBigDecimal("SUM_CATEGORY"));
 				} else {
@@ -81,14 +83,30 @@ public class CategoryDAO {
 		}
 		return listOfCategories;
 	}
-	
-	public void addCategory(CategoryModel categoryModel){
+
+	public void addCategory() {// CategoryModel categoryModel){
 		Connection connection = ConnectionFactory.getConnection();
+		CallableStatement callableStatement = null;
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement(CategoryQueries.SP_ADD_CATEGORY);
-			
+
+			// проверка работоспособности процедур
+			callableStatement = connection.prepareCall("{ call ADD_CATEGORY(1, 'тестовая', 1, 1, 1)}");
+			callableStatement.executeQuery();
+			//
+
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (connection != null && !connection.isClosed()) {
+					connection.close();
+				}
+				if (callableStatement != null && !callableStatement.isClosed()) {
+					callableStatement.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }
