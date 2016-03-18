@@ -85,7 +85,8 @@ public class CategoryDAO {
 	public void addCategory(CategoryModel categoryModel){
 		Connection connection = ConnectionFactory.getConnection();
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement(" ");
+			PreparedStatement preparedStatement = connection.prepareStatement(CategoryQueries.SP_ADD_CATEGORY);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

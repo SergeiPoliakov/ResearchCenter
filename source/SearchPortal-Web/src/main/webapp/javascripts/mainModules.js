@@ -9,7 +9,7 @@ $(function () {
     $("#statistic-menu-button").click(function (e) {
         $("#select-module1").css("display", "block");
         $("#priority-module").css("display", "none");
-        $("#categories-module").css("display", "none");
+        
         
         $("#test3").css("display", "block");
         $("#test2").css("display", "block");
@@ -19,12 +19,12 @@ $(function () {
     $("#cost-menu-button").click(function (e) {
         $("#select-module1").css("display", "none");
         $("#priority-module").css("display", "block");
+        $("#category-module").css("display", "block");
         
         $("#test3").css("display", "none");
         $("#test2").css("display", "none");
         $("#test1").css("display", "block");
         $("#add-sum").css("display", "none");
-        $("#categories-module").css("none", "none");
     });
     $("#add-sum-button").click(function (e) {
         $("#add-sum").css("display", "block");

@@ -19,13 +19,12 @@
 <script src="javascripts/googleApiCharts.js"></script>
 <script src="javascripts/priorityHistogram.js"></script>
 </head>
-<body><h1>t1</h1>
+<body>
 	<div class="header">
 		<div id="logo">214*59</div>
 		<button id="cost-menu-button" class="button">Расходы</button>
 		<button id="statistic-menu-button" class="button">Статистика</button>
 	</div>
-	<h1>t2</h1>
 	<div class="module" id="priority-module">
 		<div class="block-title">Приоритеты</div>
 		<div class="block-information">
@@ -38,13 +37,16 @@
 		</div>
 	</div>
 	<h1>t3</h1>
+	<%String test = "testString"; %>
+	<div class="module" id="category-module">
+		<div class="block-title">Категории</div>
+		<div class="block-information">
+			<%= test %>
+		</div>
+	</div>
 	<div id="top_x_div" style="width: 900px; height: 500px;"></div>
-			<%List<ObjectModel> userObjects = new ArrayList<ObjectModel>(user.getAllObjects());
-			for(ObjectModel om: userObjects){
-				if(om.getFinObjectTypeId() == 1){%>
-				<%=	om.getObjectName()%>
-				<%}
-			}%>
+			
+			<%= test %>
 			<h1>t4</h1>
 </body>
 </html>

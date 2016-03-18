@@ -2,6 +2,9 @@ package com.netcracker.unc.newmvc.dao.queries;
 
 public final class CategoryQueries {
 
+	public static final String SP_ADD_CATEGORY = " ";
+	public static final String SP_UPDATE_CATEGORY = " ";
+	public static final String SP_DELETE_CATEGORY = " ";
 	public static final String SP_GET_FULL_CATEGORIES_WITH_SUM = "SELECT \n" + " main_fo.FIN_OBJECT_ID as object_ID, \n"
 			+ " main_fo.USER_ID,\n" + " main_fo.OBJECT_NAME,\n" + " (\n" + "  SELECT select_par.VALUE\n"
 			+ "   FROM SP_FIN_OBJECTS select_fo \n" + "    INNER JOIN SP_ATTRIBUTES select_pja\n"
