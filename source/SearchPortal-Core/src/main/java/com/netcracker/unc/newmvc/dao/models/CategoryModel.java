@@ -8,7 +8,7 @@ public class CategoryModel {
 	private String objectName = null;
 	private BigDecimal minPercent = null;
 	private BigDecimal maxPercent = null;
-	private BigDecimal coeficient = null;
+	private BigDecimal coefficient = null;
 	private BigDecimal sumCategory = null;
 	private double percent = 0;
 
@@ -53,11 +53,11 @@ public class CategoryModel {
 	}
 
 	public BigDecimal getCoeficient() {
-		return coeficient;
+		return coefficient;
 	}
 
-	public void setCoeficient(BigDecimal coeficient) {
-		this.coeficient = coeficient;
+	public void setCoeficient(BigDecimal coefficient) {
+		this.coefficient = coefficient;
 	}
 
 	public BigDecimal getSumCategory() {

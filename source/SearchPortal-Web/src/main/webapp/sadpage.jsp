@@ -1,3 +1,4 @@
+<%@page import="com.netcracker.unc.htmltable.UserCategoryTable"%>
 <%@page import="com.netcracker.unc.newmvc.dao.CategoryDAO"%>
 <%@page import="com.netcracker.unc.newmvc.dao.models.ObjectModel"%>
 <%@page import="com.netcracker.unc.priorityModule.CalculationPriority"%>
@@ -48,8 +49,9 @@
 			<%
 				//CategoryDAO categoryDAO = new CategoryDAO();
 				//categoryDAO.addCategory();
+				List<CategoryModel> categoryList = new ArrayList<CategoryModel>(categoryController.getCategories());
 			%>
-
+			<%=UserCategoryTable.toHtmlTable(categoryList)%>
 
 			<form action="CategoryServlet" method="get">
 				<input type="hidden" name="user_id" value="1005" /> <input
@@ -57,7 +59,7 @@
 			</form>
 
 
-			<%=test%>
+
 
 		</div>
 	</div>

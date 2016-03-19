@@ -94,4 +94,14 @@ public final class CategoryQueries {
 			+ "FROM SP_FIN_OBJECTS main_fo \n" + " LEFT JOIN SP_FIN_OBJECT_TYPES main_fot\n"
 			+ "  ON main_fo.FIN_OBJECT_TYPE_ID = main_fot.FIN_OBJECT_TYPE_ID\n"
 			+ "WHERE main_fot.FIN_OBJECT_TYPE_NAME = 'Категория' AND main_fo.USER_ID = ?";
+
+	public static final String SP_GET_USER_CATEGORIES = " SELECT " + " FIN_OBJECT_ID as OBJECT_ID," + " OBJECT_NAME,"
+			+ " (" + " SELECT coef_par.VALUE" + " FROM SP_PARAMS coef_par" + " WHERE coef_par.ATTRIBUTE_ID = 1"
+			+ "  AND coef_par.FIN_OBJECT_ID = main_fo.FIN_OBJECT_ID" + " ) as coefficient," + " ("
+			+ " SELECT coef_par.VALUE" + " FROM SP_PARAMS coef_par" + " WHERE coef_par.ATTRIBUTE_ID = 2 "
+			+ "  AND coef_par.FIN_OBJECT_ID = main_fo.FIN_OBJECT_ID" + " ) as min_percent," + " ("
+			+ " SELECT coef_par.VALUE" + " FROM SP_PARAMS coef_par" + " WHERE coef_par.ATTRIBUTE_ID = 3 "
+			+ "  AND coef_par.FIN_OBJECT_ID = main_fo.FIN_OBJECT_ID" + " ) as max_percent "
+			+ "FROM SP_FIN_OBJECTS main_fo " + "WHERE FIN_OBJECT_TYPE_ID =1 " 
+			+ "AND USER_ID = ? ";
 }
