@@ -17,7 +17,7 @@ function checkUpdateUserRegExp() {
 
 	if (!nameUser.value.match(regExpName)) {
 		errorNameLabel.style.visibility = 'visible';
-		errorNameLabel.innerHTML = 'Имя должно состоять только из букв (не более 15 символов)';
+		errorNameLabel.innerHTML = 'имя должно состоять только из букв (не более 15 символов)';
 		check = false;
 	} else {
 		errorNameLabel.style.visibility = 'hidden';

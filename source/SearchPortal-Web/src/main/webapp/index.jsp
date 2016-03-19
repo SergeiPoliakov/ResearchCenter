@@ -86,15 +86,21 @@
 </script>
 <script type="text/javascript">
 	function createAccount() {
+		var restorePasswordLabel = document
+				.getElementById('restorePasswordLabel');
+		restorePasswordLabel.style.display = 'none';
+
 		var errorLogLabel = document.getElementById('errorRegLogLabel');
 		var errorPasLabel = document.getElementById('errorRegPasLabel');
 		var errorNameLabel = document.getElementById('errorRegNameLabel');
+		var errorEmailLabel = document.getElementById('errorRegEmailLabel');
 		var logErrorLabel = document.getElementById('logErrorLabel');
 		var logLogin = document.getElementById("logLogin");
 		var logPas = document.getElementById("logPas");
 		var login = document.getElementById("login");
 		var password = document.getElementById("password");
 		var name = document.getElementById("name");
+		var email = document.getElementById("email");
 
 		var auth = document.getElementById("authInclude");
 		var registr = document.getElementById("registrInclude");
@@ -116,12 +122,15 @@
 			errorPasLabel.style.display = 'none';
 			errorNameLabel.innerHTML = "";
 			errorNameLabel.style.display = 'none';
+			errorEmailLabel.innerHTML = "";
+			errorEmailLabel.style.display = 'none';
 			login.value = '';
 			password.value = '';
 			name.value = '';
 			logErrorLabel.innerHTML = '';
 			logLogin.value = '';
 			logPas.value = '';
+			email.value = '';
 		}
 	}
 </script>

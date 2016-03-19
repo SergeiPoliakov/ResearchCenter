@@ -48,9 +48,10 @@ public class AuthorizationServlet extends HttpServlet {
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
 		String name = request.getParameter("name");
+		String email = request.getParameter("email");
 
 		UserController userController = new UserController();
-		if (userController.createUser(login, password, name)) {
+		if (userController.createUser(login, password, name, email)) {
 			UserDAO userDAO = new UserDAO();
 			UserModel user = userDAO.getUserByLogin(login);
 
@@ -111,6 +112,33 @@ public class AuthorizationServlet extends HttpServlet {
 		request.getSession().setAttribute("user", user);
 	}
 
+	private void restoreUserPassword(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+
+		String login = request.getParameter("login");
+		String email = request.getParameter("email");
+
+		UserDAO userDAO = new UserDAO();
+		UserModel user = userDAO.getUserByLogin(login);
+		UserController userController = new UserController();
+
+		if (user.getUserId() != 0 && user.getEmail().toLowerCase().equals(email.toLowerCase())) {
+
+			String newPassword = userController.generateUserPassword(5);
+			user.setHashSum(newPassword.hashCode());
+			user.setSalt(userController.createSalt(newPassword));
+			userDAO.updateUser(user);
+
+			userController.sendPasswordToUserEmail(user.getEmail(), newPassword);
+		}
+
+		request.setAttribute("restorePassword", "Если логин и почта совпали, письмо с паролем было выслано на почту!");
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+		dispatcher.forward(request, response);
+
+	}
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -125,6 +153,8 @@ public class AuthorizationServlet extends HttpServlet {
 				registrationUser(request, response);
 			else if (authorization.equals("logOut"))
 				logOutUser(request, response);
+			else if (authorization.equals("restorePassword"))
+				restoreUserPassword(request, response);
 		} else if (request.getAttribute("checkCookie") != null)
 			cookieLogInUser(request, response);
 	}

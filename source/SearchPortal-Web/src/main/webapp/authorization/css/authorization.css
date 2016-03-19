@@ -14,7 +14,7 @@
 }
 
 .table {
-	border: 3px #004949 groove; /* рамка */
+	border: 2px #004949 groove; /* рамка */
 }
 
 .info {
@@ -50,4 +50,14 @@
 	font-size: 13pt; /* размер шрифта */
 	border: 1px #004949 groove; /* рамка */
 	box-shadow: 0 0 10px #F0FFF0; /* тень рамки */
+}
+
+#restorePasswordLabel {
+	display: block;
+	text-align: center;
+	color: green;
+	font-size: 14px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-weight: 600; /* толщина текста */
 }

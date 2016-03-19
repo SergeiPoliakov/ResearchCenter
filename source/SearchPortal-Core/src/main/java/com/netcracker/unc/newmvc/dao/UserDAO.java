@@ -20,6 +20,7 @@ public class UserDAO {
 	private final String accountTypeCol = "ACCOUNT_TYPE";
 	private final String hashSumCol = "HASH_SUM";
 	private final String userNameCol = "NAME";
+	private final String userEmailCol = "EMAIL";
 	private final String saltCol = "SALT";
 	private final String userIdCol = "USER_ID";
 	private final String finObjectIdCol = "FIN_OBJECT_ID";
@@ -70,6 +71,7 @@ public class UserDAO {
 				prepare.setNull(1, java.sql.Types.VARCHAR);
 			prepare.setString(4, user.getAccountType());
 			prepare.setInt(5, user.getSalt());
+			prepare.setString(6, user.getEmail());
 			prepare.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -92,7 +94,8 @@ public class UserDAO {
 			prepare.setString(3, user.getName());
 			prepare.setString(4, user.getAccountType());
 			prepare.setInt(5, user.getSalt());
-			prepare.setInt(6, user.getUserId());
+			prepare.setString(6, user.getEmail());
+			prepare.setInt(7, user.getUserId());
 			prepare.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -122,6 +125,7 @@ public class UserDAO {
 				user.setName(result.getString(userNameCol));
 				user.setSalt(result.getInt(saltCol));
 				user.setUserId(result.getInt(userIdCol));
+				user.setEmail(result.getString(userEmailCol));
 				object = new ObjectModel();
 				object.setFinObjectId(result.getInt(finObjectIdCol));
 				object.setParentId(result.getInt(parentIdCol));
@@ -174,6 +178,7 @@ public class UserDAO {
 				user.setName(result.getString(userNameCol));
 				user.setSalt(result.getInt(saltCol));
 				user.setUserId(result.getInt(userIdCol));
+				user.setEmail(result.getString(userEmailCol));
 				object = new ObjectModel();
 				object.setFinObjectId(result.getInt(finObjectIdCol));
 				object.setParentId(result.getInt(parentIdCol));
@@ -228,6 +233,7 @@ public class UserDAO {
 				user.setName(result.getString(userNameCol));
 				user.setSalt(result.getInt(saltCol));
 				user.setUserId(result.getInt(userIdCol));
+				user.setEmail(result.getString(userEmailCol));
 				object = new ObjectModel();
 				object.setFinObjectId(result.getInt(finObjectIdCol));
 				object.setParentId(result.getInt(parentIdCol));

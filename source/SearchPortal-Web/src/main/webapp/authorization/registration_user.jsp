@@ -6,12 +6,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Регистрация нового пользователя</title>
-<style type="text/css">
-.errorEnt {
-	font-size: 8pt;
-	color: red;
-}
-</style>
 </head>
 <body>
 	<form action="authorization" method="post"
@@ -30,28 +24,29 @@
 					<td class="column1">Логин:</td>
 					<td><input type="text" class="login" name="login" id="login"></td>
 					<td><c:choose>
-							<c:when test="${not empty incorrectLogin}">
-								<label class="errorEnt">${incorrectLogin}</label>
-							</c:when>
 							<c:when test="${not empty multiName}">
-								<label class="errorEnt">${multiName}</label>
+								<label id="errorRegLogLabel" style="display: block;">${multiName}</label>
 							</c:when>
+							<c:otherwise>
+								<label id="errorRegLogLabel" style="display: none;"></label>
+							</c:otherwise>
 						</c:choose></td>
 				</tr>
 				<tr>
 					<td class="column1">Пароль:</td>
 					<td><input type="password" class="password" name="password"
 						id="password"></td>
-					<td><c:if test="${not empty incorrectPassword}">
-							<label class="errorEnt">${incorrectPassword}</label>
-						</c:if></td>
+					<td><label class="errorEnt" id="errorRegPasLabel"></label></td>
 				</tr>
 				<tr>
 					<td class="column1">Имя:</td>
 					<td><input type="text" class="name" name="name" id="name"></td>
-					<td><c:if test="${not empty incorrectName}">
-							<label class="errorEnt">${incorrectName}</label>
-						</c:if></td>
+					<td><label class="errorEnt" id="errorRegNameLabel"></label></td>
+				</tr>
+				<tr>
+					<td class="column1">Почта:</td>
+					<td><input type="text" class="name" name="email" id="email"></td>
+					<td><label class="errorEnt" id="errorRegEmailLabel"></label></td>
 				</tr>
 				<tr>
 					<td><input type="submit" class="submit" name="button"
@@ -62,8 +57,6 @@
 				</tr>
 			</tbody>
 		</table>
-		<label id="errorRegLogLabel"></label> <label id="errorRegPasLabel"></label>
-		<label id="errorRegNameLabel"></label>
 	</form>
 </body>
 
@@ -71,13 +64,16 @@
 	function checkRegistrRegular() {
 		var loginReg = /^[A-Za-z0-9]{1,15}$/;
 		var passwordReg = /^[^ ]{4,10}$/;
+		var emailReg = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
 		var nameReg = new RegExp("^[^ ][A-Za-zА-Яа-я' ]{1,15}[^ ]$");
 		var login = document.getElementById("login");
 		var password = document.getElementById("password");
 		var name = document.getElementById("name");
+		var email = document.getElementById("email");
 		var errorLogLabel = document.getElementById('errorRegLogLabel');
 		var errorPasLabel = document.getElementById('errorRegPasLabel');
 		var errorNameLabel = document.getElementById('errorRegNameLabel');
+		var errorRegEmailLabel = document.getElementById("errorRegEmailLabel");
 		var check = true;
 		errorLogLabel.innerHTML = "";
 		errorLogLabel.style.display = 'none';
@@ -85,6 +81,8 @@
 		errorPasLabel.style.display = 'none';
 		errorNameLabel.innerHTML = "";
 		errorNameLabel.style.display = 'none';
+		errorRegEmailLabel.innerHTML = "";
+		errorRegEmailLabel.style.display = 'none';
 		if (!login.value.match(loginReg)) {
 			errorLogLabel.innerHTML = 'Логин должен состоять только из латинских букв и цифр (не более 15 символов без пробелов)';
 			errorLogLabel.style.display = 'block';
@@ -95,10 +93,17 @@
 			errorPasLabel.style.display = 'block';
 			check = false;
 		}
-		if (!name.value.match(nameReg)) {
-			errorNameLabel.innerHTML = 'Имя должно состоять только из букв (не более 15 символов)';
-			errorNameLabel.style.display = 'block';
-			check = false
+		if (name.value.valueOf() != "".valueOf()) {
+			if (!name.value.match(nameReg)) {
+				errorNameLabel.innerHTML = 'Имя должно состоять только из букв (не более 15 символов)';
+				errorNameLabel.style.display = 'block';
+				check = false
+			}
+		}
+		if (!email.value.match(emailReg)) {
+			errorRegEmailLabel.innerHTML = 'Введите корректную почту';
+			errorRegEmailLabel.style.display = 'block';
+			check = false;
 		}
 		return check;
 	}

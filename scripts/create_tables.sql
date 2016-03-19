@@ -75,7 +75,8 @@ CREATE TABLE sp_users
 	Hash_sum             INTEGER NOT NULL ,
 	Name                 VARCHAR2(50) NULL ,
 	Account_Type         VARCHAR2(50) NOT NULL ,
-	Salt                 INTEGER NOT NULL 
+	Salt                 INTEGER NOT NULL ,
+	Email                VARCHAR2(20) NOT NULL 
 );
 
 ALTER TABLE sp_users
