@@ -21,6 +21,7 @@
 <script src="javascripts/mainModules.js"></script>
 <script src="javascripts/googleApiCharts.js"></script>
 <script src="javascripts/priorityHistogram.js"></script>
+<script src="javascripts/updateCategoryRow.js"></script>
 </head>
 <body>
 	<div class="header">
@@ -47,25 +48,17 @@
 		<div class="block-title">Категории</div>
 		<div class="block-information">
 			<%
-				//CategoryDAO categoryDAO = new CategoryDAO();
-				//categoryDAO.addCategory();
 				List<CategoryModel> categoryList = new ArrayList<CategoryModel>(categoryController.getCategories());
 			%>
 			<%=UserCategoryTable.toHtmlTable(categoryList)%>
 
-			<form action="CategoryServlet" method="get">
-				<input type="hidden" name="user_id" value="1005" /> <input
-					type="submit" value="UP" />
-			</form>
-
-
-
-
+			<input type="button" id="start-add-categoty" value="Добавить" />
 		</div>
 	</div>
 	<div id="top_x_div" style="width: 900px; height: 500px;"></div>
 
 	<%=test%>
+	<button id="start-update-row">Привет мир</button>
 	<h1>t4</h1>
 </body>
 </html>

@@ -1,12 +1,16 @@
 package com.netcracker.unc.modules.servlets;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.netcracker.unc.newmvc.dao.controllers.CategoryController;
 
 /**
  * Servlet implementation class CategoryServlet
@@ -46,29 +50,25 @@ public class CategoryServlet extends HttpServlet {
 
 		objectId = Integer.parseInt(request.getParameter("objectid"));
 		action = request.getParameter("action");
-		response.getWriter().append("Served at: ").append(request.getContextPath()).append(action);
 
-		if ((action == "update" || action == "delete") && objectId != 0) {
+		if (action.equals("delete") && objectId != 0) {
 			try {
-
-				if (action == "update") {
-					response.getWriter().append("надо изменять");
-				}
-				if (action == "delete") {
-					response.getWriter().append("надо удалять");
-				}
+				CategoryController categoryController = new CategoryController();
+				categoryController.deleteCategoty(objectId);
 			} catch (Exception e) {
-				e.getMessage();
+				e.printStackTrace();
 			} finally {
 				action = null;
 				objectId = 0;
 			}
 		}
-		
-		if(action == "create" ){
-			
+
+		if (action == "create") {
+
 		}
 
+		RequestDispatcher disp = request.getRequestDispatcher("/sadpage.jsp");
+		disp.forward(request, response);
 	}
 
 }

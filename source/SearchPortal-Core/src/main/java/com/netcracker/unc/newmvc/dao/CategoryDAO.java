@@ -16,15 +16,24 @@ import com.netcracker.unc.newmvc.dao.queries.CategoryQueries;
 
 public class CategoryDAO {
 
-	public boolean deleteCategory(int objectId) {
+	public boolean updateCategory(int objectId, String categoryName, double coefficient, double minPercent,
+			double maxPercent) {
 		boolean success = false;
 		Connection connection = null;
-		PreparedStatement preparedStatement = null;
+		CallableStatement callableStatement = null;
 		try {
 			connection = ConnectionFactory.getConnection();
-			preparedStatement = connection.prepareStatement("");
-			preparedStatement.setInt(1, objectId);
-			preparedStatement.executeQuery();
+			callableStatement = connection.prepareCall("{ call UPDATE_CATEGORY(?,?,?,?,?)}");
+
+			callableStatement.setInt(1, objectId);
+			callableStatement.setString(2, categoryName);
+			callableStatement.setDouble(3, coefficient);
+			callableStatement.setDouble(4, minPercent);
+			callableStatement.setDouble(5, maxPercent);
+
+			callableStatement.executeQuery();
+
+			success = true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -32,14 +41,41 @@ public class CategoryDAO {
 				if (connection != null && !connection.isClosed()) {
 					connection.close();
 				}
-				if (preparedStatement != null && !preparedStatement.isClosed()) {
-					preparedStatement.close();
+				if (callableStatement != null && !callableStatement.isClosed()) {
+					callableStatement.close();
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 
+		return success;
+	}
+
+	public boolean deleteCategory(int objectId) {
+		boolean success = false;
+		Connection connection = null;
+		CallableStatement callableStatement = null;
+		try {
+			connection = ConnectionFactory.getConnection();
+			callableStatement = connection.prepareCall("{ call DELETE_CATEGORY(?)}");
+			callableStatement.setInt(1, objectId);
+			callableStatement.executeQuery();
+			success = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (connection != null && !connection.isClosed()) {
+					connection.close();
+				}
+				if (callableStatement != null && !callableStatement.isClosed()) {
+					callableStatement.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		return success;
 	}
 

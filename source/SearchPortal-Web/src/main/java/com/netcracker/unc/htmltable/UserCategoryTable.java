@@ -48,16 +48,22 @@ public class UserCategoryTable {
 
 		if (cm.getObjectId() != null) {
 
-			htmlString.append("<td>");
+			/*htmlString.append("<td>");
 			htmlString.append("<form action=\"CategoryServlet\" method=\"get\">");
 			htmlString.append("<input type=\"hidden\" name=\"action\" value=\"update\" />");
 			htmlString.append("<input type=\"hidden\" name=\"objectid\" value=\"");
 			htmlString.append(cm.getObjectId());
 			htmlString.append("\"/>");
-			htmlString.append("<input type=\"submit\" value=\"Изменить\" />");
+			htmlString.append("<input type=\"submit\" id=\"update-submit\" value=\"Изменить\" />");
 			htmlString.append("</form>");
+			htmlString.append("</td>");*/
+			htmlString.append("<td>");
+			htmlString.append("<input type=\"hidden\" name=\"objectid\" value=\"");
+			htmlString.append(cm.getObjectId());
+			htmlString.append("\"/>");
+			htmlString.append("<input type=\"button\" id =\"start-update-row1\" value =\"Изменить\" >");
 			htmlString.append("</td>");
-
+			
 			htmlString.append("<td>");
 			htmlString.append("<form action=\"CategoryServlet\" method=\"get\">");
 			htmlString.append("<input type=\"hidden\" name=\"action\" value=\"delete\" />");
