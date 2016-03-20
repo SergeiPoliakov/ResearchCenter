@@ -20,6 +20,26 @@ public class CategoryDAO {
 		boolean success = false;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
+		try {
+			connection = ConnectionFactory.getConnection();
+			preparedStatement = connection.prepareStatement("");
+			preparedStatement.setInt(1, objectId);
+			preparedStatement.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (connection != null && !connection.isClosed()) {
+					connection.close();
+				}
+				if (preparedStatement != null && !preparedStatement.isClosed()) {
+					preparedStatement.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
 		return success;
 	}
 

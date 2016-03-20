@@ -13,6 +13,11 @@ public class CategoryController {
 	
 	private UserModel userModel = null;
 
+	public void deleteCategoty(int objectId){
+		CategoryDAO categoryDAO = new CategoryDAO();
+		
+	}
+	
 	public List<CategoryModel> getCategories(){
 		CategoryDAO categoryDAO = new CategoryDAO();
 		List<CategoryModel> categoryModels = new ArrayList<CategoryModel>(categoryDAO.getAllUserCategories(userModel.getUserId()));
