@@ -168,11 +168,3 @@ function showActiveCases() {
 
 }
 
-function showIncoming() {
-	var activeCases = document.getElementById('incoming');
-	if (activeCases.style.visibility.valueOf() == 'hidden'.valueOf()) {
-		activeCases.style.visibility = 'visible';
-	} else {
-		activeCases.style.visibility = 'hidden';
-	}
-}

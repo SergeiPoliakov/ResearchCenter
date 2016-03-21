@@ -30,6 +30,10 @@
 		<servlet-name>incoming</servlet-name>
 		<servlet-class>com.netcracker.unc.modules.servlets.IncomingServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>invoice</servlet-name>
+		<servlet-class>com.netcracker.unc.modules.servlets.InvoiceServlet</servlet-class>
+	</servlet>	
 	<servlet-mapping>
 		<servlet-name>authorization</servlet-name>
 		<url-pattern>/authorization</url-pattern>
@@ -53,6 +57,10 @@
 	<servlet-mapping>
 		<servlet-name>incoming</servlet-name>
 		<url-pattern>/incomingservlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>invoice</servlet-name>
+		<url-pattern>/invoiceservlet</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>

@@ -23,6 +23,15 @@ public InvoiceDAO() {
 		this.user = user;
 	}
 	
+	public void setUser(UserModel user) {
+		this.user = user;
+	}
+	
+	public ArrayList<InvoiceModel> getAllInvoice(UserModel user) {
+		setUser(user);
+		return getAllInvoice();
+		
+	}
 	
 	public ArrayList<InvoiceModel> getAllInvoice() {
 		
@@ -59,9 +68,8 @@ public InvoiceDAO() {
 
 		try {
 			prepare = connect.prepareStatement(InvoiceQueries.setNewInvoiceForUser);
-			prepare.setInt(3,user.getUserId());
-			prepare.setInt(1, invoice.getInvoiceId());
-			prepare.setString(2, invoice.getInvoiceName());
+			prepare.setInt(2,user.getUserId());
+			prepare.setString(1, invoice.getInvoiceName());
 			prepare.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

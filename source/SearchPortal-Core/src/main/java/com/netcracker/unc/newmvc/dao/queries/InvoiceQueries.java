@@ -33,7 +33,7 @@ public class InvoiceQueries {
 			+ "from SP_FIN_OBJECTS o, SP_PARAMS p, SP_PARAMS a, SP_PARAMS r\n"
 			+ "where  p.FIN_OBJECT_ID=o.FIN_OBJECT_ID and a.FIN_OBJECT_ID=o.FIN_OBJECT_ID and r.FIN_OBJECT_ID=o.FIN_OBJECT_ID and o.USER_ID= ?\n"
 			+ "and p.ATTRIBUTE_ID=1 and a.ATTRIBUTE_ID=2 and r.ATTRIBUTE_ID=3 and o.FIN_OBJECT_TYPE_ID=" + invoice_id;
-	public static final String setNewInvoiceForUser = "insert into SP_FIN_OBJECTS(FIN_OBJECT_ID, OBJECT_NAME, FIN_OBJECT_TYPE_ID, user_id) values(?, ?, 5, ?); ";
+	public static final String setNewInvoiceForUser = "insert into SP_FIN_OBJECTS(FIN_OBJECT_ID, OBJECT_NAME, FIN_OBJECT_TYPE_ID, user_id) values(SP_FIN_OBJECT_ID_SEQ.nextval, ?, 5, ?)";
 	public static final String set_new_balance_in_invoice = "insert into SP_PARAMS(ATTRIBUTE_ID, FIN_OBJECT_ID, VALUE) values (1, ?, ?)";
 	public static final String set_new_credit_in_invoice = "insert into SP_PARAMS(ATTRIBUTE_ID, FIN_OBJECT_ID, VALUE) values (2, ?, ?)";
 	public static final String set_new_percent_in_invoice = "insert into SP_PARAMS(ATTRIBUTE_ID, FIN_OBJECT_ID, VALUE) values (3, ?, ?)";

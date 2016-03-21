@@ -1,0 +1,136 @@
+@CHARSET "UTF-8";
+
+.overlayInCons {
+	margin-top: 23px;
+	margin-left: 80px;
+}
+
+.create-case {
+	margin-top: 50px;
+	width: 50%;
+	left: 25%;
+	right: 25%;
+	position: absolute;
+}
+
+#updateCase {
+	margin-top: 50px;
+	margin-left: 5%;
+	margin-right: 5%;
+	position: absolute;
+}
+
+#createCaseSubmit, #logOutSubmit {
+	height: 30px;
+	width: 70px;
+	font-size: 13px;
+}
+
+#logOutSubmit {
+	position: absolute;
+	display: block;
+	margin-top: 1%;
+	margin-left: 95%;
+}
+
+#welcomeUser {
+	position: relative;
+}
+
+#animationCreateCase {
+	width: 30%;
+	border-radius: 18px;
+	border: 1px #004949 groove; /* рамка */
+	text-align: center;
+	margin-left: 35%;
+	margin-top: 10%;
+}
+
+#animationCCLabel {
+	font-size: 30pt; /* размер шрифта */
+	font-family: Roman; /* устанавливает шрифт */
+	font-weight: 600; /* толщина текста */
+	display: inline-block;
+	color: #072F01;
+	margin-bottom: 5px;
+}
+
+#helloCase {
+	width: 250px;
+	border-top-left-radius: 18px;
+	border-bottom-left-radius: 18px;
+	border: 1px #004949 groove; /* рамка */
+	height: 90px;
+	position: fixed;
+	top: 25%;
+	background-color: #fef8a0;
+	right: -250px;
+}
+
+.welcomeCase {
+	font-size: 10pt; /* размер шрифта */
+	font-family: Roman; /* устанавливает шрифт */
+	color: #072F01;
+}
+
+#welcomeCase1 {
+	display: block;
+	margin-top: 8px;
+	margin-left: 35px;
+}
+
+#welcomeCase2 {
+	display: block;
+	margin-top: 4px;
+	margin-left: 7px;
+}
+
+#welcomeCaseInput {
+	width: 70px;
+	margin-left: 25px;
+	margin-top: 5px;
+	background: #fef8a0;
+	font-size: 10pt;
+	height: 15px;
+	color: darkred;
+}
+
+#addSalarySubmit {
+	height: 23px;
+	width: 60px;
+	font-size: 11px;
+	display: inline-block;
+	margin-left: 18px;
+	margin-bottom: 7px;
+	border-radius: 3px;
+}
+
+#controlSalaryMain {
+	position: fixed;
+	margin-top: 25px;
+	width: 50%;
+	right: -25%;
+}
+
+#editUserLabel {
+	font-family: Roman; /* устанавливает шрифт */
+	cursor: pointer;
+	color: blue;
+	font-size: 15px;
+	margin-right: 1%;
+}
+
+#editUser {
+	margin-top: 50px;
+	width: 50%;
+	height: 500px;
+	position: absolute;
+	left: 25%;
+	right: 25%;
+}
+
+#caseInterview {
+	position: fixed;
+	width: 100%;
+	right: -25%;
+}

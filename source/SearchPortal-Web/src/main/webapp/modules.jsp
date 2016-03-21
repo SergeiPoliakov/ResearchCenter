@@ -79,6 +79,10 @@
 
 		<button id="statistic-menu-button" class="button"
 			onclick="showIncoming()">+</button>
+			
+		<button id="statistic-menu-button" class="button"
+			onclick="showInvoices()">Счета</button>
+			
 		<div class="overlayInCons">
 			<jsp:include page="/attitudes/income_consumption.jsp"></jsp:include>
 		</div>
@@ -137,6 +141,11 @@
 	<div id="incoming" style="visibility: hidden;">
 		<jsp:include page="interface/incoming.jsp" />
 	</div>
+	
+	<div id="invoices" style="visibility: hidden;">
+		<jsp:include page="interface/invoices.jsp" />
+	</div>
+	
 
 	<!-- needPay is test parameter which contain payment object -->
 	<c:set var="needPay" value="no" scope="page" />
@@ -194,6 +203,7 @@
 </body>
 
 <script src="javascripts/aspro.js"></script>
-<script src="interface/css/create_case.js"></script>
+<script src="javascripts/incoming.js"></script>
+<script src="interface/js/create_case.js"></script>
 
 </html>
