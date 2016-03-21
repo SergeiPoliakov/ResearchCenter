@@ -22,11 +22,13 @@
 	<c:forEach var="userCookie" items="${pageContext.request.cookies}">
 		<c:choose>
 			<c:when test="${userCookie.name == 'userID'}">
-				<c:set var="checkCookie" value="ok"></c:set>
 				<!-- check user session -->
-				<c:if test="${empty sessionScope.user}">
-					<c:set var="checkCookie" value="ok" scope="request" />
+				<c:if test="${not empty sessionScope.user}">
 					<jsp:include page="/authorization" />
+					<c:if test="${sessionScope.user.getUserId() == 0}">
+						<c:redirect url="index.jsp"></c:redirect>
+					</c:if>
+					<c:set var="checkCookie" value="ok"></c:set>
 				</c:if>
 			</c:when>
 		</c:choose>
@@ -74,8 +76,8 @@
 
 		<button id="statistic-menu-button" class="button"
 			onclick="showActiveCases()">Текущие</button>
-			
-			<button id="statistic-menu-button" class="button"
+
+		<button id="statistic-menu-button" class="button"
 			onclick="showIncoming()">+</button>
 		<div class="overlayInCons">
 			<jsp:include page="/attitudes/income_consumption.jsp"></jsp:include>
@@ -131,7 +133,7 @@
 	<div id="updateCase" style="visibility: hidden;">
 		<jsp:include page="interface/update_case.jsp" />
 	</div>
-	
+
 	<div id="incoming" style="visibility: hidden;">
 		<jsp:include page="interface/incoming.jsp" />
 	</div>

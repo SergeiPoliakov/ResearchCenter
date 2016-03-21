@@ -103,12 +103,13 @@ public class AuthorizationServlet extends HttpServlet {
 
 		int userId = 0;
 		UserDAO userDAO = new UserDAO();
+		UserModel user = new UserModel();
 		for (Cookie cookie : request.getCookies()) {
 			if (cookie.getName().equals("userID")) {
 				userId = Integer.valueOf(cookie.getValue());
+				user = userDAO.getUser(userId);
 			}
 		}
-		UserModel user = userDAO.getUser(userId);
 		request.getSession().setAttribute("user", user);
 	}
 

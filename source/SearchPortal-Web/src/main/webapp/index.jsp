@@ -33,7 +33,17 @@
 					<c:otherwise>
 						<c:set var="checkCookie" value="ok" scope="request" />
 						<jsp:include page="/authorization" />
-						<c:redirect url="modules.jsp"></c:redirect>
+						<c:choose>
+							<c:when test="${sessionScope.user.getUserId() != 0}">
+								<c:redirect url="modules.jsp"></c:redirect>
+							</c:when>
+							<c:otherwise>
+								<script type="text/javascript">
+									document.cookie = 'userID'
+											+ '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+								</script>
+							</c:otherwise>
+						</c:choose>
 					</c:otherwise>
 				</c:choose>
 				<!-- that user already login -->
