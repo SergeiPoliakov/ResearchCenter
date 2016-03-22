@@ -22,6 +22,7 @@
 <script src="javascripts/googleApiCharts.js"></script>
 <script src="javascripts/priorityHistogram.js"></script>
 <script src="javascripts/updateCategoryRow.js"></script>
+<script src = "javascripts/addCategoryRow.js"></script>
 </head>
 <body>
 	<div class="header">
@@ -58,7 +59,7 @@
 	<div id="top_x_div" style="width: 900px; height: 500px;"></div>
 
 	<%=test%>
-	<button id="start-update-row">Привет мир</button>
+	<button id="start-new-row">Привет мир</button>
 	<h1>t4</h1>
 </body>
 </html>
