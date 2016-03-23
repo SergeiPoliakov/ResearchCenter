@@ -24,7 +24,6 @@
 			<input type="hidden" class="form-control" value="createCase" name="interfaces" />
 			<table class="createCase">
 				<tr>
-					<th colspan="3"><h3>Создание новой задачи</h3></th>
 				</tr>
 				<tr>
 					<td colspan="3"><hr /></td>

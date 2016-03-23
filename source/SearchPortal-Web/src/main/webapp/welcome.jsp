@@ -116,7 +116,7 @@
 		<div class="container-fluid">
 			<div class="container">
 				<div class="module" id="income">
-					<div class="block-title">Модуль 1</div>
+					<div class="block-title">Создание новой задачи</div>
 					<div class="block-information">
 
 						<div class="create-case" id="create-case">
@@ -127,7 +127,7 @@
 				</div>
 
 				<div class="module" id="consump">
-					<div class="block-title">Модуль 2</div>
+					<div class="block-title">Редактирование задач</div>
 					<div class="block-information">
 						<div id="updateCase">
 							<jsp:include page="interface/update_case.jsp" />
@@ -138,7 +138,7 @@
 
 
 			<div class="module" id="stat">
-				<div class="block-title">Модуль n</div>
+				<div class="block-title">Редактирование профиля</div>
 				<div class="block-information">
 					<div id="editUser">
 						<jsp:include page="/interface/update_user.jsp"></jsp:include>
