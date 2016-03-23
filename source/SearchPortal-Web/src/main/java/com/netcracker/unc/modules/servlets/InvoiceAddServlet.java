@@ -13,11 +13,11 @@ import com.netcracker.unc.newmvc.dao.InvoiceDAO;
 import com.netcracker.unc.newmvc.dao.models.InvoiceModel;
 import com.netcracker.unc.newmvc.dao.models.UserModel;
 
-@WebServlet("/InvoiceServlet")
-public class InvoiceServlet extends HttpServlet {
+@WebServlet("/InvoiceAddServlet")
+public class InvoiceAddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public InvoiceServlet() {
+	public InvoiceAddServlet() {
 		super();
 	}
 
@@ -28,16 +28,34 @@ public class InvoiceServlet extends HttpServlet {
 		user = (UserModel) request.getSession().getAttribute("user");
 		InvoiceDAO invoicedao = new InvoiceDAO(user);
 		
-		Logger log = Logger.getLogger(InvoiceServlet.class.getName());
-		log.warning("User ID: " + user.getUserId());
+		Logger log = Logger.getLogger(InvoiceAddServlet.class.getName());
+	    log.warning("User ID: " + user.getUserId());
 
-		String invoiceName;
+		String invoiceName, invoiceBalance, invoicePercent = null;
+		boolean  invoiceCredit = false;
 		if ((request.getParameter("invoice-name") != null) && (!request.getParameter("invoice-name").trim().isEmpty())) {
 			invoiceName = String.valueOf(request.getParameter("invoice-name"));
 			log.warning("New invoice: " + invoiceName);
 			invoice.setInvoiceName(invoiceName);
+			
+			if ((request.getParameter("invoice-balance") != null) && (!request.getParameter("invoice-balance").trim().isEmpty())) {
+				invoiceBalance = String.valueOf(request.getParameter("invoice-balance"));
+				log.warning("New invoice: " + invoiceBalance);
+				invoice.setBalance(Integer.valueOf(invoiceBalance));
+			}
+			if ((request.getParameter("invoice-credit") != null) && (!request.getParameter("invoice-credit").trim().isEmpty())) {
+				invoiceCredit = Boolean.valueOf(request.getParameter("invoice-credit"));
+				log.warning("New invoice: " + invoiceCredit);
+				invoice.setCredit(invoiceCredit);
+			}
+			if ((request.getParameter("invoice-percent") != null) && (!request.getParameter("invoice-percent").trim().isEmpty())) {
+				invoicePercent = String.valueOf(request.getParameter("invoice-percent"));
+				log.warning("New invoice: " + invoicePercent);
+				invoice.setPercent(Integer.valueOf(invoicePercent));
+			}
+			
 			invoicedao.addInvoice(invoice);
-			request.setAttribute("currentSum", invoiceName);
+			//request.setAttribute("currentSum", invoiceName);
 			log.warning("Before redirect...");
 		}
 		response.sendRedirect("modules.jsp");

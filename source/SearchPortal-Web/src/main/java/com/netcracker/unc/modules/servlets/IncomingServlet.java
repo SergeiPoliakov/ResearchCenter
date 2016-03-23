@@ -27,7 +27,7 @@ public class IncomingServlet extends HttpServlet {
 		InvoiceModel invoice = new InvoiceModel();
 		user = (UserModel) request.getSession().getAttribute("user");
 		InvoiceDAO invoicedao = new InvoiceDAO(user);
-		invoice = (InvoiceModel) invoicedao.getInvoiceById(1);
+		invoice = (InvoiceModel) invoicedao.getInvoiceByInoiceId(1);
 		Logger log = Logger.getLogger(IncomingServlet.class.getName());
 		log.warning("User ID: " + user.getUserId());
 

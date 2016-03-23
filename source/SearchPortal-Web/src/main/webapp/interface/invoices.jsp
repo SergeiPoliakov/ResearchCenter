@@ -19,7 +19,7 @@ td {
 }
 
 input[type="text"] {
-	width: 100%;
+	width: 70%;
 	font-size: 8pt;
 }
 
@@ -37,8 +37,11 @@ select {
 <table border="1">
 <thead align="center">
 		<tr>
-			<th class="title">Number</th>
-			<th class="title">Name</th>
+			<th class="title">Номер счёта</th>
+			<th class="title">Название</th>
+			<th class="title">Баланс</th>
+			<th class="title">Кредитность</th>
+			<th class="title">Процент</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -47,17 +50,34 @@ select {
 			<tr>
 				<td>${invoice.getInvoiceId()}</td>
 				<td>${invoice.getInvoiceName()}</td>
+				<td>${invoice.getBalance()}</td>
+				<td>${invoice.isCredit()}</td>
+				<td>${invoice.getPercent()}</td>
 			</tr>
 		</c:forEach>
 	</tbody>
 </table>
 			
 <button id="statistic-menu-button" class="button"
-			onclick="addInvoice()">Добавить счет</button>
+			size="40" onclick="addInvoice()">Добавить счет</button>
+<button id="statistic-menu-button-delete" class="button"
+			size="10" onclick="deleteInvoice()">Удалить счёт</button>
 			
 <div id="add-invoice" style="visibility: hidden;">
-<form action="InvoiceServlet" method="get">
+<form action="InvoiceAddServlet" method="get">
 		      <input type="text" name="invoice-name"  size="5" placeholder="Название счета"/>
-		      <input type="submit" value="Добавить" />
+		      <input type="text" name="invoice-balance"  size="5" placeholder="баланс"/>
+		      <input type="text" name="invoice-credit"  size="5" placeholder="кредитный?"/>
+		      <input type="text" name="invoice-percent"  size="5" placeholder="Процент по кредитуs"/>
+		      <input type="submit" value="Добавить"/>
 		    </form>
-	</div>						
+	</div>			
+	
+
+			
+<div id="delete-invoice" style="visibility: hidden;">
+<form action="InvoiceDeleteServlet" method="get">
+		      <input type="text" name="invoice-number"  size="5" placeholder="Номер счёта"/>
+		      <input type="submit" value="Удалить"/>
+		    </form>
+	</div>					

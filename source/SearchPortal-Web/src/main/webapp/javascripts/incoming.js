@@ -25,3 +25,12 @@ function addInvoice() {
 		activeCases.style.visibility = 'hidden';
 	}
 }
+	
+	function deleteInvoice() {
+		var activeCases = document.getElementById('delete-invoice');
+		if (activeCases.style.visibility.valueOf() == 'hidden'.valueOf()) {
+			activeCases.style.visibility = 'visible';
+		} else {
+			activeCases.style.visibility = 'hidden';
+		}
+}
