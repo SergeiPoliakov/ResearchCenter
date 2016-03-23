@@ -70,6 +70,11 @@ public class UserCategoryTable {
 			htmlString.append("<input type=\"hidden\" name=\"objectid\" value=\"");
 			htmlString.append(cm.getObjectId());
 			htmlString.append("\"/>");
+			htmlString.append("<input type=\"hidden\" name=\"categoryname\" value=\"0\" />");
+			htmlString.append("<input type=\"hidden\" name=\"coefficient\" value=\"0\" />");
+			htmlString.append("<input type=\"hidden\" name=\"minpercent\" value=\"0\" />");
+			htmlString.append("<input type=\"hidden\" name=\"maxpercent\" value=\"0\" />");
+			htmlString.append("<input type=\"hidden\" name=\"userid\" value=\"0\" />");
 			htmlString.append("<input type=\"submit\" value=\"Удалить\" />");
 			htmlString.append("</form>");
 			htmlString.append("</td>");

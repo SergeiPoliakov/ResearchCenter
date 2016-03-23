@@ -42,14 +42,21 @@ public class CategoryServlet extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
 
-		int objectId = 0;
 		String action = null;
+		int objectId = 0;
+		String categoryName = null;
+		double coefficient = 0;
 		double minPercent = 0;
 		double maxPercent = 0;
-		double coefficient = 0;
+		int userId = 0;
 
-		objectId = Integer.parseInt(request.getParameter("objectid"));
 		action = request.getParameter("action");
+		objectId = Integer.parseInt(request.getParameter("objectid"));
+		categoryName = request.getParameter("categoryname");
+		coefficient = Double.parseDouble(request.getParameter("coefficient"));
+		minPercent = Double.parseDouble(request.getParameter("minpercent"));
+		maxPercent = Double.parseDouble(request.getParameter("maxpercent"));
+		userId = Integer.parseInt(request.getParameter("userid"));
 
 		if (action.equals("delete") && objectId != 0) {
 			try {
@@ -57,14 +64,17 @@ public class CategoryServlet extends HttpServlet {
 				categoryController.deleteCategoty(objectId);
 			} catch (Exception e) {
 				e.printStackTrace();
-			} finally {
-				action = null;
-				objectId = 0;
 			}
 		}
 
-		if (action == "create") {
-
+		if (action.equals("add") && coefficient != 0 && minPercent != 0 && maxPercent != 0
+				&& !categoryName.equals("null") && userId != 0) {
+			try {
+				CategoryController categoryController = new CategoryController();
+				categoryController.addCategory(categoryName, coefficient, minPercent, maxPercent, userId);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 		RequestDispatcher disp = request.getRequestDispatcher("/sadpage.jsp");

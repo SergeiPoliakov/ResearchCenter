@@ -13,6 +13,11 @@ public class CategoryController {
 
 	private UserModel userModel = null;
 
+	public void addCategory(String categoryName, double coef, double minP, double maxP, int userid) {
+		CategoryDAO categoryDAO = new CategoryDAO();
+		categoryDAO.addCategory(categoryName, coef, minP, maxP, userid);
+	}
+
 	public void deleteCategoty(int objectId) {
 		CategoryDAO categoryDAO = new CategoryDAO();
 		categoryDAO.deleteCategory(objectId);

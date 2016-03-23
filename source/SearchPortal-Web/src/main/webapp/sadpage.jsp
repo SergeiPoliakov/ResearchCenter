@@ -22,7 +22,7 @@
 <script src="javascripts/googleApiCharts.js"></script>
 <script src="javascripts/priorityHistogram.js"></script>
 <script src="javascripts/updateCategoryRow.js"></script>
-<script src = "javascripts/addCategoryRow.js"></script>
+<script src="javascripts/addCategoryRow.js"></script>
 </head>
 <body>
 	<div class="header">
@@ -53,9 +53,33 @@
 			%>
 			<%=UserCategoryTable.toHtmlTable(categoryList)%>
 
+			<!-- добавление категории -->
+			<br /> <br />
+			<h2>название, коэффициент, мин%, макс%</h2>
+			<form action="CategoryServlet" method="get">
+				<input type="hidden" name="action" value="add" /> <input
+					type="hidden" name="objectid" value="0" /> <input type="text"
+					name="categoryname" value="Name" /> <input type="text"
+					name="coefficient" value="coef" /> <input type="text"
+					name="minpercent" value="min" /> <input type="text"
+					name="maxpercent" value="max" /> <input type="hidden"
+					name="userid" value='<%=user.getUserId()%>' /> <input
+					type="submit" value="Добавить категорию" />
+			</form>
+			<br /> <br />
+			<!-- /добавление категории -->
+
 			<input type="button" id="start-add-categoty" value="Добавить" />
 		</div>
 	</div>
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
 	<div id="top_x_div" style="width: 900px; height: 500px;"></div>
 
 	<%=test%>

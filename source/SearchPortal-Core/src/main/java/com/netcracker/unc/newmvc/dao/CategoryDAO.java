@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -214,15 +215,21 @@ public class CategoryDAO {
 		return listOfCategories;
 	}
 
-	public void addCategory() {// CategoryModel categoryModel){
+	public void addCategory(String categoryName, double coef, double minP, double maxP, int userid) {
 		Connection connection = ConnectionFactory.getConnection();
 		CallableStatement callableStatement = null;
+		int id = 0;
 		try {
+			callableStatement = connection.prepareCall("{ ? = call ADD_CATEGORY(?, ?, ?, ?, ?)}");
 
-			// проверка работоспособности процедур
-			callableStatement = connection.prepareCall("{ call ADD_CATEGORY(1, 'тестовая', 1, 1, 1)}");
-			callableStatement.executeQuery();
-			//
+			callableStatement.registerOutParameter(1, Types.INTEGER);
+			callableStatement.setInt(2, userid);
+			callableStatement.setString(3, categoryName);
+			callableStatement.setDouble(4, coef);
+			callableStatement.setDouble(5, minP);
+			callableStatement.setDouble(6, maxP);
+			callableStatement.execute();
+			id = callableStatement.getInt(1);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
