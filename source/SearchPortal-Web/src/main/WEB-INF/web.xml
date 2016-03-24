@@ -31,10 +31,10 @@
     <servlet-name>invoice</servlet-name>
     <servlet-class>com.netcracker.unc.modules.servlets.InvoiceAddServlet</servlet-class>
   </servlet>
-  <servlet>
+  <!-- <servlet>
     <servlet-name>invoice</servlet-name>
     <servlet-class>com.netcracker.unc.modules.servlets.InvoiceDeleteServlet</servlet-class>
-  </servlet>
+  </servlet> -->
   <servlet-mapping>
     <servlet-name>authorization</servlet-name>
     <url-pattern>/authorization</url-pattern>
