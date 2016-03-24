@@ -62,7 +62,8 @@
 
 				<ul class="nav navbar-nav">
 					<li><div class="btn-group">
-							<button class="btn" onclick="show_consump()">Расходы</button>
+							<button class="btn" onclick="showHideModule(this)"
+								id="consumption">Расходы</button>
 							<button class="btn">+</button>
 						</div></li>
 					<li><div class="btn-group">
@@ -80,7 +81,8 @@
 							<a id="red-btn" href="#"></a>
 						</div></li>
 					<li><div class="btn-group">
-							<button class="btn">Личный кабинет</button>
+							<button class="btn" id="personalArea"
+								onclick="showHideModule(this)">Личный кабинет</button>
 							<button class="btn">Выход</button>
 						</div></li>
 				</ul>
@@ -112,31 +114,32 @@
 		</div>
 	</c:if>
 
-		<!-- Begin page content -->
-		<div class="container-fluid">
-			<div class="container">
-				<div class="module" id="income">
-					<div class="block-title">Создание новой задачи</div>
-					<div class="block-information">
+	<!-- Begin page content -->
+	<div class="container-fluid">
+		<div class="container" id="consumptionDiv" style="display: none">
+			<div class="module" id="income">
+				<div class="block-title">Создание новой задачи</div>
+				<div class="block-information">
 
-						<div class="create-case" id="create-case">
-							<jsp:include page="interface/create_case.jsp" />
-						</div>
+					<div class="create-case" id="create-case">
+						<jsp:include page="interface/create_case.jsp" />
+					</div>
 
+				</div>
+			</div>
+
+			<div class="module" id="consump">
+				<div class="block-title">Редактирование задач</div>
+				<div class="block-information">
+					<div id="updateCase">
+						<jsp:include page="interface/update_case.jsp" />
 					</div>
 				</div>
-
-				<div class="module" id="consump">
-					<div class="block-title">Редактирование задач</div>
-					<div class="block-information">
-						<div id="updateCase">
-							<jsp:include page="interface/update_case.jsp" />
-						</div>
-					</div>
-				</div>
+			</div>
+		</div>
 
 
-
+		<div class="container" id="personalAreaUserDiv" style="display: none">
 			<div class="module" id="stat">
 				<div class="block-title">Редактирование профиля</div>
 				<div class="block-information">
@@ -147,8 +150,8 @@
 			</div>
 		</div>
 
-
 	</div>
+
 	<div class="container">
 		<div class="module-right" id="income">
 			<div class="block-information-right">
@@ -163,9 +166,7 @@
 			<p class="text-muted">©УНЦ 2016 год.</p>
 		</div>
 	</footer>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="javascripts/bootstrap.min.js"></script>
 </body>
 <script src="javascripts/welcome-aspro.js"></script>
+<script src="javascripts/bootstrap.min.js"></script>
 </html>

@@ -35,7 +35,7 @@
 						<jsp:include page="/authorization" />
 						<c:choose>
 							<c:when test="${sessionScope.user.getUserId() != 0}">
-								<c:redirect url="modules.jsp"></c:redirect>
+								<c:redirect url="welcome.jsp"></c:redirect>
 							</c:when>
 							<c:otherwise>
 								<script type="text/javascript">

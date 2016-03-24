@@ -21,7 +21,9 @@ import com.netcracker.unc.newmvc.dao.models.UserModel;
 @WebServlet("/interface")
 public class InterfaceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
+	private final String mainUrl = "welcome.jsp";
+	
 	// database attributes
 	private final int salaryAtr = 12;
 	private final int endDateAtr = 11;
@@ -83,7 +85,7 @@ public class InterfaceServlet extends HttpServlet {
 
 		Cookie cookie = new Cookie("caseUpdate", "1");
 		response.addCookie(cookie);
-		response.sendRedirect("modules.jsp");
+		response.sendRedirect(mainUrl);
 
 	}
 
@@ -153,7 +155,7 @@ public class InterfaceServlet extends HttpServlet {
 
 		Cookie cookie = new Cookie("caseAdd", "1");
 		response.addCookie(cookie);
-		response.sendRedirect("modules.jsp");
+		response.sendRedirect(mainUrl);
 
 	}
 
@@ -172,7 +174,7 @@ public class InterfaceServlet extends HttpServlet {
 		if (userController.createSalt(oldPas) != user.getSalt()) {
 			Cookie cookie = new Cookie("errorUpdateUser", "1");
 			response.addCookie(cookie);
-			response.sendRedirect("modules.jsp");
+			response.sendRedirect("welcom.jsp");
 		} else {
 			user.setLogin(user.getLogin());
 			user.setName(userName);
@@ -180,7 +182,7 @@ public class InterfaceServlet extends HttpServlet {
 			user.setSalt(userController.createSalt(newPas));
 			userDAO.updateUser(user);
 			request.getSession().setAttribute("user", user);
-			response.sendRedirect("modules.jsp");
+			response.sendRedirect(mainUrl);
 		}
 	}
 
