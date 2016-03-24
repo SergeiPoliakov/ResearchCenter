@@ -1,40 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">	
 	
 	<jsp:useBean id="invoicesController"
 		class="com.netcracker.unc.newmvc.dao.InvoiceDAO" />
 
-<style>
-.title {
-	font-size: 12pt;
-}
-
-.result {
-	font-size: 9pt;
-}
-
-td {
-	width: 7%
-}
-
-input[type="text"] {
-	width: 70%;
-	font-size: 8pt;
-}
-
-input[type="date"] {
-	width: 100%;
-	font-size: 8pt;
-}
-
-select {
-	width: 100%;
-	font-size: 8pt;
-}
-</style>
-	
-<table border="1">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<!-- Bootstrap core CSS -->
+<link href="css/new-main.css" rel="stylesheet">
+</head>
+<body>
+<div>
+<table cellspacing="2" rules="none" height="180px" border="1">
 <thead align="center">
 		<tr>
 			<th class="title">Номер счёта</th>
@@ -64,11 +45,11 @@ select {
 			size="10" onclick="deleteInvoice()">Удалить счёт</button>
 			
 <div id="add-invoice" style="visibility: hidden;">
-<form action="InvoiceAddServlet" method="get">
-		      <input type="text" name="invoice-name"  size="5" placeholder="Название счета"/>
+<form class="for,-inline" action="InvoiceAddServlet" method="get">
+		      <input class="form-control" type="text" name="invoice-name"  size="5" placeholder="Название счета"/>
 		      <input type="text" name="invoice-balance"  size="5" placeholder="баланс"/>
 		      <input type="text" name="invoice-credit"  size="5" placeholder="кредитный?"/>
-		      <input type="text" name="invoice-percent"  size="5" placeholder="Процент по кредитуs"/>
+		      <input type="text" name="invoice-percent"  size="5" placeholder="Процент по кредиту"/>
 		      <input type="submit" value="Добавить"/>
 		    </form>
 	</div>			
@@ -81,3 +62,10 @@ select {
 		      <input type="submit" value="Удалить"/>
 		    </form>
 	</div>					
+	</div>
+
+</body>
+
+<script src="interface/js/update_user.js"></script>
+
+</html>

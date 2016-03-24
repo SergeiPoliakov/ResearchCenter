@@ -74,6 +74,11 @@
 							<button class="btn" onclick="show_consump()">Статистика</button>
 						</div>
 					</li>
+					<li>
+						<div class="btn-group">
+							<button class="btn" onclick="showInvoices()">Счета</button>
+						</div>
+					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><div class="btn-group">
@@ -162,7 +167,18 @@
 				</div>
 			</div>
 		</div>
-
+		
+		<%-- <div class="container" id="invoices" style="display: none">
+			<div class="module" id="stat">
+				<div class="block-title">Управление счетами</div>
+				<div class="block-information">
+					<div id="invoices">
+						<jsp:include page="/interface/invoices.jsp"></jsp:include>
+					</div>
+				</div>
+			</div>
+		</div>
+ --%>
 	</div>
 
 	<div class="container">
@@ -174,6 +190,9 @@
 			</div>
 		</div>
 	</div>
+	<div id="invoices" style="visibility: hidden;">
+		<jsp:include page="interface/invoices.jsp" />
+	</div>
 	<footer>
 		<div class="container-footer">
 			<p class="text-muted">©УНЦ 2016 год.</p>
@@ -182,4 +201,5 @@
 </body>
 <script src="javascripts/welcome-aspro.js"></script>
 <script src="javascripts/bootstrap.min.js"></script>
+<script src="javascripts/incoming.js"></script>
 </html>
