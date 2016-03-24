@@ -21,9 +21,9 @@ import com.netcracker.unc.newmvc.dao.models.UserModel;
 @WebServlet("/interface")
 public class InterfaceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	private final String mainUrl = "welcome.jsp";
-	
+
 	// database attributes
 	private final int salaryAtr = 12;
 	private final int endDateAtr = 11;
@@ -153,6 +153,7 @@ public class InterfaceServlet extends HttpServlet {
 		param.setValue(casePriorityStr);
 		paramDAO.addParam(param);
 
+		request.getSession().setAttribute("user", userDAO.getUser(user.getUserId()));
 		Cookie cookie = new Cookie("caseAdd", "1");
 		response.addCookie(cookie);
 		response.sendRedirect(mainUrl);

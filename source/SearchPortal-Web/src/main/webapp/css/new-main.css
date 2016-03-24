@@ -36,13 +36,21 @@ audio
 
 
 
+
+
+
+
 :not
 
 
 
 
 
+
+
  
+
+
 
 
 
@@ -57,7 +65,11 @@ controls
 
 
 
+
+
  
+
+
 
 
 
@@ -76,7 +88,13 @@ display
 
 
 
+
+
+
+
 :
+
+
 
 
 
@@ -88,7 +106,13 @@ display
 
 
 
+
+
 none
+
+
+
+
 
 
 
@@ -111,13 +135,21 @@ height
 
 
 
+
+
+
+
 :
 
 
 
 
 
+
+
  
+
+
 
 
 
@@ -193,13 +225,21 @@ svg
 
 
 
+
+
+
+
 :not
 
 
 
 
 
+
+
  
+
+
 
 
 
@@ -212,7 +252,11 @@ svg
 
 
 
+
+
  
+
+
 
 
 
@@ -231,7 +275,13 @@ overflow
 
 
 
+
+
+
+
 :
+
+
 
 
 
@@ -243,7 +293,13 @@ overflow
 
 
 
+
+
 hidden
+
+
+
+
 
 
 
@@ -4159,13 +4215,21 @@ tbody.collapse.in {
 
 
 
+
+
+
+
 :not
 
 
 
 
 
+
+
  
+
+
 
 
 
@@ -4178,7 +4242,11 @@ tbody.collapse.in {
 
 
 
+
+
  
+
+
 
 
 
@@ -4191,7 +4259,11 @@ tbody.collapse.in {
 
 
 
+
+
  
+
+
 
 
 
@@ -4204,7 +4276,11 @@ tbody.collapse.in {
 
 
 
+
+
  
+
+
 
 
 
@@ -4217,7 +4293,11 @@ tbody.collapse.in {
 
 
 
+
+
  
+
+
 
 
 
@@ -4231,7 +4311,11 @@ tbody.collapse.in {
 
 
 
+
+
 	
+
+
 
 
 
@@ -4250,13 +4334,21 @@ border-radius
 
 
 
+
+
+
+
 :
 
 
 
 
 
+
+
  
+
+
 
 
 
@@ -4281,7 +4373,15 @@ border-radius
 
 
 
+
+
+
+
 :first-child
+
+
+
+
 
 
 
@@ -4298,7 +4398,11 @@ border-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4311,7 +4415,11 @@ border-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4324,7 +4432,11 @@ border-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4337,7 +4449,11 @@ border-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4356,13 +4472,21 @@ border-top-right-radius
 
 
 
+
+
+
+
 :
 
 
 
 
 
+
+
  
+
+
 
 
 
@@ -4380,13 +4504,21 @@ border-bottom-right-radius
 
 
 
+
+
+
+
 :
 
 
 
 
 
+
+
  
+
+
 
 
 
@@ -4407,7 +4539,15 @@ border-bottom-right-radius
 
 
 
+
+
+
+
 :last-child
+
+
+
+
 
 
 
@@ -4424,7 +4564,11 @@ border-bottom-right-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4437,7 +4581,11 @@ border-bottom-right-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4457,7 +4605,13 @@ border-bottom-right-radius
 
 
 
+
+
+
+
 :not
+
+
 
 
 
@@ -4470,6 +4624,8 @@ border-bottom-right-radius
 
 
 
+
+
 (
 :first-child
 
@@ -4477,7 +4633,11 @@ border-bottom-right-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4496,13 +4656,21 @@ border-top-left-radius
 
 
 
+
+
+
+
 :
 
 
 
 
 
+
+
  
+
+
 
 
 
@@ -4520,13 +4688,21 @@ border-bottom-left-radius
 
 
 
+
+
+
+
 :
 
 
 
 
 
+
+
  
+
+
 
 
 
@@ -4623,13 +4799,21 @@ border-bottom-left-radius
 
 
 
+
+
+
+
 :not
 
 
 
 
 
+
+
  
+
+
 
 
 
@@ -4642,7 +4826,11 @@ border-bottom-left-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4655,7 +4843,11 @@ border-bottom-left-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4668,7 +4860,11 @@ border-bottom-left-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4687,7 +4883,13 @@ border-radius
 
 
 
+
+
+
+
 :
+
+
 
 
 
@@ -4699,11 +4901,17 @@ border-radius
 
 
 
+
+
 0;
 }
 .btn-group-vertical
 >
 .btn
+
+
+
+
 
 
 
@@ -4725,13 +4933,21 @@ border-radius
 
 
 
+
+
+
+
 :not
 
 
 
 
 
+
+
  
+
+
 
 
 
@@ -4744,7 +4960,11 @@ border-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4763,7 +4983,13 @@ border-top-left-radius
 
 
 
+
+
+
+
 :
+
+
 
 
 
@@ -4775,8 +5001,14 @@ border-top-left-radius
 
 
 
+
+
 4
 px
+
+
+
+
 
 
 
@@ -4799,7 +5031,13 @@ border-top-right-radius
 
 
 
+
+
+
+
 :
+
+
 
 
 
@@ -4811,8 +5049,14 @@ border-top-right-radius
 
 
 
+
+
 4
 px
+
+
+
+
 
 
 
@@ -4835,13 +5079,21 @@ border-bottom-right-radius
 
 
 
+
+
+
+
 :
 
 
 
 
 
+
+
  
+
+
 
 
 
@@ -4859,7 +5111,13 @@ border-bottom-left-radius
 
 
 
+
+
+
+
 :
+
+
 
 
 
@@ -4871,11 +5129,17 @@ border-bottom-left-radius
 
 
 
+
+
 0;
 }
 .btn-group-vertical
 >
 .btn
+
+
+
+
 
 
 
@@ -4897,13 +5161,21 @@ border-bottom-left-radius
 
 
 
+
+
+
+
 :not
 
 
 
 
 
+
+
  
+
+
 
 
 
@@ -4916,7 +5188,11 @@ border-bottom-left-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4935,13 +5211,21 @@ border-top-left-radius
 
 
 
+
+
+
+
 :
 
 
 
 
 
+
+
  
+
+
 
 
 
@@ -4959,13 +5243,21 @@ border-top-right-radius
 
 
 
+
+
+
+
 :
 
 
 
 
 
+
+
  
+
+
 
 
 
@@ -4983,7 +5275,13 @@ border-bottom-right-radius
 
 
 
+
+
+
+
 :
+
+
 
 
 
@@ -4995,8 +5293,14 @@ border-bottom-right-radius
 
 
 
+
+
 4
 px
+
+
+
+
 
 
 
@@ -5019,7 +5323,13 @@ border-bottom-left-radius
 
 
 
+
+
+
+
 :
+
+
 
 
 
@@ -5031,8 +5341,14 @@ border-bottom-left-radius
 
 
 
+
+
 4
 px
+
+
+
+
 
 
 
@@ -5175,13 +5491,21 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
+
+
 :not
 
 
 
 
 
+
+
  
+
+
 
 
 
@@ -5194,7 +5518,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
  
+
+
 
 
 
@@ -5207,7 +5535,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
  
+
+
 
 
 
@@ -5220,7 +5552,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
  
+
+
 
 
 
@@ -5238,13 +5574,21 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
+
+
 :not
 
 
 
 
 
+
+
  
+
+
 
 
 
@@ -5257,7 +5601,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
  
+
+
 
 
 
@@ -5270,7 +5618,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
  
+
+
 
 
 
@@ -5283,7 +5635,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
  
+
+
 
 
 
@@ -5296,7 +5652,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
  
+
+
 
 
 
@@ -5313,7 +5673,13 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
+
+
 :not
+
+
 
 
 
@@ -5326,6 +5692,8 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
 (
 :first-child
 
@@ -5333,7 +5701,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
  
+
+
 
 
 
@@ -5346,7 +5718,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
  
+
+
 
 
 
@@ -5359,7 +5735,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
  
+
+
 
 
 
@@ -5378,13 +5758,21 @@ border-radius
 
 
 
+
+
+
+
 :
 
 
 
 
 
+
+
  
+
+
 
 
 
@@ -8730,4 +9118,103 @@ progress.inoutProgress::-webkit-progress-value {
 
 #progressOverlaylabel {
 	font-size: 6pt;
+}
+
+.controlSalaryBorder {
+	border-top-left-radius: 18px;
+	border-bottom-left-radius: 18px;
+	border: 1px #004949 groove; /* рамка */
+	float: right;
+	width: 40%;
+	background: #fef8a0;
+}
+
+#controlSalaryButton {
+	width: 25%;
+	font-size: 10px;
+	height: 20px;
+	margin-left: 7%;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+#controlSalaryInput {
+	width: 25%;
+	font-size: 10px;
+	height: 10px;
+	margin-left: 15px;
+	margin-right: 3px;
+	background: #fef8a0;
+}
+
+#controlSalaryInputTable {
+	width: 93%;
+	font-size: 10px;
+	height: 9px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background: #fef8a0;
+}
+
+#controlSalaryInputTd {
+	width: 100%;
+	position: relative;
+	background: #fef8a0;
+}
+
+#controlSalaryLabel {
+	display: block;
+	text-align: center;
+	color: green;
+	font-size: 12px;
+}
+
+.controlSalaryTableLabel {
+	font-size: 12px;
+}
+
+.controlSalaryLabel {
+	font-size: 10px;
+}
+
+#controlSalaryRadioNo, #controlSalaryRadioYes {
+	width: 13px;
+}
+
+#controlSalaryRadioYes {
+	margin-left: 20px;
+}
+
+.controlSalaryTableDiv {
+	width: 17%;
+	border: 1px #004949 groove; /* рамка */
+	float: right;
+	visibility: hidden;
+	margin-top: 20px;
+	background: #fef8a0;
+}
+
+#controlSalaryMain {
+	position: fixed;
+	margin-top: 25px;
+	width: 50%;
+	right: -25%;
+}
+
+#divMounthCheck {
+	width: 50%;
+	display: inline;
+}
+
+#helloCase {
+	width: 250px;
+	border-top-left-radius: 18px;
+	border-bottom-left-radius: 18px;
+	border: 1px #004949 groove; /* рамка */
+	height: 90px;
+	position: fixed;
+	top: 25%;
+	background-color: #fef8a0;
+	right: -250px;
 }

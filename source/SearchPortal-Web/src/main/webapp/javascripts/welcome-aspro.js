@@ -2,19 +2,36 @@
  * 
  */
 
-// add animation for check-salary module
-var helloCase = document.getElementById("helloCase");
-var addSalaryPlace = -250;
-helloCase.style.right = addSalaryPlace + 'px';
-var animationAddCase = setInterval(function() {
-	if (addSalaryPlace != 0) {
-		addSalaryPlace += 2;
-		helloCase.style.right = addSalaryPlace + 'px';
-	} else {
-		clearInterval(animationAddCase);
-	}
+// animation for control salary
+if (document.getElementById("controlSalaryMain") != null) {
+	var controlSal = document.getElementById("controlSalaryMain");
+	var addSalaryControlPlace = -25;
+	controlSal.style.right = addSalaryControlPlace + '%';
+	var animationControlSalary = setInterval(function() {
+		if (addSalaryControlPlace < 0) {
+			addSalaryControlPlace += 1;
+			controlSal.style.right = addSalaryControlPlace + '%';
+		} else {
+			clearInterval(animationControlSalary);
+		}
+	}, 20);
+}
 
-}, 5);
+// add animation for check-salary module
+if (document.getElementById("helloCase") != null) {
+	var helloCase = document.getElementById("helloCase");
+	var addSalaryPlace = -250;
+	helloCase.style.right = addSalaryPlace + 'px';
+	var animationAddCase = setInterval(function() {
+		if (addSalaryPlace != 0) {
+			addSalaryPlace += 2;
+			helloCase.style.right = addSalaryPlace + 'px';
+		} else {
+			clearInterval(animationAddCase);
+		}
+
+	}, 5);
+}
 
 // show-hide general modules
 function showHideModule(element) {

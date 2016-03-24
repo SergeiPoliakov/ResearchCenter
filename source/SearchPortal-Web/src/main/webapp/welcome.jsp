@@ -18,7 +18,6 @@
 <script src="javascripts/modulesHide.js"></script>
 <!-- Custom styles for this template -->
 <link href="css/sticky-footer-navbar.css" rel="stylesheet">
-<link href="css/welcome-aspro.css" rel="stylesheet">
 </head>
 
 <body>
