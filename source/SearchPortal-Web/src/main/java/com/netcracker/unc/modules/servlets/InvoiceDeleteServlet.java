@@ -33,7 +33,7 @@ public class InvoiceDeleteServlet extends HttpServlet {
 		}
 		
 		invoicedao.deleteInvoice(invoiceNumber);
-		response.sendRedirect("modules.jsp");
+		response.sendRedirect("welcome.jsp");
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 

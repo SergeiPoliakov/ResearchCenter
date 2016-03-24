@@ -9,13 +9,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<!-- Bootstrap core CSS -->
-<link href="css/new-main.css" rel="stylesheet">
+<title>Invoices</title>
 </head>
 <body>
 <div>
-<table cellspacing="2" rules="none" height="180px" border="1">
+<table border="1">
 <thead align="center">
 		<tr>
 			<th class="title">Номер счёта</th>
@@ -46,7 +44,7 @@
 			
 <div id="add-invoice" style="visibility: hidden;">
 <form class="for,-inline" action="InvoiceAddServlet" method="get">
-		      <input class="form-control" type="text" name="invoice-name"  size="5" placeholder="Название счета"/>
+		      <input type="text" name="invoice-name"  size="5" placeholder="Название счета"/>
 		      <input type="text" name="invoice-balance"  size="5" placeholder="баланс"/>
 		      <input type="text" name="invoice-credit"  size="5" placeholder="кредитный?"/>
 		      <input type="text" name="invoice-percent"  size="5" placeholder="Процент по кредиту"/>

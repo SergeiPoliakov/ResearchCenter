@@ -58,7 +58,7 @@ public class InvoiceAddServlet extends HttpServlet {
 			//request.setAttribute("currentSum", invoiceName);
 			log.warning("Before redirect...");
 		}
-		response.sendRedirect("modules.jsp");
+		response.sendRedirect("welcome.jsp");
 
 	}
 

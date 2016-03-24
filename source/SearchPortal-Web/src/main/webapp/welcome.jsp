@@ -67,7 +67,7 @@
 						</div></li>
 					<li><div class="btn-group">
 							<button class="btn" onclick="show_consump()">Доходы</button>
-							<button class="btn">+</button>
+							<button class="btn" onclick="showIncoming()">+</button>
 						</div></li>
 					<li>
 						<div class="btn-group">
@@ -168,17 +168,6 @@
 			</div>
 		</div>
 		
-		<%-- <div class="container" id="invoices" style="display: none">
-			<div class="module" id="stat">
-				<div class="block-title">Управление счетами</div>
-				<div class="block-information">
-					<div id="invoices">
-						<jsp:include page="/interface/invoices.jsp"></jsp:include>
-					</div>
-				</div>
-			</div>
-		</div>
- --%>
 	</div>
 
 	<div class="container">
@@ -192,6 +181,9 @@
 	</div>
 	<div id="invoices" style="visibility: hidden;">
 		<jsp:include page="interface/invoices.jsp" />
+	</div>
+	<div id="incoming" style="visibility: hidden;">
+		<jsp:include page="interface/incoming.jsp" />
 	</div>
 	<footer>
 		<div class="container-footer">

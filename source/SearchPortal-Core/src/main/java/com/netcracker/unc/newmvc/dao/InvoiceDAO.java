@@ -33,6 +33,13 @@ public class InvoiceDAO {
 		return getAllInvoice();
 
 	}
+	
+	public int getSumBalance(UserModel user) {
+		setUser(user);
+		return getSumBalance();
+	}
+	
+	
 
 	public ArrayList<InvoiceModel> getAllInvoice() {
 

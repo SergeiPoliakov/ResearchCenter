@@ -40,7 +40,7 @@ public class IncomingServlet extends HttpServlet {
 			request.setAttribute("currentSum", addSumVal);
 			log.warning("Before redirect...");
 		}
-		response.sendRedirect("modules.jsp");
+		response.sendRedirect("welcome.jsp");
 
 	}
 
