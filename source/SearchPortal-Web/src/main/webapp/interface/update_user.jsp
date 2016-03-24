@@ -6,49 +6,50 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link type="text/css" rel="stylesheet"
-	href="interface/css/update_user.css" />
+<!-- Bootstrap core CSS -->
+<link href="css/new-main.css" rel="stylesheet">
 </head>
 <body>
-	<div class="updateUser">
-		<form action="interface" onsubmit="return checkUpdateUserRegExp()">
-			<input type="hidden" value="updateUser" name="interfaces" />
-			<table cellspacing="2" rules="groups" border="2" height="180px">
-				<thead>
-					<tr>
-						<th colspan="4">Редактировать свой профиль:</th>
-					</tr>
-				</thead>
+	<div>
+		<form class="for,-inline" action="interface"
+			onsubmit="return checkUpdateUserRegExp()">
+			<input class="form-control" type="hidden" value="updateUser"
+				name="interfaces" />
+			<table cellspacing="2" rules="none" height="180px">
 				<tbody id="updateUserTBody">
 					<tr>
-						<td class="upUsLab"><label class="editUserLabel">Смена
-								имени:</label></td>
-						<td colspan="1" align="center"><input type="text" name="name"
-							id="editUserInputName" /></td>
-						<td colspan="2"><label id="errorNameLabel">имя должно
-								состоять только из букв (не более 15 символов)</label></td>
+						<td class="upUsLab"><div class="form-group">
+								<label class="editUserLabel">Смена имени:</label>
+							</div></td>
+						<td colspan="1" align="center"><input class="form-control"
+							type="text" name="name" id="editUserInputName" /></td>
+						<td colspan="2"><label id="errorNameLabel"
+							class=errorUpdateUser style="visibility: hidden"></label></td>
 					</tr>
 					<tr>
-						<td class="upUsLab"><label class="editUserLabel">Старый
-								пароль:</label></td>
-						<td colspan="1" align="center"><input type="password"
-							name="oldPas" id="oldPas" class="upUseInp"/></td>
-						<td colspan="2"><label id="errorPasswordLabel"></label></td>
+						<td class="upUsLab"><div class="form-group">
+								<label class="editUserLabel">Старый пароль:</label>
+							</div></td>
+						<td colspan="1" align="center"><input class="form-control"
+							type="password" name="oldPas" id="oldPas" class="upUseInp" /></td>
+						<td colspan="2"><label id="errorPasswordLabel"
+							class=errorUpdateUser style="visibility: hidden"></label></td>
 					</tr>
 					<tr>
-						<td class="upUsLab"><label class="editUserLabel">Новый
-								пароль:</label></td>
-						<td align="center"><input type="password" name="newPas"
-							id="newPas" class="upUseInp"/></td>
+						<td class="upUsLab"><div class="form-group">
+								<label class="editUserLabel">Новый пароль:</label>
+							</div></td>
+						<td align="center"><input class="form-control"
+							type="password" name="newPas" id="newPas" class="upUseInp" /></td>
 						<td><label style="margin-left: 1%">подтвердить:</label></td>
-						<td align="left"><input type="password" name="newPasTwice"
-							id="newPasTwice" class="upUseInp"/></td>
+						<td><input class="form-control" type="password"
+							name="newPasTwice" id="newPasTwice" /></td>
 					</tr>
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="4"><input type="submit" value="Изменить"
-							id="editUserSubmit" /></td>
+						<td colspan="4"><button class="btn" type="submit"
+								id="editUserSubmit">Изменить</button></td>
 					</tr>
 				</tfoot>
 			</table>
@@ -57,6 +58,6 @@
 
 </body>
 
-<script src="interface/js/updateUser.js"></script>
+<script src="interface/js/update_user.js"></script>
 
 </html>

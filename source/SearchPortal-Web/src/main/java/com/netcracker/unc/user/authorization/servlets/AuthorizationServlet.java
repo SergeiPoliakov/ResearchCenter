@@ -17,6 +17,8 @@ import com.netcracker.unc.newmvc.dao.models.UserModel;
 public class AuthorizationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	private final String mainUrl = "welcome.jsp";
+
 	private void authorizationCheck(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 		UserController userController = new UserController();
@@ -33,7 +35,7 @@ public class AuthorizationServlet extends HttpServlet {
 			Cookie cookie = new Cookie("userID", String.valueOf(user.getUserId()));
 			cookie.setMaxAge(24 * 60 * 60);
 			response.addCookie(cookie);
-			response.sendRedirect("modules.jsp");
+			response.sendRedirect(mainUrl);
 		} else {
 			System.out.println("error");
 			request.setAttribute("errorMessage", "Неправильно введен логин или пароль!");
@@ -62,7 +64,7 @@ public class AuthorizationServlet extends HttpServlet {
 			cookie.setMaxAge(24 * 60 * 60);
 			response.addCookie(cookie);
 
-			response.sendRedirect("modules.jsp");
+			response.sendRedirect(mainUrl);
 		} else {
 			for (Cookie cookie : request.getCookies()) {
 				if (cookie.getName().equals("page")) {

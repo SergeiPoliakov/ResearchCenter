@@ -25,6 +25,7 @@ import com.netcracker.unc.newmvc.dao.models.UserModel;
 @WebServlet("/custom")
 public class CustomServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private final String mainUrl = "welcome.jsp";
 
 	// columns names od fatabase
 	private final int incomeType = 2; // Доход
@@ -104,7 +105,7 @@ public class CustomServlet extends HttpServlet {
 		response.addCookie(cookie);
 
 		request.getSession().setAttribute("user", userDAO.getUser(user.getUserId()));
-		response.sendRedirect("modules.jsp");
+		response.sendRedirect(mainUrl);
 
 	}
 
@@ -198,7 +199,7 @@ public class CustomServlet extends HttpServlet {
 		response.addCookie(cookie);
 
 		request.getSession().setAttribute("user", userDAO.getUser(user.getUserId()));
-		response.sendRedirect("modules.jsp");
+		response.sendRedirect(mainUrl);
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

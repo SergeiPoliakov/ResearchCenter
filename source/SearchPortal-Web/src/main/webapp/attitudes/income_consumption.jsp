@@ -6,7 +6,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link type="text/css" rel="stylesheet" href="css/attitude.css" />
 </head>
 
 <body>
@@ -33,7 +32,6 @@
 	function deleteOverlay() {
 		var div = document.getElementById('prog');
 		if (div != null) {
-			//document.body.removeChild(div);
 			divProgress.removeChild(div);
 		}
 	}
@@ -42,8 +40,10 @@
 
 		var div = document.createElement('div');
 		div.id = "prog";
+		div.className = 'progressOverlay';
 
 		var label = document.createElement('label');
+		label.id = "progressOverlaylabel";
 		label.innerHTML = '<b style=\"color:#006400\">На текущий месяц:</b> <p style=\"margin-top: 3px\"><b>Наибольший доход от:</b> '
 				+ "${maxIncomeCost} "
 				+ "(${maxIncomeCostInt} руб.)"
@@ -53,16 +53,8 @@
 				+ "<p><b>Средний доход:</b> "
 				+ "${avgIncome} руб."
 				+ "<p><b>Средний расход:</b> " + "${avgConsumption} руб.";
-		label.style.fontSize = '8pt';
 		div.appendChild(label);
-		div.style.width = 14 + '%';
-		//div.style.height = 50 + '%';
-		div.className = 'progressOverlay';
-		//div.style.position = 'absolute';
-		div.style.marginLeft = (posX - 65) + 'px';
-		//div.style.top = posY + 'px';
-		div.style.border = '1px groove black';
-		div.style.background = '#FFDEAD';
+		div.style.marginLeft = (posX-1700) + 'px';
 		divProgress.appendChild(div);
 	}
 </script>

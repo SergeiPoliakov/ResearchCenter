@@ -73,14 +73,9 @@ function checkRegExp() {
 	var div = document.getElementById("createCaseDiv");
 	var check = true;
 
-	if (document.getElementById('nameError') != null)
-		div.removeChild(document.getElementById('nameError'));
-
-	if (document.getElementById('dateError') != null)
-		div.removeChild(document.getElementById('dateError'));
-
-	if (document.getElementById('costError') != null)
-		div.removeChild(document.getElementById('costError'));
+	document.getElementById('nameError').innerHTML = '';
+	document.getElementById('dateError').innerHTML = '';
+	document.getElementById('costError').innerHTML = '';
 
 	var costCase = document.getElementById("cost_case");
 	var dateCase = document.getElementById("date_case");
@@ -91,37 +86,22 @@ function checkRegExp() {
 	var matcherDate = new RegExp("^[0-9]*.");
 	var matcherCostCase = new RegExp("^[0-9]{1,12}$");
 	if (!nameCase.value.match(matcherNameCase)) {
-		var error = document.createElement('label');
-		error.style.display = 'block';
-		error.style.marginTop = '2px';
-		error.id = 'nameError';
+		var error = document.getElementById('nameError');
+		error.setAttribute('class', 'createCaseError')
 		error.innerHTML = 'имя задачи должно состоять только из букв и цифр (не более 100 символов)';
-		error.style.fontSize = '10pt';
-		error.style.color = 'red';
 		check = false;
-		div.appendChild(error);
 	}
 	if (!dateCase.value.match(matcherDate)) {
-		var error = document.createElement('label');
-		error.style.display = 'block';
-		error.style.marginTop = '2px';
-		error.id = 'dateError';
+		var error = document.getElementById('dateError');
+		error.setAttribute('class', 'createCaseError')
 		error.innerHTML = 'не выбрана дата окончания задачи';
-		error.style.fontSize = '10pt';
-		error.style.color = 'red';
 		check = false;
-		div.appendChild(error);
 	}
 	if (!costCase.value.match(matcherCostCase)) {
-		var error = document.createElement('label');
-		error.style.display = 'block';
-		error.style.marginTop = '2px';
-		error.id = 'costError';
+		var error = document.getElementById('costError');
+		error.setAttribute('class', 'createCaseError')
 		error.innerHTML = 'сумма должна состоять только из цифр (не более 12)';
-		error.style.fontSize = '10pt';
-		error.style.color = 'red';
 		check = false;
-		div.appendChild(error);
 	}
 	if (!check) {
 		return false;

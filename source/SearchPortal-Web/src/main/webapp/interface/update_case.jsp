@@ -5,8 +5,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<style>
+<!-- Bootstrap core CSS -->
+<link href="css/new-main.css" rel="stylesheet">
+<!-- <style>
 .title {
 	font-size: 12pt;
 }
@@ -33,22 +34,22 @@ select {
 	width: 100%;
 	font-size: 8pt;
 }
-</style>
+</style>-->
 </head>
 <body>
 
 	<jsp:useBean id="activeCasesController"
 		class="com.netcracker.unc.newmvc.dao.ActiveCasesDAO" />
 
-	<input type="text" onkeypress="help()" onkeydown="backspaceHelp()"
+	<input class="form-control" type="text" onkeypress="help()" onkeydown="backspaceHelp()"
 		id="inputUpdateCase" style="margin-bottom: 7px; width: 20%"
 		onfocus="refreshHelpInput()" onblur="refreshHelpInput()"
 		onsubmit="return false" />
 	<br />
 	<form id="updateCaseTable">
 		<input type="hidden" name="interfaces" value="updateCase" />
-		<div>
-			<table border="1">
+		<div class="table-responsive">
+			<table border="1" class="table table-striped">
 				<thead align="center">
 					<tr>
 						<th class="title">Название</th>
