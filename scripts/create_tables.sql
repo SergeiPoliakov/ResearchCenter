@@ -61,8 +61,7 @@ CREATE TABLE sp_transactions
 	Transaction_ID       INTEGER NOT NULL ,
 	Transaction_date     DATE NOT NULL ,
 	Fin_object_id        INTEGER NOT NULL ,
-	Cost                 DECIMAL(6,2) NOT NULL ,
-	User_ID              INTEGER NOT NULL 
+	Cost                 DECIMAL(6,2) NOT NULL
 );
 
 ALTER TABLE sp_transactions
