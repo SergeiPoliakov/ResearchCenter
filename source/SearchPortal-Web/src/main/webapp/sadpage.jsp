@@ -33,12 +33,8 @@
 	<div class="module" id="priority-module">
 		<div class="block-title">Приоритеты</div>
 		<div class="block-information">
-			<%
-				UserModel user = (UserModel) request.getSession().getAttribute("user");
-				CategoryController categoryController = new CategoryController(user);
-			%>
+			<%	CategoryController categoryController = new CategoryController((UserModel) request.getSession().getAttribute("user")); %>
 			<%=FillHTMLTable.toHtmlString(categoryController.getCategoriesWithPriorities())%>
-			<%=user.getUserId()%>
 		</div>
 	</div>
 	<h1>t3</h1>
@@ -49,6 +45,7 @@
 		<div class="block-title">Категории</div>
 		<div class="block-information">
 			<%
+			UserModel user = (UserModel) request.getSession().getAttribute("user");
 				List<CategoryModel> categoryList = new ArrayList<CategoryModel>(categoryController.getCategories());
 			%>
 			<%=UserCategoryTable.toHtmlTable(categoryList)%>
