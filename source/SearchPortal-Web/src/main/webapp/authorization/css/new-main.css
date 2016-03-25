@@ -88,103 +88,9 @@ img {
 	border: 0;
 }
 
-svg
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-:not
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-(
-:root
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-)
+svg:not(:root)
 {
-overflow
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-:
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-hidden
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-;
+overflow:hidden;
 }
 figure {
 	margin: 1em 40px;
@@ -3830,7 +3736,6 @@ a.btn.disabled, fieldset[disabled] a.btn {
 	display: block;
 	width: 100%;
 	background-color:#FEF8A0;
-	color: black;
 }
 
 .btn-block+.btn-block {
@@ -8917,9 +8822,8 @@ button.close {
 	padding-right: 120px;
 	padding-top: 120px;
 	padding-bottom: 50px;
-	min-height: 200px;
-	max-height: 2000px;
-	border-radius: 4px;
+	height: 200px;
+	border-radius: 0px;
 	/* box-shadow: 
         0 10px 20px rgba(0, 0, 0, 0.25);*/
 }
@@ -8945,6 +8849,7 @@ button.close {
 }
 
 .container-footer {
+	position: static;
 	padding-top: 35px;
 	text-align: right;
 	vertical-align: text-bottom;
