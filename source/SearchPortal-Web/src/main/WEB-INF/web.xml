@@ -28,13 +28,10 @@
     <servlet-class>com.netcracker.unc.modules.servlets.IncomingServlet</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>invoiceAdd</servlet-name>
-    <servlet-class>com.netcracker.unc.modules.servlets.InvoiceAddServlet</servlet-class>
+    <servlet-name>invoice</servlet-name>
+    <servlet-class>com.netcracker.unc.modules.servlets.InvoiceServlet</servlet-class>
   </servlet>
-  <servlet>
-    <servlet-name>invoiceDelete</servlet-name>
-    <servlet-class>com.netcracker.unc.modules.servlets.InvoiceDeleteServlet</servlet-class>
-  </servlet> 
+  
   <servlet-mapping>
     <servlet-name>authorization</servlet-name>
     <url-pattern>/authorization</url-pattern>
@@ -60,13 +57,10 @@
     <url-pattern>/incomingservlet</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>invoiceAdd</servlet-name>
-    <url-pattern>/InvoiceAddServlet</url-pattern>
+    <servlet-name>invoice</servlet-name>
+    <url-pattern>/invoiceservlet</url-pattern>
   </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>invoiceDelete</servlet-name>
-    <url-pattern>/InvoiceDeleteServlet</url-pattern>
-  </servlet-mapping>
+  
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>

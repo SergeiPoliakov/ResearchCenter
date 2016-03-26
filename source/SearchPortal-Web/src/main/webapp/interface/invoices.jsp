@@ -43,10 +43,14 @@
 			size="10" onclick="deleteInvoice()">Удалить счёт</button>
 			
 <div id="add-invoice" style="visibility: hidden;">
-<form class="for,-inline" action="InvoiceAddServlet" method="get">
+<form class="for,-inline" action="InvoiceServlet" method="get">
 		      <input type="text" name="invoice-name"  size="5" placeholder="Название счета"/>
 		      <input type="text" name="invoice-balance"  size="5" placeholder="баланс"/>
-		      <input type="text" name="invoice-credit"  size="5" placeholder="кредитный?"/>
+		      <!-- <input type="text" name="invoice-credit"  size="5" placeholder="кредитный?"/> -->
+		      <select><selectname="invoice-credit"  size="2">
+		      <option disabled>Кредитный?</option>
+        	  <option selected value = "true">да</option>
+        	  <option selected value = "false">нет</option></select> 
 		      <input type="text" name="invoice-percent"  size="5" placeholder="Процент по кредиту"/>
 		      <input type="submit" value="Добавить"/>
 		    </form>
@@ -55,7 +59,7 @@
 
 			
 <div id="delete-invoice" style="visibility: hidden;">
-<form action="InvoiceDeleteServlet" method="get">
+<form action="InvoiceServlet" method="delete">
 		      <input type="text" name="invoice-number"  size="5" placeholder="Номер счёта"/>
 		      <input type="submit" value="Удалить"/>
 		    </form>

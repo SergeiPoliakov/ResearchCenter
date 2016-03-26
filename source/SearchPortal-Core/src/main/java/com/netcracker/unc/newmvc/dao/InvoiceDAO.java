@@ -47,7 +47,7 @@ public class InvoiceDAO {
 		Connection connect = ConnectionFactory.getConnection();
 		ArrayList<InvoiceModel> listGetAllInvoice = new ArrayList<InvoiceModel>();
 		try {
-			PreparedStatement prepare = connect.prepareStatement(InvoiceQueries.getAllInvoicesForUserByUserId);
+			PreparedStatement prepare = connect.prepareStatement(InvoiceQueries.getAllInvoicesByUserId);
 			prepare.setInt(1, user.getUserId());
 			ResultSet result = prepare.executeQuery();
 
@@ -81,7 +81,7 @@ public class InvoiceDAO {
 		long auto_id;
 
 		try {
-			prepare = connect.prepareStatement(InvoiceQueries.setNewInvoiceForUser, new String[] { "FIN_OBJECT_ID" });
+			prepare = connect.prepareStatement(InvoiceQueries.setInvoice, new String[] { "FIN_OBJECT_ID" });
 			prepare.setString(1, invoiceJsp.getInvoiceName());
 			prepare.setInt(2, user.getUserId());			
 			if (prepare.executeUpdate()>0) {
@@ -91,17 +91,17 @@ public class InvoiceDAO {
 				auto_id = rs.getLong(1);
 				log.warning("New ID: " + auto_id);
 
-				prepare = connect.prepareStatement(InvoiceQueries.setNewBalanceInInvoiceByInvoiceId);
+				prepare = connect.prepareStatement(InvoiceQueries.setBalance);
 				prepare.setLong(1, auto_id);
 				prepare.setInt(2, invoiceJsp.getBalance());
 				prepare.executeUpdate();
 
-				prepare = connect.prepareStatement(InvoiceQueries.setNewCreditInInvoiceByInvoiceId);
+				prepare = connect.prepareStatement(InvoiceQueries.setCredit);
 				prepare.setLong(1, auto_id);
 				prepare.setString(2, String.valueOf(invoiceJsp.isCredit()));
 				prepare.executeUpdate();
 
-				prepare = connect.prepareStatement(InvoiceQueries.setNewPercentInInvoiceByInvoiceId);
+				prepare = connect.prepareStatement(InvoiceQueries.setPercent);
 				prepare.setLong(1, auto_id);
 				prepare.setDouble(2, invoiceJsp.getPercent());
 				prepare.executeUpdate();
@@ -127,7 +127,7 @@ public class InvoiceDAO {
 		invoice.setInvoiceId(invoiceId);
 
 		try {
-			prepare = connect.prepareStatement(InvoiceQueries.getInvoiceForUserByInvoiceId);
+			prepare = connect.prepareStatement(InvoiceQueries.getInvoice);
 			prepare.setInt(1, user.getUserId());
 			prepare.setInt(2, invoiceId);
 			result = prepare.executeQuery();
@@ -135,7 +135,7 @@ public class InvoiceDAO {
 
 			invoice.setInvoiceName(result.getString(2));
 
-			prepare = connect.prepareStatement(InvoiceQueries.getBalanceCreditAndPercentByInvoiceId);
+			prepare = connect.prepareStatement(InvoiceQueries.getBalanceCreditAndPercent);
 			prepare.setInt(1, user.getUserId());
 			prepare.setInt(2, invoiceId);
 			result = prepare.executeQuery();
@@ -165,7 +165,7 @@ public class InvoiceDAO {
 		InvoiceModel invoice = (InvoiceModel) invoiceJsp;
 
 		try {
-			prepare = connect.prepareStatement(InvoiceQueries.updateInvoiseById);
+			prepare = connect.prepareStatement(InvoiceQueries.updateInvoise);
 			prepare.setString(1, invoice.getInvoiceName());
 			prepare.setInt(2, user.getUserId());
 			prepare.executeUpdate();
@@ -193,13 +193,13 @@ public class InvoiceDAO {
 		
 		try {
 			log.warning("prepare to delete params...");
-			prepare = connect.prepareStatement(InvoiceQueries.deleteParamInvoiceByInvoiceId);
+			prepare = connect.prepareStatement(InvoiceQueries.deleteParamInvoice);
 			prepare.setInt(1, invoiceId);
 			prepare.executeUpdate();
 			
 			log.warning("params deleted");
 			
-			prepare = connect.prepareStatement(InvoiceQueries.deleteInvoiceNameByInvoiceId);
+			prepare = connect.prepareStatement(InvoiceQueries.deleteInvoiceName);
 			prepare.setInt(1, invoiceId);
 			prepare.executeUpdate();
 			
@@ -222,7 +222,7 @@ public class InvoiceDAO {
 		Connection connect = ConnectionFactory.getConnection();
 
 		try {
-			prepare = connect.prepareStatement(InvoiceQueries.getSumAllBalancesForUsersByUserId);
+			prepare = connect.prepareStatement(InvoiceQueries.getSumAllBalancesByUserId);
 			prepare.setInt(1, user.getUserId());
 			result = prepare.executeQuery();
 			result.next();
@@ -247,7 +247,7 @@ public class InvoiceDAO {
 		InvoiceModel invoice = invoiceJsp;
 
 		try {
-			prepare = connect.prepareStatement(InvoiceQueries.updateBalanceInInvoice);
+			prepare = connect.prepareStatement(InvoiceQueries.updateBalance);
 			prepare.setInt(1, invoice.getBalance());
 			prepare.setInt(2, invoice.getInvoiceId());
 			prepare.executeUpdate();
@@ -268,7 +268,7 @@ public class InvoiceDAO {
 		Connection connect = ConnectionFactory.getConnection();
 
 		try {
-			prepare = connect.prepareStatement(InvoiceQueries.getInvoicesCountForUser);
+			prepare = connect.prepareStatement(InvoiceQueries.getInvoicesCount);
 			prepare.setInt(1, user.getUserId());
 			result = prepare.executeQuery();
 			result.next();
