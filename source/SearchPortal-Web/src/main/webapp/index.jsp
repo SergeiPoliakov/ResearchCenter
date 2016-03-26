@@ -8,6 +8,8 @@
 <link href="css/index.css" rel="stylesheet" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Добро пожаловать на сайт приоритетов</title>
+<!-- Bootstrap core CSS -->
+<link href="css/new-main.css" rel="stylesheet">
 </head>
 <body>
 

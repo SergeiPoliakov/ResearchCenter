@@ -54,9 +54,9 @@
 			</div>
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
-				<div class="welcome" align="right">
-					Добро пожаловать <label><c:out
-							value="${sessionScope.user.getLogin()}" /></label>
+				<div class="nav" align="right" style="color: #fef8a0 ">
+					<h5>Добро пожаловать <label><c:out
+							value="${sessionScope.user.getLogin()}" /></label></h5>
 				</div>
 
 				<ul class="nav navbar-nav">
@@ -119,7 +119,7 @@
 	</c:if>
 
 	<!-- Begin page content -->
-	<div class="container-fluid">
+	<div class="container-fluid" style="height: 100%">
 		<div class="container" id="consumptionDiv" style="display: none">
 			<div class="module" id="income">
 				<div class="block-title">Создание новой задачи</div>

@@ -6,28 +6,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Регистрация нового пользователя</title>
-<style type="text/css">
-.login {
-	color: black
-}
-
-.password {
-	color: black
-}
-
-.registr {
-	font-size: 10pt;
-	cursor: pointer
-}
-</style>
-<link type="text/css" rel="stylesheet"
-	href="authorization/css/authorization.css" />
+<!-- Bootstrap core CSS -->
+<link href="css/new-main.css" rel="stylesheet">
 </head>
 <body>
 
-	<div id="authorization">
-		<center>
-			<form action="authorization" method="post"
+	<div id="authorization" class="container">
+			<form class="form-signin" action="authorization" method="post"
 				onsubmit="return checkLogEmpty()">
 				<input type="hidden" value="userLogin" name="authorization" />
 				<table rules="groups" align="center" border="2px" width="50%"

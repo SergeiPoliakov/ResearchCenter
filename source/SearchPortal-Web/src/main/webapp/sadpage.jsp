@@ -33,7 +33,10 @@
 	<div class="module" id="priority-module">
 		<div class="block-title">Приоритеты</div>
 		<div class="block-information">
-			<%	CategoryController categoryController = new CategoryController((UserModel) request.getSession().getAttribute("user")); %>
+			<%
+				CategoryController categoryController = new CategoryController(
+						(UserModel) request.getSession().getAttribute("user"));
+			%>
 			<%=FillHTMLTable.toHtmlString(categoryController.getCategoriesWithPriorities())%>
 		</div>
 	</div>
@@ -45,11 +48,10 @@
 		<div class="block-title">Категории</div>
 		<div class="block-information">
 			<%
-			UserModel user = (UserModel) request.getSession().getAttribute("user");
+				UserModel user = (UserModel) request.getSession().getAttribute("user");
 				List<CategoryModel> categoryList = new ArrayList<CategoryModel>(categoryController.getCategories());
 			%>
 			<%=UserCategoryTable.toHtmlTable(categoryList)%>
-
 			<!-- добавление категории -->
 			<br /> <br />
 			<h2>название, коэффициент, мин%, макс%</h2>
