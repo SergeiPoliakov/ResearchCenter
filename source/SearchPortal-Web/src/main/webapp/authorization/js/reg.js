@@ -1,4 +1,3 @@
-<script>
 	function checkRegistrRegular() {
 		var loginReg = /^[A-Za-z0-9]{1,15}$/;
 		var passwordReg = /^[^ ]{4,10}$/;
@@ -45,4 +44,3 @@
 		}
 		return check;
 	}
-</script>

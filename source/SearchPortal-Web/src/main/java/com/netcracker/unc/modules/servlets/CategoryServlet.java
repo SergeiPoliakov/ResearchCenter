@@ -1,6 +1,8 @@
 package com.netcracker.unc.modules.servlets;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -52,11 +54,20 @@ public class CategoryServlet extends HttpServlet {
 		int userId = 0;
 
 		action = request.getParameter("action");
+
 		objectId = Integer.parseInt(request.getParameter("objectid"));
-		categoryName = request.getParameter("categoryname");
-		coefficient = Double.parseDouble(request.getParameter("coefficient"));
-		minPercent = Double.parseDouble(request.getParameter("minpercent"));
-		maxPercent = Double.parseDouble(request.getParameter("maxpercent"));
+		if (checkCategoryName(request.getParameter("categoryname"))) {
+			categoryName = request.getParameter("categoryname");
+		}
+		if (checkCoefficent(request.getParameter("coefficient"))) {
+			coefficient = Double.parseDouble(request.getParameter("coefficient"));
+		}
+		if (checkPercent(request.getParameter("minpercent"))) {
+			minPercent = Double.parseDouble(request.getParameter("minpercent"));
+		}
+		if (checkPercent(request.getParameter("maxpercent"))) {
+			maxPercent = Double.parseDouble(request.getParameter("maxpercent"));
+		}
 		userId = Integer.parseInt(request.getParameter("userid"));
 
 		if (action.equals("delete") && objectId != 0) {
@@ -78,8 +89,28 @@ public class CategoryServlet extends HttpServlet {
 			}
 		}
 
-		RequestDispatcher disp = request.getRequestDispatcher("/sadpage.jsp");
+		RequestDispatcher disp = request.getRequestDispatcher("/welcome.jsp");
 		disp.forward(request, response);
+	}
+
+	private static boolean checkCoefficent(String inputString) {
+		Pattern pattern = Pattern.compile("0[.]{1}[0-9]{1,3}|1|0");
+		Matcher matcher = pattern.matcher(inputString);
+
+		return matcher.matches();
+	}
+
+	private static boolean checkPercent(String inputString) {
+		Pattern pattern = Pattern.compile("[0-9]{1,2}[.]{1}[0-9]{1,3}|100|[0-9]{1,2}");
+		Matcher matcher = pattern.matcher(inputString);
+		return matcher.matches();
+	}
+
+	private static boolean checkCategoryName(String inputString) {
+		Pattern pattern = Pattern.compile("[A-Za-zА-Яа-я.0-9_!,() %@#+$&*^:/?=;'<|>-]{3,50}");
+		Matcher matcher = pattern.matcher(inputString);
+
+		return matcher.matches();
 	}
 
 }

@@ -52,8 +52,9 @@
 				List<CategoryModel> categoryList = new ArrayList<CategoryModel>(categoryController.getCategories());
 			%>
 			<%=UserCategoryTable.toHtmlTable(categoryList)%>
-			<!-- добавление категории -->
-			<br /> <br />
+
+
+			<!-- добавление категории --> <br /> <br />
 			<h2>название, коэффициент, мин%, макс%</h2>
 			<form action="CategoryServlet" method="get">
 				<input type="hidden" name="action" value="add" /> <input
@@ -62,8 +63,9 @@
 					name="coefficient" value="coef" /> <input type="text"
 					name="minpercent" value="min" /> <input type="text"
 					name="maxpercent" value="max" /> <input type="hidden"
-					name="userid" value='<%=user.getUserId()%>' /> <input
-					type="submit" value="Добавить категорию" />
+					name="userid" value='<%=user.getUserId()%>' />
+				<!--  -->
+				<input type="submit" value="Добавить категорию" />
 			</form>
 			<br /> <br />
 			<!-- /добавление категории -->
