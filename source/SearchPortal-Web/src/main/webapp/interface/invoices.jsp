@@ -45,13 +45,12 @@
 <div id="add-invoice" style="visibility: hidden;">
 <form class="for,-inline" action="InvoiceServlet" method="get">
 		      <input type="text" name="invoice-name"  size="5" placeholder="Название счета"/>
-		      <input type="text" name="invoice-balance"  size="5" placeholder="баланс"/>
-		      <!-- <input type="text" name="invoice-credit"  size="5" placeholder="кредитный?"/> -->
+		      <input type="number" name="invoice-balance"  size="5" placeholder="баланс"/>
 		      <select><selectname="invoice-credit"  size="2">
 		      <option disabled>Кредитный?</option>
         	  <option selected value = "true">да</option>
         	  <option selected value = "false">нет</option></select> 
-		      <input type="text" name="invoice-percent"  size="5" placeholder="Процент по кредиту"/>
+		      <input type="number" name="invoice-percent"  size="5" placeholder="Процент по кредиту"/>
 		      <input type="submit" value="Добавить"/>
 		    </form>
 	</div>			

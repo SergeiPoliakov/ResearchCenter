@@ -9,6 +9,15 @@
  		 <div ><label>Текущий баланс:</label> ${ invoicesController.getSumBalance(sessionScope.user)}</div> 
 		
 <form action="IncomingServlet" method="get">
+              <select name="invoiceNumber">
+		        <option disabled>Счёт</option>
+		          <c:forEach var="invoice"
+			        items="${invoicesController.getAllInvoice(sessionScope.user)}">
+		            <option value = "${invoice.getInvoiceId()}">${invoice.getInvoiceName()}</option> 
+		         </c:forEach>
+		      </select>
+        	  <!-- <option selected value = "true">да</option>
+        	  <option selected value = "false">нет</option></select>  -->
 		      <input type="number" name="add-sum-val" value="0" min="0" size="5" step="50"/>
 		      <input type="submit" value="добавить" />
 		    </form>

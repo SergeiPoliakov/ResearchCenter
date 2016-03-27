@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
+//import com.netcracker.unc.modules.servlets.InvoiceServlet;
 import com.netcracker.unc.newmvc.connection.ConnectionFactory;
 import com.netcracker.unc.newmvc.dao.models.InvoiceModel;
 import com.netcracker.unc.newmvc.dao.models.UserModel;
@@ -119,21 +120,24 @@ public class InvoiceDAO {
 
 	}
 
-	public InvoiceModel getInvoiceByInoiceId(int invoiceId) {
+	public InvoiceModel getInvoice(int invoiceId, UserModel user) {
 		PreparedStatement prepare;
 		ResultSet result;
 		Connection connect = ConnectionFactory.getConnection();
 		InvoiceModel invoice = new InvoiceModel();
 		invoice.setInvoiceId(invoiceId);
+		Logger log = Logger.getLogger(InvoiceDAO.class.getName());
 
 		try {
-			prepare = connect.prepareStatement(InvoiceQueries.getInvoice);
+			prepare = connect.prepareStatement(InvoiceQueries.getInvoiceName);
 			prepare.setInt(1, user.getUserId());
 			prepare.setInt(2, invoiceId);
 			result = prepare.executeQuery();
 			result.next();
 
-			invoice.setInvoiceName(result.getString(2));
+			invoice.setInvoiceName(result.getString(1));
+			log.warning("New invoice: " + invoice.getInvoiceName());
+			log.warning("New balance1: " + invoice.getBalance());
 
 			prepare = connect.prepareStatement(InvoiceQueries.getBalanceCreditAndPercent);
 			prepare.setInt(1, user.getUserId());
@@ -144,6 +148,8 @@ public class InvoiceDAO {
 			invoice.setBalance(result.getInt(1));
 			invoice.setCredit(Boolean.parseBoolean(result.getString(2)));
 			invoice.setPercent(result.getDouble(3));
+			
+			log.warning("New balance after query: " + invoice.getBalance());
 
 			return invoice;
 
@@ -262,12 +268,41 @@ public class InvoiceDAO {
 		}
 	}
 
-	public int getCountInvoices() {
+	/*public int getCountInvoices() {
 		PreparedStatement prepare;
 		ResultSet result;
 		Connection connect = ConnectionFactory.getConnection();
 
 		try {
+			prepare = connect.prepareStatement(InvoiceQueries.getInvoicesCount);
+			prepare.setInt(1, user.getUserId());
+			result = prepare.executeQuery();
+			result.next();
+
+			return result.getInt(1);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		} finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}*/
+	
+	public int getCountInvoices(UserModel user) {
+		setUser(user);
+		PreparedStatement prepare;
+		ResultSet result;
+		Connection connect = ConnectionFactory.getConnection();
+		/*InvoiceModel invoice = new InvoiceModel();
+		invoice.setInvoiceId(invoiceId);*/
+
+		try {
+
 			prepare = connect.prepareStatement(InvoiceQueries.getInvoicesCount);
 			prepare.setInt(1, user.getUserId());
 			result = prepare.executeQuery();
