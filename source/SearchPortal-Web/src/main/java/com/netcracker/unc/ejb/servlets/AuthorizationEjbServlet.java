@@ -17,7 +17,7 @@ import com.netcracker.unc.newmvc.ejb.entities.EntityUser;
 @WebServlet("/auth")
 public class AuthorizationEjbServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private final String mainUrl = "welcome.jsp";
+	private final String mainUrl = "ejb/welcome.jsp";
 	@EJB
 	ControllerUsers usContr;
 
@@ -46,7 +46,7 @@ public class AuthorizationEjbServlet extends HttpServlet {
 		} else {
 			System.out.println("error");
 			request.setAttribute("errorMessage", "Неправильно введен логин или пароль!");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/ejb/index.jsp");
 			dispatcher.include(request, response);
 		}
 
@@ -70,19 +70,10 @@ public class AuthorizationEjbServlet extends HttpServlet {
 			cookie.setMaxAge(24 * 60 * 60);
 			response.addCookie(cookie);
 			response.sendRedirect(mainUrl);
-		} else {
-			for (Cookie cookie : request.getCookies()) {
-				if (cookie.getName().equals("page")) {
-					cookie.setValue("first");
-				} else {
-					cookie = new Cookie("page", "first");
-				}
-				response.addCookie(cookie);
-			}
-			request.setAttribute("multiName", "Извините, такой логин уже используется!");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
-			dispatcher.include(request, response);
 		}
+		request.setAttribute("multiName", "Извините, такой логин уже используется!");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+		dispatcher.include(request, response);
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

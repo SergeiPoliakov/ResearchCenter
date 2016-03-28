@@ -48,6 +48,13 @@ public class ControllerUsers {
 		return user;
 	}
 
+	public EntityUser getUserById(long userId) {
+		EntityUser user = (EntityUser) ejb.getObject(EntityUser.class, userId);
+		// for change fetch to EAGLE
+		user.getUserObjects().size();
+		return user;
+	}
+
 	public boolean createUser(String login, String password, String name, String email) {
 		EntityObject object;
 		EntityUser user;
