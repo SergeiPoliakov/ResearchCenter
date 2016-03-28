@@ -21,13 +21,6 @@ public class AuthorizationEjbServlet extends HttpServlet {
 	@EJB
 	ControllerUsers usContr;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public AuthorizationEjbServlet() {
-		super();
-	}
-
 	private void authorizationCheck(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
@@ -101,7 +94,6 @@ public class AuthorizationEjbServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		doGet(request, response);
 	}
 

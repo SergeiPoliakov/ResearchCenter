@@ -109,12 +109,27 @@
 	</div>
 
 
+	<div class="container-fluid" style="height: 100%">
+		<div class="container" id="consumptionDiv">
+			<div class="module" id="income">
+				<div class="block-title">Создание новой задачи</div>
+				<div class="block-information">
+
+					<div class="create-case" id="create-case">
+						<jsp:include page="act/create_case.jsp" />
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 	<footer>
 		<div class="container-footer">
 			<p class="text-muted">©УНЦ 2016 год.</p>
 		</div>
 	</footer>
-
 </body>
 <script src="js/actions.js"></script>
 </html>

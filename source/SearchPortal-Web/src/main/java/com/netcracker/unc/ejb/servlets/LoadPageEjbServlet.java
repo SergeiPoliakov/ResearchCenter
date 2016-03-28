@@ -1,6 +1,8 @@
 package com.netcracker.unc.ejb.servlets;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -104,6 +106,15 @@ public class LoadPageEjbServlet extends HttpServlet {
 
 	}
 
+	private void doCreateCaseSelect(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		EntityUser user = (EntityUser) request.getSession().getAttribute("user");
+		List<EntityObject> userActiveCases = usContr.getUserActiveCases(user.getUserId());
+		List<EntityObject> userGeneralCases = usContr.getUserGeneralCases(user.getUserId());
+		request.setAttribute("listCases", userActiveCases);
+		request.setAttribute("generalCases", userGeneralCases);
+	}
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -112,6 +123,8 @@ public class LoadPageEjbServlet extends HttpServlet {
 		if (request.getAttribute("jsp") != null) {
 			checkSalary(request, response);
 			viewIncomeConsumptionOverlay(request, response);
+			if (request.getAttribute("jsp").equals("create-case"))
+				doCreateCaseSelect(request, response);
 		}
 	}
 }

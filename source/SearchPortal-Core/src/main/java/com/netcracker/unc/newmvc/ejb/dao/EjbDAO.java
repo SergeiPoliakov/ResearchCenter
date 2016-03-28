@@ -16,16 +16,15 @@ import com.netcracker.unc.newmvc.ejb.models.SalaryModel;
 @Stateless
 @LocalBean
 public class EjbDAO {
-	private final int objectTypeIncome = 2; // Доход
+	private final long objectTypeIncome = 2; // Доход
 	private final String valueSalary = "true"; // Ежемесячный доход true/false
-	private final int attributeCostIncome = 5; // Сумма дохода
-	private final int attributeConsumption = 12; // Стоимость
-	private final int objectTypeCase = 4; // Задача
+	private final long attributeCostIncome = 5; // Сумма дохода
+	private final long attributeConsumption = 12; // Стоимость
+	private final long objectTypeCase = 4; // Задача
+	private final long objectTypeCategory = 1; // Категория
 
 	@PersistenceContext(unitName = "myP")
 	private EntityManager em;
-
-	private final int typeCase = 4; // Задача
 
 	public void addObject(Object object) {
 		em.persist(object);
@@ -62,11 +61,15 @@ public class EjbDAO {
 		return null;
 	}
 
-	public List<EntityObject> getUserActiveCases(long userId) {
-		System.out.println(em);
-		List<EntityObject> list = em.createNamedQuery("Objects.getActiveCasesByUserId", EntityObject.class)
-				.setParameter("userId", userId).setParameter("objectType", typeCase).getResultList();
-		System.out.println(list);
+	public List<EntityObject> getUserActiveObjects(long userId) {
+		List<EntityObject> list = em.createNamedQuery("Objects.getActiveObjectsByUserId", EntityObject.class)
+				.setParameter("userId", userId).setParameter("objectType", objectTypeCase).getResultList();
+		return list;
+	}
+
+	public List<EntityObject> getGeneralObjects(long userId) {
+		List<EntityObject> list = em.createNamedQuery("Objects.getGeneralObjects", EntityObject.class)
+				.setParameter("userId", userId).setParameter("finObjectTypeId", objectTypeCategory).getResultList();
 		return list;
 	}
 

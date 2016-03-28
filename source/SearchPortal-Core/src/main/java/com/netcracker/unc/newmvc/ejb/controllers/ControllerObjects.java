@@ -30,13 +30,13 @@ public class ControllerObjects {
 	private final int priority = 13;// Приоритет
 	private final SimpleDateFormat parse = new SimpleDateFormat("yyyy-MM-dd");
 
-	public void createCase(String caseNameStr, String caseTypeStr, long caseParentInt, String casePriorityStr,
+	public void createCase(String caseNameStr, long caseTypeLong, long caseParentLong, String casePriorityStr,
 			String caseDateStr, String caseCostStr, EntityUser user) {
 
 		EntityObject objectCategory = null;
 		ArrayList<Long> objectsId = new ArrayList<Long>();
 		for (EntityObject obj : user.getUserObjects()) {
-			if (obj.getObjectName().toLowerCase().equals(caseTypeStr))
+			if (obj.getFinObjectId() == caseTypeLong)
 				objectCategory = obj;
 			objectsId.add(obj.getFinObjectId());
 		}
@@ -44,10 +44,10 @@ public class ControllerObjects {
 		EntityObject object = new EntityObject();
 
 		// create model case
-		if (caseParentInt == 0) {
+		if (caseParentLong == 0) {
 			object.setParentObject(objectCategory.getParentObject());
 		} else
-			object.setParentObject((EntityObject) ejb.getObject(EntityObject.class, caseParentInt));
+			object.setParentObject((EntityObject) ejb.getObject(EntityObject.class, caseParentLong));
 
 		// for found new creating object
 		Set<EntityObject> oldObjects = user.getUserObjects();

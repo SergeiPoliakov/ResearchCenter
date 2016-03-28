@@ -23,7 +23,7 @@ public class EntityParam implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private int id;
+	private long id;
 	@Column(name = "value", nullable = true)
 	private String value;
 	@Column(name = "value_date", nullable = true)
@@ -35,11 +35,11 @@ public class EntityParam implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private EntityAttribute attribute;
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

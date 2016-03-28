@@ -16,31 +16,24 @@ public class InterfaceEjbServlet extends HttpServlet {
 	@EJB
 	ControllerObjects objContr;
 
-	public InterfaceEjbServlet() {
-		super();
-	}
-
 	private void createCase(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		EntityUser user = (EntityUser) request.getSession().getAttribute("user");
 
 		String caseNameStr = request.getParameter("name_case");
-		String caseTypeStr = request.getParameter("type_case").toLowerCase();
-		long caseParentInt = Long.valueOf(request.getParameter("parentBlock"));
+		long caseTypeLong = Long.valueOf(request.getParameter("type_case"));
+		long caseParentLong = Long.valueOf(request.getParameter("parentBlock"));
 		String casePriorityStr = request.getParameter("priority");
 		String caseDateStr = request.getParameter("date_case");
 		String caseCostStr = request.getParameter("cost_case");
 
-		objContr.createCase(caseNameStr, caseTypeStr, caseParentInt, casePriorityStr, caseDateStr, caseCostStr, user);
+		objContr.createCase(caseNameStr, caseTypeLong, caseParentLong, casePriorityStr, caseDateStr, caseCostStr, user);
 
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		response.setContentType("text/html;charset=UTF-8");
-		request.setCharacterEncoding("UTF-8");
 
 		String interfaces = request.getParameter("interfaces");
 

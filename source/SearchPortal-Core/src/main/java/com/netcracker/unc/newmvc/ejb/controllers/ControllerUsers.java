@@ -111,8 +111,12 @@ public class ControllerUsers {
 	}
 
 	public List<EntityObject> getUserActiveCases(long userId) {
-		System.out.println("попал");
-		List<EntityObject> list = ejb.getUserActiveCases(userId);
+		List<EntityObject> list = ejb.getUserActiveObjects(userId);
+		return list;
+	}
+	
+	public List<EntityObject> getUserGeneralCases(long userId) {
+		List<EntityObject> list = ejb.getGeneralObjects(userId);
 		return list;
 	}
 
