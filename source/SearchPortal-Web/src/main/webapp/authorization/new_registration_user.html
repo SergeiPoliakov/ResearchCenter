@@ -18,8 +18,8 @@
 <form class="form-signin" action="authorization" method="post"
 		onsubmit="return checkRegistrRegular()">
 		<input type="hidden" value="userRegistration" name="authorization" />
-		<label class="title">Регистрация
-							нового пользователя:</label>
+		<h3 class="form-signin-heading">Регистрация
+							нового пользователя:</h3>
 					<input type="text" class="form-control login" name="login" id="login" placeholder="Введите логин" required>
 					<c:choose>
 							<c:when test="${not empty multiName}">
