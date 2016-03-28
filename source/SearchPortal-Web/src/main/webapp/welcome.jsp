@@ -66,7 +66,7 @@
 							<button class="btn">+</button>
 						</div></li>
 					<li><div class="btn-group">
-							<button class="btn" onclick="show_consump()">Доходы</button>
+							<button class="btn" onclick="showIncomes()">Доходы</button>
 							<button class="btn" onclick="showIncoming()">+</button>
 						</div></li>
 					<li>
@@ -184,7 +184,10 @@
 	</div>
 	<div id="incoming" style="visibility: hidden;">
 		<jsp:include page="interface/incoming.jsp" />
-	</div>
+    </div>
+	<div id="incomes" style="visibility: hidden;">
+		<jsp:include page="interface/income.jsp" />
+	</div> 
 	<footer>
 		<div class="container-footer">
 			<p class="text-muted">©УНЦ 2016 год.</p>
