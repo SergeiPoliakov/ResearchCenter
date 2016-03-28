@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import com.netcracker.unc.newmvc.connection.ConnectionFactory;
-import com.netcracker.unc.newmvc.dao.models.SalaryModel;
+import com.netcracker.unc.newmvc.ejb.models.SalaryModel;
 
 public class SalaryDAO {
 

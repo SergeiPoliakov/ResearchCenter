@@ -55,6 +55,14 @@ public class EntityObject implements Serializable {
 	@OneToMany(mappedBy = "object", fetch = FetchType.LAZY, targetEntity = EntityParam.class)
 	private Set<EntityParam> objectParams;
 
+	public Set<EntityParam> getObjectParams() {
+		return objectParams;
+	}
+
+	public void setObjectParams(Set<EntityParam> objectParams) {
+		this.objectParams = objectParams;
+	}
+
 	public EntityObject getParentObject() {
 		return parentObject;
 	}

@@ -20,9 +20,9 @@ public class ControllerObjects {
 	private EjbDAO ejb;
 
 	// database attributes
-	private final int salaryAtr = 12;
-	private final int endDateAtr = 11;
-	private final int priorityAtr = 13;
+	// private final int salaryAtr = 12;
+	// private final int endDateAtr = 11;
+	// private final int priorityAtr = 13;
 	private final int caseType = 4; // Задача
 	private final int createDate = 10; // Дата создания
 	private final int endDate = 11; // Дата завершения

@@ -15,6 +15,8 @@ import com.netcracker.unc.newmvc.ejb.dao.EjbDAO;
 import com.netcracker.unc.newmvc.ejb.entities.EntityObject;
 import com.netcracker.unc.newmvc.ejb.entities.EntityObjectType;
 import com.netcracker.unc.newmvc.ejb.entities.EntityUser;
+import com.netcracker.unc.newmvc.ejb.models.IncomeConsumptionModel;
+import com.netcracker.unc.newmvc.ejb.models.SalaryModel;
 
 @Stateless
 public class ControllerUsers {
@@ -114,8 +116,12 @@ public class ControllerUsers {
 		return list;
 	}
 
-	public String test() {
-		return "EJB работает";
+	public SalaryModel getLastCheckSalary(long userId) {
+		return ejb.getLastCheckSalary(userId);
+	}
+
+	public IncomeConsumptionModel procentForBar(IncomeConsumptionModel inCon, long userId) {
+		return ejb.procentForBar(inCon, userId);
 	}
 
 }

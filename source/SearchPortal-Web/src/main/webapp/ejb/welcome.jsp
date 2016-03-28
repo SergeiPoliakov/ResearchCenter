@@ -16,7 +16,7 @@
 </head>
 <body>
 
-	<c:set var="page" value="loading" scope="request" />
+	<c:set var="jsp" value="welcome" scope="request" />
 	<jsp:include page="/load" />
 	<c:if test="${page != 'page-ok'}">
 		<c:redirect url="../" />
@@ -74,6 +74,39 @@
 		</div>
 	</nav>
 
+	<div class="controlSalary" id="controlSalaryMain">
+		<jsp:include page="int/salary_control.jsp"></jsp:include>
+	</div>
+
+	<c:set var="checkSalaryBro" value="${checkSalary}" scope="page" />
+	<c:if test="${checkSalaryBro == 'error'}">
+		<div id="helloCase">
+			<label class="welcomeCase" id="welcomeCase1"><b>Добро
+					пожаловать на сайт <span style="margin-left: 40px">приоритетов!</span>
+			</b></label>
+			<p>
+				<label class="welcomeCase" id="welcomeCase2">Пожалуйста,
+					введите вашу зарплату:</label>
+			</p>
+			<form action="custom" onsubmit="return regularAddSalary()">
+				<input type="hidden" value="addSalary" name="custom" /> <input
+					type="text" id="welcomeCaseInput" name="salary"
+					onkeypress="validate(this)" /><label class="welcomeCase"
+					style="margin-left: 3px">руб.</label> <input type="submit"
+					value="ввести" id="addSalarySubmit" />
+			</form>
+		</div>
+	</c:if>
+
+	<div class="container">
+		<div class="module-right" id="income">
+			<div class="block-information-right">
+				<div class="overlayInCons">
+					<jsp:include page="vis/income_consumption.jsp"></jsp:include>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 	<footer>
@@ -83,4 +116,5 @@
 	</footer>
 
 </body>
+<script src="js/actions.js"></script>
 </html>

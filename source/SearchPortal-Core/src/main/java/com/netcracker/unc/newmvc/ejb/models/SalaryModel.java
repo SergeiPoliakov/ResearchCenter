@@ -1,26 +1,26 @@
-package com.netcracker.unc.newmvc.dao.models;
+package com.netcracker.unc.newmvc.ejb.models;
 
 import java.sql.Date;
 
 public class SalaryModel {
 
-	private int userId, objectId, dateCount;
+	private long userId, objectId, dateCount;
 	private String objectName, value;
 	private Date lastCheckDate;
 
-	public int getUserId() {
+	public long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 
-	public int getObjectId() {
+	public long getObjectId() {
 		return objectId;
 	}
 
-	public void setObjectId(int objectId) {
+	public void setObjectId(long objectId) {
 		this.objectId = objectId;
 	}
 
@@ -32,11 +32,11 @@ public class SalaryModel {
 		this.value = value;
 	}
 
-	public int getDateCount() {
+	public long getDateCount() {
 		return dateCount;
 	}
 
-	public void setDateCount(int dateCount) {
+	public void setDateCount(long dateCount) {
 		this.dateCount = dateCount;
 	}
 

@@ -16,11 +16,11 @@ import com.netcracker.unc.newmvc.dao.SalaryDAO;
 import com.netcracker.unc.newmvc.dao.UserDAO;
 import com.netcracker.unc.newmvc.dao.controllers.ObjectController;
 import com.netcracker.unc.newmvc.dao.controllers.ParamController;
-import com.netcracker.unc.newmvc.dao.models.IncomeConsumptionModel;
 import com.netcracker.unc.newmvc.dao.models.ObjectModel;
 import com.netcracker.unc.newmvc.dao.models.ParamModel;
-import com.netcracker.unc.newmvc.dao.models.SalaryModel;
 import com.netcracker.unc.newmvc.dao.models.UserModel;
+import com.netcracker.unc.newmvc.ejb.models.IncomeConsumptionModel;
+import com.netcracker.unc.newmvc.ejb.models.SalaryModel;
 
 @WebServlet("/custom")
 public class CustomServlet extends HttpServlet {

@@ -16,7 +16,6 @@
 
 <body>
 
-	<c:set var="page" value="loading" scope="request" />
 	<jsp:include page="/load" />
 	<c:if test="${page == 'page-ok'}">
 		<c:redirect url="welcome.jsp" />
