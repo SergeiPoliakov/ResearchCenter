@@ -9,7 +9,7 @@ public class IncomeQueries {
 			"and o.FIN_OBJECT_ID=d.FIN_OBJECT_ID and o.FIN_OBJECT_ID=s.FIN_OBJECT_ID and o.FIN_OBJECT_ID=m.FIN_OBJECT_ID and o.PARENT_ID=i.FIN_OBJECT_ID\n"+
 			"and s.ATTRIBUTE_ID=5 and m.ATTRIBUTE_ID=6 and d.ATTRIBUTE_ID=4\n"+
 			"and o.FIN_OBJECT_TYPE_ID=" + income_id;
-	public static final String getIncome = "o.OBJECT_NAME, d.VALUE_DATE, s.VALUE, m.VALUE, o.PARENT_ID, i.OBJECT_NAME\n"+
+	public static final String getIncome = "select o.OBJECT_NAME, d.VALUE_DATE, s.VALUE, m.VALUE, o.PARENT_ID, i.OBJECT_NAME\n"+
 			"from SP_FIN_OBJECTS o, SP_PARAMS d, SP_PARAMS s, SP_PARAMS m, SP_FIN_OBJECTS i\n"+
 			"where o.USER_ID=? and o.FIN_OBJECT_ID=? \n"+
 			"and o.FIN_OBJECT_ID=d.FIN_OBJECT_ID and o.FIN_OBJECT_ID=s.FIN_OBJECT_ID and o.FIN_OBJECT_ID=m.FIN_OBJECT_ID and o.PARENT_ID=i.FIN_OBJECT_ID\n"+
@@ -26,7 +26,7 @@ public class IncomeQueries {
            "VALUES(SP_FIN_OBJECT_ID_SEQ.nextval, 2, ?,?,?);\n";
 	public static final String setIsEveyMonth = "INSERT INTO SP_PARAMS(ATTRIBUTE_ID,FIN_OBJECT_ID, VALUE) VALUES (6,?,?)";
 	public static final String setSum = "INSERT INTO SP_PARAMS(ATTRIBUTE_ID,FIN_OBJECT_ID, VALUE) VALUES (5,?,?)";
-	public static final String setDate = "INSERT INTO SP_PARAMS(ATTRIBUTE_ID,FIN_OBJECT_ID, VALUE_DATE VALUES (4,?,sysdate)";
+	public static final String setDate = "INSERT INTO SP_PARAMS(ATTRIBUTE_ID,FIN_OBJECT_ID, VALUE_DATE) VALUES (4,?,?)";
 	
 	public static final String updateName = "UPDATE sp_fin_objects set OBJECT_NAME = ? where fin_object_id = ?";
 	public static final String updateDate = "UPDATE SP_PARAMS set VALUE_DATE= ? where FIN_OBJECT_ID=? and ATTRIBUTE_ID=4";

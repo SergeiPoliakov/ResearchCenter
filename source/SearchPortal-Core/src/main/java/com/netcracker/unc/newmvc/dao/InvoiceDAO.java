@@ -164,6 +164,52 @@ public class InvoiceDAO {
 			}
 		}
 	}
+		
+		public InvoiceModel getInvoice(int invoiceId, int userId) {
+			PreparedStatement prepare;
+			ResultSet result;
+			Connection connect = ConnectionFactory.getConnection();
+			InvoiceModel invoice = new InvoiceModel();
+			invoice.setInvoiceId(invoiceId);
+			Logger log = Logger.getLogger(InvoiceDAO.class.getName());
+			log.warning("UserID: " + userId + "/InvoiceID " + invoiceId);
+
+			try {
+				prepare = connect.prepareStatement(InvoiceQueries.getInvoiceName);
+				prepare.setInt(1, userId);
+				prepare.setInt(2, invoiceId);
+				result = prepare.executeQuery();
+				result.next();
+
+				invoice.setInvoiceName(result.getString(1));
+				log.warning("New invoice: " + invoice.getInvoiceName());
+				log.warning("New balance1: " + invoice.getBalance());
+
+				prepare = connect.prepareStatement(InvoiceQueries.getBalanceCreditAndPercent);
+				prepare.setInt(1, userId);
+				prepare.setInt(2, invoiceId);
+				result = prepare.executeQuery();
+				result.next();
+
+				invoice.setBalance(result.getInt(1));
+				invoice.setCredit(Boolean.parseBoolean(result.getString(2)));
+				invoice.setPercent(result.getDouble(3));
+				
+				log.warning("New balance after query: " + invoice.getBalance());
+
+				return invoice;
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return null;
+			} finally {
+				try {
+					connect.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+	}
 
 	public void updateInvoice(InvoiceModel invoiceJsp) {
 		PreparedStatement prepare;
@@ -267,31 +313,6 @@ public class InvoiceDAO {
 			}
 		}
 	}
-
-	/*public int getCountInvoices() {
-		PreparedStatement prepare;
-		ResultSet result;
-		Connection connect = ConnectionFactory.getConnection();
-
-		try {
-			prepare = connect.prepareStatement(InvoiceQueries.getInvoicesCount);
-			prepare.setInt(1, user.getUserId());
-			result = prepare.executeQuery();
-			result.next();
-
-			return result.getInt(1);
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return 0;
-		} finally {
-			try {
-				connect.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-	}*/
 	
 	public int getCountInvoices(UserModel user) {
 		setUser(user);

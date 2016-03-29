@@ -100,7 +100,7 @@
 
 	<c:set var="checkSalaryBro" value="${checkSalary}" scope="page" />
 	<c:if test="${checkSalaryBro == 'error'}">
-<div id="helloCase">
+		<div id="helloCase">
 		<form action="custom" onsubmit="return regularAddSalary()" class="hello-module">
 			<label class="welcomeCase" id="welcomeCase1"><span style="margin-left: 20px"><b>Добро
 					пожаловать на сайт приоритетов!</span>
@@ -120,7 +120,7 @@
 	</c:if>
 
 	<!-- Begin page content -->
-	<div class="container-fluid" style="height: 100%">
+	<div class="container-fluid" style="height: 100%" id="left-modules">
 		<div class="container" id="consumptionDiv" style="display: none">
 			<div class="module" id="income">
 				<div class="block-title">Создание новой задачи</div>
@@ -152,11 +152,11 @@
 			<div class="module" id="category-module">
 				<div class="block-title">Категории</div>
 				<div class="block-information" id="bi-category-module">
-					<jsp:include page="module-categories/category_controller.jsp" />
+					<jsp:include page="category_controller.jsp" />
 				</div>
 			</div>
-		</div>
 
+        </div>
 
 		<div class="container" id="personalAreaUserDiv" style="display: none">
 			<div class="module" id="stat">
@@ -171,8 +171,8 @@
 		
 	</div>
 
-	<div class="container" id="right-modules">
-		<div class="module-right" id="income">
+	<div class="container" id="right-modules" >
+		<div class="module-right" id="income" style="float:right">
 
 					<jsp:include page="/attitudes/income_consumption.jsp"></jsp:include>
 
@@ -189,10 +189,6 @@
 		<jsp:include page="interface/income.jsp" />
 	</div> 
 	</div>
-	<footer>
-		<div class="container-footer">
-			<p class="text-muted">©УНЦ 2016 год.</p>
-		</div>
 	</footer>
 </body>
 <script src="javascripts/welcome-aspro.js"></script>
