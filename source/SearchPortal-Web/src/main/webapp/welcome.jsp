@@ -100,20 +100,21 @@
 
 	<c:set var="checkSalaryBro" value="${checkSalary}" scope="page" />
 	<c:if test="${checkSalaryBro == 'error'}">
-		<div id="helloCase">
-			<label class="welcomeCase" id="welcomeCase1"><b>Добро
-					пожаловать на сайт <span style="margin-left: 40px">приоритетов!</span>
+<div id="helloCase">
+		<form action="custom" onsubmit="return regularAddSalary()" class="hello-module">
+			<label class="welcomeCase" id="welcomeCase1"><span style="margin-left: 20px"><b>Добро
+					пожаловать на сайт приоритетов!</span>
 			</b></label>
 			<p>
 				<label class="welcomeCase" id="welcomeCase2">Пожалуйста,
 					введите вашу зарплату:</label>
 			</p>
-			<form action="custom" onsubmit="return regularAddSalary()">
-				<input type="hidden" value="addSalary" name="custom" /> <input
+			
+				<input class="form-control" type="hidden" value="addSalary" name="custom" /> <input
 					type="text" id="welcomeCaseInput" name="salary"
 					onkeypress="validate(this)" /><label class="welcomeCase"
-					style="margin-left: 3px">руб.</label> <input type="submit"
-					value="ввести" id="addSalarySubmit" />
+					style="margin-left: 3px">руб.</label> <button type="submit"
+					 class="btn" style="margin-left: 20px" id="addSalarySubmit">ввести</button>
 			</form>
 		</div>
 	</c:if>
@@ -170,15 +171,14 @@
 		
 	</div>
 
-	<div class="container">
+	<div class="container" id="right-modules">
 		<div class="module-right" id="income">
-			<div class="block-information-right">
-				<div class="overlayInCons">
+
 					<jsp:include page="/attitudes/income_consumption.jsp"></jsp:include>
-				</div>
-			</div>
+
+
 		</div>
-	</div>
+	
 	<div id="invoices" style="visibility: hidden;">
 		<jsp:include page="interface/invoices.jsp" />
 	</div>
@@ -188,6 +188,7 @@
 	<div id="incomes" style="visibility: hidden;">
 		<jsp:include page="interface/income.jsp" />
 	</div> 
+	</div>
 	<footer>
 		<div class="container-footer">
 			<p class="text-muted">©УНЦ 2016 год.</p>
