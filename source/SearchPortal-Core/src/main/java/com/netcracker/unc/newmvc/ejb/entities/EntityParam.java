@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,26 +23,18 @@ public class EntityParam implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	private long id;
 	@Column(name = "value", nullable = true)
 	private String value;
 	@Column(name = "value_date", nullable = true)
 	private Date valueDate;
+	@Id
 	@JoinColumn(name = "fin_object_id", referencedColumnName = "fin_object_id")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	private EntityObject object;
+	@Id
 	@JoinColumn(name = "attribute_id", referencedColumnName = "attribute_id")
 	@ManyToOne(fetch = FetchType.LAZY)
 	private EntityAttribute attribute;
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
 
 	public String getValue() {
 		return value;

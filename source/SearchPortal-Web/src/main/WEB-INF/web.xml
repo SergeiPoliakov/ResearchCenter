@@ -15,6 +15,10 @@
 		<servlet-class>com.netcracker.unc.ejb.servlets.LoadPageEjbServlet</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>interface-ejb-servlet</servlet-name>
+		<servlet-class>com.netcracker.unc.ejb.servlets.InterfaceEjbServlet</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>category-servlet</servlet-name>
 		<servlet-class>com.netcracker.unc.modules.servlets.CategoryServlet</servlet-class>
 	</servlet>
@@ -45,6 +49,10 @@
 	<servlet-mapping>
 		<servlet-name>authorization</servlet-name>
 		<url-pattern>/authorization</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>interface-ejb-servlet</servlet-name>
+		<url-pattern>/int</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>control</servlet-name>

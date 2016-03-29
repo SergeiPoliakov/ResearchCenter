@@ -61,6 +61,10 @@ public class EjbDAO {
 		return null;
 	}
 
+	public void updateReferencesToObjects() {
+		em.flush();
+	}
+
 	public List<EntityObject> getUserActiveObjects(long userId) {
 		List<EntityObject> list = em.createNamedQuery("Objects.getActiveObjectsByUserId", EntityObject.class)
 				.setParameter("userId", userId).setParameter("objectType", objectTypeCase).getResultList();

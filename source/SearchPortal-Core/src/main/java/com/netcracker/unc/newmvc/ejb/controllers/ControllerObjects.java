@@ -3,8 +3,6 @@ package com.netcracker.unc.newmvc.ejb.controllers;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Set;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import com.netcracker.unc.newmvc.ejb.dao.EjbDAO;
@@ -33,37 +31,27 @@ public class ControllerObjects {
 	public void createCase(String caseNameStr, long caseTypeLong, long caseParentLong, String casePriorityStr,
 			String caseDateStr, String caseCostStr, EntityUser user) {
 
-		EntityObject objectCategory = null;
-		ArrayList<Long> objectsId = new ArrayList<Long>();
-		for (EntityObject obj : user.getUserObjects()) {
-			if (obj.getFinObjectId() == caseTypeLong)
-				objectCategory = obj;
-			objectsId.add(obj.getFinObjectId());
-		}
+		EntityObject objectCategory = (EntityObject) ejb.getObject(EntityObject.class, caseTypeLong);
 
 		EntityObject object = new EntityObject();
 
 		// create model case
 		if (caseParentLong == 0) {
-			object.setParentObject(objectCategory.getParentObject());
+			object.setParentObject(objectCategory);
 		} else
 			object.setParentObject((EntityObject) ejb.getObject(EntityObject.class, caseParentLong));
-
-		// for found new creating object
-		Set<EntityObject> oldObjects = user.getUserObjects();
 
 		object.setObjectName(caseNameStr);
 		object.setObjectType((EntityObjectType) ejb.getObject(EntityObjectType.class, caseType));
 		object.setUser((EntityUser) ejb.getObject(EntityUser.class, user.getUserId()));
 		ejb.addObject(object);
-
-		object = getLastCreatingObject(oldObjects, user.getUserId());
+		ejb.updateReferencesToObjects();
 
 		EntityParam param = new EntityParam();
-
 		param.setAttribute((EntityAttribute) ejb.getObject(EntityAttribute.class, createDate));
 		param = setParamCurrentDate(param);
 		param.setObject((EntityObject) ejb.getObject(EntityObject.class, object.getFinObjectId()));
+
 		ejb.addObject(param);
 
 		param = new EntityParam();
@@ -84,38 +72,6 @@ public class ControllerObjects {
 		param.setValue(casePriorityStr);
 		ejb.addObject(param);
 
-	}
-
-	// return last creating object
-	private EntityObject getLastCreatingObject(Set<EntityObject> previouesObjects, long userId) {
-		EntityObject object = new EntityObject();
-		EntityUser user = (EntityUser) ejb.getObject(EntityUser.class, userId);
-		ArrayList<Long> previouesObjectsId = new ArrayList<Long>();
-		long objectId = 0;
-
-		for (EntityObject obj : previouesObjects)
-			previouesObjectsId.add(obj.getFinObjectId());
-
-		for (EntityObject obj : user.getUserObjects()) {
-			boolean check = false;
-			for (Long id : previouesObjectsId) {
-				if (id == obj.getFinObjectId()) {
-					check = true;
-					break;
-				}
-			}
-			if (!check) {
-				objectId = obj.getFinObjectId();
-				break;
-			}
-		}
-
-		for (EntityObject obj : user.getUserObjects()) {
-			if (obj.getFinObjectId() == objectId)
-				object = obj;
-		}
-
-		return object;
 	}
 
 	private EntityParam setParamDate(String date, EntityParam param) {

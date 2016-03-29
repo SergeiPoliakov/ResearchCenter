@@ -2,14 +2,6 @@
  * @author Kolesnikov
  */
 
-// add regular check for input button of salary add
-function regularAddSalary() {
-	var welcomeCaseInput = document.getElementById("welcomeCaseInput");
-	var matcherCostCase = new RegExp("^[0-9]{1,12}$");
-	if (!welcomeCaseInput.value.match(matcherCostCase))
-		return false;
-}
-
 // show-hide parent select on yes no toogles
 var values = [];
 var parent = document.getElementById("parentBlock");

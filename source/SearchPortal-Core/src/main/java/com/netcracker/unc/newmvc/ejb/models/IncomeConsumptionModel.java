@@ -1,5 +1,8 @@
 package com.netcracker.unc.newmvc.ejb.models;
 
+import javax.ejb.Stateful;
+
+@Stateful
 public class IncomeConsumptionModel {
 
 	private long fullIncome, maxIncome, minIncome, avgIncome;

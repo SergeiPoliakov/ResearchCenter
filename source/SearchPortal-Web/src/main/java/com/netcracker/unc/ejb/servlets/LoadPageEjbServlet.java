@@ -120,7 +120,7 @@ public class LoadPageEjbServlet extends HttpServlet {
 
 		checkCookie(request, response);
 
-		if (request.getAttribute("jsp") != null) {
+		if (request.getAttribute("jsp") != null && request.getAttribute("page").equals("page-ok")) {
 			checkSalary(request, response);
 			viewIncomeConsumptionOverlay(request, response);
 			if (request.getAttribute("jsp").equals("create-case"))

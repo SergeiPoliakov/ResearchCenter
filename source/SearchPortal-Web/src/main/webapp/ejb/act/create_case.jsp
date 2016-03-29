@@ -3,13 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-<!-- <link type="text/css" rel="stylesheet"
-	href="interface/css/interface.css" /> -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- Bootstrap core CSS -->
-<link href="css/new-main.css" rel="stylesheet">
-<!-- Custom styles for this template -->
 <title>Create new case</title>
 </head>
 
@@ -18,7 +13,7 @@
 	<c:set var="jsp" value="create-case" scope="request" />
 	<jsp:include page="/load" />
 	<div align="center" id="createCaseDiv" class="form-group">
-		<form onsubmit="return checkRegExp()" action="int" method="post"
+		<form onsubmit="return checkRegExp()" action="../int"
 			id="createCaseForm">
 			<input type="hidden" class="form-control" value="createCase"
 				name="interfaces" />
@@ -56,8 +51,7 @@
 								type="checkbox" value="no" id="no" onclick="changeCheck(this)"
 								checked="checked" /><label>Нет</label>
 						</div>
-					<td><select name="p
-					arentBlock" id="parentBlock"
+					<td><select name="parentBlock" id="parentBlock"
 						style="visibility: hidden">
 							<c:forEach var="category" items="${listCases}">
 								<option value="${category.getFinObjectId()}">${category.getObjectName()}</option>

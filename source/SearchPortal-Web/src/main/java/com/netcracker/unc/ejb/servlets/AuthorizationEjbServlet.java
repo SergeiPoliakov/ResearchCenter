@@ -33,11 +33,10 @@ public class AuthorizationEjbServlet extends HttpServlet {
 			session.setAttribute("user", user);
 			session.setMaxInactiveInterval(30 * 60);
 			Cookie cookie = new Cookie("userID", String.valueOf(user.getUserId()));
-			cookie.setMaxAge(24 * 60 * 60);
+			cookie.setMaxAge(48 * 60 * 60);
 			response.addCookie(cookie);
 			response.sendRedirect(mainUrl);
 		} else {
-			System.out.println("error");
 			request.setAttribute("errorMessage", "Неправильно введен логин или пароль!");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/ejb/index.jsp");
 			dispatcher.include(request, response);
