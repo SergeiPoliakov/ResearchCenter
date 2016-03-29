@@ -151,7 +151,7 @@
 			<div class="module" id="category-module">
 				<div class="block-title">Категории</div>
 				<div class="block-information" id="bi-category-module">
-					<jsp:include page="category_controller.jsp" />
+					<jsp:include page="module-categories/category_controller.jsp" />
 				</div>
 			</div>
 		</div>
