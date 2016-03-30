@@ -1,18 +1,21 @@
-package com.netcracker.unc.newmvc.dao.models;
+package com.netcracker.unc.newmvc.ejb.models;
 
+import javax.ejb.Stateful;
+
+@Stateful
 public class ActiveCasesModel {
 
-	private String hierarchy = null;
-	private String caseName = null;
-	private String caseCost = null;
-	private String startDate = null;
-	private String endDate = null;
-	private String parentName = null;
+	private String hierarchy;
+	private String caseName;
+	private String caseCost;
+	private String startDate;
+	private String endDate;
+	private String parentName;
 	private String spaceHierarchy = "";
 	private double priority;
-	private String priorityStr = null;
+	private String priorityStr;
 	private int level;
-	int objectId;
+	private long objectId;
 
 	public String getHierarchy() {
 		return hierarchy;
@@ -62,12 +65,12 @@ public class ActiveCasesModel {
 		this.parentName = parentName;
 	}
 
-	public String getSpace() {
+	public String getSpaceHierarchy() {
 		return spaceHierarchy;
 	}
 
-	public void setSpace(String space) {
-		this.spaceHierarchy = space;
+	public void setSpaceHierarchy(String spaceHierarchy) {
+		this.spaceHierarchy = spaceHierarchy;
 	}
 
 	public double getPriority() {
@@ -94,11 +97,11 @@ public class ActiveCasesModel {
 		this.level = level;
 	}
 
-	public int getObjectId() {
+	public long getObjectId() {
 		return objectId;
 	}
 
-	public void setObjectId(int objectId) {
+	public void setObjectId(long objectId) {
 		this.objectId = objectId;
 	}
 

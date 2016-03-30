@@ -71,9 +71,6 @@ public class AuthorizationEjbServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("text/html;charset=UTF-8");
-		request.setCharacterEncoding("UTF-8");
-
 		if (request.getParameter("authorization") != null) {
 			String authorization = request.getParameter("authorization");
 			if (authorization.equals("userLogin"))

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.netcracker.unc.newmvc.connection.ConnectionFactory;
 import com.netcracker.unc.newmvc.dao.controllers.ActiveCasesController;
-import com.netcracker.unc.newmvc.dao.models.ActiveCasesModel;
+import com.netcracker.unc.newmvc.ejb.models.ActiveCasesModel;
 
 public class ActiveCasesDAO {
 

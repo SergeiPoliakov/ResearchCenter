@@ -2,7 +2,6 @@ package com.netcracker.unc.ejb.servlets;
 
 import java.io.IOException;
 import java.util.List;
-
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,7 +9,10 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.netcracker.unc.newmvc.ejb.controllers.ControllerActions;
+
+import org.hibernate.Hibernate;
+
+import com.netcracker.unc.newmvc.ejb.controllers.ControllerObjects;
 import com.netcracker.unc.newmvc.ejb.controllers.ControllerUsers;
 import com.netcracker.unc.newmvc.ejb.entities.EntityObject;
 import com.netcracker.unc.newmvc.ejb.entities.EntityParam;
@@ -34,7 +36,7 @@ public class LoadPageEjbServlet extends HttpServlet {
 	@EJB
 	ControllerUsers usContr;
 	@EJB
-	ControllerActions actContr;
+	ControllerObjects objContr;
 	@EJB
 	SalaryModel salaryModel;
 	@EJB
@@ -57,14 +59,14 @@ public class LoadPageEjbServlet extends HttpServlet {
 		} else if (request.getSession().getAttribute("user") != null) {
 			request.setAttribute("page", "page-ok");
 		}
-
 	}
 
 	private void checkSalary(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		request.setAttribute("checkSalary", "error");
-		//EntityUser user = (EntityUser) request.getSession().getAttribute("user");
+		// EntityUser user = (EntityUser)
+		// request.getSession().getAttribute("user");
 		for (EntityObject object : user.getUser().getUserObjects()) {
 			if (object.getObjectName().toLowerCase().equals(objectName.toLowerCase())) {
 				for (EntityParam param : object.getObjectParams()) {
@@ -94,7 +96,8 @@ public class LoadPageEjbServlet extends HttpServlet {
 
 		inConModel = new IncomeConsumptionModel();
 		long progress = 0;
-		//EntityUser user = (EntityUser) request.getSession().getAttribute("user");
+		// EntityUser user = (EntityUser)
+		// request.getSession().getAttribute("user");
 		inConModel = usContr.procentForBar(inConModel, user.getUser().getUserId());
 		if (inConModel.getFullConsumption() != 0 || inConModel.getFullIncome() != 0) {
 			progress = (inConModel.getFullIncome() * 100)
@@ -115,11 +118,19 @@ public class LoadPageEjbServlet extends HttpServlet {
 
 	private void doCreateCaseSelect(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//EntityUser user = (EntityUser) request.getSession().getAttribute("user");
+		// EntityUser user = (EntityUser)
+		// request.getSession().getAttribute("user");
 		List<EntityObject> userActiveCases = usContr.getUserActiveCases(user.getUser().getUserId());
 		List<EntityObject> userGeneralCases = usContr.getUserGeneralCases(user.getUser().getUserId());
 		request.setAttribute("listCases", userActiveCases);
 		request.setAttribute("generalCases", userGeneralCases);
+	}
+
+	private void doUpdateCaseSelect(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		request.setAttribute("userActiveObjects", objContr.getUserActiveCases(user.getUser().getUserId()));
+
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -132,6 +143,9 @@ public class LoadPageEjbServlet extends HttpServlet {
 			viewIncomeConsumptionOverlay(request, response);
 			if (request.getAttribute("jsp").equals("create-case"))
 				doCreateCaseSelect(request, response);
+			else if (request.getAttribute("jsp").equals("update-case"))
+				doUpdateCaseSelect(request, response);
+			request.setAttribute("jsp", "");
 		}
 	}
 }

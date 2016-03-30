@@ -7,20 +7,26 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.ejb.Stateful;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import com.netcracker.unc.newmvc.ejb.dao.EjbDAO;
+import com.netcracker.unc.newmvc.ejb.entities.EntityAttribute;
 import com.netcracker.unc.newmvc.ejb.entities.EntityObject;
 import com.netcracker.unc.newmvc.ejb.entities.EntityObjectType;
+import com.netcracker.unc.newmvc.ejb.entities.EntityParam;
 import com.netcracker.unc.newmvc.ejb.entities.EntityUser;
 import com.netcracker.unc.newmvc.ejb.models.IncomeConsumptionModel;
 import com.netcracker.unc.newmvc.ejb.models.SalaryModel;
 
-@Stateful
+@Stateless
+@LocalBean
 public class ControllerUsers {
 	@EJB
 	private EjbDAO ejb;
+	@EJB
+	private ControllerObjects objContr;
 
 	// standard objects
 	private final String object1 = "Транспорт";
@@ -29,6 +35,12 @@ public class ControllerUsers {
 	private final String object4 = "Кредит";
 	private final String object5 = "Другое";
 	private final int atributeCategory = 1; // Категория
+	private final String objectSalaryName = "Зарплата";
+	private final int incomeObjectType = 2; // Доход
+	private final int atributeIncomeDate = 4; // Дата дохода
+	private final int attributeIncome = 5; // Сумма дохода
+	private final int attributeRegularIncome = 6; // Ежемесячный доход
+	private final String attributeRegularIncomeCheck = "true";
 
 	/*
 	 * // general email properties private final String userLog =
@@ -113,7 +125,7 @@ public class ControllerUsers {
 		List<EntityObject> list = ejb.getUserActiveObjects(userId);
 		return list;
 	}
-	
+
 	public List<EntityObject> getUserGeneralCases(long userId) {
 		List<EntityObject> list = ejb.getGeneralObjects(userId);
 		return list;
@@ -127,4 +139,37 @@ public class ControllerUsers {
 		return ejb.procentForBar(inCon, userId);
 	}
 
+	public void addUserSalary(String salary, long userId) {
+
+		EntityUser user = getUserById(userId);
+		EntityObject object = new EntityObject();
+
+		EntityObjectType objType = (EntityObjectType) ejb.getObject(EntityObjectType.class, incomeObjectType);
+		object.setObjectType(objType);
+		object.setObjectName(objectSalaryName);
+		object.setUser(user);
+		ejb.addObject(object);
+
+		System.out.println(object.getObjectType().getFinObjectTypeId() + " " + object.getUser().getUserId());
+		ejb.updateReferencesToObjects();
+
+		EntityParam param = new EntityParam();
+		param.setAttribute((EntityAttribute) ejb.getObject(EntityAttribute.class, attributeIncome));
+		param.setObject(object);
+		param.setValue(salary);
+		ejb.addObject(param);
+
+		param = new EntityParam();
+		param.setAttribute((EntityAttribute) ejb.getObject(EntityAttribute.class, atributeIncomeDate));
+		param.setObject(object);
+		objContr.setParamCurrentDate(param);
+		ejb.addObject(param);
+
+		param = new EntityParam();
+		param.setAttribute((EntityAttribute) ejb.getObject(EntityAttribute.class, attributeRegularIncome));
+		param.setObject(object);
+		param.setValue(attributeRegularIncomeCheck);
+		ejb.addObject(param);
+
+	}
 }

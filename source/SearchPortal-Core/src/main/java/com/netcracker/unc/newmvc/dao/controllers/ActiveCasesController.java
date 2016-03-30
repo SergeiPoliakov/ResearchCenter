@@ -1,6 +1,6 @@
 package com.netcracker.unc.newmvc.dao.controllers;
 
-import com.netcracker.unc.newmvc.dao.models.ActiveCasesModel;
+import com.netcracker.unc.newmvc.ejb.models.ActiveCasesModel;
 
 public class ActiveCasesController {
 
@@ -21,10 +21,10 @@ public class ActiveCasesController {
 	}
 
 	// set hierarchy spaces for jsp view
-	public ActiveCasesModel setSpaceHierarchy(ActiveCasesModel activeCases, int i) {
+	public ActiveCasesModel setSpaceHierarchy(ActiveCasesModel activeCases, long i) {
 		int count = 0;
 		while (count < (i - 2) * 6) {
-			activeCases.setSpace(activeCases.getSpace() + "&nbsp;");
+			activeCases.setSpaceHierarchy(activeCases.getSpaceHierarchy() + "&nbsp;");
 			count++;
 		}
 		return activeCases;

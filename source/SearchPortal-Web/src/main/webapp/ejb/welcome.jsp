@@ -81,13 +81,21 @@
 			<div class="module" id="income">
 				<div class="block-title">Создание новой задачи</div>
 				<div class="block-information">
-
 					<div class="create-case" id="create-case">
 						<jsp:include page="act/create_case.jsp" />
 					</div>
-
 				</div>
 			</div>
+
+			<div class="module" id="consump">
+				<div class="block-title">Редактирование задач</div>
+				<div class="block-information">
+					<div id="updateCase">
+						<jsp:include page="act/update_case.jsp" />
+					</div>
+				</div>
+			</div>
+
 		</div>
 
 		<div class="container" id="personalAreaUserDiv" style="display: none">
@@ -122,7 +130,7 @@
 				<label class="welcomeCase" id="welcomeCase2">Пожалуйста,
 					введите вашу зарплату:</label>
 			</p>
-			<form action="cust" onsubmit="return regularAddSalary()">
+			<form action="../cust" onsubmit="return regularAddSalary()">
 				<input type="hidden" value="addSalary" name="custom" /> <input
 					type="text" id="welcomeCaseInput" name="salary"
 					onkeypress="validate(this)" /><label class="welcomeCase"
