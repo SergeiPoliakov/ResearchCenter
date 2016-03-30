@@ -17,6 +17,8 @@
 <script src="module-categories/js/view-update-row.js"></script>
 <link rel="stylesheet" href="module-categories/css/cat-module.css">
 
+<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+
 
 <!--  -->
 <link rel="stylesheet"
