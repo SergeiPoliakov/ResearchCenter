@@ -7,7 +7,7 @@ import com.netcracker.unc.newmvc.dao.models.CategoryModel;
 public class UserCategoryTable {
 
 	public static String toHtmlTable(List<CategoryModel> categoryList) {
-		StringBuilder htmlSB = new StringBuilder("<div class = \"categories-table\"><table>");
+		StringBuilder htmlSB = new StringBuilder("<div id = \"categories-table\"><table>");
 
 		for (CategoryModel cm : categoryList) {
 			htmlSB.append(addRow(cm));
@@ -18,69 +18,67 @@ public class UserCategoryTable {
 	}
 
 	private static String addRow(CategoryModel cm) {
-		StringBuilder htmlString = new StringBuilder("<td>");
 
-		if (cm.getObjectName() != null && !cm.getObjectName().isEmpty()) {
-			htmlString.append("<td>");
-			htmlString.append(cm.getObjectName());
-			htmlString.append("</td>");
-		} else {
-			htmlString.append("<td>Ошибка</td>");
-		}
+		StringBuilder htmlString = new StringBuilder("<tr><td>");
 
-		if (cm.getMinPercent() != null) {
-			htmlString.append("<td>");
-			htmlString.append(cm.getMinPercent());
-			htmlString.append("</td>");
-		} else {
-			htmlString.append("<td>Ошибка</td>");
-		}
+		htmlString.append(addUpdateForm(cm.getObjectId()));
+		htmlString.append(addViewForm(cm));
 
-		if (cm.getMaxPercent() != null) {
-			htmlString.append("<td>");
-			htmlString.append(cm.getMaxPercent());
-			htmlString.append("</td>");
-		} else {
-			htmlString.append("<td>Ошибка</td>");
-		}
-		
-		//if(cm.getCoefficient())
+		htmlString.append("</td></tr>");
+		return htmlString.toString();
 
-		if (cm.getObjectId() != null) {
+	}
 
-			/*htmlString.append("<td>");
-			htmlString.append("<form action=\"CategoryServlet\" method=\"get\">");
-			htmlString.append("<input type=\"hidden\" name=\"action\" value=\"update\" />");
-			htmlString.append("<input type=\"hidden\" name=\"objectid\" value=\"");
-			htmlString.append(cm.getObjectId());
-			htmlString.append("\"/>");
-			htmlString.append("<input type=\"submit\" id=\"update-submit\" value=\"Изменить\" />");
-			htmlString.append("</form>");
-			htmlString.append("</td>");*/
-			htmlString.append("<td>");
-			htmlString.append("<input type=\"hidden\" name=\"objectid\" value=\"");
-			htmlString.append(cm.getObjectId());
-			htmlString.append("\"/>");
-			htmlString.append("<input type=\"button\" id =\"start-update-row1\" value =\"Изменить\" >");
-			htmlString.append("</td>");
-			
-			htmlString.append("<td>");
-			htmlString.append("<form action=\"CategoryServlet\" method=\"get\">");
-			htmlString.append("<input type=\"hidden\" name=\"action\" value=\"delete\" />");
-			htmlString.append("<input type=\"hidden\" name=\"objectid\" value=\"");
-			htmlString.append(cm.getObjectId());
-			htmlString.append("\"/>");
-			htmlString.append("<input type=\"hidden\" name=\"categoryname\" value=\"0\" />");
-			htmlString.append("<input type=\"hidden\" name=\"coefficient\" value=\"0\" />");
-			htmlString.append("<input type=\"hidden\" name=\"minpercent\" value=\"0\" />");
-			htmlString.append("<input type=\"hidden\" name=\"maxpercent\" value=\"0\" />");
-			htmlString.append("<input type=\"hidden\" name=\"userid\" value=\"0\" />");
-			htmlString.append("<input type=\"submit\" value=\"Удалить\" />");
-			htmlString.append("</form>");
-			htmlString.append("</td>");
-		}
-		htmlString.append("</tr>");
+	private static String addUpdateForm(int objectId) {
+		StringBuilder htmlString = new StringBuilder("<form class=\"update-category-form\">");
+
+		htmlString.append("<input type=\"hidden\" name=\"objectid\" value=\"");
+		htmlString.append(objectId);
+		htmlString.append("\"/>");
+
+		htmlString.append("<input type=\"text\" name=\"categoryname\"/>");
+
+		htmlString.append("<select>");
+		htmlString.append("<option value=\"0.75\">Высокий</option>");
+		htmlString.append("<option value=\"0.5\">Средний</option>");
+		htmlString.append("<option value=\"0.25\">Низкий</option>");
+		htmlString.append("</select>");
+
+		htmlString.append("<input type=\"button\" class=\"update-row-button\" value=\"Обновить\" />");
+
+		htmlString.append("</form>");
 		return htmlString.toString();
 	}
 
+	private static String addViewForm(CategoryModel cm) {
+		StringBuilder htmlString = new StringBuilder("<form class=\"view-category-form\">");
+
+		if (cm.getObjectName() != null && !cm.getObjectName().isEmpty()) {
+			htmlString.append(cm.getObjectName());
+		}
+
+		if (cm.getCoeficient() != null) {
+			if (cm.getCoeficient().doubleValue() == 0.75)
+				htmlString.append("Высокий");
+			if (cm.getCoeficient().doubleValue() == 0.5)
+				htmlString.append("Средний");
+			if (cm.getCoeficient().doubleValue() == 0.25)
+				htmlString.append("Низкий");
+
+		}
+
+		if (cm.getMinPercent() != null) {
+			htmlString.append(cm.getMinPercent());
+		}
+
+		if (cm.getMaxPercent() != null) {
+			htmlString.append(cm.getMaxPercent());
+		}
+
+		htmlString.append("<input type=\"button\" class=\"start-update-row-button\" value=\"Изменить\" />");
+		htmlString.append("<input type=\"button\" class=\"delete-row-button\" value=\"Удалить\" />");
+
+		htmlString.append("</form>");
+		return htmlString.toString();
+	}
 }

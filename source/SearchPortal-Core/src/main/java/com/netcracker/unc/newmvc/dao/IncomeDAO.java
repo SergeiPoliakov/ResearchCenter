@@ -21,11 +21,19 @@ public class IncomeDAO {
 	
 	UserModel user;
 	
+	public IncomeDAO(){
+		
+	}
+	
+	public IncomeDAO(UserModel user){
+		this.user = user;
+	}
+	
 	public void setUser(UserModel user) {
 		this.user = user;
 	}
 	
-	public ArrayList<IncomeModel> getAllIncome(UserModel user) {
+	public ArrayList<IncomeModel> getAllIncomes(UserModel user) {
 		
 		setUser(user);
 		IncomeModel income;
@@ -38,13 +46,14 @@ public class IncomeDAO {
 
 			while (result.next()) {
 				income = new IncomeModel();
+				income.setUserId(user.getUserId());
 				income.setIncomeId(result.getInt(1));
 				income.setIncomeName(result.getString(2));
 				income.setDateIncome(result.getDate(3));
 				income.setIncomeSum(result.getInt(4));
 				income.setMonth(Boolean.parseBoolean(result.getString(5)));
-				income.setInoiceId(result.getInt(6));
-				income.setIncomeName(result.getString(7));
+				income.setInvoiceId(result.getInt(6));
+				income.getIncomesInvoice().setInvoiceName(result.getString(7));
 				listGetAllInvcome.add(income);
 			}
 		} catch (SQLException e) {
@@ -60,7 +69,6 @@ public class IncomeDAO {
 	}
 
 	public void addIncome(IncomeModel incomeJsp, UserModel user) {
-		Logger log = Logger.getLogger(IncomeDAO.class.getName());
 		setUser(user);
 		PreparedStatement prepare;
 		Connection connect = ConnectionFactory.getConnection();
@@ -70,7 +78,7 @@ public class IncomeDAO {
 		try {
 			prepare = connect.prepareStatement(IncomeQueries.setIncome, new String[] { "FIN_OBJECT_ID" });
 			prepare.setString(1, income.getIncomeName());
-			prepare.setInt(2, income.getInoiceId());
+			prepare.setInt(2, income.getInvoiceId());
 			prepare.setInt(3, user.getUserId());			
 			if (prepare.executeUpdate()>0) {
 
@@ -106,13 +114,13 @@ public class IncomeDAO {
 
 	}
 	
-	public IncomeModel getincome(int incomeId, UserModel user) {
+	public IncomeModel getIncome(int incomeId, UserModel user) {
 		PreparedStatement prepare;
 		ResultSet result;
 		Connection connect = ConnectionFactory.getConnection();
 		IncomeModel income = new IncomeModel();
 		income.setIncomeId(incomeId);
-		Logger log = Logger.getLogger(IncomeDAO.class.getName());
+		income.setUserId(user.getUserId());
 
 		try {
 			prepare = connect.prepareStatement(IncomeQueries.getIncome);
@@ -125,8 +133,8 @@ public class IncomeDAO {
 			income.setDateIncome(result.getDate(2));
 			income.setIncomeSum(result.getInt(3));
 			income.setMonth(result.getBoolean(4));
-			income.setInoiceId(result.getInt(5));
-			income.setInvoiceName(result.getString(6));
+			income.setInvoiceId(result.getInt(5));
+			income.getIncomesInvoice().setInvoiceName(result.getString(6));
 
 			prepare = connect.prepareStatement(IncomeQueries.getParams);
 			prepare.setInt(1, user.getUserId());
@@ -215,6 +223,47 @@ public class IncomeDAO {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connect.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public InvoiceModel getInvoice(int incomeId, UserModel user) {
+		PreparedStatement prepare;
+		ResultSet result;
+		Connection connect = ConnectionFactory.getConnection();
+		IncomeModel income = this.getIncome(incomeId, user);
+		InvoiceModel invoice = new InvoiceModel();
+		invoice.setInvoiceId(income.getInvoiceId());
+
+		try {
+			prepare = connect.prepareStatement(InvoiceQueries.getInvoiceName);
+			prepare.setInt(1, user.getUserId());
+			prepare.setInt(2, income.getInvoiceId());
+			result = prepare.executeQuery();
+			result.next();
+
+			invoice.setInvoiceName(result.getString(1));
+
+			prepare = connect.prepareStatement(InvoiceQueries.getBalanceCreditAndPercent);
+			prepare.setInt(1, user.getUserId());
+			prepare.setInt(2, income.getInvoiceId());
+			result = prepare.executeQuery();
+			result.next();
+
+			invoice.setBalance(result.getInt(1));
+			invoice.setCredit(Boolean.valueOf(result.getString(2)));
+			invoice.setPercent(result.getDouble(3));
+
+			return invoice;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
 		} finally {
 			try {
 				connect.close();

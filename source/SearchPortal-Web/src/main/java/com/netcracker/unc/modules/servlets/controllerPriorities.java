@@ -1,11 +1,18 @@
 package com.netcracker.unc.modules.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.netcracker.unc.priorityModule.CalculationPriority;
+import com.netcracker.unc.priorityModule.FillHTMLTable;
 
 /**
  * Servlet implementation class controllerPriorities
@@ -29,7 +36,7 @@ public class controllerPriorities extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
-		//int userId = Integer.parseInt(request.getParameter("userId"));
+		int userId = Integer.parseInt(request.getParameter("userId"));
 		/*List<ModelForTable> resultList = new ArrayList<ModelForTable>();
 		try {
 			CategoryDao categoryDao = new CategoryDao();

@@ -1,6 +1,7 @@
 package com.netcracker.unc.newmvc.dao.models;
 
 import java.sql.Date;
+import com.netcracker.unc.newmvc.dao.InvoiceDAO;
 
 public class IncomeModel {
 	
@@ -9,25 +10,27 @@ public class IncomeModel {
 	}
 	
 	private int incomeId;
-	private int inoiceId;
+	private int userId;
+	private int invoiceId;
 	private String incomeName;
+	//private String invoiceName;
 	private int incomeSum;
 	private boolean month;
-	private String invoiceName;
 	private Date dateIncome;
+	private InvoiceModel IncomesIvoice;
+
 	
-	
-	public int getInoiceId() {
-		return inoiceId;
+	public int getUserId() {
+		return userId;
 	}
-	public void setInoiceId(int inoiceId) {
-		this.inoiceId = inoiceId;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
-	public String getInvoiceName() {
-		return invoiceName;
+	public int getInvoiceId() {
+		return invoiceId;
 	}
-	public void setInvoiceName(String invoiceName) {
-		this.invoiceName = invoiceName;
+	public void setInvoiceId(int inoiceId) {
+		this.invoiceId = inoiceId;
 	}
 	public int getIncomeId() {
 		return incomeId;
@@ -58,6 +61,11 @@ public class IncomeModel {
 	}
 	public void setDateIncome(Date dateIncome) {
 		this.dateIncome = dateIncome;
+	}
+	
+	public InvoiceModel getIncomesInvoice(){
+		InvoiceDAO invoiceDao = new InvoiceDAO();
+		return invoiceDao.getInvoice(this.invoiceId, this.userId);	
 	}
 	
 }

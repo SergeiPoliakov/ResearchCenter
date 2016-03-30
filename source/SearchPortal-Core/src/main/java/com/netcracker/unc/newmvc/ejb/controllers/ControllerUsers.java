@@ -6,9 +6,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
+import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import com.netcracker.unc.newmvc.ejb.dao.EjbDAO;
@@ -18,7 +17,7 @@ import com.netcracker.unc.newmvc.ejb.entities.EntityUser;
 import com.netcracker.unc.newmvc.ejb.models.IncomeConsumptionModel;
 import com.netcracker.unc.newmvc.ejb.models.SalaryModel;
 
-@Stateless
+@Stateful
 public class ControllerUsers {
 	@EJB
 	private EjbDAO ejb;

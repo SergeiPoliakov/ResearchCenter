@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import com.netcracker.unc.newmvc.connection.ConnectionFactory;
-import com.netcracker.unc.newmvc.ejb.models.IncomeConsumptionModel;
+import com.netcracker.unc.newmvc.dao.models.IncomeConsumptionModel;
 
 public class IncomeConsumptionDAO {
 

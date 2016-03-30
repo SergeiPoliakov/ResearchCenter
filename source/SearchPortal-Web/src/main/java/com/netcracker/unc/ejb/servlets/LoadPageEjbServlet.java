@@ -17,6 +17,7 @@ import com.netcracker.unc.newmvc.ejb.entities.EntityParam;
 import com.netcracker.unc.newmvc.ejb.entities.EntityUser;
 import com.netcracker.unc.newmvc.ejb.models.IncomeConsumptionModel;
 import com.netcracker.unc.newmvc.ejb.models.SalaryModel;
+import com.netcracker.unc.newmvc.ejb.models.UserModel;
 
 /**
  * Servlet implementation class PageCheckLoadEjbServlet
@@ -34,15 +35,21 @@ public class LoadPageEjbServlet extends HttpServlet {
 	ControllerUsers usContr;
 	@EJB
 	ControllerActions actContr;
+	@EJB
+	SalaryModel salaryModel;
+	@EJB
+	IncomeConsumptionModel inConModel;
+	@EJB
+	UserModel user;
 
 	private void checkCookie(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		EntityUser user = null;
 		request.setAttribute("page", "page");
 		if (request.getCookies() != null) {
 			for (Cookie cookie : request.getCookies()) {
 				if (cookie.getName().equals("userID")) {
-					user = (EntityUser) usContr.getUserById(Long.valueOf(cookie.getValue()));
+					EntityUser user = (EntityUser) usContr.getUserById(Long.valueOf(cookie.getValue()));
+					this.user.setUser(user);
 					request.getSession().setAttribute("user", user);
 					request.setAttribute("page", "page-ok");
 				}
@@ -56,9 +63,9 @@ public class LoadPageEjbServlet extends HttpServlet {
 	private void checkSalary(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		EntityUser user = (EntityUser) request.getSession().getAttribute("user");
 		request.setAttribute("checkSalary", "error");
-		for (EntityObject object : user.getUserObjects()) {
+		//EntityUser user = (EntityUser) request.getSession().getAttribute("user");
+		for (EntityObject object : user.getUser().getUserObjects()) {
 			if (object.getObjectName().toLowerCase().equals(objectName.toLowerCase())) {
 				for (EntityParam param : object.getObjectParams()) {
 					if (param.getValue() != null && param.getValue().toLowerCase().equals(valueCheck.toLowerCase()))
@@ -69,15 +76,15 @@ public class LoadPageEjbServlet extends HttpServlet {
 			}
 		}
 		if (request.getAttribute("checkSalary").equals("ok"))
-			controlSalary(request, response, user);
+			controlSalary(request, response, user.getUser());
 	}
 
 	private void controlSalary(HttpServletRequest request, HttpServletResponse response, EntityUser user)
 			throws ServletException, IOException {
 
-		SalaryModel salary = usContr.getLastCheckSalary(user.getUserId());
-		if (salary.getDateCount() > 0 && request.getAttribute("checkSalaryBro") == null)
-			request.setAttribute("controlSalary", salary);
+		salaryModel = usContr.getLastCheckSalary(user.getUserId());
+		if (salaryModel.getDateCount() > 0 && request.getAttribute("checkSalaryBro") == null)
+			request.setAttribute("controlSalary", salaryModel);
 		else
 			request.setAttribute("controlSalary", null);
 	}
@@ -85,32 +92,32 @@ public class LoadPageEjbServlet extends HttpServlet {
 	private void viewIncomeConsumptionOverlay(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		IncomeConsumptionModel inCon = new IncomeConsumptionModel();
+		inConModel = new IncomeConsumptionModel();
 		long progress = 0;
-		EntityUser user = (EntityUser) request.getSession().getAttribute("user");
-		inCon = usContr.procentForBar(inCon, user.getUserId());
-
-		if (inCon.getFullConsumption() != 0 || inCon.getFullIncome() != 0) {
-			progress = (inCon.getFullIncome() * 100) / (inCon.getFullIncome() + inCon.getFullConsumption());
+		//EntityUser user = (EntityUser) request.getSession().getAttribute("user");
+		inConModel = usContr.procentForBar(inConModel, user.getUser().getUserId());
+		if (inConModel.getFullConsumption() != 0 || inConModel.getFullIncome() != 0) {
+			progress = (inConModel.getFullIncome() * 100)
+					/ (inConModel.getFullIncome() + inConModel.getFullConsumption());
 			request.setAttribute("percentString", progress + "/" + (100 - progress));
 		} else
 			request.setAttribute("percentString", "0/0");
 
 		request.setAttribute("progress", progress);
-		request.setAttribute("maxIncomeCost", inCon.getMaxIncomeName());
-		request.setAttribute("maxConsumptionCost", inCon.getMaxConsumptionName());
-		request.setAttribute("maxIncomeCostInt", inCon.getMaxIncome());
-		request.setAttribute("maxConsumptionCostInt", inCon.getMaxConsumption());
-		request.setAttribute("avgIncome", inCon.getAvgIncome());
-		request.setAttribute("avgConsumption", inCon.getAvgConsumption());
+		request.setAttribute("maxIncomeCost", inConModel.getMaxIncomeName());
+		request.setAttribute("maxConsumptionCost", inConModel.getMaxConsumptionName());
+		request.setAttribute("maxIncomeCostInt", inConModel.getMaxIncome());
+		request.setAttribute("maxConsumptionCostInt", inConModel.getMaxConsumption());
+		request.setAttribute("avgIncome", inConModel.getAvgIncome());
+		request.setAttribute("avgConsumption", inConModel.getAvgConsumption());
 
 	}
 
 	private void doCreateCaseSelect(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		EntityUser user = (EntityUser) request.getSession().getAttribute("user");
-		List<EntityObject> userActiveCases = usContr.getUserActiveCases(user.getUserId());
-		List<EntityObject> userGeneralCases = usContr.getUserGeneralCases(user.getUserId());
+		//EntityUser user = (EntityUser) request.getSession().getAttribute("user");
+		List<EntityObject> userActiveCases = usContr.getUserActiveCases(user.getUser().getUserId());
+		List<EntityObject> userGeneralCases = usContr.getUserGeneralCases(user.getUser().getUserId());
 		request.setAttribute("listCases", userActiveCases);
 		request.setAttribute("generalCases", userGeneralCases);
 	}

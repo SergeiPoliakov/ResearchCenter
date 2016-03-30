@@ -53,17 +53,15 @@
 		      <input type="number" name="invoice-percent"  size="5" placeholder="Процент по кредиту"/>
 		      <input type="submit" value="Добавить"/>
 		    </form>
-	</div>			
-	
-
+</div>			
 			
 <div id="delete-invoice" style="visibility: hidden;">
 <form action="InvoiceServlet" method="delete">
 		      <input type="text" name="invoice-number"  size="5" placeholder="Номер счёта"/>
 		      <input type="submit" value="Удалить"/>
 		    </form>
-	</div>					
-	</div>
+</div>					
+</div>
 
 </body>
 

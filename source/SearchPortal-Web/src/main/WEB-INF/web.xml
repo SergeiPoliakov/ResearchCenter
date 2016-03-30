@@ -7,16 +7,16 @@
 		<tracking-mode>COOKIE</tracking-mode>
 	</session-config>
 	<servlet>
-		<servlet-name>controller-priorities</servlet-name>
-		<servlet-class>com.netcracker.unc.modules.servlets.controllerPriorities</servlet-class>
-	</servlet>
-	<servlet>
 		<servlet-name>load-page</servlet-name>
 		<servlet-class>com.netcracker.unc.ejb.servlets.LoadPageEjbServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>interface-ejb-servlet</servlet-name>
 		<servlet-class>com.netcracker.unc.ejb.servlets.InterfaceEjbServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>controller-priorities</servlet-name>
+		<servlet-class>com.netcracker.unc.modules.servlets.controllerPriorities</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>category-servlet</servlet-name>
@@ -47,12 +47,12 @@
 		<url-pattern>/load</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>authorization</servlet-name>
-		<url-pattern>/authorization</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
 		<servlet-name>interface-ejb-servlet</servlet-name>
 		<url-pattern>/int</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>authorization</servlet-name>
+		<url-pattern>/authorization</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>control</servlet-name>

@@ -77,7 +77,7 @@
 	</nav>
 
 	<div class="container-fluid" style="height: 100%">
-		<div class="container" id="consumptionDiv">
+		<div class="container" id="consumptionDiv" style="display: none">
 			<div class="module" id="income">
 				<div class="block-title">Создание новой задачи</div>
 				<div class="block-information">
@@ -89,14 +89,19 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="container" id="personalAreaUserDiv" style="display: none">
+			<div class="module" id="stat">
+				<div class="block-title">Редактирование профиля</div>
+				<div class="block-information"></div>
+			</div>
+		</div>
 	</div>
 
 	<div class="container">
-		<div class="module-right" id="income">
-			<div class="block-information-right">
-				<div class="overlayInCons">
-					<jsp:include page="vis/income_consumption.jsp"></jsp:include>
-				</div>
+		<div class="module-right" id="income" style="float: right">
+			<div class="overlayInCons">
+				<jsp:include page="vis/income_consumption.jsp"></jsp:include>
 			</div>
 		</div>
 	</div>

@@ -54,9 +54,11 @@
 			</div>
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
-				<div class="nav" align="right" style="color: #fef8a0 ">
-					<h5>Добро пожаловать <label><c:out
-							value="${sessionScope.user.getLogin()}" /></label></h5>
+				<div class="nav" align="right" style="color: #fef8a0">
+					<h5>
+						Добро пожаловать <label><c:out
+								value="${sessionScope.user.getLogin()}" /></label>
+					</h5>
 				</div>
 
 				<ul class="nav navbar-nav">
@@ -66,7 +68,7 @@
 							<button class="btn">+</button>
 						</div></li>
 					<li><div class="btn-group">
-							<button class="btn" onclick="show_consump()">Доходы</button>
+							<button class="btn" onclick="showIncomes()">Доходы</button>
 							<button class="btn" onclick="showIncoming()">+</button>
 						</div></li>
 					<li>
@@ -101,19 +103,22 @@
 	<c:set var="checkSalaryBro" value="${checkSalary}" scope="page" />
 	<c:if test="${checkSalaryBro == 'error'}">
 		<div id="helloCase">
-			<label class="welcomeCase" id="welcomeCase1"><b>Добро
-					пожаловать на сайт <span style="margin-left: 40px">приоритетов!</span>
-			</b></label>
-			<p>
-				<label class="welcomeCase" id="welcomeCase2">Пожалуйста,
-					введите вашу зарплату:</label>
-			</p>
-			<form action="custom" onsubmit="return regularAddSalary()">
-				<input type="hidden" value="addSalary" name="custom" /> <input
-					type="text" id="welcomeCaseInput" name="salary"
-					onkeypress="validate(this)" /><label class="welcomeCase"
-					style="margin-left: 3px">руб.</label> <input type="submit"
-					value="ввести" id="addSalarySubmit" />
+			<form action="custom" onsubmit="return regularAddSalary()"
+				class="hello-module">
+				<label class="welcomeCase" id="welcomeCase1"><span
+					style="margin-left: 20px"><b>Добро пожаловать на сайт
+							приоритетов!</span> </b></label>
+				<p>
+					<label class="welcomeCase" id="welcomeCase2">Пожалуйста,
+						введите вашу зарплату:</label>
+				</p>
+
+				<input class="form-control" type="hidden" value="addSalary"
+					name="custom" /> <input type="text" id="welcomeCaseInput"
+					name="salary" onkeypress="validate(this)" /><label
+					class="welcomeCase" style="margin-left: 3px">руб.</label>
+				<button type="submit" class="btn" style="margin-left: 20px"
+					id="addSalarySubmit">ввести</button>
 			</form>
 		</div>
 	</c:if>
@@ -151,7 +156,7 @@
 			<div class="module" id="category-module">
 				<div class="block-title">Категории</div>
 				<div class="block-information" id="bi-category-module">
-					<jsp:include page="category_controller.jsp" />
+					<jsp:include page="module-categories/category_controller.jsp" />
 				</div>
 			</div>
 		</div>
@@ -167,23 +172,26 @@
 				</div>
 			</div>
 		</div>
-		
+
 	</div>
 
-	<div class="container">
+	<div class="container" id="right-modules">
 		<div class="module-right" id="income">
-			<div class="block-information-right">
-				<div class="overlayInCons">
-					<jsp:include page="/attitudes/income_consumption.jsp"></jsp:include>
-				</div>
-			</div>
+
+			<jsp:include page="/attitudes/income_consumption.jsp"></jsp:include>
+
+
 		</div>
-	</div>
-	<div id="invoices" style="visibility: hidden;">
-		<jsp:include page="interface/invoices.jsp" />
-	</div>
-	<div id="incoming" style="visibility: hidden;">
-		<jsp:include page="interface/incoming.jsp" />
+
+		<div id="invoices" style="visibility: hidden;">
+			<jsp:include page="interface/invoices.jsp" />
+		</div>
+		<div id="incoming" style="visibility: hidden;">
+			<jsp:include page="interface/incoming.jsp" />
+		</div>
+		<div id="incomes" style="visibility: hidden;">
+			<jsp:include page="interface/income.jsp" />
+		</div>
 	</div>
 	<footer>
 		<div class="container-footer">
