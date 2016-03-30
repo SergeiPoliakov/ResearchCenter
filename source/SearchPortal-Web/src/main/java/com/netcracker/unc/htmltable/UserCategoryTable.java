@@ -7,7 +7,7 @@ import com.netcracker.unc.newmvc.dao.models.CategoryModel;
 public class UserCategoryTable {
 
 	public static String toHtmlTable(List<CategoryModel> categoryList) {
-		StringBuilder htmlSB = new StringBuilder("<div class = \"categories-table\"><table>");
+		StringBuilder htmlSB = new StringBuilder("<div id = \"categories-table\"><table>");
 
 		for (CategoryModel cm : categoryList) {
 			htmlSB.append(addRow(cm));
@@ -19,18 +19,18 @@ public class UserCategoryTable {
 
 	private static String addRow(CategoryModel cm) {
 
-		StringBuilder htmlString = new StringBuilder("<tr>");
+		StringBuilder htmlString = new StringBuilder("<tr><td>");
 
 		htmlString.append(addUpdateForm(cm.getObjectId()));
 		htmlString.append(addViewForm(cm));
 
-		htmlString.append("</tr>");
+		htmlString.append("</td></tr>");
 		return htmlString.toString();
 
 	}
 
 	private static String addUpdateForm(int objectId) {
-		StringBuilder htmlString = new StringBuilder("<td><form id=\"update-category-form\">");
+		StringBuilder htmlString = new StringBuilder("<form class=\"update-category-form\">");
 
 		htmlString.append("<input type=\"hidden\" name=\"objectid\" value=\"");
 		htmlString.append(objectId);
@@ -44,14 +44,14 @@ public class UserCategoryTable {
 		htmlString.append("<option value=\"0.25\">Низкий</option>");
 		htmlString.append("</select>");
 
-		htmlString.append("<input type=\"button\" id=\"update-row\" value=\"Обновить\" />");
+		htmlString.append("<input type=\"button\" class=\"update-row-button\" value=\"Обновить\" />");
 
-		htmlString.append("</form></td>");
+		htmlString.append("</form>");
 		return htmlString.toString();
 	}
 
 	private static String addViewForm(CategoryModel cm) {
-		StringBuilder htmlString = new StringBuilder("<td><form id=\"view-category-form\">");
+		StringBuilder htmlString = new StringBuilder("<form class=\"view-category-form\">");
 
 		if (cm.getObjectName() != null && !cm.getObjectName().isEmpty()) {
 			htmlString.append(cm.getObjectName());
@@ -75,10 +75,10 @@ public class UserCategoryTable {
 			htmlString.append(cm.getMaxPercent());
 		}
 
-		htmlString.append("<input type=\"button\" id=\"start-update-row\" value=\"Изменить\" />");
-		htmlString.append("<input type=\"button\" id=\"delete-row\" value=\"Удалить\" />");
+		htmlString.append("<input type=\"button\" class=\"start-update-row-button\" value=\"Изменить\" />");
+		htmlString.append("<input type=\"button\" class=\"delete-row-button\" value=\"Удалить\" />");
 
-		htmlString.append("</form></td>");
+		htmlString.append("</form>");
 		return htmlString.toString();
 	}
 }

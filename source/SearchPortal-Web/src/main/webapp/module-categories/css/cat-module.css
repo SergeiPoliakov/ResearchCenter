@@ -1,0 +1,9 @@
+@CHARSET "UTF-8";
+
+.update-category-form {
+	display: none;
+}
+
+.view-category-form {
+	display: block;
+}

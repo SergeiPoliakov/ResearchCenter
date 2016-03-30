@@ -12,9 +12,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <?xml version="1.0" encoding="UTF-8" ?>
-<script src="javascripts/jquery-2.2.0.min.js"></script>
-<script src="javascripts/for-category-module/view-update-row.js"></script>
 
+<script src="javascripts/jquery-2.2.0.min.js"></script>
+<script src="module-categories/js/view-update-row.js"></script>
+<link rel="stylesheet" href="module-categories/css/cat-module.css">
 
 
 <!--  -->
@@ -66,30 +67,6 @@
 	<br />
 	<br />
 	<!-- /добавление категории -->
-
-
-
-	<div>
-		<!-- тестовый div для js -->
-		<p>тут вставляется input</p>
-
-		<select>
-			<option value="volvo">Volvo</option>
-			<option value="saab">Saab</option>
-			<option value="mercedes">Mercedes</option>
-			<option value="audi">Audi</option>
-		</select>
-	</div>
-
-
-
-	<table>
-		<tr>
-			<td>Это пример де тд внутри формы</td>
-		</tr>
-		<tr>
-		</tr>
-	</table>
 	<p>
 		<label for="amount">Price range:</label> <input type="text"
 			id="amount" readonly

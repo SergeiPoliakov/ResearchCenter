@@ -54,9 +54,11 @@
 			</div>
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
-				<div class="nav" align="right" style="color: #fef8a0 ">
-					<h5>Добро пожаловать <label><c:out
-							value="${sessionScope.user.getLogin()}" /></label></h5>
+				<div class="nav" align="right" style="color: #fef8a0">
+					<h5>
+						Добро пожаловать <label><c:out
+								value="${sessionScope.user.getLogin()}" /></label>
+					</h5>
 				</div>
 
 				<ul class="nav navbar-nav">
@@ -100,21 +102,23 @@
 
 	<c:set var="checkSalaryBro" value="${checkSalary}" scope="page" />
 	<c:if test="${checkSalaryBro == 'error'}">
-<div id="helloCase">
-		<form action="custom" onsubmit="return regularAddSalary()" class="hello-module">
-			<label class="welcomeCase" id="welcomeCase1"><span style="margin-left: 20px"><b>Добро
-					пожаловать на сайт приоритетов!</span>
-			</b></label>
-			<p>
-				<label class="welcomeCase" id="welcomeCase2">Пожалуйста,
-					введите вашу зарплату:</label>
-			</p>
-			
-				<input class="form-control" type="hidden" value="addSalary" name="custom" /> <input
-					type="text" id="welcomeCaseInput" name="salary"
-					onkeypress="validate(this)" /><label class="welcomeCase"
-					style="margin-left: 3px">руб.</label> <button type="submit"
-					 class="btn" style="margin-left: 20px" id="addSalarySubmit">ввести</button>
+		<div id="helloCase">
+			<form action="custom" onsubmit="return regularAddSalary()"
+				class="hello-module">
+				<label class="welcomeCase" id="welcomeCase1"><span
+					style="margin-left: 20px"><b>Добро пожаловать на сайт
+							приоритетов!</span> </b></label>
+				<p>
+					<label class="welcomeCase" id="welcomeCase2">Пожалуйста,
+						введите вашу зарплату:</label>
+				</p>
+
+				<input class="form-control" type="hidden" value="addSalary"
+					name="custom" /> <input type="text" id="welcomeCaseInput"
+					name="salary" onkeypress="validate(this)" /><label
+					class="welcomeCase" style="margin-left: 3px">руб.</label>
+				<button type="submit" class="btn" style="margin-left: 20px"
+					id="addSalarySubmit">ввести</button>
 			</form>
 		</div>
 	</c:if>
@@ -168,26 +172,26 @@
 				</div>
 			</div>
 		</div>
-		
+
 	</div>
 
 	<div class="container" id="right-modules">
 		<div class="module-right" id="income">
 
-					<jsp:include page="/attitudes/income_consumption.jsp"></jsp:include>
+			<jsp:include page="/attitudes/income_consumption.jsp"></jsp:include>
 
 
 		</div>
-	
-	<div id="invoices" style="visibility: hidden;">
-		<jsp:include page="interface/invoices.jsp" />
-	</div>
-	<div id="incoming" style="visibility: hidden;">
-		<jsp:include page="interface/incoming.jsp" />
-    </div>
-	<div id="incomes" style="visibility: hidden;">
-		<jsp:include page="interface/income.jsp" />
-	</div> 
+
+		<div id="invoices" style="visibility: hidden;">
+			<jsp:include page="interface/invoices.jsp" />
+		</div>
+		<div id="incoming" style="visibility: hidden;">
+			<jsp:include page="interface/incoming.jsp" />
+		</div>
+		<div id="incomes" style="visibility: hidden;">
+			<jsp:include page="interface/income.jsp" />
+		</div>
 	</div>
 	<footer>
 		<div class="container-footer">
