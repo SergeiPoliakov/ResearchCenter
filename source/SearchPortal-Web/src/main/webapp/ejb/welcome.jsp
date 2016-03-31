@@ -5,14 +5,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author" content="">
-<link rel="icon" href="../../favicon.ico">
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<link rel="icon" href="../../favicon.ico" />
 <title>Сайт приоритетов</title>
-<link href="css/new-main.css" rel="stylesheet">
+<link href="css/new-main.css" rel="stylesheet" />
 </head>
 <body>
 
@@ -101,7 +101,11 @@
 		<div class="container" id="personalAreaUserDiv" style="display: none">
 			<div class="module" id="stat">
 				<div class="block-title">Редактирование профиля</div>
-				<div class="block-information"></div>
+				<div class="block-information">
+					<div id="editUser">
+						<jsp:include page="act/update_user.jsp"></jsp:include>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

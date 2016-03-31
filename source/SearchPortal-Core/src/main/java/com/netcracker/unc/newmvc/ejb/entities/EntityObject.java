@@ -53,7 +53,7 @@ public class EntityObject implements Serializable {
 	private EntityUser user;
 	@OneToMany(mappedBy = "object", fetch = FetchType.LAZY, targetEntity = EntityTransaction.class)
 	private Set<EntityTransaction> objectTransactions;
-	@OneToMany(mappedBy = "object", fetch = FetchType.LAZY, targetEntity = EntityParam.class)
+	@OneToMany(mappedBy = "object", fetch = FetchType.LAZY, targetEntity = EntityParam.class )
 	private Set<EntityParam> objectParams;
 
 	public Set<EntityParam> getObjectParams() {

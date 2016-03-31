@@ -8,7 +8,7 @@ function checkUpdateUserRegExp() {
 	var nameUser = document.getElementById("editUserInputName");
 	var oldPas = document.getElementById("oldPas");
 	var regExpName = new RegExp("^[^ ][A-Za-zА-Яа-я' ]{1,15}[^ ]$");
-	var regExpPas = new RegExp("^[^ ]{4,10}$");
+	var regExpPas = new RegExp("^[^ А-Яа-я]{4,10}$");
 	var tbNameError = document.getElementById("updateUserTBody");
 	var errorNameLabel = document.getElementById("errorNameLabel");
 	var errorPasswordLabel = document.getElementById("errorPasswordLabel");
@@ -37,4 +37,17 @@ function checkUpdateUserRegExp() {
 		}
 	}
 	return check;
+}
+
+// to save show edit user module
+var matches = document.cookie.match(new RegExp('errorUpdateUser=1'));
+var errorPasswordLabel = document.getElementById("errorPasswordLabel");
+errorPasswordLabel.innerHTML = "";
+errorPasswordLabel.style.visibility = 'hidden';
+if (matches) {
+	errorPasswordLabel.innerHTML = 'старый пароль введен неверно';
+	errorPasswordLabel.style.visibility = 'visible';
+	// for delete cookie
+	document.cookie = 'errorUpdateUser'
+			+ '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }

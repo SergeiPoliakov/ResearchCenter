@@ -9,9 +9,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.hibernate.Hibernate;
-
 import com.netcracker.unc.newmvc.ejb.controllers.ControllerObjects;
 import com.netcracker.unc.newmvc.ejb.controllers.ControllerUsers;
 import com.netcracker.unc.newmvc.ejb.entities.EntityObject;
@@ -65,8 +62,7 @@ public class LoadPageEjbServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		request.setAttribute("checkSalary", "error");
-		// EntityUser user = (EntityUser)
-		// request.getSession().getAttribute("user");
+
 		for (EntityObject object : user.getUser().getUserObjects()) {
 			if (object.getObjectName().toLowerCase().equals(objectName.toLowerCase())) {
 				for (EntityParam param : object.getObjectParams()) {

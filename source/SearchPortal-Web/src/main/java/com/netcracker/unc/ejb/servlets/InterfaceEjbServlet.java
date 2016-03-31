@@ -4,10 +4,12 @@ import java.io.IOException;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.netcracker.unc.newmvc.ejb.controllers.ControllerObjects;
+import com.netcracker.unc.newmvc.ejb.controllers.ControllerUsers;
 import com.netcracker.unc.newmvc.ejb.entities.EntityUser;
 import com.netcracker.unc.newmvc.ejb.models.UserModel;
 
@@ -16,6 +18,8 @@ public class InterfaceEjbServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@EJB
 	ControllerObjects objContr;
+	@EJB
+	ControllerUsers usContr;
 	@EJB
 	UserModel user;
 	private final String mainUrl = "ejb/welcome.jsp";
@@ -32,7 +36,8 @@ public class InterfaceEjbServlet extends HttpServlet {
 		String caseDateStr = request.getParameter("date_case");
 		String caseCostStr = request.getParameter("cost_case");
 
-		objContr.createCase(caseNameStr, caseTypeLong, caseParentLong, casePriorityStr, caseDateStr, caseCostStr, user.getUser());
+		objContr.createCase(caseNameStr, caseTypeLong, caseParentLong, casePriorityStr, caseDateStr, caseCostStr,
+				user.getUser());
 		response.sendRedirect(mainUrl);
 
 	}
@@ -51,6 +56,30 @@ public class InterfaceEjbServlet extends HttpServlet {
 
 	}
 
+	private void updateUser(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String userName = request.getParameter("name");
+		String oldPas = request.getParameter("oldPas");
+		String newPas = request.getParameter("newPas");
+		request.setAttribute("errorOldPassword", "ok");
+
+		// if old password incorrect
+		if (usContr.createSalt(oldPas) != user.getUser().getSalt()) {
+			// request.setAttribute("errorUpdateUser", "неправильно введен
+			// старый пароль!");
+			Cookie cookie = new Cookie("errorUpdateUser", "1");
+			response.addCookie(cookie);
+			response.sendRedirect(mainUrl);
+		} else {
+			user.getUser().setName(userName);
+			user.getUser().setHashSum(newPas.hashCode());
+			user.getUser().setSalt(usContr.createSalt(newPas));
+			usContr.updateUser(user.getUser());
+			response.sendRedirect(mainUrl);
+		}
+	}
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -62,10 +91,8 @@ public class InterfaceEjbServlet extends HttpServlet {
 			createCase(request, response);
 		else if (interfaces.equals("updateCase"))
 			updateCase(request, response);
-		/*
-		 * else if (interfaces.equals("updateUser")) { updateUser(request,
-		 * response); }
-		 */
+		else if (interfaces.equals("updateUser"))
+			updateUser(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

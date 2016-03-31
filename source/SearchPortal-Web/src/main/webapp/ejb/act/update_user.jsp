@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div>
-		<form class="for,-inline" action="int"
+		<form class="for,-inline" action="../int"
 			onsubmit="return checkUpdateUserRegExp()">
 			<input class="form-control" type="hidden" value="updateUser"
 				name="interfaces" />

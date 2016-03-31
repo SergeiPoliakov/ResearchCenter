@@ -18,6 +18,7 @@ import com.netcracker.unc.newmvc.ejb.entities.EntityUser;
 public class AuthorizationEjbServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final String mainUrl = "ejb/welcome.jsp";
+	private final String indexUrl = "ejb/index.jsp";
 	@EJB
 	ControllerUsers usContr;
 
@@ -38,7 +39,7 @@ public class AuthorizationEjbServlet extends HttpServlet {
 			response.sendRedirect(mainUrl);
 		} else {
 			request.setAttribute("errorMessage", "Неправильно введен логин или пароль!");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/ejb/index.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher(indexUrl);
 			dispatcher.include(request, response);
 		}
 
@@ -64,12 +65,15 @@ public class AuthorizationEjbServlet extends HttpServlet {
 			response.sendRedirect(mainUrl);
 		}
 		request.setAttribute("multiName", "Извините, такой логин уже используется!");
-		RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher(indexUrl);
 		dispatcher.include(request, response);
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		response.setContentType("text/html;charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
 
 		if (request.getParameter("authorization") != null) {
 			String authorization = request.getParameter("authorization");

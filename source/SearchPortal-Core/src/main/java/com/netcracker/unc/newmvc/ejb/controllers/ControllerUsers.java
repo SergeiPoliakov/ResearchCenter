@@ -11,6 +11,9 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import org.hibernate.Hibernate;
+
 import com.netcracker.unc.newmvc.ejb.dao.EjbDAO;
 import com.netcracker.unc.newmvc.ejb.entities.EntityAttribute;
 import com.netcracker.unc.newmvc.ejb.entities.EntityObject;
@@ -63,9 +66,14 @@ public class ControllerUsers {
 
 	public EntityUser getUserById(long userId) {
 		EntityUser user = (EntityUser) ejb.getObject(EntityUser.class, userId);
-		// for change fetch to EAGLE
-		user.getUserObjects().size();
+		Hibernate.initialize(user.getUserObjects());
+		for (EntityObject obj : user.getUserObjects())
+			Hibernate.initialize(obj.getObjectParams());
 		return user;
+	}
+
+	public void updateUser(EntityUser user) {
+		ejb.updateObject(user);
 	}
 
 	public boolean createUser(String login, String password, String name, String email) {
