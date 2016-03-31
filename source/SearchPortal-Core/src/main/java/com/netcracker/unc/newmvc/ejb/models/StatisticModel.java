@@ -1,4 +1,8 @@
-package com.netcracker.unc.newmvc.dao.models;
+package com.netcracker.unc.newmvc.ejb.models;
+
+import javax.ejb.Stateful;
+
+@Stateful
 
 public class StatisticModel {
 
