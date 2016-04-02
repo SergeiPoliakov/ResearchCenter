@@ -15,15 +15,15 @@
 
 <script src="javascripts/jquery-2.2.0.min.js"></script>
 <script src="module-categories/js/view-update-row.js"></script>
+<script src="module-categories/js/percent-slider.js"></script>
 <link rel="stylesheet" href="module-categories/css/cat-module.css">
 
-<script type="text/javascript" src="js/jquery.validate.min.js"></script>
 
 
-<!--  -->
+
+
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script>
@@ -66,16 +66,5 @@
 			value='<%=user.getUserId()%>' /> <input type="submit"
 			value="Добавить категорию" />
 	</form>
-	<br />
-	<br />
-	<!-- /добавление категории -->
-	<p>
-		<label for="amount">Price range:</label> <input type="text"
-			id="amount" readonly
-			style="border: 0; color: #f6931f; font-weight: bold;">
-	</p>
-
-	<div id="slider-range"></div>
-
 </body>
 </html>
