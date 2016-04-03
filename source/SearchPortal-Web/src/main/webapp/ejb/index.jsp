@@ -37,14 +37,14 @@
 					type="submit">Войти</button>
 				<label onclick="changeToReg()"
 					style="cursor: pointer; text-decoration: underline;">Зарегистрироваться!</label>
-				<label onclick="changeToReg()"
+				<label onclick="changeToRest()"
 					style="cursor: pointer; text-decoration: underline;">Забыли
 					пароль?</label>
 			</form>
 		</div>
 		<!-- Forget password -->
 		<div id="restoreUser" style="display: none">
-			<form class="form-signin" action="authorization" method="post"
+			<form class="form-signin" action="auth" method="post"
 				onsubmit="return checkEmptyRestoreInput()">
 				<input class="form-control" type="hidden" name="authorization"
 					value="restorePassword" />
@@ -60,6 +60,7 @@
 					вспомнил!</label>
 			</form>
 		</div>
+		<label id="restorePasswordLabel">${restorePassword}</label>
 	</div>
 
 	<div id="registrationUser" style="display: none">

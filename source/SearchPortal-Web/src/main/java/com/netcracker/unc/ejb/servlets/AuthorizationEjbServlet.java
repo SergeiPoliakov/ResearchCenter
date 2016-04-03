@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import com.netcracker.unc.newmvc.ejb.controllers.ControllerUsers;
+import com.netcracker.unc.newmvc.ejb.dao.EjbDAO;
 import com.netcracker.unc.newmvc.ejb.entities.EntityUser;
+import com.netcracker.unc.newmvc.ejb.models.UserModel;
 
 @WebServlet("/auth")
 public class AuthorizationEjbServlet extends HttpServlet {
@@ -21,6 +23,10 @@ public class AuthorizationEjbServlet extends HttpServlet {
 	private final String indexUrl = "ejb/index.jsp";
 	@EJB
 	ControllerUsers usContr;
+	@EJB
+	UserModel user;
+	@EJB
+	EjbDAO ejb;
 
 	private void authorizationCheck(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
@@ -89,6 +95,31 @@ public class AuthorizationEjbServlet extends HttpServlet {
 		response.sendRedirect("");
 	}
 
+	private void restoreUserPassword(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+
+		String login = request.getParameter("login");
+		String email = request.getParameter("email");
+		user.setUser(usContr.getUserByLogin(login));
+
+		if (user.getUser() != null && user.getUser().getEmail().toLowerCase().equals(email.toLowerCase())) {
+
+			String newPassword = usContr.generateUserPassword(5);
+			user.getUser().setHashSum(newPassword.hashCode());
+			user.getUser().setSalt(usContr.createSalt(newPassword));
+			ejb.updateObject(user.getUser());
+
+			usContr.sendPasswordToUserEmail(user.getUser().getEmail(), newPassword);
+		}
+
+		request.setAttribute("restorePassword",
+				"Если логин и почта совпали, письмо с паролем было выслано Вам на почту!");
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher(indexUrl);
+		dispatcher.forward(request, response);
+
+	}
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -103,6 +134,8 @@ public class AuthorizationEjbServlet extends HttpServlet {
 				registrationUser(request, response);
 			else if (authorization.equals("logOut"))
 				logOutUser(request, response);
+			else if (authorization.equals("restorePassword"))
+				restoreUserPassword(request, response);
 			/*
 			 * else if (authorization.equals("restorePassword"))
 			 * restoreUserPassword(request, response); } else if
