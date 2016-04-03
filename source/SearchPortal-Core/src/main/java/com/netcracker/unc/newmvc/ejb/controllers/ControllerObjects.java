@@ -162,6 +162,5 @@ public class ControllerObjects {
 		object.setObjectName(nameCase.trim());
 		ejb.updateObject(object);
 		ejb.updateReferencesToObjects();
-
 	}
 }

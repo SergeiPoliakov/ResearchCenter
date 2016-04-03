@@ -81,10 +81,13 @@ public class LoadPageEjbServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		salaryModel = usContr.getLastCheckSalary(user.getUserId());
-		if (salaryModel.getDateCount() > 0 && request.getAttribute("checkSalaryBro") == null)
+		if (salaryModel.getDateCount() > 0 && request.getAttribute("checkSalaryBro") == null) {
 			request.setAttribute("controlSalary", salaryModel);
-		else
+			request.getSession().setAttribute("controlSalary", salaryModel);
+		} else {
 			request.setAttribute("controlSalary", null);
+			request.getSession().setAttribute("controlSalary", null);
+		}
 	}
 
 	private void viewIncomeConsumptionOverlay(HttpServletRequest request, HttpServletResponse response)

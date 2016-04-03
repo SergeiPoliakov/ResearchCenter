@@ -69,7 +69,10 @@
 					<li><div class="btn-group">
 							<button class="btn" id="personalArea"
 								onclick="showHideModule(this)">Личный кабинет</button>
-							<button class="btn">Выход</button>
+							<form action="../auth" method="get">
+								<input type="hidden" name="authorization" value="logOut"><input
+									type="submit" value="Выход" class="btn" />
+							</form>
 						</div></li>
 				</ul>
 			</div>
@@ -118,12 +121,9 @@
 		</div>
 	</div>
 
-
-
 	<div class="controlSalary" id="controlSalaryMain">
 		<jsp:include page="int/salary_control.jsp"></jsp:include>
 	</div>
-
 	<c:set var="checkSalaryBro" value="${checkSalary}" scope="page" />
 	<c:if test="${checkSalaryBro == 'error'}">
 		<div id="helloCase">

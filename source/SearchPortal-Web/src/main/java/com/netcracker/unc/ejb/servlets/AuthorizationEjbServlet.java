@@ -69,6 +69,26 @@ public class AuthorizationEjbServlet extends HttpServlet {
 		dispatcher.include(request, response);
 	}
 
+	private void logOutUser(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+
+		Cookie[] cookie = request.getCookies();
+		if (cookie != null) { // delete all user cookies
+			for (Cookie c : cookie) {
+				c.setValue("");
+				c.setPath("");
+				c.setMaxAge(0);
+				response.addCookie(c);
+			}
+		}
+		HttpSession session = request.getSession(false); // for delete current
+															// user session
+		if (session != null) {
+			request.getSession().invalidate();
+		}
+		response.sendRedirect("");
+	}
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -81,9 +101,10 @@ public class AuthorizationEjbServlet extends HttpServlet {
 				authorizationCheck(request, response);
 			else if (authorization.equals("userRegistration"))
 				registrationUser(request, response);
+			else if (authorization.equals("logOut"))
+				logOutUser(request, response);
 			/*
-			 * else if (authorization.equals("logOut")) logOutUser(request,
-			 * response); else if (authorization.equals("restorePassword"))
+			 * else if (authorization.equals("restorePassword"))
 			 * restoreUserPassword(request, response); } else if
 			 * (request.getAttribute("checkCookie") != null)
 			 * cookieLogInUser(request, response);

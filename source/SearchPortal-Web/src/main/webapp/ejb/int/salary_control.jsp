@@ -10,7 +10,7 @@
 <body>
 
 	<c:if test="${not empty controlSalary }">
-		<form action="custom">
+		<form action="../cust" method="get">
 			<input type="hidden" name="custom" value="controlSalary">
 			<div id="divMounthCheck">
 				<div class="controlSalaryBorder">

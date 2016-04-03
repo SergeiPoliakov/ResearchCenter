@@ -4,16 +4,16 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 import org.hibernate.Hibernate;
-
 import com.netcracker.unc.newmvc.ejb.dao.EjbDAO;
 import com.netcracker.unc.newmvc.ejb.entities.EntityAttribute;
 import com.netcracker.unc.newmvc.ejb.entities.EntityObject;
@@ -157,8 +157,6 @@ public class ControllerUsers {
 		object.setObjectName(objectSalaryName);
 		object.setUser(user);
 		ejb.addObject(object);
-
-		System.out.println(object.getObjectType().getFinObjectTypeId() + " " + object.getUser().getUserId());
 		ejb.updateReferencesToObjects();
 
 		EntityParam param = new EntityParam();
@@ -179,5 +177,74 @@ public class ControllerUsers {
 		param.setValue(attributeRegularIncomeCheck);
 		ejb.addObject(param);
 
+	}
+
+	public void addMissUserSalary(SalaryModel salary, String[] mounthsControl, String newSalary, EntityUser user) {
+
+		boolean checkSameSalary = true;
+		String previous = mounthsControl[0];
+		for (String i : mounthsControl) {
+			if (!previous.equals(i))
+				checkSameSalary = false;
+			else
+				continue;
+		}
+		EntityObject object;
+		Date date = salary.getLastCheckDate();
+		Calendar cal = Calendar.getInstance();
+
+		// if user set not same salaries
+		if (checkSameSalary == false) {
+			for (String valueSalary : mounthsControl) {
+				object = new EntityObject();
+				object.setObjectType((EntityObjectType) ejb.getObject(EntityObjectType.class, incomeObjectType));
+				object.setObjectName(objectSalaryName);
+				object.setUser(user);
+				ejb.addObject(object);
+				ejb.updateReferencesToObjects();
+
+				cal.setTimeInMillis(date.getTime());
+				cal.add(Calendar.MONTH, 1);
+				date.setTime(cal.getTimeInMillis());
+				addRegularySalaryParams(valueSalary, object, date);
+
+			}
+		} else {
+			for (int i = 0; i < salary.getDateCount(); i++) {
+				object = new EntityObject();
+				object.setObjectType((EntityObjectType) ejb.getObject(EntityObjectType.class, incomeObjectType));
+				object.setObjectName(objectSalaryName);
+				object.setUser(user);
+				ejb.addObject(object);
+				ejb.updateReferencesToObjects();
+
+				cal.setTimeInMillis(date.getTime());
+				cal.add(Calendar.MONTH, 1);
+				date.setTime(cal.getTimeInMillis());
+				addRegularySalaryParams(newSalary, object, date);
+			}
+		}
+		ejb.updateReferencesToObjects();
+	}
+
+	// add standard params for salary object
+	private void addRegularySalaryParams(String valueSalary, EntityObject object, Date date) {
+		EntityParam param = new EntityParam();
+		param.setAttribute((EntityAttribute) ejb.getObject(EntityAttribute.class, attributeIncome));
+		param.setObject(object);
+		param.setValue(valueSalary);
+		ejb.addObject(param);
+
+		param = new EntityParam();
+		param.setAttribute((EntityAttribute) ejb.getObject(EntityAttribute.class, atributeIncomeDate));
+		param.setObject(object);
+		param.setValueDate((Date) date.clone());
+		ejb.addObject(param);
+
+		param = new EntityParam();
+		param.setAttribute((EntityAttribute) ejb.getObject(EntityAttribute.class, attributeRegularIncome));
+		param.setObject(object);
+		param.setValue(attributeRegularIncomeCheck);
+		ejb.addObject(param);
 	}
 }

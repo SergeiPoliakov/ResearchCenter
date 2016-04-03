@@ -105,6 +105,9 @@ public class EjbDAO {
 		return list;
 	}
 
+	// columns result : fin_object_id, object_name, user_id, value_date,
+	// fin_object_type_id, fin_object_type_name, attribute_id, mounth_count,
+	// value
 	public SalaryModel getLastCheckSalary(long userId) {
 
 		SalaryModel salaryModel = new SalaryModel();
@@ -131,8 +134,8 @@ public class EjbDAO {
 				salaryModel.setObjectName((String) res[1]);
 				salaryModel.setUserId(((BigDecimal) res[2]).longValue());
 				salaryModel.setLastCheckDate(new Date(((Timestamp) res[3]).getTime()));
-				salaryModel.setDateCount(((BigDecimal) res[4]).longValue());
-				salaryModel.setValue((String) res[5]);
+				salaryModel.setDateCount(((BigDecimal) res[7]).longValue());
+				salaryModel.setValue((String) res[8]);
 			}
 		}
 		return salaryModel;
@@ -269,7 +272,7 @@ public class EjbDAO {
 		}
 		return list;
 	}
-	
+
 	public StatisticModel procentForPie(StatisticModel inStat, int userId) {
 
 		String query = "SELECT SUM(par.VALUE) AS res"
@@ -286,11 +289,9 @@ public class EjbDAO {
 				inStat.setReservedMoney(((BigDecimal) res[0]).longValue());
 			}
 		}
-		
-		 query = "select SUM(p.VALUE)"
-               + "from SP_FIN_OBJECTS o, SP_PARAMS p"
-               + "where p.FIN_OBJECT_ID=o.FIN_OBJECT_ID and USER_ID=? and p.ATTRIBUTE_ID=14 and o.FIN_OBJECT_TYPE_ID=5";
 
+		query = "select SUM(p.VALUE)" + "from SP_FIN_OBJECTS o, SP_PARAMS p"
+				+ "where p.FIN_OBJECT_ID=o.FIN_OBJECT_ID and USER_ID=? and p.ATTRIBUTE_ID=14 and o.FIN_OBJECT_TYPE_ID=5";
 
 		result = em.createNativeQuery(query).setParameter(1, userId).getResultList();
 
@@ -301,15 +302,15 @@ public class EjbDAO {
 				inStat.setSum(((BigDecimal) res[0]).longValue());
 			}
 		}
-		//Add calculating of free money
+		// Add calculating of free money
 		/*
 		 * 
 		 */
 		return inStat;
 	}
-	
-	public TransactionModel transactionTable (TransactionModel inTrans, int userId) {
-		
+
+	public TransactionModel transactionTable(TransactionModel inTrans, int userId) {
+
 		String query = "SELECT t.transaction_date, t.cost, fo.object_name"
 				+ "FROM SP_TRANSACTIONS t JOIN SP_FIN_OBJECTS fo ON t.fin_object_id=fo.fin_object_id"
 				+ "WHERE fo.user_id=?";
