@@ -70,7 +70,7 @@
 			<h3 class="form-signin-heading">Регистрация нового пользователя:</h3>
 			<input type="text" class="form-control login" name="login" id="login"
 				placeholder="Введите логин" required><label
-				id='errorRegLogLabel'></label><input type="password"
+				id='errorRegLogLabel'>${multiName}</label><input type="password"
 				class="form-control password" name="password" id="password"
 				placeholder="Введите пароль" required><label
 				id='errorRegPasLabel'></label><input type="text"

@@ -2,6 +2,21 @@
  * 
  */
 
+// for save registration panel
+var authDiv = document.getElementById('authorizationUser');
+var registrDiv = document.getElementById('registrationUser');
+var restoreDiv = document.getElementById('restoreUser');
+var errorLogLabel = document.getElementById('errorRegLogLabel');
+var errorPasLabel = document.getElementById('errorRegPasLabel');
+var errorNameLabel = document.getElementById('errorRegNameLabel');
+var errorRegEmailLabel = document.getElementById("errorRegEmailLabel");
+if (document.getElementById('errorRegLogLabel').innerHTML.valueOf() != ''
+		.valueOf()) {
+	authDiv.style.display = 'none';
+	registrDiv.style.display = '';
+	restoreDiv.style.display = 'none';
+}
+
 function changeToReg() {
 	document.getElementById('restorePasswordLabel').style.display = 'none';
 	var authDiv = document.getElementById('authorizationUser');
@@ -12,6 +27,14 @@ function changeToReg() {
 		authDiv.style.display = 'none';
 		registrDiv.style.display = '';
 		restoreDiv.style.display = 'none';
+		errorLogLabel.innerHTML = "";
+		errorLogLabel.style.display = 'none';
+		errorPasLabel.innerHTML = "";
+		errorPasLabel.style.display = 'none';
+		errorNameLabel.innerHTML = "";
+		errorNameLabel.style.display = 'none';
+		errorRegEmailLabel.innerHTML = "";
+		errorRegEmailLabel.style.display = 'none';
 	}
 }
 
@@ -25,6 +48,14 @@ function changeToAuth() {
 		authDiv.style.display = '';
 		registrDiv.style.display = 'none';
 		restoreDiv.style.display = 'none';
+		errorLogLabel.innerHTML = "";
+		errorLogLabel.style.display = 'none';
+		errorPasLabel.innerHTML = "";
+		errorPasLabel.style.display = 'none';
+		errorNameLabel.innerHTML = "";
+		errorNameLabel.style.display = 'none';
+		errorRegEmailLabel.innerHTML = "";
+		errorRegEmailLabel.style.display = 'none';
 	}
 }
 
@@ -38,13 +69,21 @@ function changeToRest() {
 		restoreDiv.style.display = '';
 		registrDiv.style.display = 'none';
 		authDiv.style.display = 'none';
+		errorLogLabel.innerHTML = "";
+		errorLogLabel.style.display = 'none';
+		errorPasLabel.innerHTML = "";
+		errorPasLabel.style.display = 'none';
+		errorNameLabel.innerHTML = "";
+		errorNameLabel.style.display = 'none';
+		errorRegEmailLabel.innerHTML = "";
+		errorRegEmailLabel.style.display = 'none';
 	}
 }
 
-// regular fo authorization user
+// regular for authorization user
 function checkRegistrRegular() {
 	var loginReg = /^[A-Za-z0-9]{1,15}$/;
-	var passwordReg = /^[^ ]{4,10}$/;
+	var passwordReg = /^[^ А-Яа-я]{4,10}$/
 	var emailReg = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
 	var nameReg = new RegExp("^[^ ][A-Za-zА-Яа-я' ]{1,15}[^ ]$");
 	var login = document.getElementById("login");
