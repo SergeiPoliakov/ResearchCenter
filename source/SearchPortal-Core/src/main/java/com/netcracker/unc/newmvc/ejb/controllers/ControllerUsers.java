@@ -8,9 +8,20 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Properties;
+import java.util.Random;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.hibernate.Hibernate;
@@ -45,6 +56,11 @@ public class ControllerUsers {
 	private final int attributeRegularIncome = 6; // Ежемесячный доход
 	private final String attributeRegularIncomeCheck = "true";
 
+	// general email properties
+	private final String userLog = "sop.testing123@gmail.com";
+	private final String userAuth = "sop.testing123";
+	private final String passwordLog = "SiteOfPriorities";
+
 	/*
 	 * // general email properties private final String userLog =
 	 * "sop.testing123@gmail.com"; private final String userAuth =
@@ -66,7 +82,7 @@ public class ControllerUsers {
 
 	public EntityUser getUserById(long userId) {
 		EntityUser user = (EntityUser) ejb.getObject(EntityUser.class, userId);
-		// Hibernate.initialize(user.getUserObjects());
+		Hibernate.initialize(user.getUserObjects());
 		for (EntityObject obj : user.getUserObjects())
 			Hibernate.initialize(obj.getObjectParams());
 		return user;
@@ -246,5 +262,62 @@ public class ControllerUsers {
 		param.setObject(object);
 		param.setValue(attributeRegularIncomeCheck);
 		ejb.addObject(param);
+	}
+
+	public void sendPasswordToUserEmail(String email, String password) {
+
+		String text = "Добрый день! Вы забыли пароль и начали процедуру восстановления пароля "
+				+ "на сайте приоритетов. Пожалуйста, используйте следующий пароль для входа: " + password;
+
+		Properties properties = System.getProperties();
+		properties.put("mail.smtp.host", "smtp.gmail.com");
+		properties.put("mail.smtp.auth", "true");
+		properties.put("mail.smtp.user", userAuth);
+		properties.put("mail.smtp.password", passwordLog);
+		properties.put("mail.smtp.port", "587");
+		properties.put("mail.debug", "true");
+		properties.put("mail.smtp.starttls.enable", "true");
+		properties.put("mail.smtp.EnableSSL.enable", "true");
+		properties.put("mail.smtp.port", "587");
+		properties.setProperty("mail.smtp.socketFactory.port", "587");
+		properties.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+		properties.setProperty("mail.smtp.socketFactory.fallback", "false");
+
+		Authenticator auth = new Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(userAuth, passwordLog);
+			}
+		};
+		Session session = Session.getInstance(properties, auth);
+		MimeMessage mes = new MimeMessage(session);
+		try {
+			mes.setFrom(new InternetAddress(userLog));
+			mes.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
+			mes.setSubject("Восстановление пароля - no reply");
+			mes.setText(text);
+			Transport transport = session.getTransport("smtp");
+			transport.connect("smtp.gmail.com", userAuth, passwordLog);
+			transport.sendMessage(mes, mes.getAllRecipients());
+
+		} catch (AddressException e) {
+			e.printStackTrace();
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public String generateUserPassword(int length) {
+		Random random = new Random();
+		char charData = ' ';
+		String data = "";
+		for (int i = 0; i < length; i++) {
+			int numb = random.nextInt(25);
+			if ((numb & 1) == 0)
+				charData = (char) (numb + 97);
+			else
+				charData = (char) (numb + 65);
+			data += String.valueOf(charData);
+		}
+		return data;
 	}
 }
