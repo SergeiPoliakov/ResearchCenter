@@ -27,7 +27,7 @@ public class EntityAttribute implements Serializable {
 	@Column(name = "attribute_name", nullable = false, length = 50)
 	private String attributeName;
 	@JoinColumn(name = "fin_object_type_id", referencedColumnName = "fin_object_type_id")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private EntityObjectType objectType;
 	@Id
 	@SequenceGenerator(sequenceName = "SP_ATTRIBUTE_ID_SEQ ", name = "attributeSEQ")

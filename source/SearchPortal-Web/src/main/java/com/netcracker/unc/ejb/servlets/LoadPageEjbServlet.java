@@ -1,6 +1,7 @@
 package com.netcracker.unc.ejb.servlets;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -125,6 +126,21 @@ public class LoadPageEjbServlet extends HttpServlet {
 		request.setAttribute("generalCases", userGeneralCases);
 	}
 
+	private void checkBalance(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		List<EntityObject> listObjects = objContr.getUserBalanceObjects(user.getUser());
+		HashMap<String, String> paramCostObjects = new HashMap<String, String>();
+		for (EntityObject obj : listObjects)
+			paramCostObjects.put(obj.getObjectName(), objContr.getBalanceCost(obj));
+		request.getSession().setAttribute("balanceObjects", listObjects);
+		request.getSession().setAttribute("balanceParamObjects", paramCostObjects);
+		if (objContr.checkBankruptUser(user.getUser())) {
+			request.setAttribute("bankrupt", "true");
+		} else
+			request.setAttribute("bankrupt", "false");
+	}
+
 	private void doUpdateCaseSelect(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -140,6 +156,7 @@ public class LoadPageEjbServlet extends HttpServlet {
 		if (request.getAttribute("jsp") != null && request.getAttribute("page").equals("page-ok")) {
 			checkSalary(request, response);
 			viewIncomeConsumptionOverlay(request, response);
+			checkBalance(request, response);
 			if (request.getAttribute("jsp").equals("create-case"))
 				doCreateCaseSelect(request, response);
 			else if (request.getAttribute("jsp").equals("update-case"))

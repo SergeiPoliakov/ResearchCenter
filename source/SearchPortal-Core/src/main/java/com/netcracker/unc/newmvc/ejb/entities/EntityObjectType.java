@@ -31,9 +31,9 @@ public class EntityObjectType implements Serializable {
 	private long finObjectTypeId;
 	@Column(name = "fin_object_type_name", nullable = false, length = 50)
 	private String finObjectTypeName;
-	@OneToMany(mappedBy = "objectType", fetch = FetchType.LAZY, targetEntity = EntityObject.class)
+	@OneToMany(mappedBy = "objectType", fetch = FetchType.EAGER, targetEntity = EntityObject.class)
 	private Set<EntityObject> objects;
-	@OneToMany(mappedBy = "objectType", fetch = FetchType.LAZY, targetEntity = EntityAttribute.class)
+	@OneToMany(mappedBy = "objectType", fetch = FetchType.EAGER, targetEntity = EntityAttribute.class)
 	private Set<EntityAttribute> attributes;
 
 	public long getFinObjectTypeId() {

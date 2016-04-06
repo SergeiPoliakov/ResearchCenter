@@ -39,21 +39,21 @@ public class EntityObject implements Serializable {
 	@Column(name = "fin_object_id", unique = true)
 	private long finObjectId;
 	@JoinColumn(name = "parent_id", referencedColumnName = "fin_object_id", nullable = true)
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private EntityObject parentObject;
-	@OneToMany(mappedBy = "parentObject", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "parentObject", fetch = FetchType.EAGER)
 	private Set<EntityObject> childObjects;
 	@Column(name = "object_name", nullable = false, length = 100)
 	private String objectName;
 	@JoinColumn(name = "fin_object_type_id", referencedColumnName = "fin_object_type_id")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private EntityObjectType objectType;
 	@JoinColumn(name = "user_id", referencedColumnName = "user_id")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private EntityUser user;
-	@OneToMany(mappedBy = "object", fetch = FetchType.LAZY, targetEntity = EntityTransaction.class)
+	@OneToMany(mappedBy = "object", fetch = FetchType.EAGER, targetEntity = EntityTransaction.class)
 	private Set<EntityTransaction> objectTransactions;
-	@OneToMany(mappedBy = "object", fetch = FetchType.LAZY, targetEntity = EntityParam.class )
+	@OneToMany(mappedBy = "object", fetch = FetchType.EAGER, targetEntity = EntityParam.class )
 	private Set<EntityParam> objectParams;
 
 	public Set<EntityParam> getObjectParams() {

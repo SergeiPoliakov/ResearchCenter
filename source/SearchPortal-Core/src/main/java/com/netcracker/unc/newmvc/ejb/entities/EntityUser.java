@@ -47,7 +47,7 @@ public class EntityUser implements Serializable {
 	private int salt;
 	@Column(name = "email", nullable = false, length = 50)
 	private String email;
-	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
 	private Set<EntityObject> userObjects;
 
 	public long getUserId() {

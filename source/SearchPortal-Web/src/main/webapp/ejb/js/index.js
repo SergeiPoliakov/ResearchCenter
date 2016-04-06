@@ -3,7 +3,6 @@
  */
 
 function changeToReg() {
-	document.getElementById('restorePasswordLabel').style.display = 'none';
 	var authDiv = document.getElementById('authorizationUser');
 	var registrDiv = document.getElementById('registrationUser');
 	var restoreDiv = document.getElementById('restoreUser');
@@ -16,7 +15,6 @@ function changeToReg() {
 }
 
 function changeToAuth() {
-	document.getElementById('restorePasswordLabel').style.display = 'none';
 	var authDiv = document.getElementById('authorizationUser');
 	var registrDiv = document.getElementById('registrationUser');
 	var restoreDiv = document.getElementById('restoreUser');
@@ -28,23 +26,10 @@ function changeToAuth() {
 	}
 }
 
-function changeToRest() {
-	document.getElementById('restorePasswordLabel').style.display = 'none';
-	var authDiv = document.getElementById('authorizationUser');
-	var registrDiv = document.getElementById('registrationUser');
-	var restoreDiv = document.getElementById('restoreUser');
-
-	if (restoreDiv.style.display.valueOf() == 'none'.valueOf()) {
-		restoreDiv.style.display = '';
-		registrDiv.style.display = 'none';
-		authDiv.style.display = 'none';
-	}
-}
-
-// regular fo authorization user
+// check registration for regular
 function checkRegistrRegular() {
 	var loginReg = /^[A-Za-z0-9]{1,15}$/;
-	var passwordReg = /^[^ ]{4,10}$/;
+	var passwordReg = /^[^ А-Яа-я]{4,10}$/;
 	var emailReg = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
 	var nameReg = new RegExp("^[^ ][A-Za-zА-Яа-я' ]{1,15}[^ ]$");
 	var login = document.getElementById("login");

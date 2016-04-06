@@ -189,7 +189,7 @@ function changeCase(element) {
 }
 // //
 
-// for refresh ative cases
+// for refresh active cases
 function refreshActiveCases() {
 	for (var i = 0; i < allRows.length; i++) {
 		if (allRows[i].getElementsByTagName('td')[6]

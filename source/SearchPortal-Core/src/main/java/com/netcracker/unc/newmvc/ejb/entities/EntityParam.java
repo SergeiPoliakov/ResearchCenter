@@ -29,11 +29,11 @@ public class EntityParam implements Serializable {
 	private Date valueDate;
 	@Id
 	@JoinColumn(name = "fin_object_id", referencedColumnName = "fin_object_id")
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	private EntityObject object;
 	@Id
 	@JoinColumn(name = "attribute_id", referencedColumnName = "attribute_id")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private EntityAttribute attribute;
 
 	public String getValue() {

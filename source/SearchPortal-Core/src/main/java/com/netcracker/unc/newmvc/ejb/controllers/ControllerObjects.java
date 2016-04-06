@@ -3,6 +3,7 @@ package com.netcracker.unc.newmvc.ejb.controllers;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
@@ -12,6 +13,7 @@ import com.netcracker.unc.newmvc.ejb.entities.EntityAttribute;
 import com.netcracker.unc.newmvc.ejb.entities.EntityObject;
 import com.netcracker.unc.newmvc.ejb.entities.EntityObjectType;
 import com.netcracker.unc.newmvc.ejb.entities.EntityParam;
+import com.netcracker.unc.newmvc.ejb.entities.EntityTransaction;
 import com.netcracker.unc.newmvc.ejb.entities.EntityUser;
 import com.netcracker.unc.newmvc.ejb.models.ActiveCasesModel;
 
@@ -29,9 +31,11 @@ public class ControllerObjects {
 	private final int createDate = 10; // Дата создания
 	private final int endDate = 11; // Дата завершения
 	private final int cost = 12;// Стоимость
+	private final int balance = 14;// Баланс
 	private final int priority = 13;// Приоритет
 	private final SimpleDateFormat parse = new SimpleDateFormat("yyyy-MM-dd");
 
+	private final int typeScore = 5;// Счет
 	// standard priorities from database
 	private final double high = 0.75;
 	private final double average = 0.5;
@@ -105,6 +109,18 @@ public class ControllerObjects {
 		return param;
 	}
 
+	public Date getCurrentDate() {
+		try {
+			java.util.Date oldDate;
+			String currentDate = parse.format(new java.util.Date());
+			oldDate = parse.parse(currentDate);
+			return new Date(oldDate.getTime());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	public List<ActiveCasesModel> getUserActiveCases(long userId) {
 		return ejb.getActiveUserObjects(userId, this);
 	}
@@ -162,5 +178,93 @@ public class ControllerObjects {
 		object.setObjectName(nameCase.trim());
 		ejb.updateObject(object);
 		ejb.updateReferencesToObjects();
+	}
+
+	// for check balance module
+	public void resetUserBalance(EntityUser user) {
+
+		for (EntityObject obj : user.getUserObjects()) {
+			if (obj.getObjectType().getFinObjectTypeId() == typeScore) {
+				for (EntityParam param : obj.getObjectParams()) {
+					if (param.getAttribute().getAttributeId() == balance) {
+						EntityTransaction transaction = new EntityTransaction();
+						transaction.setTransactionDate(getCurrentDate());
+						transaction.setObject(obj);
+						param.setValue("0");
+						ejb.updateObject(param);
+						ejb.updateReferencesToObjects();
+						transaction.setCost(Long.valueOf(param.getValue()));
+						ejb.addObject(transaction);
+					}
+				}
+			}
+		}
+	}
+
+	// for check balance module
+	public void changeUserBalance(long objId, String cost) {
+		EntityObject object = (EntityObject) ejb.getObject(EntityObject.class, objId);
+		for (EntityParam param : object.getObjectParams()) {
+			if (param.getAttribute().getAttributeId() == balance) {
+				param.setValue(cost);
+				ejb.updateObject(param);
+				ejb.updateReferencesToObjects();
+
+				EntityTransaction transaction = new EntityTransaction();
+				transaction.setTransactionDate(getCurrentDate());
+				transaction.setObject(object);
+				transaction.setCost(Long.valueOf(cost));
+				ejb.addObject(transaction);
+			}
+		}
+	}
+
+	// for check balance module
+	public boolean checkBankruptUser(EntityUser user) {
+		// for check all balances
+		boolean ok = false;
+		boolean haveOne = false;
+		for (EntityObject obj : user.getUserObjects()) {
+			if (obj.getObjectType().getFinObjectTypeId() == typeScore) {
+				for (EntityParam param : obj.getObjectParams()) {
+					if (param.getAttribute().getAttributeId() == balance) {
+						haveOne = true;
+						if (Double.valueOf(param.getValue()) > 100)
+							ok = true;
+					}
+				}
+			}
+		}
+		if (ok || !haveOne)
+			return false;
+		else
+			return true;
+	}
+
+	// for check balance module
+	public String getBalanceCost(EntityObject object) {
+		String bal = null;
+		for (EntityParam param : object.getObjectParams()) {
+			if (param.getAttribute().getAttributeId() == balance) {
+				bal = param.getValue();
+			}
+		}
+		return bal;
+	}
+
+	// for check balance module
+	public List<EntityObject> getUserBalanceObjects(EntityUser user) {
+		ArrayList<EntityObject> list = new ArrayList<EntityObject>();
+		for (EntityObject obj : user.getUserObjects()) {
+			if (obj.getObjectType().getFinObjectTypeId() == typeScore) {
+				for (EntityParam param : obj.getObjectParams()) {
+					if (param.getAttribute().getAttributeId() == balance) {
+						list.add(obj);
+					}
+				}
+			}
+		}
+
+		return list;
 	}
 }

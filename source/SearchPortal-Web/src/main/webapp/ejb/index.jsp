@@ -37,14 +37,14 @@
 					type="submit">Войти</button>
 				<label onclick="changeToReg()"
 					style="cursor: pointer; text-decoration: underline;">Зарегистрироваться!</label>
-				<label onclick="changeToRest()"
+				<label onclick="changeToReg()"
 					style="cursor: pointer; text-decoration: underline;">Забыли
 					пароль?</label>
 			</form>
 		</div>
 		<!-- Forget password -->
 		<div id="restoreUser" style="display: none">
-			<form class="form-signin" action="auth" method="post"
+			<form class="form-signin" action="authorization" method="post"
 				onsubmit="return checkEmptyRestoreInput()">
 				<input class="form-control" type="hidden" name="authorization"
 					value="restorePassword" />
@@ -60,7 +60,6 @@
 					вспомнил!</label>
 			</form>
 		</div>
-		<label id="restorePasswordLabel">${restorePassword}</label>
 	</div>
 
 	<div id="registrationUser" style="display: none">
@@ -69,13 +68,16 @@
 			<input type="hidden" value="userRegistration" name="authorization" />
 			<h3 class="form-signin-heading">Регистрация нового пользователя:</h3>
 			<input type="text" class="form-control login" name="login" id="login"
-				placeholder="Введите логин" required><input type="password"
+				placeholder="Введите логин" required><label
+				id='errorRegLogLabel'></label><input type="password"
 				class="form-control password" name="password" id="password"
-				placeholder="Введите пароль" required><input type="text"
+				placeholder="Введите пароль" required><label
+				id='errorRegPasLabel'></label><input type="text"
 				class="form-control name" name="name" id="name"
-				placeholder="Введите имя"><input class="form-control name"
-				type="text" name="email" id="email" placeholder="Введите e-mail"
-				required>
+				placeholder="Введите имя"><label id='errorRegNameLabel'></label><input
+				class="form-control name" type="text" name="email" id="email"
+				placeholder="Введите e-mail" required><label
+				id='errorRegEmailLabel'></label>
 			<button class="btn btn-lg btn-primary btn-block" name="submit"
 				type="submit">Зарегистрироваться</button>
 			<button name="submit" class="btn btn-lg btn-primary btn-block"

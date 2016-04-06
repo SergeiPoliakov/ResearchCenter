@@ -44,7 +44,7 @@
 		response.setCharacterEncoding("UTF-8");
 	%>
 
-	<div class="header">
+	<div class="header" id="headerDiv">
 		<div id="logo">214*59</div>
 
 		<div class="welcome" align="right" style="background-color: #92d36e;"
@@ -79,10 +79,10 @@
 
 		<button id="statistic-menu-button" class="button"
 			onclick="showIncoming()">+</button>
-			
+
 		<button id="statistic-menu-button" class="button"
 			onclick="showInvoices()">Счета</button>
-			
+
 		<div class="overlayInCons">
 			<jsp:include page="/attitudes/income_consumption.jsp"></jsp:include>
 		</div>
@@ -141,11 +141,11 @@
 	<div id="incoming" style="visibility: hidden;">
 		<jsp:include page="interface/incoming.jsp" />
 	</div>
-	
+
 	<div id="invoices" style="visibility: hidden;">
 		<jsp:include page="interface/invoices.jsp" />
 	</div>
-	
+
 
 	<!-- needPay is test parameter which contain payment object -->
 	<c:set var="needPay" value="no" scope="page" />

@@ -34,7 +34,7 @@ public class EntityTransaction implements Serializable {
 	@Column(name = "transaction_date", nullable = false)
 	private Date transactionDate;
 	@JoinColumn(name = "fin_object_id", referencedColumnName = "fin_object_id")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	private EntityObject object;
 	@Column(name = "cost", nullable = false)
 	private long cost;

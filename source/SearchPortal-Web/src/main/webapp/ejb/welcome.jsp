@@ -23,6 +23,9 @@
 		<c:redirect url="../" />
 	</c:if>
 
+	<c:if test="${bankrupt == 'true'}">
+		<li id="bankrupt" />
+	</c:if>
 
 
 	<nav class="navbar navbar-default">
@@ -64,7 +67,7 @@
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><div class="btn-group">
-							<a id="red-btn" href="#"></a>
+							<a id="red-btn" onclick="resetBalance()"></a>
 						</div></li>
 					<li><div class="btn-group">
 							<button class="btn" id="personalArea"
@@ -78,6 +81,10 @@
 			</div>
 		</div>
 	</nav>
+
+	<div id="resetBalanceDiv" style="display: none">
+		<jsp:include page="act/reset_balance.jsp" />
+	</div>
 
 	<div class="container-fluid" style="height: 100%">
 		<div class="container" id="consumptionDiv" style="display: none">
