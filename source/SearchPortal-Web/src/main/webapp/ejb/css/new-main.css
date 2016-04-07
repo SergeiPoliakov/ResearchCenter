@@ -11799,3 +11799,7 @@ progress.inoutProgress::-webkit-progress-value {
 #balTextCost {
 	width: 30%;
 }
+
+.main-container {
+	min-height: 100%;
+}

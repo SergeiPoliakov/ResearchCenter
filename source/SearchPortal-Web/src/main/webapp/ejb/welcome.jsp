@@ -86,7 +86,7 @@
 		<jsp:include page="act/reset_balance.jsp" />
 	</div>
 
-	<div class="container-fluid" style="height: 100%">
+	<div class="container-fluid main-container" style="height: 100%">
 		<div class="container" id="consumptionDiv" style="display: none">
 			<div class="module" id="income">
 				<div class="block-title">Создание новой задачи</div>

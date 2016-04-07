@@ -32,26 +32,5 @@ public class StatisticModel {
 	public void setfreeMoney() {
 		this.freeMoney = this.sum-this.reservedMoney;
 	}
-	
-/*public class transactionModel {
-	private String date, nameOper;
-	private int value;
-	
-	public void setDate(String date) {
-		this.date = date;
-	}
-	
-	public void setName (String name) {
-		this.nameOper = name;
-	}
-	
-	public void setValue (int val){
-		this.value = val;
-	}
-	
-	public String returnRow () {
-		return "<tr><td>" + this.date + "</td><td>" + this.name + "</td><td>" + value + "</td></tr>";
-	}
-}*/
 
 }

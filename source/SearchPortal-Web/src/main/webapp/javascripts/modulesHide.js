@@ -13,3 +13,16 @@ function show_income(){
     document.getElementById('consump').style.display = 'none';
 	document.getElementById('stat').style.display = 'block';
 }
+$(document)
+		.ready(
+				function() {
+					$('#popover-event-hidden').popover({
+						placement : 'top'
+					});
+					$('#popover-event-hidden')
+							.on(
+									'hidden.bs.popover',
+									function() {
+										alert("Popover была полностью скрыта от пользователя. Нажмите на кнопку ещё раз, чтобы снова увидеть popover.");
+									});
+				});
