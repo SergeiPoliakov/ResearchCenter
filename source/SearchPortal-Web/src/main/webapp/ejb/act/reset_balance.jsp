@@ -35,9 +35,9 @@
 			<div style="float: left; width: 50%">
 				<label>изменить на:</label><input type="text" name="balTextCost"
 					onkeypress="validate(this)" id="balTextCost"
-					style="margin-left: 10px" onfocus="checkBalanceEmptyHelp(this)"
+					style="margin-left: 5px" onfocus="checkBalanceEmptyHelp(this)"
 					onblur="checkBalanceEmptyHelp(this)" /><input type="submit"
-					value="изменить" style="margin-left: 10px" />
+					value="изменить" />
 			</div>
 		</form>
 		<form action="../cust" method="get" onsubmit="return checkBalReset()">

@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
@@ -34,7 +35,7 @@ public class EntityObject implements Serializable {
 
 	@Id
 	@SequenceGenerator(sequenceName = "SP_FIN_OBJECT_ID_SEQ ", name = "objectSEQ")
-	@GeneratedValue(generator = "objectSEQ")
+	@GeneratedValue(generator = "objectSEQ", strategy = GenerationType.SEQUENCE)
 	@NotNull
 	@Column(name = "fin_object_id", unique = true)
 	private long finObjectId;
@@ -53,7 +54,7 @@ public class EntityObject implements Serializable {
 	private EntityUser user;
 	@OneToMany(mappedBy = "object", fetch = FetchType.EAGER, targetEntity = EntityTransaction.class)
 	private Set<EntityTransaction> objectTransactions;
-	@OneToMany(mappedBy = "object", fetch = FetchType.EAGER, targetEntity = EntityParam.class )
+	@OneToMany(mappedBy = "object", fetch = FetchType.EAGER, targetEntity = EntityParam.class)
 	private Set<EntityParam> objectParams;
 
 	public Set<EntityParam> getObjectParams() {

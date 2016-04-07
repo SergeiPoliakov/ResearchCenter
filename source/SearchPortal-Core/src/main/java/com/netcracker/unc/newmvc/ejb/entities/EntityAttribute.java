@@ -5,6 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
@@ -31,7 +32,7 @@ public class EntityAttribute implements Serializable {
 	private EntityObjectType objectType;
 	@Id
 	@SequenceGenerator(sequenceName = "SP_ATTRIBUTE_ID_SEQ ", name = "attributeSEQ")
-	@GeneratedValue(generator = "attributeSEQ")
+	@GeneratedValue(generator = "attributeSEQ", strategy = GenerationType.SEQUENCE)
 	@NotNull
 	@Column(name = "attribute_id", unique = true)
 	private long attributeId;

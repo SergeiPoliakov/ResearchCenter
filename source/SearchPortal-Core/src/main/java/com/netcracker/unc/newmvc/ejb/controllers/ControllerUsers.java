@@ -5,7 +5,6 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
@@ -83,8 +82,6 @@ public class ControllerUsers {
 	public EntityUser getUserById(long userId) {
 		EntityUser user = (EntityUser) ejb.getObject(EntityUser.class, userId);
 		Hibernate.initialize(user.getUserObjects());
-		for (EntityObject obj : user.getUserObjects())
-			Hibernate.initialize(obj.getObjectParams());
 		return user;
 	}
 
@@ -94,9 +91,8 @@ public class ControllerUsers {
 
 	public boolean createUser(String login, String password, String name, String email) {
 		EntityObject object;
-		EntityUser user;
 		// check user
-		user = (EntityUser) ejb.getObject(EntityUser.class, login);
+		EntityUser user = (EntityUser) ejb.getObject(EntityUser.class, login);
 		if (user == null) {
 			user = new EntityUser();
 			user.setAccountType("user");
@@ -107,23 +103,17 @@ public class ControllerUsers {
 			user.setEmail(email);
 			ejb.addObject(user);
 			// ejb.updateReferencesToObjects();
+			EntityObjectType objectType = (EntityObjectType) ejb.getObject(EntityObjectType.class, atributeCategory);
 
-			int i = 0;
-			ArrayList<String> generalObjects = new ArrayList<String>();
-			generalObjects.add(object1);
-			generalObjects.add(object2);
-			generalObjects.add(object3);
-			generalObjects.add(object4);
-			generalObjects.add(object5);
-			while (i < 5) {
+			String[] generalObjects = new String[] { object1, object2, object3, object4, object5 };
+			for (String obj : generalObjects) {
 				object = new EntityObject();
-				user = (EntityUser) ejb.getObject(EntityUser.class, user.getLogin());
 				object.setUser(user);
-				object.setObjectType((EntityObjectType) ejb.getObject(EntityObjectType.class, atributeCategory));
+				object.setObjectType(objectType);
 				// add standard objects
-				object.setObjectName(generalObjects.get(i));
+				object.setObjectName(obj);
 				ejb.addObject(object);
-				i++;
+				ejb.updateReferencesToObjects();
 			}
 			return true;
 		}
