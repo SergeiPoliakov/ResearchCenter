@@ -78,6 +78,10 @@ public class EjbDAO {
 		return object;
 	}
 
+	public void deleteObject(Object object) {
+		em.remove(object);
+	}
+
 	public EntityUser getUserByLoginAndPassword(String login, int salt) {
 		List<?> list = null;
 		list = em.createNamedQuery("Users.getUserByLoginAndPassword", EntityUser.class).setParameter("login", login)

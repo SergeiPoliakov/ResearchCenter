@@ -52,9 +52,9 @@ public class EntityObject implements Serializable {
 	@JoinColumn(name = "user_id", referencedColumnName = "user_id")
 	@ManyToOne(fetch = FetchType.EAGER)
 	private EntityUser user;
-	@OneToMany(mappedBy = "object", fetch = FetchType.EAGER, targetEntity = EntityTransaction.class)
+	@OneToMany(mappedBy = "object", fetch = FetchType.EAGER, targetEntity = EntityTransaction.class, orphanRemoval = true)
 	private Set<EntityTransaction> objectTransactions;
-	@OneToMany(mappedBy = "object", fetch = FetchType.EAGER, targetEntity = EntityParam.class)
+	@OneToMany(mappedBy = "object", fetch = FetchType.EAGER, targetEntity = EntityParam.class, orphanRemoval = true)
 	private Set<EntityParam> objectParams;
 
 	public Set<EntityParam> getObjectParams() {
