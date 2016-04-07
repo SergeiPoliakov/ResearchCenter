@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.OneToMany;
@@ -25,7 +26,7 @@ public class EntityObjectType implements Serializable {
 
 	@Id
 	@SequenceGenerator(sequenceName = "SP_FIN_OBJECT_TYPE_ID_SEQ ", name = "objectTypeSEQ")
-	@GeneratedValue(generator = "objectTypeSEQ")
+	@GeneratedValue(generator = "objectTypeSEQ", strategy = GenerationType.SEQUENCE)
 	@NotNull
 	@Column(name = "fin_object_type_id", unique = true)
 	private long finObjectTypeId;

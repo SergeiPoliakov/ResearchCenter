@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.NamedQueries;
@@ -31,7 +32,7 @@ public class EntityUser implements Serializable {
 
 	@Id
 	@SequenceGenerator(sequenceName = "SP_USER_ID_SEQ", name = "userSEQ")
-	@GeneratedValue(generator = "userSEQ")
+	@GeneratedValue(generator = "userSEQ", strategy = GenerationType.SEQUENCE)
 	@NotNull
 	@Column(name = "user_id")
 	private long userId;
@@ -47,7 +48,7 @@ public class EntityUser implements Serializable {
 	private int salt;
 	@Column(name = "email", nullable = false, length = 50)
 	private String email;
-	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, orphanRemoval = true)
 	private Set<EntityObject> userObjects;
 
 	public long getUserId() {

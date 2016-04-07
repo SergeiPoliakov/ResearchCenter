@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
@@ -27,7 +28,7 @@ public class EntityTransaction implements Serializable {
 
 	@Id
 	@SequenceGenerator(sequenceName = "SP_TRANSACTION_ID_SEQ ", name = "transactionSEQ")
-	@GeneratedValue(generator = "transactionSEQ")
+	@GeneratedValue(generator = "transactionSEQ", strategy = GenerationType.SEQUENCE)
 	@NotNull
 	@Column(name = "transaction_id", unique = true)
 	private long transactionId;

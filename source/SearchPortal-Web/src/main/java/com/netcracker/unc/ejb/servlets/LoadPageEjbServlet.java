@@ -10,6 +10,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import com.netcracker.unc.newmvc.ejb.controllers.ControllerObjects;
 import com.netcracker.unc.newmvc.ejb.controllers.ControllerUsers;
 import com.netcracker.unc.newmvc.ejb.entities.EntityObject;
@@ -48,10 +50,29 @@ public class LoadPageEjbServlet extends HttpServlet {
 		if (request.getCookies() != null) {
 			for (Cookie cookie : request.getCookies()) {
 				if (cookie.getName().equals("userID")) {
-					EntityUser user = (EntityUser) usContr.getUserById(Long.valueOf(cookie.getValue()));
-					this.user.setUser(user);
-					request.getSession().setAttribute("user", user);
-					request.setAttribute("page", "page-ok");
+					try {
+						EntityUser user = (EntityUser) usContr.getUserById(Long.valueOf(cookie.getValue()));
+						this.user.setUser(user);
+						request.getSession().setAttribute("user", user);
+						request.setAttribute("page", "page-ok");
+					} catch (Exception c) {
+						c.printStackTrace();
+						Cookie[] allCookie = request.getCookies();
+						if (cookie != null) { // delete all user cookies
+							for (Cookie coo : allCookie) {
+								coo.setValue("");
+								coo.setPath("/");
+								coo.setMaxAge(-1);
+								response.addCookie(coo);
+								System.out.println("очистил");
+							}
+						}
+						HttpSession session = request.getSession(false);
+						// user session
+						if (session != null)
+							request.getSession().invalidate();
+						response.sendRedirect("");
+					}
 				}
 			}
 		} else if (request.getSession().getAttribute("user") != null) {
