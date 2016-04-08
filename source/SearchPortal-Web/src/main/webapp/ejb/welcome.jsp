@@ -120,13 +120,13 @@
 		</div>
 	</div>
 
-	<div class="container">
-		<div class="module-right" id="income" style="float: right">
-			<div class="overlayInCons">
-				<jsp:include page="vis/income_consumption.jsp"></jsp:include>
-			</div>
+
+	<div class="module-right" id="income">
+		<div class="overlayInCons">
+			<jsp:include page="vis/income_consumption.jsp"></jsp:include>
 		</div>
 	</div>
+
 
 	<div class="controlSalary" id="controlSalaryMain">
 		<jsp:include page="int/salary_control.jsp"></jsp:include>
@@ -150,12 +150,13 @@
 			</form>
 		</div>
 	</c:if>
-
 	<footer>
 		<div class="container-footer">
 			<p class="text-muted">©УНЦ 2016 год.</p>
 		</div>
 	</footer>
+
 </body>
+
 <script src="js/actions.js"></script>
 </html>
