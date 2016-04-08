@@ -13,7 +13,9 @@
 		<class>com.netcracker.unc.newmvc.ejb.entities.EntityAttribute</class>
 		<class>com.netcracker.unc.newmvc.ejb.entities.EntityParam</class>
 		<class>com.netcracker.unc.newmvc.ejb.entities.EntityTransaction</class>
-		<properties></properties>
+		<properties>
+			<property name="hibernate.id.new_generator_mappings" value="false" />
+		</properties>
 	</persistence-unit>
 
 </persistence>
