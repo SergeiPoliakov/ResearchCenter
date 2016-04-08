@@ -8606,3 +8606,7 @@ progress.inoutProgress::-webkit-progress-value {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+.errorEnt {
+	color: #C85B5B
+}

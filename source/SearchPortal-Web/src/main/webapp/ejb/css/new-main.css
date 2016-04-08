@@ -11,6 +11,7 @@ html {
 }
 
 body {
+
 	background-color: #FAFAD2;
 	margin: 0;
 }
@@ -7805,7 +7806,7 @@ button.close {
 }
 
 .module-right {
-	
+	margin-left: 50px;
 	right: 10px;
 	top: 205px;
 	float: right;
@@ -7818,8 +7819,8 @@ button.close {
 }
 
 .overlayInCons {
-	padding-right: 20px;
-	padding-top: 20px;
+	float: right;
+
 }
 
 #red-btn {
@@ -7845,7 +7846,7 @@ button.close {
 .container-footer {
 	/*необходимо исправить*/
 	bottom: 0px;
-	position: abolute;
+	position: static;
 	width: 100%;
 	text-align: right;
 	height: 90px;
@@ -8029,7 +8030,7 @@ progress.inoutProgress::-webkit-progress-value {
 	border-top-right-radius: 0;
 }
 
-.hello-module {
+#helloCase {
 	border: 1px #004949 groove;
 	margin: 10px;
 	border-top-left-radius: 18px;
@@ -8058,10 +8059,19 @@ progress.inoutProgress::-webkit-progress-value {
 }
 
 .main-container {
-	height: 100%;
+	min-height: 71vh;
 }
 
 .btn-block:hover {
 	background-color: #CABB02;
 	color: black;
+}
+
+.navbar-right {
+	float: right;
+	right: 20px;
+}
+
+#errorRegNameLabel {
+	color: #C94545;
 }

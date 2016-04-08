@@ -30,13 +30,14 @@
 
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
+					<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="#"><img src="../img/logo.png"
 					alt="Logo" width="214" height="59" id="Insert_logo"
 					style="background-color: #92D36E;" /></a>
 			</div>
-			<div class="collapse navbar-collapse"
-				id="bs-example-navbar-collapse-1">
+
 				<div class="nav" align="right" style="color: #fef8a0">
 					<h5>
 						Добро пожаловать <label><c:out
@@ -65,18 +66,20 @@
 						</div>
 					</li>
 				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li><div class="btn-group">
+				<ul class="nav navbar-nav navbar-right" >
+					<li style="padding-right: 50px">
 							<a id="red-btn" onclick="resetBalance()"></a>
-						</div></li>
-					<li><div class="btn-group">
-							<button class="btn" id="personalArea"
-								onclick="showHideModule(this)">Личный кабинет</button>
-							<form action="../auth" method="get">
-								<input type="hidden" name="authorization" value="logOut"><input
-									type="submit" value="Выход" class="btn" />
-							</form>
-						</div></li>
+					</li>
+					<li>
+						<button class="btn" id="personalArea"
+							onclick="showHideModule(this)">Личный кабинет</button>
+					</li>
+					<li>
+						<form action="../auth" method="get">
+							<input type="hidden" name="authorization" value="logOut" />
+							<button type="submit" class="btn">Выход</button>
+						</form>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -86,7 +89,7 @@
 		<jsp:include page="act/reset_balance.jsp" />
 	</div>
 
-	<div class="container-fluid main-container" style="height: 100%">
+	<div class="container-fluid main-container">
 		<div class="container" id="consumptionDiv" style="display: none">
 			<div class="module" id="income">
 				<div class="block-title">Создание новой задачи</div>
@@ -150,11 +153,9 @@
 			</form>
 		</div>
 	</c:if>
-	<footer>
 		<div class="container-footer">
 			<p class="text-muted">©УНЦ 2016 год.</p>
 		</div>
-	</footer>
 
 </body>
 
