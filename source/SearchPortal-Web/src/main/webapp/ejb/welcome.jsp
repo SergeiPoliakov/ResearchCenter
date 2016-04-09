@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page
+	import="com.netcracker.unc.newmvc.ejb.controllers.ControllerCategories"%>
+<%@page import="com.netcracker.unc.newmvc.ejb.entities.EntityUser"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -29,20 +34,22 @@
 
 
 	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#"><img src="../img/logo.png"
-					alt="Logo" width="214" height="59" id="Insert_logo"
-					style="background-color: #92D36E;" /></a>
-			</div>
+		<div class="container-fluid" style="height: 10%">
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
-				<div class="nav" align="right" style="color: #fef8a0">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#"><img src="../img/logo.png"
+						alt="Logo" width="214" height="59" id="Insert_logo"
+						style="background-color: #92D36E;" /></a>
+				</div>
+				<div class="nav" align="right" style="color: #fef8a0"
+					style="height :25px">
 					<h5>
 						Добро пожаловать <label><c:out
 								value="${sessionScope.user.getLogin()}" /></label>
 					</h5>
 				</div>
+				
 
 				<ul class="nav navbar-nav">
 					<li><div class="btn-group">
@@ -68,17 +75,25 @@
 					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><div class="btn-group">
+					<li style="padding-right: 50px">
+						<div class="btn-group">
 							<a id="red-btn" onclick="resetBalance()"></a>
-						</div></li>
-					<li><div class="btn-group">
+						</div>
+					</li>
+					<li>
+						<div class="btn-group" style="padding-right: 0px">
 							<button class="btn" id="personalArea"
 								onclick="showHideModule(this)">Личный кабинет</button>
+						</div>
+					</li>
+					<li>
+						<div class="btn-group">
 							<form action="../auth" method="get">
-								<input type="hidden" name="authorization" value="logOut"><input
-									type="submit" value="Выход" class="btn" />
+								<input type="hidden" name="authorization" value="logOut" />
+								<button type="submit" class="btn">Выход</button>
 							</form>
-						</div></li>
+						</div>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -91,7 +106,7 @@
 	<div id="resetBalanceDiv" style="display: none">
 		<jsp:include page="act/reset_balance.jsp" />
 	</div>
-
+	<div class="container-fluid main-container">
 	<div class="module" id="createCase" style="display: none">
 		<div class="block-title">Создание новой задачи</div>
 		<div class="block-information">
@@ -127,6 +142,12 @@
 			</div>
 		</div>
 	</div>
+</div>
+	<%
+		EntityUser user = (EntityUser) request.getSession().getAttribute("user");//тут пусто
+	%>
+
+
 
 
 	<div class="module-right" id="income">
@@ -158,11 +179,9 @@
 			</form>
 		</div>
 	</c:if>
-	<footer>
 		<div class="container-footer">
 			<p class="text-muted">©УНЦ 2016 год.</p>
 		</div>
-	</footer>
 
 </body>
 

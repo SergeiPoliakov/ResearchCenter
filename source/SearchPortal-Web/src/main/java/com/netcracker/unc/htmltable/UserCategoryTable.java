@@ -12,7 +12,6 @@ public class UserCategoryTable {
 		for (CategoryModel cm : categoryList) {
 			htmlSB.append(addRow(cm));
 		}
-
 		htmlSB.append("</table></div>");
 		return htmlSB.toString();
 	}

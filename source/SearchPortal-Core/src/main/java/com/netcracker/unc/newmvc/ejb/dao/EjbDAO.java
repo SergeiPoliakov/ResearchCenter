@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import javax.ejb.LocalBean;
@@ -15,6 +16,7 @@ import com.netcracker.unc.newmvc.ejb.controllers.ControllerObjects;
 import com.netcracker.unc.newmvc.ejb.entities.EntityObject;
 import com.netcracker.unc.newmvc.ejb.entities.EntityUser;
 import com.netcracker.unc.newmvc.ejb.models.ActiveCasesModel;
+import com.netcracker.unc.newmvc.ejb.models.CategoryModel;
 import com.netcracker.unc.newmvc.ejb.models.IncomeConsumptionModel;
 import com.netcracker.unc.newmvc.ejb.models.InvoiceModel;
 import com.netcracker.unc.newmvc.ejb.models.SalaryModel;
@@ -145,6 +147,43 @@ public class EjbDAO {
 			}
 		}
 		return salaryModel;
+	}
+
+	public List<CategoryModel> getCategories(long userId) {
+		List<CategoryModel> categoryList = new ArrayList<>();
+
+		String query = " SELECT " + " FIN_OBJECT_ID as OBJECT_ID, OBJECT_NAME, ( SELECT coef_par.VALUE"
+				+ " FROM SP_PARAMS coef_par WHERE coef_par.ATTRIBUTE_ID = 1"
+				+ "  AND coef_par.FIN_OBJECT_ID = main_fo.FIN_OBJECT_ID ) as coefficient, ("
+				+ " SELECT coef_par.VALUE FROM SP_PARAMS coef_par WHERE coef_par.ATTRIBUTE_ID = 2 "
+				+ "  AND coef_par.FIN_OBJECT_ID = main_fo.FIN_OBJECT_ID ) as min_percent, ("
+				+ " SELECT coef_par.VALUE FROM SP_PARAMS coef_par WHERE coef_par.ATTRIBUTE_ID = 3 "
+				+ "  AND coef_par.FIN_OBJECT_ID = main_fo.FIN_OBJECT_ID ) as max_percent "
+				+ "FROM SP_FIN_OBJECTS main_fo WHERE FIN_OBJECT_TYPE_ID =1 AND USER_ID = ? ";
+
+		Query emQuery = em.createNativeQuery(query);
+		emQuery.setParameter(1, userId);
+		List<?> resultList = emQuery.getResultList();
+		if (resultList.size() > 0) {
+			Iterator<?> i = resultList.iterator();
+			while (i.hasNext()) {
+				CategoryModel categoryModel = new CategoryModel();
+				Object[] res = (Object[]) i.next();
+
+				categoryModel.setObjectId(((BigDecimal) res[0]).longValue());
+				categoryModel.setObjectName((String) res[1]);
+				categoryModel.setCoeficient(((BigDecimal) res[0]).doubleValue());
+				categoryModel.setMinPercent(((BigDecimal) res[0]).doubleValue());
+				categoryModel.setMaxPercent(((BigDecimal) res[0]).doubleValue());
+
+				categoryList.add(categoryModel);
+			}
+		}
+
+		if (categoryList.isEmpty())
+			categoryList = Collections.emptyList();
+
+		return categoryList;
 	}
 
 	public IncomeConsumptionModel procentForBar(IncomeConsumptionModel inCon, long userId) {
@@ -279,61 +318,6 @@ public class EjbDAO {
 		return list;
 	}
 
-	public StatisticModel procentForPie(StatisticModel inStat, int userId) {
-
-		String query = "SELECT SUM(par.VALUE) AS res"
-				+ "FROM SP_FIN_OBJECTS fo INNER JOIN SP_ATTRIBUTES atr ON fo.FIN_OBJECT_TYPE_ID = atr.FIN_OBJECT_TYPE_ID"
-				+ "INNER JOIN SP_PARAMS par ON atr.ATTRIBUTE_ID = par.ATTRIBUTE_ID"
-				+ "WHERE fo.FIN_OBJECT_TYPE_ID = 3 AND fo.USER_ID = ? AND par.VALUE_DATE = SYSDATE";
-
-		List<?> result = em.createNativeQuery(query).setParameter(1, userId).getResultList();
-
-		if (result.size() > 0) {
-			Iterator<?> i = result.iterator();
-			if (i.hasNext()) {
-				Object[] res = (Object[]) i.next();
-				inStat.setReservedMoney(((BigDecimal) res[0]).longValue());
-			}
-		}
-
-		query = "select SUM(p.VALUE)" + "from SP_FIN_OBJECTS o, SP_PARAMS p"
-				+ "where p.FIN_OBJECT_ID=o.FIN_OBJECT_ID and USER_ID=? and p.ATTRIBUTE_ID=14 and o.FIN_OBJECT_TYPE_ID=5";
-
-		result = em.createNativeQuery(query).setParameter(1, userId).getResultList();
-
-		if (result.size() > 0) {
-			Iterator<?> i = result.iterator();
-			if (i.hasNext()) {
-				Object[] res = (Object[]) i.next();
-				inStat.setSum(((BigDecimal) res[0]).longValue());
-			}
-		}
-		// Add calculating of free money
-		/*
-		 * 
-		 */
-		return inStat;
-	}
-
-	public TransactionModel transactionTable(TransactionModel inTrans, int userId) {
-
-		String query = "SELECT t.transaction_date, t.cost, fo.object_name"
-				+ "FROM SP_TRANSACTIONS t JOIN SP_FIN_OBJECTS fo ON t.fin_object_id=fo.fin_object_id"
-				+ "WHERE fo.user_id=?";
-
-		List<?> result = em.createNativeQuery(query).setParameter(1, userId).getResultList();
-
-		if (result.size() > 0) {
-			Iterator<?> i = result.iterator();
-			if (i.hasNext()) {
-				Object[] res = (Object[]) i.next();
-				inTrans.setDate((String) res[0]);
-				inTrans.setValue(((BigDecimal) res[1]).intValue());
-				inTrans.setName((String) res[2]);
-			}
-		}
-		return inTrans;
-	}
 
 	public int getSumBalance(EntityUser user) {
 		Query query = em.createNativeQuery(InvoiceQueries.getSumAllBalancesByUserId);
@@ -342,7 +326,9 @@ public class EjbDAO {
 		if (result.size() > 0) {
 			Iterator<?> i = result.iterator();
 			if (i.hasNext()) {
-				return (((BigDecimal) i.next()).intValue());
+				Object obj = i.next();
+				if (obj != null)
+					return (((BigDecimal) i.next()).intValue());
 			}
 		}
 		return 0;
@@ -406,5 +392,64 @@ public class EjbDAO {
 			}
 		}
 		return listGetAllInvoice;
+	}
+	
+	public StatisticModel procentForPie(StatisticModel inStat, int userId) {
+
+		String query = "SELECT SUM(par.VALUE) AS res"
+				+ "FROM SP_FIN_OBJECTS fo INNER JOIN SP_ATTRIBUTES atr ON fo.FIN_OBJECT_TYPE_ID = atr.FIN_OBJECT_TYPE_ID"
+				+ "INNER JOIN SP_PARAMS par ON atr.ATTRIBUTE_ID = par.ATTRIBUTE_ID"
+				+ "WHERE fo.FIN_OBJECT_TYPE_ID = 3 AND fo.USER_ID = ? AND par.VALUE_DATE = SYSDATE";
+
+		List<?> result = em.createNativeQuery(query).setParameter(1, userId).getResultList();
+
+		if (result.size() > 0) {
+			Iterator<?> i = result.iterator();
+			if (i.hasNext()) {
+				Object[] res = (Object[]) i.next();
+				inStat.setReservedMoney(((BigDecimal) res[0]).longValue());
+			}
+		}
+
+		query = "select SUM(p.VALUE)" + "from SP_FIN_OBJECTS o, SP_PARAMS p"
+				+ "where p.FIN_OBJECT_ID=o.FIN_OBJECT_ID and USER_ID=? and p.ATTRIBUTE_ID=14 and o.FIN_OBJECT_TYPE_ID=5";
+
+		result = em.createNativeQuery(query).setParameter(1, userId).getResultList();
+
+		if (result.size() > 0) {
+			Iterator<?> i = result.iterator();
+			if (i.hasNext()) {
+				Object[] res = (Object[]) i.next();
+				inStat.setSum(((BigDecimal) res[0]).longValue());
+			}
+		}
+		// Add calculating of free money
+		/*
+		 * 
+		 */
+		return inStat;
+	}
+//
+	public List<TransactionModel> transactionTable(int userId) {
+		
+		List<TransactionModel> resTrans = null;
+		String query = "SELECT t.transaction_date, t.cost, fo.object_name"
+				+ "FROM SP_TRANSACTIONS t JOIN SP_FIN_OBJECTS fo ON t.fin_object_id=fo.fin_object_id"
+				+ "WHERE fo.user_id=?";
+        resTrans = new ArrayList<TransactionModel>();
+		List<?> result = em.createNativeQuery(query).setParameter(1, userId).getResultList();
+
+		if (result.size() > 0) {
+			Iterator<?> i = result.iterator();
+			while (i.hasNext()) {
+				TransactionModel inTrans = new TransactionModel();
+				Object[] res = (Object[]) i.next();
+				inTrans.setDate((String) res[0]);
+				inTrans.setValue(((BigDecimal) res[1]).intValue());
+				inTrans.setName((String) res[2]);
+				resTrans.add(inTrans);
+			}
+		}
+		return resTrans;
 	}
 }
