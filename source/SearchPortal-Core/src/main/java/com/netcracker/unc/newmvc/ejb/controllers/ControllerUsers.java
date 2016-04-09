@@ -102,7 +102,7 @@ public class ControllerUsers {
 			user.setName(name);
 			user.setEmail(email);
 			ejb.addObject(user);
-			// ejb.updateReferencesToObjects();
+			ejb.updateReferencesToObjects();
 			EntityObjectType objectType = (EntityObjectType) ejb.getObject(EntityObjectType.class, atributeCategory);
 
 			String[] generalObjects = new String[] { object1, object2, object3, object4, object5 };
