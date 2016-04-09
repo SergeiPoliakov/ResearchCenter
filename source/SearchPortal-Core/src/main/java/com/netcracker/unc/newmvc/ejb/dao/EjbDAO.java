@@ -327,8 +327,11 @@ public class EjbDAO {
 			Iterator<?> i = result.iterator();
 			if (i.hasNext()) {
 				Object obj = i.next();
-				if (obj != null)
-					return (((BigDecimal) i.next()).intValue());
+				if (obj != null) {
+					System.out.println(obj);
+					return ((BigDecimal)obj).intValue();
+					
+				}
 			}
 		}
 		return 0;

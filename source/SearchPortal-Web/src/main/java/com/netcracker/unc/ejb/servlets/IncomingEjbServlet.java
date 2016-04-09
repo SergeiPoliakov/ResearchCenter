@@ -37,7 +37,6 @@ public class IncomingEjbServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		System.out.println("попал в сервлет");
 		user.setUser((EntityUser) request.getSession().getAttribute("user"));
 		createSumBalance(request, response);
 
@@ -54,11 +53,10 @@ public class IncomingEjbServlet extends HttpServlet {
 				int invoiceNumber = 1;
 				if ((request.getParameter("invoiceNumber") != null)
 						&& (!request.getParameter("invoiceNumber").trim().isEmpty())) {
-					System.out.println("попал в сервлет3");
 					invoiceNumber = Integer.valueOf(request.getParameter("invoiceNumber"));
 					log.warning("New number: " + invoiceNumber);
-					// request.setAttribute("currentSum", invoiceNumber);
-					// log.warning("Before redirect...");
+					 request.setAttribute("currentSum", invoiceNumber);
+					 log.warning("Before redirect...");
 				}
 				log.warning("invoiceNumber: " + invoiceNumber);
 				invoice = ejb.getInvoice(invoiceNumber, user);
@@ -87,7 +85,6 @@ public class IncomingEjbServlet extends HttpServlet {
 			System.out.println("попал в сервлет1");
 			String incoming = request.getParameter("incomingMinus");
 			if (incoming.equals("incomingBalance")) {
-				System.out.println("попал в сервлет2");
 				EntityUser user = null;
 				InvoiceModel invoice = new InvoiceModel();
 				user = (EntityUser) request.getSession().getAttribute("user");
@@ -96,11 +93,10 @@ public class IncomingEjbServlet extends HttpServlet {
 				int invoiceNumber = 1;
 				if ((request.getParameter("invoiceNumber") != null)
 						&& (!request.getParameter("invoiceNumber").trim().isEmpty())) {
-					System.out.println("попал в сервлет3");
 					invoiceNumber = Integer.valueOf(request.getParameter("invoiceNumber"));
 					log.warning("New number: " + invoiceNumber);
-					// request.setAttribute("currentSum", invoiceNumber);
-					// log.warning("Before redirect...");
+					 request.setAttribute("currentSum", invoiceNumber);
+					log.warning("Before redirect...");
 				}
 				log.warning("invoiceNumber: " + invoiceNumber);
 				invoice = ejb.getInvoice(invoiceNumber, user);
