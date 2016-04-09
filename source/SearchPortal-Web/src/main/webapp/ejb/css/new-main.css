@@ -4894,6 +4894,7 @@ border-radius
 }
 
 .navbar-collapse {
+	padding-top: 10px;
 	padding-right: 15px;
 	padding-left: 15px;
 	overflow-x: visible;
@@ -4997,7 +4998,6 @@ border-radius
 	height: 90px;
 	padding-right: 50px;
 	padding-left: 30px;
-	padding-top: 27px;
 	font-size: 18px;
 	line-height: 20px;
 }
@@ -8075,3 +8075,10 @@ progress.inoutProgress::-webkit-progress-value {
 #errorRegNameLabel {
 	color: #C94545;
 }
+
+/*
+.navbar-nav li {
+	height: 50px;
+	vertical-align: top;
+}
+*/

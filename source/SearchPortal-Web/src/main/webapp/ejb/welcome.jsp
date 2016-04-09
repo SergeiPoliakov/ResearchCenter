@@ -29,20 +29,18 @@
 
 
 	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-					<div class="collapse navbar-collapse"
-				id="bs-example-navbar-collapse-1">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#"><img src="../img/logo.png"
-					alt="Logo" width="214" height="59" id="Insert_logo"
-					style="background-color: #92D36E;" /></a>
-			</div>
-
-				<div class="nav" align="right" style="color: #fef8a0">
+		<div class="container-fluid ">
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<div class="nav" align="right" style="color: #fef8a0" style="height :25px">
 					<h5>
 						Добро пожаловать <label><c:out
 								value="${sessionScope.user.getLogin()}" /></label>
 					</h5>
+				</div>
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#"><img src="../img/logo.png"
+						alt="Logo" width="214" height="59" id="Insert_logo"
+						style="background-color: #92D36E;" /></a>
 				</div>
 
 				<ul class="nav navbar-nav">
@@ -66,19 +64,25 @@
 						</div>
 					</li>
 				</ul>
-				<ul class="nav navbar-nav navbar-right" >
+				<ul class="nav navbar-nav navbar-right">
 					<li style="padding-right: 50px">
-							<a id="red-btn" onclick="resetBalance()"></a>
+					<div class="btn-group">
+					<a id="red-btn" onclick="resetBalance()"></a>
+					</div>
 					</li>
 					<li>
+					<div class="btn-group" style="padding-right: 0px">
 						<button class="btn" id="personalArea"
 							onclick="showHideModule(this)">Личный кабинет</button>
+							</div>
 					</li>
 					<li>
+					<div class="btn-group">
 						<form action="../auth" method="get">
 							<input type="hidden" name="authorization" value="logOut" />
 							<button type="submit" class="btn">Выход</button>
 						</form>
+						</div>
 					</li>
 				</ul>
 			</div>
