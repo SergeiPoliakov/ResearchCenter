@@ -49,7 +49,7 @@
 								value="${sessionScope.user.getLogin()}" /></label>
 					</h5>
 				</div>
-				
+
 
 				<ul class="nav navbar-nav">
 					<li><div class="btn-group">
@@ -107,42 +107,42 @@
 		<jsp:include page="act/reset_balance.jsp" />
 	</div>
 	<div class="container-fluid main-container">
-	<div class="module" id="createCase" style="display: none">
-		<div class="block-title">Создание новой задачи</div>
-		<div class="block-information">
-			<div class="create-case" id="create-case">
-				<jsp:include page="act/create_case.jsp" />
-			</div>
-		</div>
-	</div>
-
-	<div class="module" id="editCase" style="display: none">
-		<div class="block-title">Редактирование задач</div>
-		<div class="block-information">
-			<div id="updateCase">
-				<jsp:include page="act/update_case.jsp" />
-			</div>
-		</div>
-	</div>
-
-	<div id="incoming" style="display: none">
-		<jsp:include page="int/incoming.jsp" />
-	</div>
-	<div id="incomingMinus" style="display: none">
-		<jsp:include page="int/incomingMinus.jsp" />
-	</div>
-
-	<div class="container" id="personalAreaUserDiv" style="display: none">
-		<div class="module" id="stat">
-			<div class="block-title">Редактирование профиля</div>
+		<div class="module" id="createCase" style="display: none">
+			<div class="block-title">Создание новой задачи</div>
 			<div class="block-information">
-				<div id="editUser">
-					<jsp:include page="act/update_user.jsp"></jsp:include>
+				<div class="create-case" id="create-case">
+					<jsp:include page="act/create_case.jsp" />
+				</div>
+			</div>
+		</div>
+
+		<div class="module" id="editCase" style="display: none">
+			<div class="block-title">Редактирование задач</div>
+			<div class="block-information">
+				<div id="updateCase">
+					<jsp:include page="act/update_case.jsp" />
+				</div>
+			</div>
+		</div>
+
+		<div id="incoming" style="display: none">
+			<jsp:include page="int/incoming.jsp" />
+		</div>
+		<div id="incomingMinus" style="display: none"></div>
+
+		<div><jsp:include page="vis/statistic.jsp"></jsp:include></div>
+
+		<div class="container" id="personalAreaUserDiv" style="display: none">
+			<div class="module" id="stat">
+				<div class="block-title">Редактирование профиля</div>
+				<div class="block-information">
+					<div id="editUser">
+						<jsp:include page="act/update_user.jsp"></jsp:include>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 	<%
 		EntityUser user = (EntityUser) request.getSession().getAttribute("user");//тут пусто
 	%>
@@ -179,9 +179,9 @@
 			</form>
 		</div>
 	</c:if>
-		<div class="container-footer">
-			<p class="text-muted">©УНЦ 2016 год.</p>
-		</div>
+	<div class="container-footer">
+		<p class="text-muted">©УНЦ 2016 год.</p>
+	</div>
 
 </body>
 
