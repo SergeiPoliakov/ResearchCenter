@@ -34,21 +34,11 @@
 
 
 	<nav class="navbar navbar-default">
-<<<<<<< HEAD
 		<div class="container-fluid ">
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<div class="nav" align="right" style="color: #fef8a0" style="height :25px">
-=======
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#"><img src="../img/logo.png"
-					alt="Logo" width="214" height="59" id="Insert_logo"
-					style="background-color: #92D36E;" /></a>
-			</div>
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
-				<div class="nav" align="right" style="color: #fef8a0">
->>>>>>> e0dd8ece4809a94e217c41d9278ee1dc7b5eda50
+				<div class="nav" align="right" style="color: #fef8a0"
+					style="height :25px">
 					<h5>
 						Добро пожаловать <label><c:out
 								value="${sessionScope.user.getLogin()}" /></label>
@@ -83,39 +73,25 @@
 					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-<<<<<<< HEAD
 					<li style="padding-right: 50px">
-					<div class="btn-group">
-					<a id="red-btn" onclick="resetBalance()"></a>
-					</div>
-					</li>
-					<li>
-					<div class="btn-group" style="padding-right: 0px">
-						<button class="btn" id="personalArea"
-							onclick="showHideModule(this)">Личный кабинет</button>
-							</div>
-					</li>
-					<li>
-					<div class="btn-group">
-						<form action="../auth" method="get">
-							<input type="hidden" name="authorization" value="logOut" />
-							<button type="submit" class="btn">Выход</button>
-						</form>
+						<div class="btn-group">
+							<a id="red-btn" onclick="resetBalance()"></a>
 						</div>
 					</li>
-=======
-					<li><div class="btn-group">
-							<a id="red-btn" onclick="resetBalance()"></a>
-						</div></li>
-					<li><div class="btn-group">
+					<li>
+						<div class="btn-group" style="padding-right: 0px">
 							<button class="btn" id="personalArea"
 								onclick="showHideModule(this)">Личный кабинет</button>
+						</div>
+					</li>
+					<li>
+						<div class="btn-group">
 							<form action="../auth" method="get">
-								<input type="hidden" name="authorization" value="logOut"><input
-									type="submit" value="Выход" class="btn" />
+								<input type="hidden" name="authorization" value="logOut" />
+								<button type="submit" class="btn">Выход</button>
 							</form>
-						</div></li>
->>>>>>> e0dd8ece4809a94e217c41d9278ee1dc7b5eda50
+						</div>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -166,7 +142,7 @@
 		EntityUser user = (EntityUser) request.getSession().getAttribute("user");//тут пусто
 	%>
 
-																																								
+
 
 
 	<div class="module-right" id="income">

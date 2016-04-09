@@ -353,28 +353,25 @@ public class EjbDAO {
 		 */
 		return inStat;
 	}
-//
-	public List<TransactionModel> transactionTable(int userId) {
-		
-		List<TransactionModel> resTrans = null;
+
+	public TransactionModel transactionTable(TransactionModel inTrans, int userId) {
+
 		String query = "SELECT t.transaction_date, t.cost, fo.object_name"
 				+ "FROM SP_TRANSACTIONS t JOIN SP_FIN_OBJECTS fo ON t.fin_object_id=fo.fin_object_id"
 				+ "WHERE fo.user_id=?";
-        resTrans = new ArrayList<TransactionModel>();
+
 		List<?> result = em.createNativeQuery(query).setParameter(1, userId).getResultList();
 
 		if (result.size() > 0) {
 			Iterator<?> i = result.iterator();
-			while (i.hasNext()) {
-				TransactionModel inTrans = new TransactionModel();
+			if (i.hasNext()) {
 				Object[] res = (Object[]) i.next();
 				inTrans.setDate((String) res[0]);
 				inTrans.setValue(((BigDecimal) res[1]).intValue());
 				inTrans.setName((String) res[2]);
-				resTrans.add(inTrans);
 			}
 		}
-		return resTrans;
+		return inTrans;
 	}
 
 	public int getSumBalance(EntityUser user) {

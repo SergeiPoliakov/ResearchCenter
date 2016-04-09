@@ -7998,6 +7998,7 @@ button.close {
 }
 
 .module-right {
+	margin-left: 50px;
 	right: 10px;
 	top: 205px;
 	float: right;
@@ -8010,8 +8011,7 @@ button.close {
 }
 
 .overlayInCons {
-	padding-right: 20px;
-	padding-top: 20px;
+	float: right;
 }
 
 #red-btn {
@@ -8037,7 +8037,7 @@ button.close {
 .container-footer {
 	/*необходимо исправить*/
 	bottom: 0px;
-	position: abolute;
+	position: static;
 	width: 100%;
 	text-align: right;
 	height: 90px;
@@ -8221,7 +8221,7 @@ progress.inoutProgress::-webkit-progress-value {
 	border-top-right-radius: 0;
 }
 
-.hello-module {
+#helloCase {
 	border: 1px #004949 groove;
 	margin: 10px;
 	border-top-left-radius: 18px;
@@ -8249,7 +8249,7 @@ progress.inoutProgress::-webkit-progress-value {
 }
 
 .main-container {
-	height: 100%;
+	min-height: 71vh;
 }
 
 .btn-block:hover {
@@ -8257,13 +8257,11 @@ progress.inoutProgress::-webkit-progress-value {
 	color: black;
 }
 
-#leftMenuDiv {
-	width: 30px;
-	margin-left: -30px;
-	position: absolute;
+.navbar-right {
+	float: right;
+	right: 20px;
 }
 
-<<<<<<< HEAD
 #errorRegNameLabel {
 	color: #C94545;
 }
@@ -8274,14 +8272,3 @@ progress.inoutProgress::-webkit-progress-value {
 	vertical-align: top;
 }
 */
-=======
-.leftMenuButton {
-	margin-top: 5px;
-	background: #fef8a0;
-}
-
-.updateCaseInput {
-	width: 100%;
-	font-size: 10px;
-}
->>>>>>> e0dd8ece4809a94e217c41d9278ee1dc7b5eda50
