@@ -2,6 +2,7 @@ package com.netcracker.unc.htmltable;
 
 import java.util.List;
 
+import com.netcracker.unc.newmvc.dao.models.CategoryModel;
 import com.netcracker.unc.newmvc.ejb.models.*;
 
 public class HtmlConverter {
@@ -14,14 +15,14 @@ public class HtmlConverter {
 			if (modelType == "CategoryModel")
 				for (Object object : listModels) {
 					CategoryModel categoryModel = (CategoryModel) object;
-					addRow(categoryModel);
+					CategoryHtmlRow.addRow(categoryModel);
 				}
 			if (modelType == "StatisticModel")
 				for (Object object : listModels) {
 					StatisticModel statisticModel = (StatisticModel) object;
-					addRow(statisticModel);
+					// addRow(statisticModel);
 				}
-
+			// добавить кнопку изменить
 			htmlSB.append("</table></div>");
 			return htmlSB.toString();
 		} else {
@@ -36,23 +37,9 @@ public class HtmlConverter {
 		if (object instanceof ActiveCasesModel)
 			modelType = "ActiveCasesModel";
 		if (object instanceof SalaryModel)
-			modelType = "SalaryMOdel";
+			modelType = "SalaryModel";
 		if (object instanceof StatisticModel)
 			modelType = "StatisticModel";
 		return modelType;
-	}
-
-	private static String addRow(CategoryModel categoryModel) {
-		StringBuilder htmlString = new StringBuilder("<tr><td>");
-		// тут код вставления форм
-		htmlString.append("</td></tr>");
-		return htmlString.toString();
-	}
-
-	private static String addRow(StatisticModel statisticModel) {
-		StringBuilder htmlString = new StringBuilder("<tr><td>");
-		// тут код вставления форм
-		htmlString.append("</td></tr>");
-		return htmlString.toString();
 	}
 }
