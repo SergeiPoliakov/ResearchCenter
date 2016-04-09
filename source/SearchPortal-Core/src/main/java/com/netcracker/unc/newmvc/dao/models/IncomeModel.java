@@ -2,6 +2,7 @@ package com.netcracker.unc.newmvc.dao.models;
 
 import java.sql.Date;
 import com.netcracker.unc.newmvc.dao.InvoiceDAO;
+import com.netcracker.unc.newmvc.ejb.models.InvoiceModel;
 
 public class IncomeModel {
 	

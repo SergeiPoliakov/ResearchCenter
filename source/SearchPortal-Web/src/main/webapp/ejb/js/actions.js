@@ -82,22 +82,70 @@ if (document.getElementById("controlSalaryMain") != null) {
 
 // show-hide general modules
 function showHideModule(element) {
-	var consumptionDiv = document.getElementById('consumptionDiv');
+	var leftMenuButtons = document.getElementsByClassName('leftMenuButton');
 	var personalAreaUserDiv = document.getElementById('personalAreaUserDiv');
 	var button = element;
 	switch (button.id.valueOf()) {
 	case 'consumption'.valueOf():
-		if (consumptionDiv.style.display.valueOf() == 'none'.valueOf()) {
-			consumptionDiv.style.display = '';
-		} else
-			consumptionDiv.style.display = 'none';
+		document.getElementById('createCase').style.display = '';
+		personalAreaUserDiv.style.display = 'none';
+		showLeftMenuDiv();
 		break;
 	case 'personalArea'.valueOf():
 		if (personalAreaUserDiv.style.display.valueOf() == 'none'.valueOf()) {
 			personalAreaUserDiv.style.display = '';
+			document.getElementById('createCase').style.display = 'none';
+			document.getElementById('updateCase').style.display = 'none';
+			document.getElementById('leftMenuDiv').style.marginLeft = '-10px';
+			document.getElementById('leftMenuDiv').style.display = 'none';
 		} else
 			personalAreaUserDiv.style.display = 'none';
 		break;
+	case 'incomePlus'.valueOf():
+		if (document.getElementById('incoming').style.display.valueOf() == 'none'
+				.valueOf()) {
+			document.getElementById('incoming').style.display = '';
+			leftMenuButtons[0].setAttribute("onclick",
+					'showIncomePlusDivs(this)');
+			document.getElementById('createCase').style.display = 'none';
+			document.getElementById('updateCase').style.display = 'none';
+		}
+		break;
+	}
+}
 
+function showIncomePlusDivs(element) {
+	switch (element.innerHTML.valueOf()) {
+	case '1'.valueOf():
+		document.getElementById('incoming').style.display = '';
+	}
+}
+
+// animation for left menu buttons
+function showLeftMenuDiv() {
+	var leftMenuDiv = document.getElementById('leftMenuDiv');
+	leftMenuDiv.style.display = '';
+	var posLeftMenu = -10;
+	var animationLeftMenu = setInterval(function() {
+		if (posLeftMenu < 10) {
+			posLeftMenu += 1;
+			leftMenuDiv.style.marginLeft = posLeftMenu + 'px';
+		} else {
+			clearInterval(animationLeftMenu);
+		}
+	}, 50);
+}
+
+// left menu button choose
+function leftMenuChoose(element) {
+	switch (element.innerHTML.valueOf()) {
+	case '1'.valueOf():
+		document.getElementById('createCase').style.display = '';
+		document.getElementById('editCase').style.display = 'none';
+		break;
+	case '2'.valueOf():
+		document.getElementById('editCase').style.display = '';
+		document.getElementById('createCase').style.display = 'none';
+		break;
 	}
 }

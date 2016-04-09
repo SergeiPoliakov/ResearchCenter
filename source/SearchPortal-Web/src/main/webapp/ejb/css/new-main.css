@@ -11,7 +11,6 @@ html {
 }
 
 body {
-
 	background-color: #FAFAD2;
 	margin: 0;
 }
@@ -29,7 +28,11 @@ audio, canvas, progress, video {
 audio
 
 
+
+
 :not
+
+
 
 
 (
@@ -38,21 +41,33 @@ controls
 ]
 
 
+
+
 ){
 display
+
+
 
 
 :
 
 
+
+
 none
+
+
 
 
 ;
 height
 
 
+
+
 :
+
+
 
 
 0;
@@ -117,21 +132,33 @@ img {
 svg
 
 
+
+
 :not
+
+
 
 
 (
 :root
 
 
+
+
 ){
 overflow
+
+
 
 
 :
 
 
+
+
 hidden
+
+
 
 
 ;
@@ -1397,7 +1424,6 @@ body {
 	color: #333;
 	background-color: #FAFAD2;
 	height: 100%;
-	
 }
 
 input, button, select, textarea {
@@ -3783,7 +3809,7 @@ a.btn.disabled, fieldset[disabled] a.btn {
 	width: 100%;
 	background-color: #FEF8A0;
 	color: #959595
-	}
+}
 
 .btn-block+.btn-block {
 	margin-top: 5px;
@@ -4036,27 +4062,41 @@ tbody.collapse.in {
 .btn
 
 
+
+
 :not
+
+
 
 
 (
 :first-child
 
 
+
+
 )
 :not
+
+
 
 
 (
 :last-child
 
 
+
+
 )
 :not
 
 
+
+
 (
 .dropdown-toggle
+
+
 
 
 )
@@ -4064,7 +4104,11 @@ tbody.collapse.in {
 border-radius
 
 
+
+
 :
+
+
 
 
 0;
@@ -4078,22 +4122,34 @@ border-radius
 .btn
 
 
+
+
 :first-child
 
 
+
+
 :not
+
+
 
 
 (
 :last-child
 
 
+
+
 )
 :not
 
 
+
+
 (
 .dropdown-toggle
+
+
 
 
 )
@@ -4101,14 +4157,22 @@ border-radius
 border-top-right-radius
 
 
+
+
 :
+
+
 
 
 0;
 border-bottom-right-radius
 
 
+
+
 :
+
+
 
 
 0;
@@ -4118,14 +4182,22 @@ border-bottom-right-radius
 .btn
 
 
+
+
 :last-child
+
+
 
 
 :not
 
 
+
+
 (
 :first-child
+
+
 
 
 ),
@@ -4134,11 +4206,17 @@ border-bottom-right-radius
 .dropdown-toggle
 
 
+
+
 :not
+
+
 
 
 (
 :first-child
+
+
 
 
 )
@@ -4146,14 +4224,22 @@ border-bottom-right-radius
 border-top-left-radius
 
 
+
+
 :
+
+
 
 
 0;
 border-bottom-left-radius
 
 
+
+
 :
+
+
 
 
 0;
@@ -4239,19 +4325,29 @@ border-bottom-left-radius
 .btn
 
 
+
+
 :not
+
+
 
 
 (
 :first-child
 
 
+
+
 )
 :not
 
 
+
+
 (
 :last-child
+
+
 
 
 )
@@ -4259,7 +4355,11 @@ border-bottom-left-radius
 border-radius
 
 
+
+
 :
+
+
 
 
 0;
@@ -4269,14 +4369,22 @@ border-radius
 .btn
 
 
+
+
 :first-child
+
+
 
 
 :not
 
 
+
+
 (
 :last-child
+
+
 
 
 )
@@ -4284,36 +4392,56 @@ border-radius
 border-top-left-radius
 
 
+
+
 :
+
+
 
 
 4
 px
+
+
 
 
 ;
 border-top-right-radius
 
 
+
+
 :
+
+
 
 
 4
 px
 
 
+
+
 ;
 border-bottom-right-radius
 
 
+
+
 :
+
+
 
 
 0;
 border-bottom-left-radius
 
 
+
+
 :
+
+
 
 
 0;
@@ -4323,14 +4451,22 @@ border-bottom-left-radius
 .btn
 
 
+
+
 :last-child
+
+
 
 
 :not
 
 
+
+
 (
 :first-child
+
+
 
 
 )
@@ -4338,36 +4474,56 @@ border-bottom-left-radius
 border-top-left-radius
 
 
+
+
 :
+
+
 
 
 0;
 border-top-right-radius
 
 
+
+
 :
+
+
 
 
 0;
 border-bottom-right-radius
 
 
+
+
 :
+
+
 
 
 4
 px
+
+
 
 
 ;
 border-bottom-left-radius
 
 
+
+
 :
+
+
 
 
 4
 px
+
+
 
 
 ;
@@ -4494,60 +4650,92 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 .input-group-addon
 
 
+
+
 :not
+
+
 
 
 (
 :first-child
 
 
+
+
 )
 :not
 
 
+
+
 (
 :last-child
+
+
 
 
 ),
 .input-group-btn
 
 
+
+
 :not
+
+
 
 
 (
 :first-child
 
 
+
+
 )
 :not
 
 
+
+
 (
 :last-child
+
+
 
 
 ),
 .input-group
 
 
+
+
 .form-control
 
 
+
+
 :not
+
+
 
 
 (
 :first-child
 
 
+
+
 )
 :not
 
 
+
+
 (
 :last-child
+
+
 
 
 )
@@ -4555,7 +4743,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 border-radius
 
 
+
+
 :
+
+
 
 
 0;
@@ -7806,7 +7998,6 @@ button.close {
 }
 
 .module-right {
-	margin-left: 50px;
 	right: 10px;
 	top: 205px;
 	float: right;
@@ -7819,8 +8010,8 @@ button.close {
 }
 
 .overlayInCons {
-	float: right;
-
+	padding-right: 20px;
+	padding-top: 20px;
 }
 
 #red-btn {
@@ -7846,7 +8037,7 @@ button.close {
 .container-footer {
 	/*необходимо исправить*/
 	bottom: 0px;
-	position: static;
+	position: abolute;
 	width: 100%;
 	text-align: right;
 	height: 90px;
@@ -8030,7 +8221,7 @@ progress.inoutProgress::-webkit-progress-value {
 	border-top-right-radius: 0;
 }
 
-#helloCase {
+.hello-module {
 	border: 1px #004949 groove;
 	margin: 10px;
 	border-top-left-radius: 18px;
@@ -8042,7 +8233,6 @@ progress.inoutProgress::-webkit-progress-value {
 	float: left;
 	width: 70%;
 }
-
 
 #resetBalanceDiv {
 	position: absolute;
@@ -8059,7 +8249,7 @@ progress.inoutProgress::-webkit-progress-value {
 }
 
 .main-container {
-	min-height: 71vh;
+	height: 100%;
 }
 
 .btn-block:hover {
@@ -8067,11 +8257,13 @@ progress.inoutProgress::-webkit-progress-value {
 	color: black;
 }
 
-.navbar-right {
-	float: right;
-	right: 20px;
+#leftMenuDiv {
+	width: 30px;
+	margin-left: -30px;
+	position: absolute;
 }
 
+<<<<<<< HEAD
 #errorRegNameLabel {
 	color: #C94545;
 }
@@ -8082,3 +8274,14 @@ progress.inoutProgress::-webkit-progress-value {
 	vertical-align: top;
 }
 */
+=======
+.leftMenuButton {
+	margin-top: 5px;
+	background: #fef8a0;
+}
+
+.updateCaseInput {
+	width: 100%;
+	font-size: 10px;
+}
+>>>>>>> e0dd8ece4809a94e217c41d9278ee1dc7b5eda50

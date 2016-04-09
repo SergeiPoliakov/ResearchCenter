@@ -32,9 +32,6 @@ public class CustomEjbServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		String salary = request.getParameter("salary");
-		System.out.println(usContr);
-		System.out.println(salary);
-		System.out.println(user.getUser());
 		usContr.addUserSalary(salary, user.getUser().getUserId());
 
 		response.sendRedirect(mainUrl);

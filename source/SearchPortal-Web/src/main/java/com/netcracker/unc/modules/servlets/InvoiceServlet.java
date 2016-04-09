@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.netcracker.unc.newmvc.dao.InvoiceDAO;
-import com.netcracker.unc.newmvc.dao.models.InvoiceModel;
 import com.netcracker.unc.newmvc.dao.models.UserModel;
+import com.netcracker.unc.newmvc.ejb.models.InvoiceModel;
 
 @WebServlet("/InvoiceServlet")
 public class InvoiceServlet extends HttpServlet {
