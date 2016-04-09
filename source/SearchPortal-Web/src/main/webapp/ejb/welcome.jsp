@@ -48,7 +48,8 @@
 					<li><div class="btn-group">
 							<button class="btn" onclick="showHideModule(this)"
 								id="consumption">Расходы</button>
-							<button class="btn">-</button>
+							<button class="btn" onclick="showHideModule(this)"
+								id="incomeMinus">-</button>
 						</div></li>
 					<li><div class="btn-group">
 							<button class="btn" onclick="show_consump()">Доходы</button>
@@ -111,6 +112,9 @@
 
 	<div id="incoming" style="display: none">
 		<jsp:include page="int/incoming.jsp" />
+	</div>
+	<div id="incomingMinus" style="display: none">
+		<jsp:include page="int/incomingMinus.jsp" />
 	</div>
 
 	<div class="container" id="personalAreaUserDiv" style="display: none">

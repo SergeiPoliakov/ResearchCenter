@@ -5,7 +5,7 @@
 
 <jsp:include page="/inc"></jsp:include>
 <div id="add-sum">
-	<div>Мгновенное попонение счёта</div>
+	<div>Мгновенное увеличение баланса</div>
 	<div>
 		<label>Текущий баланс:</label>
 		${sessionScope.invoicesController}
@@ -20,8 +20,6 @@
 				<option value="${invoice.getInvoiceId()}">${invoice.getInvoiceName()}</option>
 			</c:forEach>
 		</select>
-		<!-- <option selected value = "true">да</option>
-        	  <option selected value = "false">нет</option></select>  -->
 		<input type="number" name="add-sum-val" value="0" min="0" size="5"
 			step="50" /> <input type="submit" value="добавить" />
 	</form>

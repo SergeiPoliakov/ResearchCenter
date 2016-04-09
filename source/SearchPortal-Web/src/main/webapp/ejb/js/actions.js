@@ -109,6 +109,19 @@ function showHideModule(element) {
 					'showIncomePlusDivs(this)');
 			document.getElementById('createCase').style.display = 'none';
 			document.getElementById('updateCase').style.display = 'none';
+			document.getElementById('incomingMinus').style.display = 'none';
+		}
+		break;
+		
+	case 'incomeMinus'.valueOf():
+		if (document.getElementById('incomingMinus').style.display.valueOf() == 'none'
+				.valueOf()) {
+			document.getElementById('incomingMinus').style.display = '';
+			leftMenuButtons[0].setAttribute("onclick",
+					'showIncomeMinusDivs(this)');
+			document.getElementById('createCase').style.display = 'none';
+			document.getElementById('updateCase').style.display = 'none';
+			document.getElementById('incoming').style.display = 'none';
 		}
 		break;
 	}
@@ -117,7 +130,14 @@ function showHideModule(element) {
 function showIncomePlusDivs(element) {
 	switch (element.innerHTML.valueOf()) {
 	case '1'.valueOf():
-		document.getElementById('incomeMinus').style.display = '';
+		document.getElementById('incoming').style.display = '';
+	}
+}
+
+function showIncomeMinusDivs(element) {
+	switch (element.innerHTML.valueOf()) {
+	case '1'.valueOf():
+		document.getElementById('incomingMinus').style.display = '';
 	}
 }
 
