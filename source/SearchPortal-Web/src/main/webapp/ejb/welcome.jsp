@@ -103,7 +103,7 @@
 		<jsp:include page="vis/left_menu.jsp" />
 	</div>
 
-	<div id="resetBalanceDiv" style="display: none">
+	<div id="resetBalanceDiv" style="display: none" class="reset-div">
 		<jsp:include page="act/reset_balance.jsp" />
 	</div>
 	<div class="container-fluid main-container">

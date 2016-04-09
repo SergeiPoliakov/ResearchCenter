@@ -8272,3 +8272,18 @@ progress.inoutProgress::-webkit-progress-value {
 	vertical-align: top;
 }
 */
+
+.reset-div {
+	width: 250px;
+	height: 180px;
+    position: absolute;
+	border: 1px #004949 groove;
+	margin: 10px;
+	border-bottom-right-radius: 18px;
+	border-bottom-left-radius: 18px;
+	background-color: #fef8a0;
+}
+
+#leftMenuDiv {
+	position: absolute;
+}
