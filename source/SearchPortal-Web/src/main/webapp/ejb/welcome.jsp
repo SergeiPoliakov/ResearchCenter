@@ -34,9 +34,14 @@
 
 
 	<nav class="navbar navbar-default">
-		<div class="container-fluid ">
+		<div class="container-fluid" style="height: 10%">
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#"><img src="../img/logo.png"
+						alt="Logo" width="214" height="59" id="Insert_logo"
+						style="background-color: #92D36E;" /></a>
+				</div>
 				<div class="nav" align="right" style="color: #fef8a0"
 					style="height :25px">
 					<h5>
@@ -44,11 +49,7 @@
 								value="${sessionScope.user.getLogin()}" /></label>
 					</h5>
 				</div>
-				<div class="navbar-header">
-					<a class="navbar-brand" href="#"><img src="../img/logo.png"
-						alt="Logo" width="214" height="59" id="Insert_logo"
-						style="background-color: #92D36E;" /></a>
-				</div>
+				
 
 				<ul class="nav navbar-nav">
 					<li><div class="btn-group">
@@ -104,7 +105,7 @@
 	<div id="resetBalanceDiv" style="display: none">
 		<jsp:include page="act/reset_balance.jsp" />
 	</div>
-
+	<div class="container-fluid main-container">
 	<div class="module" id="createCase" style="display: none">
 		<div class="block-title">Создание новой задачи</div>
 		<div class="block-information">
@@ -137,7 +138,7 @@
 			</div>
 		</div>
 	</div>
-
+</div>
 	<%
 		EntityUser user = (EntityUser) request.getSession().getAttribute("user");//тут пусто
 	%>
@@ -174,11 +175,9 @@
 			</form>
 		</div>
 	</c:if>
-	<footer>
 		<div class="container-footer">
 			<p class="text-muted">©УНЦ 2016 год.</p>
 		</div>
-	</footer>
 
 </body>
 
