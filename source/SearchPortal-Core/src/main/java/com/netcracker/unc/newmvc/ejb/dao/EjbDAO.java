@@ -15,11 +15,12 @@ import com.netcracker.unc.newmvc.ejb.controllers.ControllerObjects;
 import com.netcracker.unc.newmvc.ejb.entities.EntityObject;
 import com.netcracker.unc.newmvc.ejb.entities.EntityUser;
 import com.netcracker.unc.newmvc.ejb.models.ActiveCasesModel;
-import com.netcracker.unc.newmvc.ejb.models.CategoryModel;
 import com.netcracker.unc.newmvc.ejb.models.IncomeConsumptionModel;
+import com.netcracker.unc.newmvc.ejb.models.InvoiceModel;
 import com.netcracker.unc.newmvc.ejb.models.SalaryModel;
 import com.netcracker.unc.newmvc.ejb.models.StatisticModel;
 import com.netcracker.unc.newmvc.ejb.models.TransactionModel;
+import com.netcracker.unc.newmvc.ejb.queries.InvoiceQueries;
 
 @Stateless
 @LocalBean
@@ -207,40 +208,6 @@ public class EjbDAO {
 		return inCon;
 	}
 
-	public List<CategoryModel> getCategories(long userId) {
-		List<CategoryModel> categoryList = new ArrayList<>();
-
-		String query = " SELECT " + " FIN_OBJECT_ID as OBJECT_ID, OBJECT_NAME, ( SELECT coef_par.VALUE"
-				+ " FROM SP_PARAMS coef_par WHERE coef_par.ATTRIBUTE_ID = 1"
-				+ "  AND coef_par.FIN_OBJECT_ID = main_fo.FIN_OBJECT_ID ) as coefficient, ("
-				+ " SELECT coef_par.VALUE FROM SP_PARAMS coef_par WHERE coef_par.ATTRIBUTE_ID = 2 "
-				+ "  AND coef_par.FIN_OBJECT_ID = main_fo.FIN_OBJECT_ID ) as min_percent, ("
-				+ " SELECT coef_par.VALUE FROM SP_PARAMS coef_par WHERE coef_par.ATTRIBUTE_ID = 3 "
-				+ "  AND coef_par.FIN_OBJECT_ID = main_fo.FIN_OBJECT_ID ) as max_percent "
-				+ "FROM SP_FIN_OBJECTS main_fo WHERE FIN_OBJECT_TYPE_ID =1 AND USER_ID = ? ";
-
-		Query emQuery = em.createNativeQuery(query);
-		emQuery.setParameter(1, userId);
-		List<?> resultList = emQuery.getResultList();
-		if (resultList.size() > 0) {
-			Iterator<?> i = resultList.iterator();
-			while (i.hasNext()) {
-				CategoryModel categoryModel = new CategoryModel();
-				Object[] res = (Object[]) i.next();
-
-				categoryModel.setObjectId(((BigDecimal) res[0]).longValue());
-				categoryModel.setObjectName((String) res[1]);
-				categoryModel.setCoeficient(((BigDecimal) res[0]).doubleValue());
-				categoryModel.setMinPercent(((BigDecimal) res[0]).doubleValue());
-				categoryModel.setMaxPercent(((BigDecimal) res[0]).doubleValue());
-
-				categoryList.add(categoryModel);
-			}
-		}
-
-		return categoryList;
-	}
-
 	public List<ActiveCasesModel> getActiveUserObjects(long userId, ControllerObjects controller) {
 
 		List<ActiveCasesModel> list = null;
@@ -366,5 +333,78 @@ public class EjbDAO {
 			}
 		}
 		return inTrans;
+	}
+
+	public int getSumBalance(EntityUser user) {
+		Query query = em.createNativeQuery(InvoiceQueries.getSumAllBalancesByUserId);
+		query.setParameter(1, user.getUserId());
+		List<?> result = query.getResultList();
+		if (result.size() > 0) {
+			Iterator<?> i = result.iterator();
+			if (i.hasNext()) {
+				return (((BigDecimal) i.next()).intValue());
+			}
+		}
+		return 0;
+	}
+
+	public InvoiceModel getInvoice(int invoiceId, EntityUser user) {
+		InvoiceModel invoice = new InvoiceModel();
+		invoice.setInvoiceId(invoiceId);
+		Query query = em.createNativeQuery(InvoiceQueries.getInvoiceName);
+		query.setParameter(1, user.getUserId());
+		query.setParameter(2, invoiceId);
+		List<?> result = query.getResultList();
+		if (result.size() > 0) {
+			Iterator<?> i = result.iterator();
+			if (i.hasNext()) {
+				invoice.setInvoiceName((String) i.next());
+			}
+		}
+		query = em.createNativeQuery(InvoiceQueries.getBalanceCreditAndPercent);
+		query.setParameter(1, user.getUserId());
+		query.setParameter(2, invoiceId);
+		result = query.getResultList();
+		if (result.size() > 0) {
+			Iterator<?> i = result.iterator();
+			if (i.hasNext()) {
+				Object[] res = (Object[]) i.next();
+				invoice.setBalance(Integer.valueOf((String) res[0]));
+				invoice.setCredit(Boolean.parseBoolean((String) res[1]));
+				invoice.setPercent(Integer.valueOf((String) res[2]));
+			}
+		}
+		return invoice;
+	}
+
+	public void updateBalance(InvoiceModel invoiceJsp) {
+		InvoiceModel invoice = invoiceJsp;
+		Query query = em.createNativeQuery(InvoiceQueries.updateBalance);
+		query.setParameter(1, invoice.getBalance());
+		query.setParameter(2, invoice.getInvoiceId());
+		query.executeUpdate();
+	}
+
+	public ArrayList<InvoiceModel> getAllInvoice(EntityUser user) {
+		InvoiceModel invoice;
+		ArrayList<InvoiceModel> listGetAllInvoice = new ArrayList<InvoiceModel>();
+		Query query = em.createNativeQuery(InvoiceQueries.getAllInvoicesByUserId);
+		query.setParameter(1, user.getUserId());
+		List<?> result = query.getResultList();
+		if (result.size() > 0) {
+			Iterator<?> i = result.iterator();
+			while (i.hasNext()) {
+				Object[] res = (Object[]) i.next();
+
+				invoice = new InvoiceModel();
+				invoice.setInvoiceId(((BigDecimal) res[0]).intValue());
+				invoice.setInvoiceName((String) res[1]);
+				invoice.setBalance(Integer.valueOf((String) res[2]));
+				invoice.setCredit(Boolean.parseBoolean((String) res[3]));
+				invoice.setPercent(Integer.valueOf((String) res[4]));
+				listGetAllInvoice.add(invoice);
+			}
+		}
+		return listGetAllInvoice;
 	}
 }

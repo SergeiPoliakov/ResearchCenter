@@ -1,4 +1,4 @@
-package com.netcracker.unc.newmvc.dao.models;
+package com.netcracker.unc.newmvc.ejb.models;
 
 
 public class InvoiceModel {
@@ -10,7 +10,7 @@ public class InvoiceModel {
 	private int invoiceId;
 	private int objectTypeId;
 	
-	public void InvoiceModel(){
+	public InvoiceModel(){
 		invoiceName = "none";
 		balance = 0;
 		credit = false;

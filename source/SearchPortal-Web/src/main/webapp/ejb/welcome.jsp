@@ -30,14 +30,13 @@
 
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
-					<div class="collapse navbar-collapse"
-				id="bs-example-navbar-collapse-1">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="#"><img src="../img/logo.png"
 					alt="Logo" width="214" height="59" id="Insert_logo"
 					style="background-color: #92D36E;" /></a>
 			</div>
-
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
 				<div class="nav" align="right" style="color: #fef8a0">
 					<h5>
 						Добро пожаловать <label><c:out
@@ -49,11 +48,12 @@
 					<li><div class="btn-group">
 							<button class="btn" onclick="showHideModule(this)"
 								id="consumption">Расходы</button>
-							<button class="btn">+</button>
+							<button class="btn">-</button>
 						</div></li>
 					<li><div class="btn-group">
 							<button class="btn" onclick="show_consump()">Доходы</button>
-							<button class="btn" onclick="showIncoming()">+</button>
+							<button class="btn" onclick="showHideModule(this)"
+								id="incomePlus">+</button>
 						</div></li>
 					<li>
 						<div class="btn-group">
@@ -66,58 +66,59 @@
 						</div>
 					</li>
 				</ul>
-				<ul class="nav navbar-nav navbar-right" >
-					<li style="padding-right: 50px">
+				<ul class="nav navbar-nav navbar-right">
+					<li><div class="btn-group">
 							<a id="red-btn" onclick="resetBalance()"></a>
-					</li>
-					<li>
-						<button class="btn" id="personalArea"
-							onclick="showHideModule(this)">Личный кабинет</button>
-					</li>
-					<li>
-						<form action="../auth" method="get">
-							<input type="hidden" name="authorization" value="logOut" />
-							<button type="submit" class="btn">Выход</button>
-						</form>
-					</li>
+						</div></li>
+					<li><div class="btn-group">
+							<button class="btn" id="personalArea"
+								onclick="showHideModule(this)">Личный кабинет</button>
+							<form action="../auth" method="get">
+								<input type="hidden" name="authorization" value="logOut"><input
+									type="submit" value="Выход" class="btn" />
+							</form>
+						</div></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 
+	<div id="leftMenuDiv" style="display: none;">
+		<jsp:include page="vis/left_menu.jsp" />
+	</div>
+
 	<div id="resetBalanceDiv" style="display: none">
 		<jsp:include page="act/reset_balance.jsp" />
 	</div>
 
-	<div class="container-fluid main-container">
-		<div class="container" id="consumptionDiv" style="display: none">
-			<div class="module" id="income">
-				<div class="block-title">Создание новой задачи</div>
-				<div class="block-information">
-					<div class="create-case" id="create-case">
-						<jsp:include page="act/create_case.jsp" />
-					</div>
-				</div>
+	<div class="module" id="createCase" style="display: none">
+		<div class="block-title">Создание новой задачи</div>
+		<div class="block-information">
+			<div class="create-case" id="create-case">
+				<jsp:include page="act/create_case.jsp" />
 			</div>
-
-			<div class="module" id="consump">
-				<div class="block-title">Редактирование задач</div>
-				<div class="block-information">
-					<div id="updateCase">
-						<jsp:include page="act/update_case.jsp" />
-					</div>
-				</div>
-			</div>
-
 		</div>
+	</div>
 
-		<div class="container" id="personalAreaUserDiv" style="display: none">
-			<div class="module" id="stat">
-				<div class="block-title">Редактирование профиля</div>
-				<div class="block-information">
-					<div id="editUser">
-						<jsp:include page="act/update_user.jsp"></jsp:include>
-					</div>
+	<div class="module" id="editCase" style="display: none">
+		<div class="block-title">Редактирование задач</div>
+		<div class="block-information">
+			<div id="updateCase">
+				<jsp:include page="act/update_case.jsp" />
+			</div>
+		</div>
+	</div>
+
+	<div id="incoming" style="display: none">
+		<jsp:include page="int/incoming.jsp" />
+	</div>
+
+	<div class="container" id="personalAreaUserDiv" style="display: none">
+		<div class="module" id="stat">
+			<div class="block-title">Редактирование профиля</div>
+			<div class="block-information">
+				<div id="editUser">
+					<jsp:include page="act/update_user.jsp"></jsp:include>
 				</div>
 			</div>
 		</div>
@@ -153,9 +154,11 @@
 			</form>
 		</div>
 	</c:if>
+	<footer>
 		<div class="container-footer">
 			<p class="text-muted">©УНЦ 2016 год.</p>
 		</div>
+	</footer>
 
 </body>
 

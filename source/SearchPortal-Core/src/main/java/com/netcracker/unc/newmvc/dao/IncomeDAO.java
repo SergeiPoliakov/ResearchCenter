@@ -10,11 +10,11 @@ import java.util.logging.Logger;
 
 import com.netcracker.unc.newmvc.connection.ConnectionFactory;
 import com.netcracker.unc.newmvc.dao.models.IncomeModel;
-import com.netcracker.unc.newmvc.dao.models.InvoiceModel;
 import com.netcracker.unc.newmvc.dao.models.IncomeModel;
 import com.netcracker.unc.newmvc.dao.models.UserModel;
 import com.netcracker.unc.newmvc.dao.queries.IncomeQueries;
-import com.netcracker.unc.newmvc.dao.queries.InvoiceQueries;
+import com.netcracker.unc.newmvc.ejb.models.InvoiceModel;
+import com.netcracker.unc.newmvc.ejb.queries.InvoiceQueries;
 import com.netcracker.unc.newmvc.dao.queries.IncomeQueries;
 
 public class IncomeDAO {

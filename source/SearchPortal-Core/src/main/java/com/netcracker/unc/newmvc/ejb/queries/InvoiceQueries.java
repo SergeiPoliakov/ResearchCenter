@@ -1,4 +1,4 @@
-package com.netcracker.unc.newmvc.dao.queries;
+package com.netcracker.unc.newmvc.ejb.queries;
 
 public class InvoiceQueries {
 	
@@ -14,13 +14,13 @@ public class InvoiceQueries {
 	public static final String getPercent = "select p.value from SP_PARAMS p, SP_FIN_OBJECTS o\n"
 			+ "where p.FIN_OBJECT_ID = o.FIN_OBJECT_ID and o.USER_ID=?\n"
 			+ "and p.ATTRIBUTE_ID=16 and o.FIN_OBJECT_ID=? and o.FIN_OBJECT_TYPE_ID=" + invoice_id;
-	public static final String getBalanceCreditAndPercent = "select p.value, a.VALUE, r.VALUE\n"
+	public static final String getBalanceCreditAndPercent = "select p.value, a.VALUE as avalue, r.VALUE as rvalue\n"
 			+ "from SP_PARAMS p, SP_PARAMS a, SP_PARAMS r, SP_FIN_OBJECTS o\n"
 			+ "where p.FIN_OBJECT_ID = o.FIN_OBJECT_ID and  a.FIN_OBJECT_ID = o.FIN_OBJECT_ID and  r.FIN_OBJECT_ID = o.FIN_OBJECT_ID and\n"
 			+ "o.USER_ID=? and p.ATTRIBUTE_ID=14 and a.ATTRIBUTE_ID=15 and r.ATTRIBUTE_ID=16\n"
 			+ "and o.FIN_OBJECT_ID=? and a.value in ('true','false') and o.FIN_OBJECT_TYPE_ID= " + invoice_id;
 	public static final String getInvoicesCount = "select count(fin_object_type_ID) from SP_FIN_OBJECTS where USER_ID = ? and FIN_OBJECT_TYPE_ID= "+ invoice_id;
-	public static final String getAllInvoicesByUserId = "select o.FIN_OBJECT_ID, o.OBJECT_NAME, p.value, a.VALUE, r.VALUE\n"
+	public static final String getAllInvoicesByUserId = "select o.FIN_OBJECT_ID, o.OBJECT_NAME, p.value as pvalue, a.VALUE as avalue, r.VALUE as rvalue\n"
                                                               +"from SP_PARAMS p, SP_PARAMS a, SP_PARAMS r, SP_FIN_OBJECTS o\n"
                                                               +"where p.FIN_OBJECT_ID = o.FIN_OBJECT_ID and  a.FIN_OBJECT_ID = o.FIN_OBJECT_ID and  r.FIN_OBJECT_ID = o.FIN_OBJECT_ID and \n"
                                                               +"o.USER_ID=? and p.ATTRIBUTE_ID=14 and a.ATTRIBUTE_ID=15 and r.ATTRIBUTE_ID=16\n"
