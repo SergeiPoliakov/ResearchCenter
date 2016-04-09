@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page
+	import="com.netcracker.unc.newmvc.ejb.controllers.ControllerCategories"%>
+<%@page import="com.netcracker.unc.newmvc.ejb.entities.EntityUser"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -123,6 +128,12 @@
 			</div>
 		</div>
 	</div>
+
+	<%
+		EntityUser user = (EntityUser) request.getSession().getAttribute("user");//тут пусто
+	%>
+
+																																								
 
 
 	<div class="module-right" id="income">

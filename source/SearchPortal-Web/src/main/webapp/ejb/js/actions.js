@@ -117,7 +117,7 @@ function showHideModule(element) {
 function showIncomePlusDivs(element) {
 	switch (element.innerHTML.valueOf()) {
 	case '1'.valueOf():
-		document.getElementById('incomeMinus').style.display = '';
+		document.getElementById('incoming').style.display = '';
 	}
 }
 

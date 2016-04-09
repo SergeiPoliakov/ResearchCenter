@@ -9,6 +9,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import com.netcracker.unc.newmvc.ejb.dao.EjbDAO;
+import com.netcracker.unc.newmvc.ejb.entities.EntityUser;
 import com.netcracker.unc.newmvc.ejb.models.CategoryModel;;
 
 @Stateless
@@ -17,9 +18,9 @@ public class ControllerCategories {
 	@EJB
 	private EjbDAO ejb;
 
-	public List<CategoryModel> getCategories(long userId) {
+	public List<CategoryModel> getCategories(EntityUser user) {
 
-		List<CategoryModel> categoryModels = new ArrayList<CategoryModel>(ejb.getCategories(userId));
+		List<CategoryModel> categoryModels = new ArrayList<CategoryModel>(ejb.getCategories(user.getUserId()));
 
 		if (categoryModels.isEmpty())
 			categoryModels = Collections.emptyList();

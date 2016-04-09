@@ -148,7 +148,7 @@ public class EjbDAO {
 		}
 		return salaryModel;
 	}
-	
+
 	public List<CategoryModel> getCategories(long userId) {
 		List<CategoryModel> categoryList = new ArrayList<>();
 
@@ -381,7 +381,9 @@ public class EjbDAO {
 		if (result.size() > 0) {
 			Iterator<?> i = result.iterator();
 			if (i.hasNext()) {
-				return (((BigDecimal) i.next()).intValue());
+				Object obj = i.next();
+				if (obj != null)
+					return (((BigDecimal) i.next()).intValue());
 			}
 		}
 		return 0;
