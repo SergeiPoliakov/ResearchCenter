@@ -318,61 +318,6 @@ public class EjbDAO {
 		return list;
 	}
 
-	public StatisticModel procentForPie(StatisticModel inStat, int userId) {
-
-		String query = "SELECT SUM(par.VALUE) AS res"
-				+ "FROM SP_FIN_OBJECTS fo INNER JOIN SP_ATTRIBUTES atr ON fo.FIN_OBJECT_TYPE_ID = atr.FIN_OBJECT_TYPE_ID"
-				+ "INNER JOIN SP_PARAMS par ON atr.ATTRIBUTE_ID = par.ATTRIBUTE_ID"
-				+ "WHERE fo.FIN_OBJECT_TYPE_ID = 3 AND fo.USER_ID = ? AND par.VALUE_DATE = SYSDATE";
-
-		List<?> result = em.createNativeQuery(query).setParameter(1, userId).getResultList();
-
-		if (result.size() > 0) {
-			Iterator<?> i = result.iterator();
-			if (i.hasNext()) {
-				Object[] res = (Object[]) i.next();
-				inStat.setReservedMoney(((BigDecimal) res[0]).longValue());
-			}
-		}
-
-		query = "select SUM(p.VALUE)" + "from SP_FIN_OBJECTS o, SP_PARAMS p"
-				+ "where p.FIN_OBJECT_ID=o.FIN_OBJECT_ID and USER_ID=? and p.ATTRIBUTE_ID=14 and o.FIN_OBJECT_TYPE_ID=5";
-
-		result = em.createNativeQuery(query).setParameter(1, userId).getResultList();
-
-		if (result.size() > 0) {
-			Iterator<?> i = result.iterator();
-			if (i.hasNext()) {
-				Object[] res = (Object[]) i.next();
-				inStat.setSum(((BigDecimal) res[0]).longValue());
-			}
-		}
-		// Add calculating of free money
-		/*
-		 * 
-		 */
-		return inStat;
-	}
-
-	public TransactionModel transactionTable(TransactionModel inTrans, int userId) {
-
-		String query = "SELECT t.transaction_date, t.cost, fo.object_name"
-				+ "FROM SP_TRANSACTIONS t JOIN SP_FIN_OBJECTS fo ON t.fin_object_id=fo.fin_object_id"
-				+ "WHERE fo.user_id=?";
-
-		List<?> result = em.createNativeQuery(query).setParameter(1, userId).getResultList();
-
-		if (result.size() > 0) {
-			Iterator<?> i = result.iterator();
-			if (i.hasNext()) {
-				Object[] res = (Object[]) i.next();
-				inTrans.setDate((String) res[0]);
-				inTrans.setValue(((BigDecimal) res[1]).intValue());
-				inTrans.setName((String) res[2]);
-			}
-		}
-		return inTrans;
-	}
 
 	public int getSumBalance(EntityUser user) {
 		Query query = em.createNativeQuery(InvoiceQueries.getSumAllBalancesByUserId);
@@ -447,5 +392,64 @@ public class EjbDAO {
 			}
 		}
 		return listGetAllInvoice;
+	}
+	
+	public StatisticModel procentForPie(StatisticModel inStat, int userId) {
+
+		String query = "SELECT SUM(par.VALUE) AS res"
+				+ "FROM SP_FIN_OBJECTS fo INNER JOIN SP_ATTRIBUTES atr ON fo.FIN_OBJECT_TYPE_ID = atr.FIN_OBJECT_TYPE_ID"
+				+ "INNER JOIN SP_PARAMS par ON atr.ATTRIBUTE_ID = par.ATTRIBUTE_ID"
+				+ "WHERE fo.FIN_OBJECT_TYPE_ID = 3 AND fo.USER_ID = ? AND par.VALUE_DATE = SYSDATE";
+
+		List<?> result = em.createNativeQuery(query).setParameter(1, userId).getResultList();
+
+		if (result.size() > 0) {
+			Iterator<?> i = result.iterator();
+			if (i.hasNext()) {
+				Object[] res = (Object[]) i.next();
+				inStat.setReservedMoney(((BigDecimal) res[0]).longValue());
+			}
+		}
+
+		query = "select SUM(p.VALUE)" + "from SP_FIN_OBJECTS o, SP_PARAMS p"
+				+ "where p.FIN_OBJECT_ID=o.FIN_OBJECT_ID and USER_ID=? and p.ATTRIBUTE_ID=14 and o.FIN_OBJECT_TYPE_ID=5";
+
+		result = em.createNativeQuery(query).setParameter(1, userId).getResultList();
+
+		if (result.size() > 0) {
+			Iterator<?> i = result.iterator();
+			if (i.hasNext()) {
+				Object[] res = (Object[]) i.next();
+				inStat.setSum(((BigDecimal) res[0]).longValue());
+			}
+		}
+		// Add calculating of free money
+		/*
+		 * 
+		 */
+		return inStat;
+	}
+//
+	public List<TransactionModel> transactionTable(int userId) {
+		
+		List<TransactionModel> resTrans = null;
+		String query = "SELECT t.transaction_date, t.cost, fo.object_name"
+				+ "FROM SP_TRANSACTIONS t JOIN SP_FIN_OBJECTS fo ON t.fin_object_id=fo.fin_object_id"
+				+ "WHERE fo.user_id=?";
+        resTrans = new ArrayList<TransactionModel>();
+		List<?> result = em.createNativeQuery(query).setParameter(1, userId).getResultList();
+
+		if (result.size() > 0) {
+			Iterator<?> i = result.iterator();
+			while (i.hasNext()) {
+				TransactionModel inTrans = new TransactionModel();
+				Object[] res = (Object[]) i.next();
+				inTrans.setDate((String) res[0]);
+				inTrans.setValue(((BigDecimal) res[1]).intValue());
+				inTrans.setName((String) res[2]);
+				resTrans.add(inTrans);
+			}
+		}
+		return resTrans;
 	}
 }
