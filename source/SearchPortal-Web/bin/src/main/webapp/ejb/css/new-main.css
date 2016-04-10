@@ -8718,7 +8718,7 @@ progress.inoutProgress::-webkit-progress-value {
 .reset-div {
 	padding-left: 10px;
 	text-align: right;
-	width: 25%;
+	width: 20%;
 	height: 110px;
 	background-color: rgba(254, 248, 160, 0.7);
 	border: 1px #004949 groove;
@@ -8738,21 +8738,5 @@ progress.inoutProgress::-webkit-progress-value {
 }
 
 .btn-group {
-	margin-top: 0;
-	padding-top: 0;
+	padding-top: 5px;
 }
-
-.btn:hover {
-	background-color: #FFF035
-}
-
-#pieModule {
-	align: center;
-}
-
-#helloCase {
-	margin-left: 40 px;
-	padding-left: 40 px;
-}
-
-

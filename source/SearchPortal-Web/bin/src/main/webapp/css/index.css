@@ -1,0 +1,74 @@
+@CHARSET "UTF-8";
+
+* {
+	margin: 0px;
+	padding: 0px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.main {
+	background-color: #f7fade;
+}
+
+.header {
+	position: static;
+	height: 150px;
+	width: 100%;
+	background-color: #92d36e;
+}
+
+.module {
+	margin-top: 1%;
+}
+
+.label { /* модуль надписи добро пожалования */
+	background-image: -webkit-linear-gradient(top, #376E00, #6CD500);
+	height: 70px;
+	width: 80%;
+	overflow: hidden; /* отображение элементов за рамкой */
+	border-radius: 18px;
+	border: 3px #004949 solid; /* рамка */
+}
+
+.welcomeText { /* приветсвенный текст */
+	height: 7%;
+	text-shadow: 1px 1px 2px black;
+	font-size: 36pt; /* размер шрифта */
+	font-family: Roman; /* устанавливает шрифт */
+	font-weight: 600; /* толщина текста */
+	display: inline-block;
+	color: #072F01;
+	height: 5%;
+}
+
+.authInclude, .registrInclude { /* отображение модуля логина юзера */
+	left: 0;
+	right: 0;
+	margin-right: auto;
+	position: absolute;
+	top: 40%;
+}
+
+td {
+	padding: 15px;
+	padding-right: 10px;
+	width: auto;
+	height: auto;
+}
+
+body {
+	background-color: #f7fade;
+}
+
+.errorEnt {
+	display: none;
+	color: red;
+	font-family: Roman; /* устанавливает шрифт */
+	font-size: 8pt;
+}
+
+#errorRegLogLabel {
+	color: red;
+	font-family: Roman; /* устанавливает шрифт */
+	font-size: 8pt;
+}

@@ -1,0 +1,63 @@
+@CHARSET "UTF-8";
+
+.info, .column1 {
+	text-shadow: 1px 1px 2px grey;
+	color: #00120B; /* цвет шрифта */
+	font-size: 20pt; /* размер шрифта */
+	width: 30px;
+}
+
+.title {
+	text-shadow: 1px 1px 2px grey;
+	color: #072F01; /* цвет шрифта */
+	font-size: 30pt; /* размер шрифта */
+}
+
+.table {
+	border: 2px #004949 groove; /* рамка */
+}
+
+.info {
+	padding-left: 60px; /* отступ слева */
+}
+
+.submit {
+	background-image: -webkit-linear-gradient(top, #376E00, #6CD500);
+	height: 30px;
+	width: 100px;
+	color: #00120B; /* цвет шрифта */
+	font-size: 13pt; /* размер шрифта */
+	border: 1px #004949 groove; /* рамка */
+}
+
+.registr {
+	font-size: 13pt; /* размер шрифта */
+	color: #00120B; /* цвет шрифта */
+	font-weight: 600; /* толщина текста */
+	color: #072F01;
+}
+
+.login, .password, .name {
+	width: 140px;
+	height: 20px;
+}
+
+.logoutButton {
+	background-image: -webkit-linear-gradient(top, #376E00, #6CD500);
+	height: 25px;
+	width: 70px;
+	color: #00120B; /* цвет шрифта */
+	font-size: 13pt; /* размер шрифта */
+	border: 1px #004949 groove; /* рамка */
+	box-shadow: 0 0 10px #F0FFF0; /* тень рамки */
+}
+
+#restorePasswordLabel {
+	display: block;
+	text-align: center;
+	color: green;
+	font-size: 14px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-weight: 600; /* толщина текста */
+}

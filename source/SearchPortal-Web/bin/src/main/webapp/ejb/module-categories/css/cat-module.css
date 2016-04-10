@@ -1,0 +1,42 @@
+@CHARSET "UTF-8";
+
+.update-category-form {
+	display: none;
+}
+
+.view-category-form {
+	display: block;
+}
+
+.err-validation {
+	color: #ffc3ae;
+}
+
+.percent-slider {
+	width: 150px;
+	display: inline-block;
+}
+
+.range-min-percent {
+	width: 40px;
+	border-color: transparent;
+	border: none;
+}
+
+.range-max-percent {
+	width: 40px;
+	border-color: transparent;
+	border: none;
+}
+
+.min-percent-view {
+	width: 40px;
+	border-color: transparent;
+	border: none;
+}
+
+.max-percent-view {
+	width: 40px;
+	border-color: transparent;
+	border: none;
+}
