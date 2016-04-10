@@ -38,9 +38,6 @@ public class IncomingEjbServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		user.setUser((EntityUser) request.getSession().getAttribute("user"));
-		createSumBalance(request, response);
-
 		if (request.getParameter("incoming") != null) {
 			String incoming = request.getParameter("incoming");
 			if (incoming.equals("incomingBalance")) {
@@ -165,19 +162,22 @@ public class IncomingEjbServlet extends HttpServlet {
 			log.warning("Before redirect...");
 			response.sendRedirect("ejb/welcome.jsp");
 		}
-	}else{
+	}
 		
-		if ((request.getParameter("invoicesDelete") != null)
-				&& (!request.getParameter("invoicesDelete").trim().isEmpty())) {
+		if ((request.getParameter("invoicesDelete") != null)) {
 			String invoices = request.getParameter("invoicesDelete");
 			if (invoices.equals("deleteInvoices")){
 				if ((request.getParameter("invoice-number") != null) && (!request.getParameter("invoice-number").trim().isEmpty())) {
 					Integer invoiceNumber = Integer.valueOf(request.getParameter("invoice-number"));
 					ejb.deleteInvoice(invoiceNumber);
+					response.sendRedirect("ejb/welcome.jsp");
 				}
 			}
 		}
-	}
+		else {
+			user.setUser((EntityUser) request.getSession().getAttribute("user"));
+			createSumBalance(request, response);
+		}
 	}
 }
 

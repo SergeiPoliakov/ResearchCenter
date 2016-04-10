@@ -459,9 +459,7 @@ public class EjbDAO {
 	}
 	
 	public void deleteInvoice(int invoiceId){
-		EntityObject invoiceObj = new EntityObject();
-		
-		invoiceObj = (EntityObject) getObject(EntityObject.class, invoiceId);
+		EntityObject invoiceObj = (EntityObject) getObject(EntityObject.class, invoiceId);
 		deleteObject(invoiceObj);
 	}
 
