@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div>
+	<div style="float: left">
 		<label>Изменить баланс?</label> <select id="balSelect"
 			onchange="changeBalCost()">
 			<c:choose>
@@ -32,20 +32,21 @@
 			onsubmit="return checkBalanceEmpty()">
 			<input type="hidden" id="balHidden" name="balObjId" value="" /> <input
 				type="hidden" name="custom" value="changeBalance" />
-			<div style="float: left; width: 50%">
+			<div style="float: left; width: 7
+			0%">
 				<label>изменить на:</label><input type="text" name="balTextCost"
 					onkeypress="validate(this)" id="balTextCost"
 					style="margin-left: 5px" onfocus="checkBalanceEmptyHelp(this)"
-					onblur="checkBalanceEmptyHelp(this)" /><input type="submit"
-					value="изменить" />
-			</div>
+					onblur="checkBalanceEmptyHelp(this)" /><input style="float: center" type="submit"
+					value="изменить"  />
+			
 		</form>
 		<form action="../cust" method="get" onsubmit="return checkBalReset()">
 			<input type="hidden" name="custom" value="resetBalance" />
-			<div style="float: left;">
-				<input type="submit" value="сброс" id="resetBalanceResetSubmit" />
-			</div>
+				<input style="float: center; margin-left: 10px" type="submit" value="сброс" id="resetBalanceResetSubmit" />
+
 		</form>
+		</div>
 	</div>
 </body>
 <script src="act/js/reset_balance.js"></script>
