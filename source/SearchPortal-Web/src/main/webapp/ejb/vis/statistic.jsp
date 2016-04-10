@@ -2,39 +2,37 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html xmlns:v="urn:schemas-microsoft-com:vml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="ejb/js/Chart.js"></script>
-</head>
-<body>
-	<canvas id="skills" width="300" height="300"></canvas>
-	<jsp:include page="/stat" />
-	<div>${statisticModel.getSum() }</div>
-	<script type="text/javascript">
-	var data = [
-	            {
-	                value: 300,
-	                color:"#F7464A",
-	                highlight: "#FF5A5E",
-	                label: "Red"
-	            },
-	            {
-	                value: 50,
-	                color: "#46BFBD",
-	                highlight: "#5AD3D1",
-	                label: "Green"
-	            }
-	        ]
-    var pieOptions = {
-            segmentShowStroke : false,
-            animateScale : true
-       }
-	var context = document.getElementById('skills').getContext('2d');
-	var skillsChart = new Chart(context).Pie(pieData);
-	new Chart(skillsChart).Pie(data, pieOptions);
-	</script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
 
+        var data = google.visualization.arrayToDataTable([
+          ['type', 'money'],
+          ['Свободные средства',     1120],
+          ['Зарезервированные средства',      257]
+        ]);
+
+        var options = {
+                width: 500,
+                height: 300,
+          backgroundColor: '#FAFAD2'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+    </head>
+    <body>
+  <div id="piechart" width="500" height="300" style="background-color: #FAFAD2"></div>
+	<jsp:include page="/stat" />
+<!-- 	<div>${statisticModel.getSum() }</div> -->
 </body>
 </html>

@@ -103,7 +103,7 @@
 		</div>
 
 		<div id="resetBalanceDiv" style="display: none"
-			class="reset-div generalModule">
+			class="generalModule reset-div">
 			<jsp:include page="act/reset_balance.jsp" />
 		</div>
 
@@ -168,9 +168,13 @@
 				</div>
 			</div>
 		</div>
-
-		<div><jsp:include page="vis/statistic.jsp"></jsp:include></div>
-
+		
+		<div class="module generalModule" id="statPie" style="display: none">
+			<div class="block-title">Статистика бюджета</div>
+			<div class="block-information">
+					<jsp:include page="vis/statistic.jsp"></jsp:include>
+			</div>
+		</div>
 		<div class="module-right" id="income">
 			<div class="overlayInCons">
 				<jsp:include page="vis/income_consumption.jsp"></jsp:include>
