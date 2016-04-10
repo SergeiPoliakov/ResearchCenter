@@ -8681,7 +8681,6 @@ progress.inoutProgress::-webkit-progress-value {
 #resetBalanceDiv {
 	position: absolute;
 	left: 35%;
-	width: 40%;
 }
 
 #balCost {
@@ -8717,14 +8716,16 @@ progress.inoutProgress::-webkit-progress-value {
 }
 */
 .reset-div {
-	width: 250px;
-	height: 180px;
-	position: absolute;
+	padding-left: 10px;
+	text-align: right;
+	width: 20%;
+	height: 110px;
+	background-color: rgba(254, 248, 160, 0.7);
 	border: 1px #004949 groove;
 	margin: 10px;
+	margin-top: 0px;
 	border-bottom-right-radius: 18px;
 	border-bottom-left-radius: 18px;
-	background-color: #fef8a0;
 }
 
 #leftMenuDiv {
@@ -8739,4 +8740,3 @@ progress.inoutProgress::-webkit-progress-value {
 .btn-group {
 	padding-top: 5px;
 }
-/*--------------*/

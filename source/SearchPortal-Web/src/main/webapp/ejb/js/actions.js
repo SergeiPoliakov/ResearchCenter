@@ -185,7 +185,10 @@ function showHideModule(element) {
 			document.getElementById('priority-module').style.display = '';
 			leftMenuButtons[0].setAttribute("onclick",
 					'showStatisticDivs(this)');
+			leftMenuButtons[1].setAttribute("onclick",
+					'showStatisticDivs(this)');
 			leftMenuButtons[0].style.display = '';
+			leftMenuButtons[1].style.display = '';
 		} else {
 			for (var i = 0; i < generalModules.length; i++) {
 				generalModules[i].style.display = 'none';
@@ -269,6 +272,12 @@ function showStatisticDivs(element) {
 	switch (element.innerHTML.valueOf()) {
 	case '1'.valueOf():
 		document.getElementById('priority-module').style.display = '';
+	document.getElementById('statPie').style.display = 'none';
+		break;
+	case '2'.valueOf():
+		document.getElementById('priority-module').style.display = 'none';
+	document.getElementById('statPie').style.display = '';
+		break;
 	}
 }
 
