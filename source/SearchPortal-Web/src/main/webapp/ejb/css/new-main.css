@@ -8408,6 +8408,7 @@ button.close {
 
 .block-information {
 	height: 70%;
+	min-height: 200px;
 	min-width: 400px;
 	max-height: 1000px; /*ÑÐ°Ð·Ð¾Ð±ÑÐ°ÑÑÑÑ*/
 	width: 80%;
@@ -8755,4 +8756,6 @@ progress.inoutProgress::-webkit-progress-value {
 	padding-left: 40 px;
 }
 
-
+#bi-category-module {
+	text-align:center;
+}

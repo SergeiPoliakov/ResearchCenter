@@ -10,7 +10,8 @@
 </head>
 <body>
 <jsp:include page="/inc"></jsp:include>
-			<table border="1">
+<div style="float: left">
+			<table border="1" style="float: center">
 				<thead align="center">
 					<tr>
 						<th class="title">Номер счёта</th>
@@ -32,7 +33,8 @@
 					</c:forEach>
 				</tbody>
 			</table>
-
+</div>
+<div style="padding-left: 20px; float: right">
 			<button id="statistic-menu-button" class="button"
 				onclick="addInvoice()">Добавить счет</button>
 
@@ -55,13 +57,15 @@
 						<input type="submit" id='addInvoicesJsp' value="Добавить" />
 				</div>
 			</form>	
+
 <form action="../inc" method="get">
 <input type = "hidden" value='deleteInvoices' name="invoicesDelete">	
 <div id="delete-invoice" style="visibility: hidden;">
 		      <input type="number" name="invoice-number"  placeholder="Номер счёта"/>
 		      <input type="submit" id='deleteInvoicesJsp' value="Удалить"/> 
 	</div>
-	</form>		
+	</form>	
+	</div>	
 </body>
 
 <script src="int/js/incoming.js"></script>
