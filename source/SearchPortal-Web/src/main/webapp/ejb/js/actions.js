@@ -104,6 +104,8 @@ function showHideModule(element) {
 			document.getElementById('createCase').style.display = '';
 			showLeftMenuDiv();
 
+			leftMenuButtons[0].setAttribute("title", "Создание задачи");
+			leftMenuButtons[1].setAttribute("title", "Активные задачи");
 			leftMenuButtons[0].setAttribute("onclick",
 					"showConsumptionDivs(this)");
 			leftMenuButtons[1].setAttribute("onclick",
@@ -157,6 +159,7 @@ function showHideModule(element) {
 				leftMenuButtons[i].style.display = 'none';
 			}
 			showLeftMenuDiv();
+			leftMenuButtons[0].setAttribute("title", "Редактирование профиля");
 			document.getElementById('editUser').style.display = '';
 			leftMenuButtons[0].setAttribute("onclick",
 					'showPersonalAreaDivs(this)');
@@ -183,6 +186,8 @@ function showHideModule(element) {
 			}
 			showLeftMenuDiv();
 			document.getElementById('priority-module').style.display = '';
+			leftMenuButtons[0].setAttribute("title", "Приоритеты");
+			leftMenuButtons[1].setAttribute("title", "Статистика бюджета");
 			leftMenuButtons[0].setAttribute("onclick",
 					'showStatisticDivs(this)');
 			leftMenuButtons[1].setAttribute("onclick",
@@ -211,6 +216,8 @@ function showHideModule(element) {
 			}
 			showLeftMenuDiv();
 			document.getElementById('category-module').style.display = '';
+			leftMenuButtons[0].setAttribute("title", "Категории");
+			leftMenuButtons[1].setAttribute("title", "Управление счетами");
 			leftMenuButtons[0]
 					.setAttribute("onclick", 'showResourceDivs(this)');
 			leftMenuButtons[1]
@@ -239,6 +246,8 @@ function showHideModule(element) {
 			}
 			showLeftMenuDiv();
 			document.getElementById('incoming').style.display = '';
+			leftMenuButtons[0].setAttribute("title",
+					"Пополнение денежных средств");
 			leftMenuButtons[0].setAttribute("onclick",
 					'showIncomePlusDivs(this)');
 			leftMenuButtons[0].style.display = '';
@@ -249,32 +258,68 @@ function showHideModule(element) {
 			for (var i = 0; i < leftMenuButtons.length; i++) {
 				leftMenuButtons[i].style.display = 'none';
 			}
-			document.getElementById('ivoices').style.display = 'none';
 		}
 		break;
 	case 'incomeMinus'.valueOf():
 		if (document.getElementById('incomingMinus').style.display.valueOf() == 'none'
 				.valueOf()) {
+			stopLeftMenuAnimation();
+			document.getElementById('leftMenuDiv').style.marginLeft = '-10px';
+			for (var i = 0; i < generalModules.length; i++) {
+				generalModules[i].style.display = 'none';
+			}
+			for (var i = 0; i < leftMenuButtons.length; i++) {
+				leftMenuButtons[i].style.display = 'none';
+			}
+			showLeftMenuDiv();
 			document.getElementById('incomingMinus').style.display = '';
 			leftMenuButtons[0].setAttribute("onclick",
 					'showIncomeMinusDivs(this)');
-			document.getElementById('createCase').style.display = 'none';
-			document.getElementById('updateCase').style.display = 'none';
-			document.getElementById('incoming').style.display = 'none';
-			document.getElementById('ivoices').style.display = 'none';
+			leftMenuButtons[0].setAttribute("title",
+					"Списание денежных средств");
+			leftMenuButtons[0].style.display = '';
+		} else {
+			for (var i = 0; i < generalModules.length; i++) {
+				generalModules[i].style.display = 'none';
+			}
+			for (var i = 0; i < leftMenuButtons.length; i++) {
+				leftMenuButtons[i].style.display = 'none';
+			}
 		}
 		break;
-	case 'invoice'.valueOf():
-		if (document.getElementById('invoice').style.display.valueOf() == 'none'
+	case 'incomes'.valueOf():
+		if (document.getElementById('incomeA').style.display.valueOf() == 'none'
 				.valueOf()) {
-			document.getElementById('invoice').style.display = '';
-			leftMenuButtons[0].setAttribute("onclick", 'showInvoiceDivs(this)');
-			document.getElementById('createCase').style.display = 'none';
-			document.getElementById('updateCase').style.display = 'none';
-			document.getElementById('incoming').style.display = 'none';
-			document.getElementById('incomingMinus').style.display = 'none';
+			stopLeftMenuAnimation();
+			document.getElementById('leftMenuDiv').style.marginLeft = '-10px';
+			for (var i = 0; i < generalModules.length; i++) {
+				generalModules[i].style.display = 'none';
+			}
+			for (var i = 0; i < leftMenuButtons.length; i++) {
+				leftMenuButtons[i].style.display = 'none';
+			}
+			showLeftMenuDiv();
+			document.getElementById('incomeA').style.display = '';
+			leftMenuButtons[0].setAttribute("onclick", 'showIncomesDivs(this)');
+			leftMenuButtons[0].setAttribute("title", "Управление доходами");
+			leftMenuButtons[0].style.display = '';
+		} else {
+			for (var i = 0; i < generalModules.length; i++) {
+				generalModules[i].style.display = 'none';
+			}
+			for (var i = 0; i < leftMenuButtons.length; i++) {
+				leftMenuButtons[i].style.display = 'none';
+			}
 		}
 		break;
+	}
+}
+
+// show divs for incomes button
+function showIncomesDivs(element) {
+	switch (element.innerHTML.valueOf()) {
+	case '1'.valueOf():
+		document.getElementById('incomeA').style.display = '';
 	}
 }
 

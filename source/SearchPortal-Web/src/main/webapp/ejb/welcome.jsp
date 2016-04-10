@@ -59,7 +59,7 @@
 								id="incomeMinus">-</button>
 						</div></li>
 					<li><div class="btn-group">
-							<button class="btn" onclick="show_consump()">Доходы</button>
+							<button class="btn" onclick="showHideModule(this)" id="incomes">Доходы</button>
 							<button class="btn" onclick="showHideModule(this)"
 								id="incomePlus">+</button>
 						</div></li>
@@ -139,7 +139,8 @@
 			style="display: none">
 			<div class="block-title">Кредиты</div>
 			<div class="block-information" id="credit-module">
-				<jsp:include page="int/creditModule.jsp" />
+
+
 			</div>
 		</div>
 
@@ -148,6 +149,13 @@
 			<div class="block-title">Управление счетами</div>
 			<div class="block-information" id="bi-category-module">
 				<jsp:include page="int/invoice.jsp" />
+			</div>
+		</div>
+
+		<div class="module generalModule" id="incomeA" style="display: none">
+			<div class="block-title">Управление доходами</div>
+			<div class="block-information">
+				<jsp:include page="int/income.jsp" />
 			</div>
 		</div>
 
