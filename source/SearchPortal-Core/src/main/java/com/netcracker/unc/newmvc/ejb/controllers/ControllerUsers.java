@@ -41,13 +41,44 @@ public class ControllerUsers {
 	@EJB
 	private ControllerObjects objContr;
 
+	// priorities for general objects
+	// Транспорт
+	private final String priority1 = "0.3"; // Коэффициент приоритета
+	private final String minProcent1 = "10"; // Минимальный % от расхода
+	private final String maxProcent1 = "40"; // Минимальный % от расхода
+
+	// ЖКХ
+	private final String priority2 = "0.65"; // Коэффициент приоритета
+	private final String minProcent2 = "15"; // Минимальный % от расхода
+	private final String maxProcent2 = "80"; // Минимальный % от расхода
+
+	// Продукты
+	private final String priority3 = "0.8"; // Коэффициент приоритета
+	private final String minProcent3 = "20"; // Минимальный % от расхода
+	private final String maxProcent3 = "80"; // Минимальный % от расхода
+
+	// Кредит
+	private final String priority4 = "0.4"; // Коэффициент приоритета
+	private final String minProcent4 = "15"; // Минимальный % от расхода
+	private final String maxProcent4 = "60"; // Минимальный % от расхода
+
+	// Другое
+	private final String priority5 = "0.2"; // Коэффициент приоритета
+	private final String minProcent5 = "10"; // Минимальный % от расхода
+	private final String maxProcent5 = "70"; // Минимальный % от расхода
+
 	// standard objects
 	private final String object1 = "Транспорт";
 	private final String object2 = "ЖКХ";
 	private final String object3 = "Продукты";
 	private final String object4 = "Кредит";
 	private final String object5 = "Другое";
-	private final int atributeCategory = 1; // Категория
+
+	private final long attribute1 = 1; // Коэффициент приоритета
+	private final long attribute2 = 2; // Минимальный процент от расхода
+	private final long attribute3 = 3; // Максимальный процент от расхода
+
+	private final int typeCategory = 1; // Категория
 	private final String objectSalaryName = "Зарплата";
 	private final int incomeObjectType = 2; // Доход
 	private final int atributeIncomeDate = 4; // Дата дохода
@@ -91,6 +122,7 @@ public class ControllerUsers {
 
 	public boolean createUser(String login, String password, String name, String email) {
 		EntityObject object;
+		EntityParam param;
 		// check user
 		EntityUser user = (EntityUser) ejb.getObject(EntityUser.class, login);
 		if (user == null) {
@@ -103,18 +135,44 @@ public class ControllerUsers {
 			user.setEmail(email);
 			ejb.addObject(user);
 			// ejb.updateReferencesToObjects();
-			EntityObjectType objectType = (EntityObjectType) ejb.getObject(EntityObjectType.class, atributeCategory);
+			EntityObjectType objectType = (EntityObjectType) ejb.getObject(EntityObjectType.class, typeCategory);
 
 			String[] generalObjects = new String[] { object1, object2, object3, object4, object5 };
-			for (String obj : generalObjects) {
+			String[][] categoryAr = new String[][] { { priority1, maxProcent1, minProcent1 },
+					{ priority2, maxProcent2, minProcent2 }, { priority3, maxProcent3, minProcent3 },
+					{ priority4, maxProcent4, minProcent4 }, { priority5, maxProcent5, minProcent5 } };
+
+			for (int i = 0; i < generalObjects.length; i++) {
 				object = new EntityObject();
 				object.setUser(user);
 				object.setObjectType(objectType);
 				// add standard objects
-				object.setObjectName(obj);
+				object.setObjectName(generalObjects[i]);
 				ejb.addObject(object);
 				ejb.updateReferencesToObjects();
+
+				param = new EntityParam();
+				ejb.updateReferencesToObjects();
+				param.setObject(object);
+				param.setAttribute((EntityAttribute) ejb.getObject(EntityAttribute.class, attribute1));
+				param.setValue(categoryAr[i][0]);
+				ejb.addObject(param);
+
+				param = new EntityParam();
+				ejb.updateReferencesToObjects();
+				param.setObject(object);
+				param.setAttribute((EntityAttribute) ejb.getObject(EntityAttribute.class, attribute2));
+				param.setValue(categoryAr[i][1]);
+				ejb.addObject(param);
+
+				param = new EntityParam();
+				ejb.updateReferencesToObjects();
+				param.setObject(object);
+				param.setAttribute((EntityAttribute) ejb.getObject(EntityAttribute.class, attribute3));
+				param.setValue(categoryAr[i][2]);
+				ejb.addObject(param);
 			}
+
 			return true;
 		}
 		return false;
