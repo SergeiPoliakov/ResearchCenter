@@ -13,13 +13,15 @@ import com.netcracker.unc.newmvc.ejb.controllers.ControllerCredit;
 import com.netcracker.unc.newmvc.ejb.models.UserModel;
 
 
-@WebServlet("/CreditServlet")
+@WebServlet("/credit")
 public class CreditServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     @EJB
     ControllerCredit credController;
     @EJB
     UserModel user;
+    @EJB
+    EjbDAO dao;
    
     public CreditServlet() {
         super();
@@ -28,12 +30,12 @@ public class CreditServlet extends HttpServlet {
 
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		request.getSession().setAttribute("CreditItems", dao.getAllCredits(user.getUser()));
 	}
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 	}
 
 	
