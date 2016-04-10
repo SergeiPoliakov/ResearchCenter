@@ -65,12 +65,12 @@
 						</div></li>
 					<li>
 						<div class="btn-group">
-							<button class="btn" onclick="show_consump()">Статистика</button>
+							<button class="btn" onclick="showHideModule(this)" id="statistic">Статистика</button>
 						</div>
 					</li>
 					<li>
 						<div class="btn-group">
-							<button class="btn" onclick="showInvoices()">Счета</button>
+							<button class="btn" id="resource" onclick="showHideModule(this)">Ресурсы</button>
 						</div>
 					</li>
 				</ul>
@@ -99,14 +99,14 @@
 		</div>
 	</nav>
 	<div class="container-fluid main-container">
-	<div id="leftMenuDiv" style="display: none;">
-		<jsp:include page="vis/left_menu.jsp" />
-	</div>
+		<div id="leftMenuDiv" style="display: none;">
+			<jsp:include page="vis/left_menu.jsp" />
+		</div>
 
-	<div id="resetBalanceDiv" style="display: none"
-		class="reset-div generalModule">
-		<jsp:include page="act/reset_balance.jsp" />
-	</div>
+		<div id="resetBalanceDiv" style="display: none"
+			class="reset-div generalModule">
+			<jsp:include page="act/reset_balance.jsp" />
+		</div>
 
 		<div class="module generalModule" id="createCase"
 			style="display: none">
@@ -127,7 +127,8 @@
 			</div>
 		</div>
 
-<div class="module" id="category-module">
+		<div class="module generalModule" id="category-module"
+			style="display: none">
 			<div class="block-title">Категории</div>
 			<div class="block-information" id="bi-category-module">
 				<jsp:include page="module-categories/module.jsp" />
@@ -135,7 +136,8 @@
 		</div>
 
 
-<div class="module" id="priority-module">
+		<div class="module generalModule" id="priority-module"
+			style="display: none">
 			<div class="block-title">Приоритеты</div>
 			<div class="block-information" id="bi-category-module">
 				<jsp:include page="module-priority/module.jsp" />
@@ -172,33 +174,33 @@
 				<jsp:include page="vis/income_consumption.jsp"></jsp:include>
 			</div>
 		</div>
-</div>
+	</div>
 
-		<div class="controlSalary" id="controlSalaryMain">
-			<jsp:include page="int/salary_control.jsp"></jsp:include>
+	<div class="controlSalary" id="controlSalaryMain">
+		<jsp:include page="int/salary_control.jsp"></jsp:include>
+	</div>
+	<c:set var="checkSalaryBro" value="${checkSalary}" scope="page" />
+	<c:if test="${checkSalaryBro == 'error'}">
+		<div id="helloCase">
+			<label class="welcomeCase" id="welcomeCase1"><b>Добро
+					пожаловать на сайт <span style="margin-left: 40px">приоритетов!</span>
+			</b></label>
+			<p>
+				<label class="welcomeCase" id="welcomeCase2">Пожалуйста,
+					введите вашу зарплату:</label>
+			</p>
+			<form action="../cust" onsubmit="return regularAddSalary()">
+				<input type="hidden" value="addSalary" name="custom" /> <input
+					type="text" id="welcomeCaseInput" name="salary"
+					onkeypress="validate(this)" /><label class="welcomeCase"
+					style="margin-left: 3px">руб.</label> <input type="submit"
+					value="ввести" id="addSalarySubmit" />
+			</form>
 		</div>
-		<c:set var="checkSalaryBro" value="${checkSalary}" scope="page" />
-		<c:if test="${checkSalaryBro == 'error'}">
-			<div id="helloCase">
-				<label class="welcomeCase" id="welcomeCase1"><b>Добро
-						пожаловать на сайт <span style="margin-left: 40px">приоритетов!</span>
-				</b></label>
-				<p>
-					<label class="welcomeCase" id="welcomeCase2">Пожалуйста,
-						введите вашу зарплату:</label>
-				</p>
-				<form action="../cust" onsubmit="return regularAddSalary()">
-					<input type="hidden" value="addSalary" name="custom" /> <input
-						type="text" id="welcomeCaseInput" name="salary"
-						onkeypress="validate(this)" /><label class="welcomeCase"
-						style="margin-left: 3px">руб.</label> <input type="submit"
-						value="ввести" id="addSalarySubmit" />
-				</form>
-			</div>
-		</c:if>
-		<div class="container-footer">
-			<p class="text-muted">©УНЦ 2016 год.</p>
-		</div>
+	</c:if>
+	<div class="container-footer">
+		<p class="text-muted">©УНЦ 2016 год.</p>
+	</div>
 </body>
 
 <script src="js/actions.js"></script>
