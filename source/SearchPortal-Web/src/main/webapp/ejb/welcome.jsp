@@ -70,7 +70,8 @@
 					</li>
 					<li>
 						<div class="btn-group">
-							<button class="btn" id="resource" onclick="showHideModule(this)">Ресурсы</button>						</div>
+							<button class="btn" id="resource" onclick="showHideModule(this)">Ресурсы</button>
+						</div>
 					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
@@ -133,9 +134,14 @@
 				<jsp:include page="module-categories/module.jsp" />
 			</div>
 		</div>
-		<jsp:include page="int/incomingMinus.jsp" />
-		<div id="invoices" style="display: none"></div>
-		<jsp:include page="int/invoice.jsp" />
+
+
+		<div class="module generalModule" id="invoices" style="display: none">
+			<div class="block-title">Управление счетами</div>
+			<div class="block-information" id="bi-category-module">
+				<jsp:include page="int/invoice.jsp" />
+			</div>
+		</div>
 
 
 		<div class="module generalModule" id="priority-module"
@@ -147,14 +153,14 @@
 		</div>
 
 		<div class="module generalModule" id="incoming" style="display: none">
-			<div class="block-title">Изменение счета</div>
+			<div class="block-title">Мгновенное увеличение баланса</div>
 			<div class="block-information">
 				<jsp:include page="int/incoming.jsp" />
 			</div>
 		</div>
 		<div class="module generalModule" id="incomingMinus"
 			style="display: none">
-			<div class="block-title">Изменение счета</div>
+			<div class="block-title">Мгновенное списание денежных средств</div>
 			<div class="block-information">
 				<jsp:include page="int/incomingMinus.jsp" />
 			</div>
@@ -168,11 +174,11 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="module generalModule" id="statPie" style="display: none">
 			<div class="block-title">Статистика бюджета</div>
 			<div class="block-information">
-					<jsp:include page="vis/statistic.jsp"></jsp:include>
+				<jsp:include page="vis/statistic.jsp"></jsp:include>
 			</div>
 		</div>
 		<div class="module-right" id="income">

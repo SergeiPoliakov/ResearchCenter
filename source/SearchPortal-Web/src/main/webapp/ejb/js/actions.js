@@ -213,7 +213,10 @@ function showHideModule(element) {
 			document.getElementById('category-module').style.display = '';
 			leftMenuButtons[0]
 					.setAttribute("onclick", 'showResourceDivs(this)');
+			leftMenuButtons[1]
+					.setAttribute("onclick", 'showResourceDivs(this)');
 			leftMenuButtons[0].style.display = '';
+			leftMenuButtons[1].style.display = '';
 		} else {
 			for (var i = 0; i < generalModules.length; i++) {
 				generalModules[i].style.display = 'none';
@@ -249,8 +252,6 @@ function showHideModule(element) {
 			document.getElementById('ivoices').style.display = 'none';
 		}
 		break;
-<<<<<<< .mine
-		
 	case 'incomeMinus'.valueOf():
 		if (document.getElementById('incomingMinus').style.display.valueOf() == 'none'
 				.valueOf()) {
@@ -263,27 +264,11 @@ function showHideModule(element) {
 			document.getElementById('ivoices').style.display = 'none';
 		}
 		break;
-=======
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> .theirs
 	case 'invoice'.valueOf():
 		if (document.getElementById('invoice').style.display.valueOf() == 'none'
 				.valueOf()) {
 			document.getElementById('invoice').style.display = '';
-			leftMenuButtons[0].setAttribute("onclick",
-					'showInvoiceDivs(this)');
+			leftMenuButtons[0].setAttribute("onclick", 'showInvoiceDivs(this)');
 			document.getElementById('createCase').style.display = 'none';
 			document.getElementById('updateCase').style.display = 'none';
 			document.getElementById('incoming').style.display = 'none';
@@ -314,11 +299,11 @@ function showStatisticDivs(element) {
 	switch (element.innerHTML.valueOf()) {
 	case '1'.valueOf():
 		document.getElementById('priority-module').style.display = '';
-	document.getElementById('statPie').style.display = 'none';
+		document.getElementById('statPie').style.display = 'none';
 		break;
 	case '2'.valueOf():
 		document.getElementById('priority-module').style.display = 'none';
-	document.getElementById('statPie').style.display = '';
+		document.getElementById('statPie').style.display = '';
 		break;
 	}
 }
@@ -328,6 +313,11 @@ function showResourceDivs(element) {
 	switch (element.innerHTML.valueOf()) {
 	case '1'.valueOf():
 		document.getElementById('category-module').style.display = '';
+		document.getElementById('invoices').style.display = 'none';
+		break;
+	case '2'.valueOf():
+		document.getElementById('category-module').style.display = 'none';
+		document.getElementById('invoices').style.display = '';
 	}
 }
 
