@@ -111,6 +111,13 @@ function showHideModule(element) {
 
 			leftMenuButtons[0].style.display = '';
 			leftMenuButtons[1].style.display = '';
+		} else {
+			for (var i = 0; i < generalModules.length; i++) {
+				generalModules[i].style.display = 'none';
+			}
+			for (var i = 0; i < leftMenuButtons.length; i++) {
+				leftMenuButtons[i].style.display = 'none';
+			}
 		}
 		break;
 	case 'incomeMinus'.valueOf():
@@ -129,6 +136,13 @@ function showHideModule(element) {
 			leftMenuButtons[0].setAttribute("onclick",
 					'showIncomeMinusDivs(this)');
 			leftMenuButtons[0].style.display = '';
+		} else {
+			for (var i = 0; i < generalModules.length; i++) {
+				generalModules[i].style.display = 'none';
+			}
+			for (var i = 0; i < leftMenuButtons.length; i++) {
+				leftMenuButtons[i].style.display = 'none';
+			}
 		}
 		break;
 	case 'personalArea'.valueOf():
@@ -147,6 +161,63 @@ function showHideModule(element) {
 			leftMenuButtons[0].setAttribute("onclick",
 					'showPersonalAreaDivs(this)');
 			leftMenuButtons[0].style.display = '';
+		} else {
+			for (var i = 0; i < generalModules.length; i++) {
+				generalModules[i].style.display = 'none';
+			}
+			for (var i = 0; i < leftMenuButtons.length; i++) {
+				leftMenuButtons[i].style.display = 'none';
+			}
+		}
+		break;
+	case 'statistic'.valueOf():
+		if (document.getElementById('priority-module').style.display.valueOf() == 'none'
+				.valueOf()) {
+			stopLeftMenuAnimation();
+			document.getElementById('leftMenuDiv').style.marginLeft = '-10px';
+			for (var i = 0; i < generalModules.length; i++) {
+				generalModules[i].style.display = 'none';
+			}
+			for (var i = 0; i < leftMenuButtons.length; i++) {
+				leftMenuButtons[i].style.display = 'none';
+			}
+			showLeftMenuDiv();
+			document.getElementById('priority-module').style.display = '';
+			leftMenuButtons[0].setAttribute("onclick",
+					'showStatisticDivs(this)');
+			leftMenuButtons[0].style.display = '';
+		} else {
+			for (var i = 0; i < generalModules.length; i++) {
+				generalModules[i].style.display = 'none';
+			}
+			for (var i = 0; i < leftMenuButtons.length; i++) {
+				leftMenuButtons[i].style.display = 'none';
+			}
+		}
+		break;
+	case 'resource'.valueOf():
+		if (document.getElementById('category-module').style.display.valueOf() == 'none'
+				.valueOf()) {
+			stopLeftMenuAnimation();
+			document.getElementById('leftMenuDiv').style.marginLeft = '-10px';
+			for (var i = 0; i < generalModules.length; i++) {
+				generalModules[i].style.display = 'none';
+			}
+			for (var i = 0; i < leftMenuButtons.length; i++) {
+				leftMenuButtons[i].style.display = 'none';
+			}
+			showLeftMenuDiv();
+			document.getElementById('category-module').style.display = '';
+			leftMenuButtons[0]
+					.setAttribute("onclick", 'showResourceDivs(this)');
+			leftMenuButtons[0].style.display = '';
+		} else {
+			for (var i = 0; i < generalModules.length; i++) {
+				generalModules[i].style.display = 'none';
+			}
+			for (var i = 0; i < leftMenuButtons.length; i++) {
+				leftMenuButtons[i].style.display = 'none';
+			}
 		}
 		break;
 	case 'incomePlus'.valueOf():
@@ -165,6 +236,13 @@ function showHideModule(element) {
 			leftMenuButtons[0].setAttribute("onclick",
 					'showIncomePlusDivs(this)');
 			leftMenuButtons[0].style.display = '';
+		} else {
+			for (var i = 0; i < generalModules.length; i++) {
+				generalModules[i].style.display = 'none';
+			}
+			for (var i = 0; i < leftMenuButtons.length; i++) {
+				leftMenuButtons[i].style.display = 'none';
+			}
 		}
 		break;
 	}
@@ -183,6 +261,22 @@ function showIncomeMinusDivs(element) {
 	switch (element.innerHTML.valueOf()) {
 	case '1'.valueOf():
 		document.getElementById('incomingMinus').style.display = '';
+	}
+}
+
+// show divs for statistic button
+function showStatisticDivs(element) {
+	switch (element.innerHTML.valueOf()) {
+	case '1'.valueOf():
+		document.getElementById('priority-module').style.display = '';
+	}
+}
+
+// show divs for statistic button
+function showResourceDivs(element) {
+	switch (element.innerHTML.valueOf()) {
+	case '1'.valueOf():
+		document.getElementById('category-module').style.display = '';
 	}
 }
 
