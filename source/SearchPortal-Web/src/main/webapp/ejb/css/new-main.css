@@ -27,98 +27,16 @@ audio, canvas, progress, video {
 
 audio
 
-
-
-
-
-
-
-
-
-
 :not
-
-
-
-
-
-
-
-
-
 
 (
 [
 controls
 ]
 
-
-
-
-
-
-
-
-
-
 ){
-display
-
-
-
-
-
-
-
-
-
-
-:
-
-
-
-
-
-
-
-
-
-
-none
-
-
-
-
-
-
-
-
-
-
-;
-height
-
-
-
-
-
-
-
-
-
-
-:
-
-
-
-
-
-
-
-
-
-
-0;
+display:none;
+height:0;
 }
 [hidden], template {
 	display: none;
@@ -179,72 +97,16 @@ img {
 
 svg
 
-
-
-
-
-
-
-
-
-
 :not
-
-
-
-
-
-
-
-
-
 
 (
 :root
 
-
-
-
-
-
-
-
-
-
 ){
 overflow
 
-
-
-
-
-
-
-
-
-
 :
-
-
-
-
-
-
-
-
-
-
 hidden
-
-
-
-
-
-
-
-
-
-
 ;
 }
 figure {
@@ -8619,7 +8481,7 @@ button.close {
 .container-footer {
 	/*необходимо исправить*/
 	bottom: 0px;
-	position: static;
+	position: relative;
 	width: 100%;
 	text-align: right;
 	height: 90px;
@@ -8831,7 +8693,7 @@ progress.inoutProgress::-webkit-progress-value {
 }
 
 .main-container {
-	min-height: 74vh;
+	min-height: 71vh;
 }
 
 .btn-block:hover {

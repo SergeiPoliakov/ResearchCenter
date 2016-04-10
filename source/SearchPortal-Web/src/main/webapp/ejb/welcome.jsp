@@ -98,7 +98,7 @@
 			</div>
 		</div>
 	</nav>
-
+	<div class="container-fluid main-container">
 	<div id="leftMenuDiv" style="display: none;">
 		<jsp:include page="vis/left_menu.jsp" />
 	</div>
@@ -107,7 +107,7 @@
 		class="reset-div generalModule">
 		<jsp:include page="act/reset_balance.jsp" />
 	</div>
-	<div class="container-fluid main-container">
+
 		<div class="module generalModule" id="createCase"
 			style="display: none">
 			<div class="block-title">Создание новой задачи</div>
@@ -157,7 +157,7 @@
 				<jsp:include page="vis/income_consumption.jsp"></jsp:include>
 			</div>
 		</div>
-
+</div>
 
 		<div class="controlSalary" id="controlSalaryMain">
 			<jsp:include page="int/salary_control.jsp"></jsp:include>
