@@ -44,15 +44,15 @@
 <body>
 	<%
 		EntityUser user = (EntityUser) request.getSession().getAttribute("user");//тут пусто
-		ControllerCategories controllerCategories = new ControllerCategories();
+		/*ControllerCategories controllerCategories = new ControllerCategories();
 		List<?> userCategories = null;
 		try {
 			//userCategories = new ArrayList(controllerCategories.getCategories(user.getUserId()));
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}*/
 	%>
-	<%=userCategories.size()%>
+	<%=user.getUserId()%>
 
 </body>
 </html>

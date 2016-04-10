@@ -127,6 +127,21 @@
 			</div>
 		</div>
 
+<div class="module" id="category-module">
+			<div class="block-title">Категории</div>
+			<div class="block-information" id="bi-category-module">
+				<jsp:include page="module-categories/module.jsp" />
+			</div>
+		</div>
+
+
+<div class="module" id="priority-module">
+			<div class="block-title">Приоритеты</div>
+			<div class="block-information" id="bi-category-module">
+				<jsp:include page="module-priority/module.jsp" />
+			</div>
+		</div>
+
 		<div class="module generalModule" id="incoming" style="display: none">
 			<div class="block-title">Изменение счета</div>
 			<div class="block-information">
