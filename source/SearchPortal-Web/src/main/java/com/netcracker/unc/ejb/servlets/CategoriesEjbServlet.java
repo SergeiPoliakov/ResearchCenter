@@ -1,6 +1,10 @@
 package com.netcracker.unc.ejb.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.netcracker.unc.newmvc.ejb.controllers.ControllerCategories;
 import com.netcracker.unc.newmvc.ejb.entities.EntityUser;
+import com.netcracker.unc.newmvc.ejb.models.CategoryModel;
+import com.netcracker.unc.newmvc.ejb.models.UserModel;
 
 /**
  * Servlet implementation class CategoriesEjbServlet
@@ -17,13 +23,11 @@ import com.netcracker.unc.newmvc.ejb.entities.EntityUser;
 public class CategoriesEjbServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public CategoriesEjbServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	@EJB
+	ControllerCategories controller;
+
+	@EJB
+	UserModel user;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -31,17 +35,14 @@ public class CategoriesEjbServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		user.setUser((EntityUser) request.getSession().getAttribute("user"));
+		List categoryList = new ArrayList<CategoryModel>();
+		categoryList = controller.getCategories(user.getUser());
 
-		EntityUser user = (EntityUser) request.getSession().getAttribute("user");// тут
-																					// пусто
-		//ControllerCategories controllerCategories = new ControllerCategories();
-
-		response.getWriter().append("Привет сервлет");
+		request.getSession().setAttribute("categoryList", categoryList);
+		// response.sendRedirect("ejb/module-categories/module.jsp");
 	}
 }

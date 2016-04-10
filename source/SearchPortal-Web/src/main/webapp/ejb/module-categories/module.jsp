@@ -1,3 +1,6 @@
+<%@page import="com.netcracker.unc.newmvc.ejb.models.UserModel"%>
+<%@page import="com.netcracker.unc.ejb.htmltable.HtmlConverter"%>
+<%@page import="com.netcracker.unc.newmvc.ejb.models.CategoryModel"%>
 <%@page
 	import="com.netcracker.unc.newmvc.ejb.controllers.ControllerCategories"%>
 <%@page import="java.util.List"%>
@@ -42,17 +45,16 @@
 </script>
 </head>
 <body>
+	<jsp:include page="/CategoriesEjbServlet" />
 	<%
-		EntityUser user = (EntityUser) request.getSession().getAttribute("user");//тут пусто
-		/*ControllerCategories controllerCategories = new ControllerCategories();
-		List<?> userCategories = null;
-		try {
-			//userCategories = new ArrayList(controllerCategories.getCategories(user.getUserId()));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}*/
+		List<CategoryModel> categoryList = new ArrayList<CategoryModel>();
+		if (request.getSession().getAttribute("categoryList") != null) {
+			categoryList = (List<CategoryModel>) request.getSession().getAttribute("categoryList");
+			EntityUser user = (EntityUser) request.getSession().getAttribute("user");
 	%>
-	<%=user.getUserId()%>
-
+	<%=HtmlConverter.toHtmlTableWithUpdateForms(CategoryModel.class, categoryList, user.getUserId())%>
+	<%
+		}
+	%>
 </body>
 </html>
