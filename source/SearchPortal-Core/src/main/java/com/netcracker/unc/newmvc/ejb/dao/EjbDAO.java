@@ -457,6 +457,13 @@ public class EjbDAO {
 		}
 		return listGetAllInvoice;
 	}
+	
+	public void deleteInvoice(int invoiceId){
+		EntityObject invoiceObj = new EntityObject();
+		
+		invoiceObj = (EntityObject) getObject(EntityObject.class, invoiceId);
+		deleteObject(invoiceObj);
+	}
 
 	public StatisticModel procentForPie(long userId) {
 

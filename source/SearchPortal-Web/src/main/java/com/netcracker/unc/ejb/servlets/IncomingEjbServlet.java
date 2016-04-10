@@ -165,6 +165,18 @@ public class IncomingEjbServlet extends HttpServlet {
 			log.warning("Before redirect...");
 			response.sendRedirect("ejb/welcome.jsp");
 		}
+	}else{
+		
+		if ((request.getParameter("invoicesDelete") != null)
+				&& (!request.getParameter("invoicesDelete").trim().isEmpty())) {
+			String invoices = request.getParameter("invoicesDelete");
+			if (invoices.equals("deleteInvoices")){
+				if ((request.getParameter("invoice-number") != null) && (!request.getParameter("invoice-number").trim().isEmpty())) {
+					Integer invoiceNumber = Integer.valueOf(request.getParameter("invoice-number"));
+					ejb.deleteInvoice(invoiceNumber);
+				}
+			}
+		}
 	}
 	}
 }
