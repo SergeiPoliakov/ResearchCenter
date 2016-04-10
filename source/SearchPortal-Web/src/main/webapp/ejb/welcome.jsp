@@ -135,6 +135,14 @@
 			</div>
 		</div>
 
+		<div class="module generalModule" id="credit-module"
+			style="display: none">
+			<div class="block-title">Кредиты</div>
+			<div class="block-information" id="credit-module">
+				<jsp:include page="int/creditModule.jsp" />
+			</div>
+		</div>
+
 
 		<div class="module generalModule" id="invoices" style="display: none">
 			<div class="block-title">Управление счетами</div>
