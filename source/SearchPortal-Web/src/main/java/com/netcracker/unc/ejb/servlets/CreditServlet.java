@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.netcracker.unc.newmvc.ejb.controllers.ControllerCredit;
+import com.netcracker.unc.newmvc.ejb.dao.EjbDAO;
 import com.netcracker.unc.newmvc.ejb.models.UserModel;
 
 

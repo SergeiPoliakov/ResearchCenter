@@ -137,9 +137,9 @@
 
 		<div class="module generalModule" id="credit-module"
 			style="display: none">
-			<div class="block-title">Категории</div>
+			<div class="block-title">Кредиты</div>
 			<div class="block-information" id="credit-module">
-				<jsp:include page="int/CreditModule.jsp" />
+				<jsp:include page="int/creditModule.jsp" />
 			</div>
 		</div>
 
