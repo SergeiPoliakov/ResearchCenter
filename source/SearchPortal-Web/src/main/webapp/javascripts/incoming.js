@@ -19,11 +19,13 @@ function showInvoices() {
 
 function addInvoice() {
 	var activeCases = document.getElementById('add-invoice');
-	if (activeCases.style.visibility.valueOf() == 'hidden'.valueOf()) {
-		activeCases.style.visibility = 'visible';
+	alert(activeCases.style.display);
+	if (activeCases.style.display.valueOf() == 'none'.valueOf()) {
+		activeCases.style.display = '';
 	} else {
-		activeCases.style.visibility = 'hidden';
+		activeCases.style.visibility = 'none';
 	}
+	return false;
 }
 	
 function deleteInvoice() {

@@ -82,7 +82,7 @@ public class InvoiceDAO {
 		long auto_id;
 
 		try {
-			prepare = connect.prepareStatement(InvoiceQueries.setInvoice, new String[] { "FIN_OBJECT_ID" });
+			prepare = connect.prepareStatement(InvoiceQueries.setInvoiceName, new String[] { "FIN_OBJECT_ID" });
 			prepare.setString(1, invoiceJsp.getInvoiceName());
 			prepare.setInt(2, user.getUserId());			
 			if (prepare.executeUpdate()>0) {
@@ -104,7 +104,7 @@ public class InvoiceDAO {
 
 				prepare = connect.prepareStatement(InvoiceQueries.setPercent);
 				prepare.setLong(1, auto_id);
-				prepare.setDouble(2, invoiceJsp.getPercent());
+				prepare.setInt(2, invoiceJsp.getPercent());
 				prepare.executeUpdate();
 			}
 
@@ -147,7 +147,7 @@ public class InvoiceDAO {
 
 			invoice.setBalance(result.getInt(1));
 			invoice.setCredit(Boolean.parseBoolean(result.getString(2)));
-			invoice.setPercent(result.getDouble(3));
+			invoice.setPercent(result.getInt(3));
 			
 			log.warning("New balance after query: " + invoice.getBalance());
 
@@ -193,7 +193,7 @@ public class InvoiceDAO {
 
 				invoice.setBalance(result.getInt(1));
 				invoice.setCredit(Boolean.parseBoolean(result.getString(2)));
-				invoice.setPercent(result.getDouble(3));
+				invoice.setPercent(result.getInt(3));
 				
 				log.warning("New balance after query: " + invoice.getBalance());
 

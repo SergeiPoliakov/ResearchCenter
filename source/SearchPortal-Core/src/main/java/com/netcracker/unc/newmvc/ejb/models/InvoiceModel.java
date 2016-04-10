@@ -6,7 +6,7 @@ public class InvoiceModel {
 	private String invoiceName;
 	private int balance;
 	private boolean credit;
-	private double percent;
+	private int percent;
 	private int invoiceId;
 	private int objectTypeId;
 	
@@ -44,11 +44,11 @@ public class InvoiceModel {
 		this.credit = credit;
 	}
 
-	public double getPercent() {
+	public int getPercent() {
 		return percent;
 	}
 
-	public void setPercent(double percent) {
+	public void setPercent(int percent) {
 		this.percent = percent;
 	}
 

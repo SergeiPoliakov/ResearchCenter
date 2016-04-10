@@ -257,7 +257,7 @@ public class IncomeDAO {
 
 			invoice.setBalance(result.getInt(1));
 			invoice.setCredit(Boolean.valueOf(result.getString(2)));
-			invoice.setPercent(result.getDouble(3));
+			invoice.setPercent(result.getInt(3));
 
 			return invoice;
 

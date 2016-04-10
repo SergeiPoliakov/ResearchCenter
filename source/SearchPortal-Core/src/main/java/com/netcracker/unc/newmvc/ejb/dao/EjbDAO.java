@@ -7,13 +7,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+
+import org.hibernate.sql.Update;
+
 import com.netcracker.unc.newmvc.ejb.controllers.ControllerObjects;
+import com.netcracker.unc.newmvc.ejb.entities.EntityAttribute;
 import com.netcracker.unc.newmvc.ejb.entities.EntityObject;
+import com.netcracker.unc.newmvc.ejb.entities.EntityObjectType;
+import com.netcracker.unc.newmvc.ejb.entities.EntityParam;
 import com.netcracker.unc.newmvc.ejb.entities.EntityUser;
 import com.netcracker.unc.newmvc.ejb.models.ActiveCasesModel;
 import com.netcracker.unc.newmvc.ejb.models.CategoryModel;
@@ -37,6 +45,7 @@ public class EjbDAO {
 
 	private final long objectTypeIncome = 2; // Доход
 	private final long objectTypeCase = 4; // Задача
+	private final long objectTypeInvoice = 5; //Счет
 	private final long objectTypeCategory = 1; // Категория
 
 	//// database name object types
@@ -327,7 +336,7 @@ public class EjbDAO {
 			if (i.hasNext()) {
 				Object obj = i.next();
 				if (obj != null) {
-					System.out.println(obj);
+				//	System.out.println(obj);
 					return ((BigDecimal)obj).intValue();
 					
 				}
@@ -364,6 +373,58 @@ public class EjbDAO {
 		}
 		return invoice;
 	}
+	
+	public void addInvoice(InvoiceModel invoiceJsp,EntityUser userJsp){
+		EntityParam param = new EntityParam();
+		EntityAttribute atr = new EntityAttribute();
+		EntityObjectType ot = new EntityObjectType();
+		EntityObject invoice = new EntityObject();
+		Logger log = Logger.getLogger(EjbDAO.class.getName());
+		if (invoiceJsp != null){
+			invoice.setObjectName(invoiceJsp.getInvoiceName());
+			invoice.setObjectType(em.getReference(EntityObjectType.class, objectTypeInvoice));
+			invoice.setUser(userJsp);
+			addObject(invoice);
+			updateReferencesToObjects();
+			//	invoice = (EntityObject) getObject(EntityObject.class, invoice.getFinObjectId());
+			log.warning("invoice = " + invoice);
+			
+			ot = (EntityObjectType) getObject(EntityObjectType.class, 5);
+			atr = (EntityAttribute) getObject(EntityAttribute.class, 14);
+			param.setObject(invoice);
+			param.setAttribute(atr);
+			param.setValue(String.valueOf(invoiceJsp.getBalance()));
+			addObject(param);
+			log.warning("add object...");
+			updateReferencesToObjects();
+			log.warning("param = " + param);
+			
+			atr = (EntityAttribute) getObject(EntityAttribute.class, 15);
+			param = new EntityParam();
+			param.setObject(invoice);
+			param.setAttribute(atr);
+			param.setValue(String.valueOf(invoiceJsp.isCredit()));
+			log.warning("param = " + param);
+			addObject(param);
+			log.warning("add object...");
+			//updateReferencesToObjects();
+			
+			log.warning("after update");
+			atr = (EntityAttribute) getObject(EntityAttribute.class, 16);
+			param = new EntityParam();
+			log.warning("atr = "+ atr );
+			log.warning("param.setObject..");
+			param.setObject(invoice);
+			log.warning("param.setAtrtribute");
+			param.setAttribute(atr);
+			param.setValue(String.valueOf(invoiceJsp.getPercent()));
+			log.warning("param = " + param);
+			addObject(param);
+			log.warning("add object...");
+			//updateReferencesToObjects();
+		}
+		
+	}
 
 	public void updateBalance(InvoiceModel invoiceJsp) {
 		InvoiceModel invoice = invoiceJsp;
@@ -379,6 +440,7 @@ public class EjbDAO {
 		Query query = em.createNativeQuery(InvoiceQueries.getAllInvoicesByUserId);
 		query.setParameter(1, user.getUserId());
 		List<?> result = query.getResultList();
+		System.out.println(result.size());
 		if (result.size() > 0) {
 			Iterator<?> i = result.iterator();
 			while (i.hasNext()) {

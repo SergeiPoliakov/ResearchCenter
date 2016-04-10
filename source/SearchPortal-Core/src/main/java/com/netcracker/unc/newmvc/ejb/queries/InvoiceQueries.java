@@ -31,7 +31,7 @@ public class InvoiceQueries {
 			+ invoice_id;
 	public static final String get_sum_all_consumption_for_users_by_user_id = "SELECT SUM(par.VALUE) FROM SP_FIN_OBJECTS fo INNER JOIN SP_ATTRIBUTES atr ON fo.FIN_OBJECT_TYPE_ID = atr.FIN_OBJECT_TYPE_ID INNER JOIN SP_PARAMS par ON atr.ATTRIBUTE_ID = par.ATTRIBUTE_ID WHERE FIN_OBJECT_TYPE_ID = 3 AND date_format(par.VALUE_DATE, '%Y%m') = date_format(now(), '%Y%m')"
 			+ invoice_id;
-	public static final String setInvoice = "insert into SP_FIN_OBJECTS(FIN_OBJECT_ID, OBJECT_NAME, FIN_OBJECT_TYPE_ID, user_id) values(SP_FIN_OBJECT_ID_SEQ.nextval, ?, 5, ?)";
+	public static final String setInvoiceName = "insert into SP_FIN_OBJECTS(FIN_OBJECT_ID, OBJECT_NAME, FIN_OBJECT_TYPE_ID, user_id) values(SP_FIN_OBJECT_ID_SEQ.nextval, ?, 5, ?)";
 	public static final String setBalance = "insert into SP_PARAMS(ATTRIBUTE_ID, FIN_OBJECT_ID, VALUE) values (14,?, ?)";
 	public static final String setCredit = "insert into SP_PARAMS(ATTRIBUTE_ID, FIN_OBJECT_ID, VALUE) values (15, ?, ?)";
 	public static final String setPercent = "insert into SP_PARAMS(ATTRIBUTE_ID, FIN_OBJECT_ID, VALUE) values (16, ?, ?)";

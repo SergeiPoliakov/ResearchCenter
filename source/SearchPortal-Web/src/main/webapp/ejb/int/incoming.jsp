@@ -12,7 +12,8 @@
 	</div>
 
 	<form action="../inc" method="get">
-		<input type="hidden" value="incomingBalance" name="incoming" /> <select
+		<input type="hidden" value="incomingBalance" name="incoming" /> 
+		<select
 			name="invoiceNumber">
 			<option disabled>Счёт</option>
 			<c:forEach var="invoice"

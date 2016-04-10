@@ -70,7 +70,7 @@
 					</li>
 					<li>
 						<div class="btn-group">
-							<button class="btn" onclick="showInvoices()">Счета</button>
+							<button class="btn" onclick="showHideModule(this)" id="invoice">Ресурсы</button>
 						</div>
 					</li>
 				</ul>
@@ -129,6 +129,9 @@
 			<jsp:include page="int/incoming.jsp" />
 		</div>
 		<div id="incomingMinus" style="display: none"></div>
+		<jsp:include page="int/incomingMinus.jsp" />
+		<div id="invoices" style="display: none"></div>
+		<jsp:include page="int/invoice.jsp" />
 
 		<div><jsp:include page="vis/statistic.jsp"></jsp:include></div>
 

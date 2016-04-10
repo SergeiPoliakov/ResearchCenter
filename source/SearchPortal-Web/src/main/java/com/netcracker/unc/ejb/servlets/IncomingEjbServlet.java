@@ -32,6 +32,7 @@ public class IncomingEjbServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.getSession().setAttribute("invoicesController", ejb.getSumBalance(user.getUser()));
 		request.getSession().setAttribute("invoicesControllerItems", ejb.getAllInvoice(user.getUser()));
+		//System.out.println(ejb.getAllInvoice(user.getUser()).size());
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,10 +42,8 @@ public class IncomingEjbServlet extends HttpServlet {
 		createSumBalance(request, response);
 
 		if (request.getParameter("incoming") != null) {
-			System.out.println("попал в сервлет1");
 			String incoming = request.getParameter("incoming");
 			if (incoming.equals("incomingBalance")) {
-				System.out.println("попал в сервлет2");
 				EntityUser user = null;
 				InvoiceModel invoice = new InvoiceModel();
 				user = (EntityUser) request.getSession().getAttribute("user");
@@ -52,7 +51,7 @@ public class IncomingEjbServlet extends HttpServlet {
 
 				int invoiceNumber = 1;
 				if ((request.getParameter("invoiceNumber") != null)
-						&& (!request.getParameter("invoiceNumber").trim().isEmpty())) {
+						&& (!request.getParameter("invoiceNumber").trim().isEmpty())) {                           
 					invoiceNumber = Integer.valueOf(request.getParameter("invoiceNumber"));
 					log.warning("New number: " + invoiceNumber);
 					 request.setAttribute("currentSum", invoiceNumber);
@@ -82,7 +81,6 @@ public class IncomingEjbServlet extends HttpServlet {
 			}
 		}
 		if (request.getParameter("incomingMinus") != null) {
-			System.out.println("попал в сервлет1");
 			String incoming = request.getParameter("incomingMinus");
 			if (incoming.equals("incomingBalance")) {
 				EntityUser user = null;
@@ -120,7 +118,56 @@ public class IncomingEjbServlet extends HttpServlet {
 				log.warning("Before redirect...");
 				response.sendRedirect("ejb/welcome.jsp");
 			}
+			else {
+				user.setUser((EntityUser) request.getSession().getAttribute("user"));
+				createSumBalance(request, response);
+			}
+		}
+		
+		String invoiceName; String invoiceBalance, invoiceCredit, invoicePercent;
+		if ((request.getParameter("invoices") != null)
+				&& (!request.getParameter("invoices").trim().isEmpty())) {
+			String invoices = request.getParameter("invoices");
+			if (invoices.equals("addInvoices")){
+				EntityUser user = null;
+				InvoiceModel invoice = new InvoiceModel();
+				user = (EntityUser) request.getSession().getAttribute("user");
+				Logger log = Logger.getLogger(IncomingEjbServlet.class.getName());
+			
+				if ((request.getParameter("invoice-name") != null)
+						&& (!request.getParameter("invoice-name").trim().isEmpty())) {
+				invoiceName = String.valueOf(request.getParameter("invoice-name"));
+				log.warning("New invoice: " + invoiceName);
+				invoice.setInvoiceName(invoiceName);
+				}
+
+				if ((request.getParameter("invoice-balance") != null)
+					&& (!request.getParameter("invoice-balance").trim().isEmpty())) {
+					invoiceBalance = String.valueOf(request.getParameter("invoice-balance"));
+					log.warning("New invoice: " + invoiceBalance);
+					invoice.setBalance(Integer.valueOf(invoiceBalance));
+				}
+				if ((request.getParameter("invoice-credit") != null)
+						&& (!request.getParameter("invoice-credit").trim().isEmpty())) {
+					invoiceCredit = request.getParameter("invoice-credit");
+					log.warning("New invoice: " + invoiceCredit);
+					invoice.setCredit(Boolean.valueOf(invoiceCredit));
+				}
+				if ((request.getParameter("invoice-percent") != null)
+					&& (!request.getParameter("invoice-percent").trim().isEmpty())) {
+				invoicePercent = String.valueOf(request.getParameter("invoice-percent"));
+				log.warning("New invoice: " + invoicePercent);
+				invoice.setPercent(Integer.valueOf(invoicePercent));
+			}
+
+			ejb.addInvoice(invoice, user);
+			// request.setAttribute("currentSum", invoiceName);
+			log.warning("Before redirect...");
+			response.sendRedirect("ejb/welcome.jsp");
 		}
 	}
-
+	}
 }
+
+
+		
