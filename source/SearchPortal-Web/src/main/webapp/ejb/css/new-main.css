@@ -27,50 +27,16 @@ audio, canvas, progress, video {
 
 audio
 
-
-
-
 :not
-
-
-
 
 (
 [
 controls
 ]
 
-
-
-
 ){
-display
-
-
-
-
-:
-
-
-
-
-none
-
-
-
-
-;
-height
-
-
-
-
-:
-
-
-
-
-0;
+display:none;
+height:0;
 }
 [hidden], template {
 	display: none;
@@ -131,36 +97,16 @@ img {
 
 svg
 
-
-
-
 :not
-
-
-
 
 (
 :root
 
-
-
-
 ){
 overflow
 
-
-
-
 :
-
-
-
-
 hidden
-
-
-
-
 ;
 }
 figure {
@@ -4064,7 +4010,19 @@ tbody.collapse.in {
 
 
 
+
+
+
+
+
+
 :not
+
+
+
+
+
+
 
 
 
@@ -4075,8 +4033,20 @@ tbody.collapse.in {
 
 
 
+
+
+
+
+
+
 )
 :not
+
+
+
+
+
+
 
 
 
@@ -4087,14 +4057,32 @@ tbody.collapse.in {
 
 
 
+
+
+
+
+
+
 )
 :not
 
 
 
 
+
+
+
+
+
+
 (
 .dropdown-toggle
+
+
+
+
+
+
 
 
 
@@ -4106,7 +4094,19 @@ border-radius
 
 
 
+
+
+
+
+
+
 :
+
+
+
+
+
+
 
 
 
@@ -4124,12 +4124,30 @@ border-radius
 
 
 
+
+
+
+
+
+
 :first-child
 
 
 
 
+
+
+
+
+
+
 :not
+
+
+
+
+
+
 
 
 
@@ -4140,14 +4158,32 @@ border-radius
 
 
 
+
+
+
+
+
+
 )
 :not
 
 
 
 
+
+
+
+
+
+
 (
 .dropdown-toggle
+
+
+
+
+
+
 
 
 
@@ -4159,7 +4195,19 @@ border-top-right-radius
 
 
 
+
+
+
+
+
+
 :
+
+
+
+
+
+
 
 
 
@@ -4170,7 +4218,19 @@ border-bottom-right-radius
 
 
 
+
+
+
+
+
+
 :
+
+
+
+
+
+
 
 
 
@@ -4184,7 +4244,19 @@ border-bottom-right-radius
 
 
 
+
+
+
+
+
+
 :last-child
+
+
+
+
+
+
 
 
 
@@ -4194,8 +4266,20 @@ border-bottom-right-radius
 
 
 
+
+
+
+
+
+
 (
 :first-child
+
+
+
+
+
+
 
 
 
@@ -4208,13 +4292,31 @@ border-bottom-right-radius
 
 
 
+
+
+
+
+
+
 :not
+
+
+
+
+
+
 
 
 
 
 (
 :first-child
+
+
+
+
+
+
 
 
 
@@ -4226,7 +4328,19 @@ border-top-left-radius
 
 
 
+
+
+
+
+
+
 :
+
+
+
+
+
+
 
 
 
@@ -4237,7 +4351,19 @@ border-bottom-left-radius
 
 
 
+
+
+
+
+
+
 :
+
+
+
+
+
+
 
 
 
@@ -4327,7 +4453,19 @@ border-bottom-left-radius
 
 
 
+
+
+
+
+
+
 :not
+
+
+
+
+
+
 
 
 
@@ -4338,14 +4476,32 @@ border-bottom-left-radius
 
 
 
+
+
+
+
+
+
 )
 :not
 
 
 
 
+
+
+
+
+
+
 (
 :last-child
+
+
+
+
+
+
 
 
 
@@ -4357,7 +4513,19 @@ border-radius
 
 
 
+
+
+
+
+
+
 :
+
+
+
+
+
+
 
 
 
@@ -4371,7 +4539,19 @@ border-radius
 
 
 
+
+
+
+
+
+
 :first-child
+
+
+
+
+
+
 
 
 
@@ -4381,8 +4561,20 @@ border-radius
 
 
 
+
+
+
+
+
+
 (
 :last-child
+
+
+
+
+
+
 
 
 
@@ -4394,13 +4586,31 @@ border-top-left-radius
 
 
 
+
+
+
+
+
+
 :
+
+
+
+
+
+
 
 
 
 
 4
 px
+
+
+
+
+
+
 
 
 
@@ -4411,7 +4621,19 @@ border-top-right-radius
 
 
 
+
+
+
+
+
+
 :
+
+
+
+
+
+
 
 
 
@@ -4422,13 +4644,31 @@ px
 
 
 
+
+
+
+
+
+
 ;
 border-bottom-right-radius
 
 
 
 
+
+
+
+
+
+
 :
+
+
+
+
+
+
 
 
 
@@ -4439,7 +4679,19 @@ border-bottom-left-radius
 
 
 
+
+
+
+
+
+
 :
+
+
+
+
+
+
 
 
 
@@ -4453,7 +4705,19 @@ border-bottom-left-radius
 
 
 
+
+
+
+
+
+
 :last-child
+
+
+
+
+
+
 
 
 
@@ -4463,8 +4727,20 @@ border-bottom-left-radius
 
 
 
+
+
+
+
+
+
 (
 :first-child
+
+
+
+
+
+
 
 
 
@@ -4476,7 +4752,19 @@ border-top-left-radius
 
 
 
+
+
+
+
+
+
 :
+
+
+
+
+
+
 
 
 
@@ -4487,7 +4775,19 @@ border-top-right-radius
 
 
 
+
+
+
+
+
+
 :
+
+
+
+
+
+
 
 
 
@@ -4498,13 +4798,31 @@ border-bottom-right-radius
 
 
 
+
+
+
+
+
+
 :
+
+
+
+
+
+
 
 
 
 
 4
 px
+
+
+
+
+
+
 
 
 
@@ -4515,13 +4833,31 @@ border-bottom-left-radius
 
 
 
+
+
+
+
+
+
 :
+
+
+
+
+
+
 
 
 
 
 4
 px
+
+
+
+
+
+
 
 
 
@@ -4652,7 +4988,19 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
+
+
+
+
 :not
+
+
+
+
+
+
 
 
 
@@ -4663,14 +5011,32 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
+
+
+
+
 )
 :not
 
 
 
 
+
+
+
+
+
+
 (
 :last-child
+
+
+
+
+
+
 
 
 
@@ -4681,7 +5047,19 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
+
+
+
+
 :not
+
+
+
+
+
+
 
 
 
@@ -4692,14 +5070,32 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
+
+
+
+
 )
 :not
 
 
 
 
+
+
+
+
+
+
 (
 :last-child
+
+
+
+
+
+
 
 
 
@@ -4710,12 +5106,30 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
+
+
+
+
 .form-control
 
 
 
 
+
+
+
+
+
+
 :not
+
+
+
+
+
+
 
 
 
@@ -4726,14 +5140,32 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
+
+
+
+
 )
 :not
 
 
 
 
+
+
+
+
+
+
 (
 :last-child
+
+
+
+
+
+
 
 
 
@@ -4745,7 +5177,19 @@ border-radius
 
 
 
+
+
+
+
+
+
 :
+
+
+
+
+
+
 
 
 
@@ -8037,7 +8481,7 @@ button.close {
 .container-footer {
 	/*необходимо исправить*/
 	bottom: 0px;
-	position: static;
+	position: relative;
 	width: 100%;
 	text-align: right;
 	height: 90px;
@@ -8249,7 +8693,7 @@ progress.inoutProgress::-webkit-progress-value {
 }
 
 .main-container {
-	min-height: 74vh;
+	min-height: 71vh;
 }
 
 .btn-block:hover {
@@ -8272,3 +8716,27 @@ progress.inoutProgress::-webkit-progress-value {
 	vertical-align: top;
 }
 */
+.reset-div {
+	width: 250px;
+	height: 180px;
+	position: absolute;
+	border: 1px #004949 groove;
+	margin: 10px;
+	border-bottom-right-radius: 18px;
+	border-bottom-left-radius: 18px;
+	background-color: #fef8a0;
+}
+
+#leftMenuDiv {
+	position: absolute;
+}
+
+.updateCaseInput {
+	width: 100%;
+	font-size: 10px;
+}
+
+.btn-group {
+	padding-top: 5px;
+}
+/*--------------*/

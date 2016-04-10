@@ -65,13 +65,12 @@
 						</div></li>
 					<li>
 						<div class="btn-group">
-							<button class="btn" onclick="show_consump()">Статистика</button>
+							<button class="btn" onclick="showHideModule(this)" id="statistic">Статистика</button>
 						</div>
 					</li>
 					<li>
 						<div class="btn-group">
-							<button class="btn" onclick="showHideModule(this)" id="invoice">Ресурсы</button>
-						</div>
+							<button class="btn" id="resource" onclick="showHideModule(this)">Ресурсы</button>						</div>
 					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
@@ -98,16 +97,18 @@
 			</div>
 		</div>
 	</nav>
-
-	<div id="leftMenuDiv" style="display: none;">
-		<jsp:include page="vis/left_menu.jsp" />
-	</div>
-
-	<div id="resetBalanceDiv" style="display: none">
-		<jsp:include page="act/reset_balance.jsp" />
-	</div>
 	<div class="container-fluid main-container">
-		<div class="module" id="createCase" style="display: none">
+		<div id="leftMenuDiv" style="display: none;">
+			<jsp:include page="vis/left_menu.jsp" />
+		</div>
+
+		<div id="resetBalanceDiv" style="display: none"
+			class="reset-div generalModule">
+			<jsp:include page="act/reset_balance.jsp" />
+		</div>
+
+		<div class="module generalModule" id="createCase"
+			style="display: none">
 			<div class="block-title">Создание новой задачи</div>
 			<div class="block-information">
 				<div class="create-case" id="create-case">
@@ -116,7 +117,7 @@
 			</div>
 		</div>
 
-		<div class="module" id="editCase" style="display: none">
+		<div class="module generalModule" id="editCase" style="display: none">
 			<div class="block-title">Редактирование задач</div>
 			<div class="block-information">
 				<div id="updateCase">
@@ -125,40 +126,57 @@
 			</div>
 		</div>
 
-		<div id="incoming" style="display: none">
-			<jsp:include page="int/incoming.jsp" />
+		<div class="module generalModule" id="category-module"
+			style="display: none">
+			<div class="block-title">Категории</div>
+			<div class="block-information" id="bi-category-module">
+				<jsp:include page="module-categories/module.jsp" />
+			</div>
 		</div>
-		<div id="incomingMinus" style="display: none"></div>
 		<jsp:include page="int/incomingMinus.jsp" />
 		<div id="invoices" style="display: none"></div>
 		<jsp:include page="int/invoice.jsp" />
 
-		<div><jsp:include page="vis/statistic.jsp"></jsp:include></div>
 
-		<div class="container" id="personalAreaUserDiv" style="display: none">
-			<div class="module" id="stat">
-				<div class="block-title">Редактирование профиля</div>
-				<div class="block-information">
-					<div id="editUser">
-						<jsp:include page="act/update_user.jsp"></jsp:include>
-					</div>
+		<div class="module generalModule" id="priority-module"
+			style="display: none">
+			<div class="block-title">Приоритеты</div>
+			<div class="block-information" id="bi-category-module">
+				<jsp:include page="module-priority/module.jsp" />
+			</div>
+		</div>
+
+		<div class="module generalModule" id="incoming" style="display: none">
+			<div class="block-title">Изменение счета</div>
+			<div class="block-information">
+				<jsp:include page="int/incoming.jsp" />
+			</div>
+		</div>
+		<div class="module generalModule" id="incomingMinus"
+			style="display: none">
+			<div class="block-title">Изменение счета</div>
+			<div class="block-information">
+				<jsp:include page="int/incomingMinus.jsp" />
+			</div>
+		</div>
+
+		<div class="module generalModule" id="editUser" style="display: none">
+			<div class="block-title">Редактирование профиля</div>
+			<div class="block-information">
+				<div id="editUser">
+					<jsp:include page="act/update_user.jsp"></jsp:include>
 				</div>
 			</div>
 		</div>
-	</div>
-	<%
-		EntityUser user = (EntityUser) request.getSession().getAttribute("user");//тут пусто
-	%>
 
+		<div><jsp:include page="vis/statistic.jsp"></jsp:include></div>
 
-
-
-	<div class="module-right" id="income">
-		<div class="overlayInCons">
-			<jsp:include page="vis/income_consumption.jsp"></jsp:include>
+		<div class="module-right" id="income">
+			<div class="overlayInCons">
+				<jsp:include page="vis/income_consumption.jsp"></jsp:include>
+			</div>
 		</div>
 	</div>
-
 
 	<div class="controlSalary" id="controlSalaryMain">
 		<jsp:include page="int/salary_control.jsp"></jsp:include>
@@ -185,7 +203,6 @@
 	<div class="container-footer">
 		<p class="text-muted">©УНЦ 2016 год.</p>
 	</div>
-
 </body>
 
 <script src="js/actions.js"></script>
