@@ -58,6 +58,7 @@ function changeCase(element) {
 		cells[0].innerHTML = '';
 		var input = document.createElement('input');
 		input.setAttribute("type", "text");
+		input.setAttribute("class", "updateCaseInput");
 		input.setAttribute("name", "nameCase");
 		input.setAttribute("value", name);
 		cells[0].appendChild(input);
@@ -67,6 +68,7 @@ function changeCase(element) {
 		name = name.match(expect2);
 		cells[1].innerHTML = '';
 		input = document.createElement('input');
+		input.setAttribute("class", "updateCaseInput");
 		input.setAttribute("type", "text");
 		input.setAttribute("name", "costCase");
 		input.setAttribute("value", name);
@@ -78,6 +80,7 @@ function changeCase(element) {
 		name = name.match(expect3);
 		cells[3].innerHTML = '';
 		input = document.createElement('input');
+		input.setAttribute("class", "updateCaseInput");
 		input.setAttribute("type", "date");
 		input.setAttribute("name", "dateCase");
 		// block date
@@ -102,6 +105,7 @@ function changeCase(element) {
 		name = name.match(expect4);
 		cells[5].innerHTML = '';
 		input = document.createElement('select');
+		input.setAttribute("class", "updateCaseInput");
 		input.name = 'priorityCase';
 		var option = document.createElement('option');
 		option.value = name;

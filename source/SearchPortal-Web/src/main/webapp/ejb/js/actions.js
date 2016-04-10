@@ -81,52 +81,96 @@ if (document.getElementById("controlSalaryMain") != null) {
 }
 
 // show-hide general modules
+var leftMenuButtons = document.getElementsByClassName('leftMenuButton');
 function showHideModule(element) {
-	var leftMenuButtons = document.getElementsByClassName('leftMenuButton');
 	var personalAreaUserDiv = document.getElementById('personalAreaUserDiv');
 	var button = element;
+	var generalModules = document.getElementsByClassName('generalModule');
+	// document.getElementById('leftMenuDiv').style.display = 'none';
 	switch (button.id.valueOf()) {
 	case 'consumption'.valueOf():
-		document.getElementById('createCase').style.display = '';
-		personalAreaUserDiv.style.display = 'none';
-		showLeftMenuDiv();
+		if (document.getElementById('createCase').style.display.valueOf() == 'none'
+				.valueOf()
+				&& document.getElementById('editCase').style.display.valueOf() == 'none'
+						.valueOf()) {
+			stopLeftMenuAnimation();
+			document.getElementById('leftMenuDiv').style.marginLeft = '-10px';
+			for (var i = 0; i < generalModules.length; i++) {
+				generalModules[i].style.display = 'none';
+			}
+			for (var i = 0; i < leftMenuButtons.length; i++) {
+				leftMenuButtons[i].style.display = 'none';
+			}
+			document.getElementById('createCase').style.display = '';
+			showLeftMenuDiv();
+
+			leftMenuButtons[0].setAttribute("onclick",
+					"showConsumptionDivs(this)");
+			leftMenuButtons[1].setAttribute("onclick",
+					"showConsumptionDivs(this)");
+
+			leftMenuButtons[0].style.display = '';
+			leftMenuButtons[1].style.display = '';
+		}
+		break;
+	case 'incomeMinus'.valueOf():
+		if (document.getElementById('incomingMinus').style.display.valueOf() == 'none'
+				.valueOf()) {
+			stopLeftMenuAnimation();
+			document.getElementById('leftMenuDiv').style.marginLeft = '-10px';
+			for (var i = 0; i < generalModules.length; i++) {
+				generalModules[i].style.display = 'none';
+			}
+			for (var i = 0; i < leftMenuButtons.length; i++) {
+				leftMenuButtons[i].style.display = 'none';
+			}
+			showLeftMenuDiv();
+			document.getElementById('incomingMinus').style.display = '';
+			leftMenuButtons[0].setAttribute("onclick",
+					'showIncomeMinusDivs(this)');
+			leftMenuButtons[0].style.display = '';
+		}
 		break;
 	case 'personalArea'.valueOf():
-		if (personalAreaUserDiv.style.display.valueOf() == 'none'.valueOf()) {
-			personalAreaUserDiv.style.display = '';
-			document.getElementById('createCase').style.display = 'none';
-			document.getElementById('updateCase').style.display = 'none';
+		if (document.getElementById('editUser').style.display.valueOf() == 'none'
+				.valueOf()) {
+			stopLeftMenuAnimation();
 			document.getElementById('leftMenuDiv').style.marginLeft = '-10px';
-			document.getElementById('leftMenuDiv').style.display = 'none';
-		} else
-			personalAreaUserDiv.style.display = 'none';
+			for (var i = 0; i < generalModules.length; i++) {
+				generalModules[i].style.display = 'none';
+			}
+			for (var i = 0; i < leftMenuButtons.length; i++) {
+				leftMenuButtons[i].style.display = 'none';
+			}
+			showLeftMenuDiv();
+			document.getElementById('editUser').style.display = '';
+			leftMenuButtons[0].setAttribute("onclick",
+					'showPersonalAreaDivs(this)');
+			leftMenuButtons[0].style.display = '';
+		}
 		break;
 	case 'incomePlus'.valueOf():
 		if (document.getElementById('incoming').style.display.valueOf() == 'none'
 				.valueOf()) {
+			stopLeftMenuAnimation();
+			document.getElementById('leftMenuDiv').style.marginLeft = '-10px';
+			for (var i = 0; i < generalModules.length; i++) {
+				generalModules[i].style.display = 'none';
+			}
+			for (var i = 0; i < leftMenuButtons.length; i++) {
+				leftMenuButtons[i].style.display = 'none';
+			}
+			showLeftMenuDiv();
 			document.getElementById('incoming').style.display = '';
 			leftMenuButtons[0].setAttribute("onclick",
 					'showIncomePlusDivs(this)');
-			document.getElementById('createCase').style.display = 'none';
-			document.getElementById('updateCase').style.display = 'none';
-			document.getElementById('incomingMinus').style.display = 'none';
-		}
-		break;
-		
-	case 'incomeMinus'.valueOf():
-		if (document.getElementById('incomingMinus').style.display.valueOf() == 'none'
-				.valueOf()) {
-			document.getElementById('incomingMinus').style.display = '';
-			leftMenuButtons[0].setAttribute("onclick",
-					'showIncomeMinusDivs(this)');
-			document.getElementById('createCase').style.display = 'none';
-			document.getElementById('updateCase').style.display = 'none';
-			document.getElementById('incoming').style.display = 'none';
+			leftMenuButtons[0].style.display = '';
 		}
 		break;
 	}
 }
 
+// show divs for plus button
 function showIncomePlusDivs(element) {
 	switch (element.innerHTML.valueOf()) {
 	case '1'.valueOf():
@@ -134,6 +178,7 @@ function showIncomePlusDivs(element) {
 	}
 }
 
+// show divs for minus button
 function showIncomeMinusDivs(element) {
 	switch (element.innerHTML.valueOf()) {
 	case '1'.valueOf():
@@ -141,12 +186,35 @@ function showIncomeMinusDivs(element) {
 	}
 }
 
+// show divs for consumption button
+function showConsumptionDivs(element) {
+	switch (element.innerHTML.valueOf()) {
+	case '1'.valueOf():
+		document.getElementById('createCase').style.display = '';
+		document.getElementById('editCase').style.display = 'none';
+		break;
+	case '2'.valueOf():
+		document.getElementById('createCase').style.display = 'none';
+		document.getElementById('editCase').style.display = '';
+	}
+}
+
+// show divs for personal area button
+function showPersonalAreaDivs(element) {
+	switch (element.innerHTML.valueOf()) {
+	case '1'.valueOf():
+		document.getElementById('editUser').style.display = '';
+		break;
+	}
+}
+
 // animation for left menu buttons
+var animationLeftMenu;
 function showLeftMenuDiv() {
 	var leftMenuDiv = document.getElementById('leftMenuDiv');
 	leftMenuDiv.style.display = '';
 	var posLeftMenu = -10;
-	var animationLeftMenu = setInterval(function() {
+	animationLeftMenu = setInterval(function() {
 		if (posLeftMenu < 10) {
 			posLeftMenu += 1;
 			leftMenuDiv.style.marginLeft = posLeftMenu + 'px';
@@ -154,6 +222,9 @@ function showLeftMenuDiv() {
 			clearInterval(animationLeftMenu);
 		}
 	}, 50);
+}
+function stopLeftMenuAnimation() {
+	clearInterval(animationLeftMenu);
 }
 
 // left menu button choose

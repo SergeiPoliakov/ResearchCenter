@@ -54,7 +54,7 @@
 				+ "${avgIncome} руб."
 				+ "<p><b>Средний расход:</b> " + "${avgConsumption} руб.";
 		div.appendChild(label);
-		div.style.marginLeft = (posX-1700) + 'px';
+		div.style.marginLeft = (posX-1300) + 'px';
 		divProgress.appendChild(div);
 	}
 </script>
