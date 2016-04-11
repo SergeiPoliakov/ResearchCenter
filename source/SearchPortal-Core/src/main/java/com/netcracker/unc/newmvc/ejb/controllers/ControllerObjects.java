@@ -95,7 +95,7 @@ public class ControllerObjects {
 
 	}
 
-	private EntityParam setParamDate(String date, EntityParam param) {
+	public EntityParam setParamDate(String date, EntityParam param) {
 		java.util.Date oldDate;
 		try {
 			oldDate = parse.parse(date);
