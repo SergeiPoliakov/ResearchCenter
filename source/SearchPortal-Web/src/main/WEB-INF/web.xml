@@ -18,7 +18,6 @@
 		<servlet-name>interface-ejb-servlet</servlet-name>
 		<servlet-class>com.netcracker.unc.ejb.servlets.InterfaceEjbServlet</servlet-class>
 	</servlet>
-
 	<servlet>
 		<servlet-name>category-ejb-servlet</servlet-name>
 		<servlet-class>com.netcracker.unc.ejb.servlets.CategoriesEjbServlet</servlet-class>
@@ -26,6 +25,16 @@
 	<servlet-mapping>
 		<servlet-name>category-ejb-servlet</servlet-name>
 		<url-pattern>/CategoriesEjbServlet</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>priority-category-ejb-servlet</servlet-name>
+		<servlet-class>com.netcracker.unc.ejb.servlets.PriorityCategoriesEjbServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>priority-category-ejb-servlet</servlet-name>
+		<url-pattern>/PriorityCategoriesEjbServlet</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
