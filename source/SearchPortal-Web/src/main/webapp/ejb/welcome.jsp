@@ -210,8 +210,9 @@
 	<c:set var="checkSalaryBro" value="${checkSalary}" scope="page" />
 	<c:if test="${checkSalaryBro == 'error'}">
 		<div id="helloCase">
-			<label class="welcomeCase" id="welcomeCase1"><b>Добро
-					пожаловать на сайт <span style="margin-left: 40px">приоритетов!</span>
+		<div style="margin-left: 5px;">
+			<label class="welcomeCase" id="welcomeCase1"><span style="margin-left: 40px"><b>Добро
+					пожаловать на сайт <span style="margin-left: 20px">приоритетов!</span>
 			</b></label>
 			<p>
 				<label class="welcomeCase" id="welcomeCase2">Пожалуйста,
@@ -221,9 +222,10 @@
 				<input type="hidden" value="addSalary" name="custom" /> <input
 					type="text" id="welcomeCaseInput" name="salary"
 					onkeypress="validate(this)" /><label class="welcomeCase"
-					style="margin-left: 3px">руб.</label> <input type="submit"
-					value="ввести" id="addSalarySubmit" />
+					style="margin-left: 3px">руб.</label> <button class="btn btn-reset" type="submit"
+					 id="addSalarySubmit">Ввести</button>
 			</form>
+			</div>
 		</div>
 	</c:if>
 	<div class="container-footer">

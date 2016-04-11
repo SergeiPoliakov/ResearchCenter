@@ -3456,13 +3456,12 @@ a.btn.disabled, fieldset[disabled] a.btn {
 
 .btn-primary:hover {
 	color: #fff;
-	background-color: #286090;
-	border-color: #204d74;
+	background-color: #CABB02;
 }
 
 .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary
 	{
-	color: #fff;
+	color: #000;
 	background-color: #286090;
 	border-color: #204d74;
 }
@@ -3471,7 +3470,7 @@ a.btn.disabled, fieldset[disabled] a.btn {
 	.btn-primary:active:focus, .btn-primary.active:focus, .open>.dropdown-toggle.btn-primary:focus,
 	.btn-primary:active.focus, .btn-primary.active.focus, .open>.dropdown-toggle.btn-primary.focus
 	{
-	color: #fff;
+	color: #000;
 	background-color: #204d74;
 	border-color: #122b40;
 }
@@ -8689,11 +8688,19 @@ progress.inoutProgress::-webkit-progress-value {
 }
 
 #balTextCost {
-	width: 50%;
+	width: 40%;
+	margin: 10px;
+	 font-size: 16px;
+	  line-height : 18px;
+}
+
+#balSelect {
+	margin: 10px;
+	font-size: 14px;
 }
 
 .main-container {
-	min-height: 71vh;
+	min-height: 69vh;
 }
 
 .btn-block:hover {
@@ -8720,11 +8727,10 @@ progress.inoutProgress::-webkit-progress-value {
 	padding-left: 10px;
 	text-align: right;
 	width: 25%;
-	height: 110px;
+	height: 15%;
 	background-color: rgba(254, 248, 160, 0.7);
 	border: 1px #004949 groove;
 	margin: 10px;
-	margin-top: 0px;
 	border-bottom-right-radius: 18px;
 	border-bottom-left-radius: 18px;
 }
@@ -8739,8 +8745,8 @@ progress.inoutProgress::-webkit-progress-value {
 }
 
 .btn-group {
-	margin-top: 0;
-	padding-top: 0;
+	margin-bottom: 10px;
+	padding-bottom: 10px;
 }
 
 .btn:hover {
@@ -8758,4 +8764,14 @@ progress.inoutProgress::-webkit-progress-value {
 
 #bi-category-module {
 	text-align:center;
+}
+
+.btn-reset {
+	magin-top: 5px;
+	font-size: 14px;
+	background-color: #88B317;
+}
+
+.btn-reset:hover {
+	background-color: #688912;
 }

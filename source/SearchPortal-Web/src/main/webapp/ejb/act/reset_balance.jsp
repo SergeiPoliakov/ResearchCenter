@@ -5,11 +5,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="">
 <title>Insert title here</title>
 </head>
 <body>
-	<div style="float: left">
-		<label>Изменить баланс?</label> <select id="balSelect"
+	<div style="float: left" style="margin-top: 5px; font-size: 14px;">
+		<label>Изменить баланс?</label> 
+		<select id="balSelect"
 			onchange="changeBalCost()">
 			<c:choose>
 				<c:when test="${sessionScope.balanceObjects.size() > 0}">
@@ -27,27 +29,27 @@
 			<label id="bal${obj.getFinObjectId()}" class="balLabel"
 				style="display: none">текущий счет: <span id="balCost">${sessionScope.balanceParamObjects.get(obj.getObjectName())}</span></label>
 		</c:forEach>
-
+<div>
 		<form action="../cust" method="get"
 			onsubmit="return checkBalanceEmpty()">
 			<input type="hidden" id="balHidden" name="balObjId" value="" /> <input
 				type="hidden" name="custom" value="changeBalance" />
-			<div style="float: left; width: 7
-			0%">
-				<label>изменить на:</label><input type="text" name="balTextCost"
+
+				<label style="font-size: 16px;">изменить на:</label>
+				<input type="text" name="balTextCost"
 					onkeypress="validate(this)" id="balTextCost"
-					style="margin-left: 5px" onfocus="checkBalanceEmptyHelp(this)"
-					onblur="checkBalanceEmptyHelp(this)" /><input style="float: center" type="submit"
-					value="изменить"  />
+					 onfocus="checkBalanceEmptyHelp(this)"
+					onblur="checkBalanceEmptyHelp(this)" /><button type="submit" class="btn btn-reset" style="float: left; margin-left: 50%">Изменить</button>
 			
 		</form>
 		<form action="../cust" method="get" onsubmit="return checkBalReset()">
 			<input type="hidden" name="custom" value="resetBalance" />
-				<input style="float: center; margin-left: 10px" type="submit" value="сброс" id="resetBalanceResetSubmit" />
+				<button type="submit" id="resetBalanceResetSubmit" class="btn btn-reset" style="float: right">Сброс</button>
 
 		</form>
 		</div>
-	</div>
+		</div>
+
 </body>
 <script src="act/js/reset_balance.js"></script>
 </html>
