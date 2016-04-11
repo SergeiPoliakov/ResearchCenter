@@ -8,26 +8,19 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
+
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+
 import com.netcracker.unc.newmvc.ejb.controllers.ControllerObjects;
-import com.netcracker.unc.newmvc.ejb.entities.EntityAttribute;
-import com.netcracker.unc.newmvc.ejb.entities.EntityObject;
-import com.netcracker.unc.newmvc.ejb.entities.EntityObjectType;
-import com.netcracker.unc.newmvc.ejb.entities.EntityParam;
-import com.netcracker.unc.newmvc.ejb.entities.EntityUser;
-import com.netcracker.unc.newmvc.ejb.models.ActiveCasesModel;
-import com.netcracker.unc.newmvc.ejb.models.CategoryModel;
-import com.netcracker.unc.newmvc.ejb.models.CreditModel;
-import com.netcracker.unc.newmvc.ejb.models.IncomeConsumptionModel;
-import com.netcracker.unc.newmvc.ejb.models.InvoiceModel;
-import com.netcracker.unc.newmvc.ejb.models.SalaryModel;
-import com.netcracker.unc.newmvc.ejb.models.StatisticModel;
-import com.netcracker.unc.newmvc.ejb.models.TransactionModel;
+import com.netcracker.unc.newmvc.ejb.entities.*;
+import com.netcracker.unc.newmvc.ejb.models.*;
 import com.netcracker.unc.newmvc.ejb.queries.CreditQueries;
+import com.netcracker.unc.newmvc.ejb.queries.IncomeQueries;
 import com.netcracker.unc.newmvc.ejb.queries.InvoiceQueries;
 
 @Stateless
@@ -55,6 +48,9 @@ public class EjbDAO {
 
 	@PersistenceContext(unitName = "myP")
 	private EntityManager em;
+
+	@EJB
+	ControllerObjects objContr;
 
 	public void addObject(Object object) {
 		em.persist(object);
@@ -532,6 +528,13 @@ public class EjbDAO {
 
 	public void deleteInvoice(int invoiceId) {
 		EntityObject invoiceObj = (EntityObject) getObject(EntityObject.class, invoiceId);
+		for (EntityObject obj : invoiceObj.getChildObjects())
+			deleteObject(obj);
+		deleteObject(invoiceObj);
+	}
+
+	public void deleteIncome(int invoiceId) {
+		EntityObject invoiceObj = (EntityObject) getObject(EntityObject.class, invoiceId);
 		deleteObject(invoiceObj);
 	}
 
@@ -702,5 +705,77 @@ public class EjbDAO {
 		}
 
 		return creditModel;
+	}
+
+	// Income
+
+	public void addIncome(IncomeModel incomeJsp, EntityUser userJsp) {
+		EntityParam param = new EntityParam();
+		EntityAttribute atr = new EntityAttribute();
+		EntityObject income = new EntityObject();
+		Logger log = Logger.getLogger(EjbDAO.class.getName());
+		if (incomeJsp != null) {
+			income.setObjectName(incomeJsp.getIncomeName());
+			income.setObjectType((EntityObjectType) getObject(EntityObjectType.class, objectTypeIncome));
+			income.setUser(userJsp);
+			income.setParentObject(
+					(EntityObject) getObject(EntityObject.class, incomeJsp.getIncomesInvoice().getInvoiceId()));
+			addObject(income);
+			updateReferencesToObjects();
+
+			atr = (EntityAttribute) getObject(EntityAttribute.class, 4);
+			param.setObject(income);
+			param.setAttribute(atr);
+			objContr.setParamDate(incomeJsp.getDateIncome().toString(), param);
+			// param.setValueDate(incomeJsp.getDateIncome());
+			addObject(param);
+			log.warning("add object...");
+			updateReferencesToObjects();
+
+			atr = (EntityAttribute) getObject(EntityAttribute.class, 5);
+			param = new EntityParam();
+			param.setObject(income);
+			param.setAttribute(atr);
+			param.setValue(String.valueOf(incomeJsp.getIncomeSum()));
+			log.warning("param = " + param);
+			addObject(param);
+			log.warning("add object...");
+
+			log.warning("after update");
+			atr = (EntityAttribute) getObject(EntityAttribute.class, 6);
+			param = new EntityParam();
+			param.setObject(income);
+			log.warning("param.setAtrtribute");
+			param.setAttribute(atr);
+			param.setValue(String.valueOf(incomeJsp.isMonth()));
+			log.warning("param = " + param);
+			addObject(param);
+			log.warning("add object...");
+
+		}
+	}
+
+	public ArrayList<IncomeModel> getAllIncome(EntityUser user) {
+		IncomeModel income;
+		ArrayList<IncomeModel> listGetAllIncome = new ArrayList<IncomeModel>();
+		Query query = em.createNativeQuery(IncomeQueries.getAllIncomeByUserId);
+		query.setParameter(1, user.getUserId());
+		List<?> result = query.getResultList();
+		if (result.size() > 0) {
+			Iterator<?> i = result.iterator();
+			while (i.hasNext()) {
+				Object[] res = (Object[]) i.next();
+
+				income = new IncomeModel();
+				income.setIncomeId(((BigDecimal) res[0]).intValue());
+				income.setIncomeName((String) res[1]);
+				income.setDateIncome(new Date(((Timestamp) res[2]).getTime()));
+				income.setIncomeSum(Integer.valueOf((String) res[3]));
+				income.setMonth(Boolean.parseBoolean((String) res[4]));
+				income.setIncomesInvoice(getInvoice((((BigDecimal) res[5])).intValue(), user));
+				listGetAllIncome.add(income);
+			}
+		}
+		return listGetAllIncome;
 	}
 }
