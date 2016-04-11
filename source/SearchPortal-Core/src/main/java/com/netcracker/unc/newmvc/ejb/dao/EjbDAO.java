@@ -8,15 +8,11 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
-
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
-import org.hibernate.sql.Update;
-
 import com.netcracker.unc.newmvc.ejb.controllers.ControllerObjects;
 import com.netcracker.unc.newmvc.ejb.entities.EntityAttribute;
 import com.netcracker.unc.newmvc.ejb.entities.EntityObject;
@@ -453,7 +449,7 @@ public class EjbDAO {
 	public void addInvoice(InvoiceModel invoiceJsp, EntityUser userJsp) {
 		EntityParam param = new EntityParam();
 		EntityAttribute atr = new EntityAttribute();
-		EntityObjectType ot = new EntityObjectType();
+		// EntityObjectType ot = new EntityObjectType();
 		EntityObject invoice = new EntityObject();
 		Logger log = Logger.getLogger(EjbDAO.class.getName());
 		if (invoiceJsp != null) {
@@ -466,7 +462,7 @@ public class EjbDAO {
 			// invoice.getFinObjectId());
 			log.warning("invoice = " + invoice);
 
-			ot = (EntityObjectType) getObject(EntityObjectType.class, 5);
+			// ot = (EntityObjectType) getObject(EntityObjectType.class, 5);
 			atr = (EntityAttribute) getObject(EntityAttribute.class, 14);
 			param.setObject(invoice);
 			param.setAttribute(atr);

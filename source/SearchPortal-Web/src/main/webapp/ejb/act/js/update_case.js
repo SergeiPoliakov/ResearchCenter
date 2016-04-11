@@ -45,7 +45,8 @@ function changeCase(element) {
 	var row = element.parentElement.parentElement;
 	var cells = row.getElementsByTagName('td');
 	var hide = cells[6].getElementsByTagName('input')[0];
-	ref = cells[6].getElementsByTagName('label')[0];
+	var ref = cells[6].getElementsByTagName('label')[0];
+	var del = cells[6].getElementsByTagName('label')[1];
 	if (ref.innerHTML.valueOf() == 'изменить'.valueOf()) {
 		// for 1 column
 		hide.name = 'caseId';
@@ -145,14 +146,18 @@ function changeCase(element) {
 		cells[5].appendChild(input);
 	}
 	// for redirect to servlet
-	if (ref.innerHTML.valueOf() == 'применить'.valueOf())
+	if (ref.innerHTML.valueOf() == 'применить'.valueOf()) {
 		ref.onclick = new function() {
 			var form = document.getElementById('updateCaseTable');
+			var hidden = document.getElementById('upCaseHidden');
+			hidden.setAttribute("value", "updateCase");
 			form.setAttribute('action', '../int');
 			form.setAttribute('method', 'get');
 			form.submit();
 		};
+	}
 	ref.innerHTML = 'применить';
+	del.style.display = '';
 
 	// for return values if cancel change
 	for (var i = 0; i < allRows.length; i++) {
@@ -186,12 +191,23 @@ function changeCase(element) {
 
 			cell = allRows[i].getElementsByTagName('td')[6];
 			var label = cell.getElementsByTagName('label')[0];
+			var labelDel = cell.getElementsByTagName('label')[1];
 			label.innerHTML = 'изменить';
+			labelDel.style.display = 'none';
 			label.onclick = changeCase(this);
 		}
 	}
 }
 // //
+
+function delFunction() {
+	var form = document.getElementById('updateCaseTable');
+	var hidden = document.getElementById('upCaseHidden');
+	hidden.setAttribute("value", "updateCaseDelete");
+	form.setAttribute('action', '../int');
+	form.setAttribute('method', 'get');
+	form.submit();
+}
 
 // for refresh active cases
 function refreshActiveCases() {
@@ -222,6 +238,7 @@ function refreshActiveCases() {
 			cell = allRows[i].getElementsByTagName('td')[6];
 			var label = cell.getElementsByTagName('label')[0];
 			label.innerHTML = 'изменить';
+			del.style.display = 'none';
 		}
 	}
 	var tableBody = document.getElementById("tableBody");

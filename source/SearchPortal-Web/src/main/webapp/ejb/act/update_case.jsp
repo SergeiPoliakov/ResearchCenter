@@ -47,7 +47,8 @@ select {
 		onblur="refreshHelpInput()" onsubmit="return false" />
 	<br />
 	<form id="updateCaseTable">
-		<input type="hidden" name="interfaces" value="updateCase" />
+		<input type="hidden" name="interfaces" value="updateCase"
+			id="upCaseHidden" />
 		<div class="table-responsive">
 			<table border="1" class="table table-striped">
 				<thead align="center">
@@ -78,7 +79,9 @@ select {
 							<td class="result">${activeCase.getSpaceHierarchy()}${activeCase.getPriorityStr()}</td>
 							<td align="center" valign="middle"><label
 								style="font-size: 7pt; color: blue; cursor: pointer; text-decoration: underline;"
-								onclick="changeCase(this)">изменить</label><input type="hidden"
+								onclick="changeCase(this)">изменить</label><label
+								style="font-size: 7pt; color: blue; cursor: pointer; text-decoration: underline; display: none"
+								onclick="delFunction()">удалить</label><input type="hidden"
 								value="${activeCase.getObjectId()}" /></td>
 						</tr>
 					</c:forEach>

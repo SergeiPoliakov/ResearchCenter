@@ -8,6 +8,9 @@ var parent = document.getElementById("parentBlock");
 for (var i = 0; i < parent.length; i++) {
 	values.push(new Number(parent.options[i].value));
 }
+for (var i = 0; i < parent.length; i++) {
+	parent.options[i].value = 0;
+}
 
 function changeCheck(element) {
 

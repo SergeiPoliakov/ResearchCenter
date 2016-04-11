@@ -10,12 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.netcracker.unc.newmvc.ejb.controllers.ControllerObjects;
 import com.netcracker.unc.newmvc.ejb.controllers.ControllerUsers;
+import com.netcracker.unc.newmvc.ejb.dao.EjbDAO;
 import com.netcracker.unc.newmvc.ejb.entities.EntityUser;
 import com.netcracker.unc.newmvc.ejb.models.UserModel;
 
 @WebServlet("/int")
 public class InterfaceEjbServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	@EJB
+	EjbDAO ejb;
 	@EJB
 	ControllerObjects objContr;
 	@EJB
@@ -56,6 +59,16 @@ public class InterfaceEjbServlet extends HttpServlet {
 
 	}
 
+	private void deleteCase(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		long objectId = Integer.valueOf(request.getParameter("caseId"));
+		objContr.deleteObjectWithChildObjects(objectId);
+
+		response.sendRedirect(mainUrl);
+
+	}
+
 	private void updateUser(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -91,6 +104,8 @@ public class InterfaceEjbServlet extends HttpServlet {
 			createCase(request, response);
 		else if (interfaces.equals("updateCase"))
 			updateCase(request, response);
+		else if (interfaces.equals("updateCaseDelete"))
+			deleteCase(request, response);
 		else if (interfaces.equals("updateUser"))
 			updateUser(request, response);
 	}

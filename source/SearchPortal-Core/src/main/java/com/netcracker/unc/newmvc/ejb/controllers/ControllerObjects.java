@@ -41,6 +41,15 @@ public class ControllerObjects {
 	private final double average = 0.5;
 	private final double low = 0.35;
 
+	public void deleteObjectWithChildObjects(long objectId) {
+		EntityObject object = (EntityObject) ejb.getObject(EntityObject.class, objectId);
+		object.getChildObjects().size();
+		for (EntityObject obj : object.getChildObjects()) {
+			ejb.deleteObject(obj);
+		}
+		ejb.deleteObject(object);
+	}
+
 	public void createCase(String caseNameStr, long caseTypeLong, long caseParentLong, String casePriorityStr,
 			String caseDateStr, String caseCostStr, EntityUser user) {
 

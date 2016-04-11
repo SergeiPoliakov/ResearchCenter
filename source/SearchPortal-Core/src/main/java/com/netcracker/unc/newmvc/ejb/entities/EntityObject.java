@@ -42,7 +42,7 @@ public class EntityObject implements Serializable {
 	@JoinColumn(name = "parent_id", referencedColumnName = "fin_object_id", nullable = true)
 	@ManyToOne(fetch = FetchType.EAGER)
 	private EntityObject parentObject;
-	@OneToMany(mappedBy = "parentObject", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "parentObject", targetEntity = EntityObject.class)
 	private Set<EntityObject> childObjects;
 	@Column(name = "object_name", nullable = false, length = 100)
 	private String objectName;
