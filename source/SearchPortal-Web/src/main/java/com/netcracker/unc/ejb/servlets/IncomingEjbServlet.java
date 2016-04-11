@@ -1,6 +1,7 @@
 package com.netcracker.unc.ejb.servlets;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.logging.Logger;
 
 import javax.ejb.EJB;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.netcracker.unc.newmvc.ejb.models.IncomeModel;
+import com.netcracker.unc.newmvc.ejb.controllers.ControllerObjects;
 import com.netcracker.unc.newmvc.ejb.dao.EjbDAO;
 import com.netcracker.unc.newmvc.ejb.entities.EntityUser;
 import com.netcracker.unc.newmvc.ejb.models.InvoiceModel;
@@ -24,19 +27,31 @@ public class IncomingEjbServlet extends HttpServlet {
 	@EJB
 	UserModel user;
 
+	@EJB
+	ControllerObjects objContr;
+
 	public IncomingEjbServlet() {
 		super();
 	}
 
-	/*public*/ private void createSumBalance(HttpServletRequest request, HttpServletResponse response)
+	/* public */ private void createSumBalance(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.getSession().setAttribute("invoicesController", ejb.getSumBalance(user.getUser()));
 		request.getSession().setAttribute("invoicesControllerItems", ejb.getAllInvoice(user.getUser()));
-		//System.out.println(ejb.getAllInvoice(user.getUser()).size());
+		// System.out.println(ejb.getAllInvoice(user.getUser()).size());
+	}
+
+	private void createIncome(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.getSession().setAttribute("allIncome", ejb.getAllIncome(user.getUser()));
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		user.setUser((EntityUser) request.getSession().getAttribute("user"));
+		createSumBalance(request, response);
+		createIncome(request, response);
 
 		if (request.getParameter("incoming") != null) {
 			String incoming = request.getParameter("incoming");
@@ -48,11 +63,11 @@ public class IncomingEjbServlet extends HttpServlet {
 
 				int invoiceNumber = 1;
 				if ((request.getParameter("invoiceNumber") != null)
-						&& (!request.getParameter("invoiceNumber").trim().isEmpty())) {                           
+						&& (!request.getParameter("invoiceNumber").trim().isEmpty())) {
 					invoiceNumber = Integer.valueOf(request.getParameter("invoiceNumber"));
 					log.warning("New number: " + invoiceNumber);
-					 request.setAttribute("currentSum", invoiceNumber);
-					 log.warning("Before redirect...");
+					request.setAttribute("currentSum", invoiceNumber);
+					log.warning("Before redirect...");
 				}
 				log.warning("invoiceNumber: " + invoiceNumber);
 				invoice = ejb.getInvoice(invoiceNumber, user);
@@ -90,7 +105,7 @@ public class IncomingEjbServlet extends HttpServlet {
 						&& (!request.getParameter("invoiceNumber").trim().isEmpty())) {
 					invoiceNumber = Integer.valueOf(request.getParameter("invoiceNumber"));
 					log.warning("New number: " + invoiceNumber);
-					 request.setAttribute("currentSum", invoiceNumber);
+					request.setAttribute("currentSum", invoiceNumber);
 					log.warning("Before redirect...");
 				}
 				log.warning("invoiceNumber: " + invoiceNumber);
@@ -115,31 +130,65 @@ public class IncomingEjbServlet extends HttpServlet {
 				log.warning("Before redirect...");
 				response.sendRedirect("ejb/welcome.jsp");
 			}
-			else {
-				user.setUser((EntityUser) request.getSession().getAttribute("user"));
-				createSumBalance(request, response);
+		}
+		if (request.getParameter("incomes") != null) {
+			if (request.getParameter("incomes").equals("addIncomes")) {
+				IncomeModel income = new IncomeModel();
+				String incomeName = String.valueOf(request.getParameter("income-name"));
+				// log.warning("New number: " + incomeNumber);
+				request.setAttribute("incomeName", incomeName);
+				income.setIncomeName(incomeName);
+
+				int incomeSum = Integer.valueOf(request.getParameter("income-balance"));
+				request.setAttribute("incomeBalance", incomeSum);
+				income.setIncomeSum(incomeSum);
+
+				String regularSalary = request.getParameter("income-regular");
+				request.setAttribute("incomeRegular", regularSalary);
+				income.setMonth(Boolean.parseBoolean(regularSalary));
+
+				Date incomeDate = Date.valueOf(request.getParameter("income-date"));
+				request.setAttribute("incomeRegular", incomeDate);
+				income.setDateIncome(incomeDate);
+
+				InvoiceModel invoice;
+				int invoiceId = Integer.valueOf(request.getParameter("income-invoice"));
+				// request.setAttribute("incomeRegular", incomeDate);
+				invoice = ejb.getInvoice(invoiceId, user.getUser());
+				income.setUserId((int) user.getUser().getUserId());
+				income.setIncomesInvoice(invoice);
+
+				ejb.addIncome(income, user.getUser());
+				response.sendRedirect("ejb/welcome.jsp");
+			}
+			if (request.getParameter("incomes").equals("deleteIncomes")) {
+				int inNumb = Integer.valueOf(request.getParameter("income-number"));
+				ejb.deleteInvoice(inNumb);
+				response.sendRedirect("ejb/welcome.jsp");
 			}
 		}
-		
-		String invoiceName; String invoiceBalance, invoiceCredit, invoicePercent;
-		if ((request.getParameter("invoices") != null)
-				&& (!request.getParameter("invoices").trim().isEmpty())) {
+
+		String invoiceName;
+		String invoiceBalance, invoiceCredit, invoicePercent;
+		if ((request.getParameter("invoices") != null) && (!request.getParameter("invoices").trim().isEmpty()))
+
+		{
 			String invoices = request.getParameter("invoices");
-			if (invoices.equals("addInvoices")){
+			if (invoices.equals("addInvoices")) {
 				EntityUser user = null;
 				InvoiceModel invoice = new InvoiceModel();
 				user = (EntityUser) request.getSession().getAttribute("user");
 				Logger log = Logger.getLogger(IncomingEjbServlet.class.getName());
-			
+
 				if ((request.getParameter("invoice-name") != null)
 						&& (!request.getParameter("invoice-name").trim().isEmpty())) {
-				invoiceName = String.valueOf(request.getParameter("invoice-name"));
-				log.warning("New invoice: " + invoiceName);
-				invoice.setInvoiceName(invoiceName);
+					invoiceName = String.valueOf(request.getParameter("invoice-name"));
+					log.warning("New invoice: " + invoiceName);
+					invoice.setInvoiceName(invoiceName);
 				}
 
 				if ((request.getParameter("invoice-balance") != null)
-					&& (!request.getParameter("invoice-balance").trim().isEmpty())) {
+						&& (!request.getParameter("invoice-balance").trim().isEmpty())) {
 					invoiceBalance = String.valueOf(request.getParameter("invoice-balance"));
 					log.warning("New invoice: " + invoiceBalance);
 					invoice.setBalance(Integer.valueOf(invoiceBalance));
@@ -151,35 +200,36 @@ public class IncomingEjbServlet extends HttpServlet {
 					invoice.setCredit(Boolean.valueOf(invoiceCredit));
 				}
 				if ((request.getParameter("invoice-percent") != null)
-					&& (!request.getParameter("invoice-percent").trim().isEmpty())) {
-				invoicePercent = String.valueOf(request.getParameter("invoice-percent"));
-				log.warning("New invoice: " + invoicePercent);
-				invoice.setPercent(Integer.valueOf(invoicePercent));
-			}
+						&& (!request.getParameter("invoice-percent").trim().isEmpty())) {
+					invoicePercent = String.valueOf(request.getParameter("invoice-percent"));
+					log.warning("New invoice: " + invoicePercent);
+					invoice.setPercent(Integer.valueOf(invoicePercent));
+				}
 
-			ejb.addInvoice(invoice, user);
-			// request.setAttribute("currentSum", invoiceName);
-			log.warning("Before redirect...");
-			response.sendRedirect("ejb/welcome.jsp");
+				ejb.addInvoice(invoice, user);
+				// request.setAttribute("currentSum", invoiceName);
+				log.warning("Before redirect...");
+				response.sendRedirect("ejb/welcome.jsp");
+			}
 		}
-	}
-		
-		if ((request.getParameter("invoicesDelete") != null)) {
+
+		if ((request.getParameter("invoicesDelete") != null))
+
+		{
 			String invoices = request.getParameter("invoicesDelete");
-			if (invoices.equals("deleteInvoices")){
-				if ((request.getParameter("invoice-number") != null) && (!request.getParameter("invoice-number").trim().isEmpty())) {
+			if (invoices.equals("deleteInvoices")) {
+				if ((request.getParameter("invoice-number") != null)
+						&& (!request.getParameter("invoice-number").trim().isEmpty())) {
 					Integer invoiceNumber = Integer.valueOf(request.getParameter("invoice-number"));
 					ejb.deleteInvoice(invoiceNumber);
 					response.sendRedirect("ejb/welcome.jsp");
 				}
 			}
-		}
-		else {
+		} else
+
+		{
 			user.setUser((EntityUser) request.getSession().getAttribute("user"));
 			createSumBalance(request, response);
 		}
 	}
 }
-
-
-		
