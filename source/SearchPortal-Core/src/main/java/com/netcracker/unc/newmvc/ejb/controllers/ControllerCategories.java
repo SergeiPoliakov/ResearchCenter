@@ -18,6 +18,9 @@ public class ControllerCategories {
 	@EJB
 	private EjbDAO ejb;
 
+	private List<CategoryModel> categoryList;
+	private double sumIncome = 0;
+
 	public List<CategoryModel> getCategories(EntityUser user) {
 
 		List<CategoryModel> categoryModels = new ArrayList<CategoryModel>(ejb.getCategories(user.getUserId()));
@@ -27,12 +30,44 @@ public class ControllerCategories {
 
 		return categoryModels;
 	}
-	/*
-	 * public List<CategoryModel> getCategories() { CategoryDAO categoryDAO =
-	 * new CategoryDAO(); List<CategoryModel> categoryModels = new
-	 * ArrayList<CategoryModel>(
-	 * categoryDAO.getAllUserCategories(userModel.getUserId())); if
-	 * (categoryModels.isEmpty()) categoryModels = Collections.emptyList();
-	 * return categoryModels; }
-	 */
+
+	public List<CategoryModel> getPriorities(EntityUser user) {
+		List<CategoryModel> categoryModels = new ArrayList<CategoryModel>(ejb.getCategoriesWithSum(user.getUserId()));
+		// изменить селект так же получаем лист доходов отдельно
+		categoryList = new ArrayList<>(categoryModels);
+
+		if (categoryModels.isEmpty())
+			categoryModels = Collections.emptyList();
+		return categoryModels;
+	}
+
+	private List<CategoryModel> toCalculate() {
+		double onePercent = getOnePercentValue();
+		for (CategoryModel cm : categoryList) {
+			double percent = calculationIntermediateValue(cm) / onePercent;
+			cm.setPercent(percent);
+		}
+		if (categoryList.isEmpty())
+			categoryList = Collections.emptyList();
+		return categoryList;
+	}
+
+	private double getOnePercentValue() {
+		double sumValue = 0;
+		for (CategoryModel cm : categoryList) {
+			sumValue = sumValue + calculationIntermediateValue(cm);
+		}
+		return sumValue / 100;
+	}
+
+	private double calculationIntermediateValue(CategoryModel cm) {
+		if (sumIncome * (cm.getMaxPercent() / 100) - cm.getSumCategory() < 0) {
+			return 0;
+		} else {
+
+			double value = cm.getCoeficient()
+					* (sumIncome * (cm.getMaxPercent() + cm.getMinPercent() / (2 * 100) - cm.getSumCategory()));
+			return value;
+		}
+	}
 }

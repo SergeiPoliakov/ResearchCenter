@@ -1,7 +1,11 @@
 $(document).ready(function() {
 
-	$(".update-row-button").click(function() {
-
+	$(".update-category-row-button").click(function() {
+		$(this).val("Отменить");
+		//$(".start-delete-category-row-button").css("display", "block");
+		//$(".start-update-category-row-button").css("display", "block");
+		
+		
 	});
 
 	/*

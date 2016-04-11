@@ -14,7 +14,7 @@ public class HtmlConverter {
 					CategoryModel categoryModel = (CategoryModel) object;
 					htmlSB.append(CategoryHtmlRow.addRow(categoryModel));
 				}
-				htmlSB.append("<input type=\"button\" class=\"update-row-button\" value=\"Изменить\" />");
+				htmlSB.append("<input type=\"button\" class=\"update-category-row-button\" value=\"Изменить\" />");
 			}
 			if (clazz == StatisticModel.class) {
 				/**/

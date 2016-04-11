@@ -44,7 +44,7 @@ public class CategoryHtmlRow {
 			htmlString.append("\" readonly />");
 		}
 		htmlString.append("<input type=\"button\" class=\"start-update-category-row-button\" value=\"Изменить\" />");
-		htmlString.append("<input type=\"button\" class=\"delete-category-row-button\" value=\"Удалить\" />");
+		htmlString.append("<input type=\"button\" class=\"start-delete-category-row-button\" value=\"Удалить\" />");
 		htmlString.append("</form>");
 		return htmlString.toString();
 	}
