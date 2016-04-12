@@ -8429,7 +8429,7 @@ button.close {
 }
 
 .module {
-	width: 80%;
+	width: 85%;
 	min-width: 400px;
 	padding-left: 65px;
 	padding-top: 35px;
@@ -8725,9 +8725,10 @@ progress.inoutProgress::-webkit-progress-value {
 */
 .reset-div {
 	padding-left: 10px;
+	padding-right: 10px;
 	text-align: right;
 	width: 25%;
-	height: 15%;
+	height: 20%;
 	background-color: rgba(254, 248, 160, 0.7);
 	border: 1px #004949 groove;
 	margin: 10px;
@@ -8737,6 +8738,15 @@ progress.inoutProgress::-webkit-progress-value {
 
 #leftMenuDiv {
 	position: absolute;
+}
+
+.invoice-table {
+	font-size: 14px;
+}
+
+.invoice-table-head {
+	
+	font-size: 17px;
 }
 
 .updateCaseInput {

@@ -10,9 +10,9 @@
 </head>
 <body>
 <jsp:include page="/inc"></jsp:include>
-<div style="float: left">
-			<table border="1" style="float: center">
-				<thead align="center">
+<div style="width=100%">
+			<table border="1" class="table invoice-table" style="width: 100%; padding: 10px;">
+				<thead align="center" class="invoice-table-head">
 					<tr>
 						<th class="title">Номер счёта</th>
 						<th class="title">Название</th>
@@ -34,7 +34,7 @@
 				</tbody>
 			</table>
 </div>
-<div style="padding-left: 20px; float: right">
+<div style="padding-left: 20px; float: center">
 			<button id="statistic-menu-button" class="button"
 				onclick="addInvoice()">Добавить счет</button>
 
