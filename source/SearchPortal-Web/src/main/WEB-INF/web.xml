@@ -26,7 +26,14 @@
 		<servlet-name>category-ejb-servlet</servlet-name>
 		<url-pattern>/CategoriesEjbServlet</url-pattern>
 	</servlet-mapping>
-
+	<servlet>
+		<servlet-name>credit</servlet-name>
+		<servlet-class>com.netcracker.unc.ejb.servlets.CreditServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>credit</servlet-name>
+		<url-pattern>/credit</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>priority-category-ejb-servlet</servlet-name>
