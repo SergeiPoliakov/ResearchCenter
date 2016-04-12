@@ -168,7 +168,8 @@
 		<div class="module generalModule" id="priority-module"
 			style="display: none">
 			<div class="block-title">Приоритеты</div>
-			<div class="block-information" id="bi-category-module"></div>
+			<div class="block-information" id="bi-category-module">
+				<jsp:include page="module-priority/module.jsp" /></div>
 		</div>
 
 		<div class="module generalModule" id="incoming" style="display: none">
