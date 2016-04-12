@@ -617,103 +617,73 @@ public class EjbDAO {
 	// для кредитного типа
 	public ArrayList<CreditModel> getAllCredits(EntityUser user) {
 		CreditModel creditModel;
-		ArrayList<CreditModel> resultList = new ArrayList<CreditModel>();
-		Query query = em.createNativeQuery(CreditQueries.getAllCreditsByUser);
-		query.setParameter(1, user.getUserId());
-		List<?> result = query.getResultList();
+		ArrayList<CreditModel> resultList = new ArrayList<CreditModel>(); 
+		List<?> result = em.createNativeQuery(CreditQueries.getAllCreditsByUser).setParameter(1, user.getUserId()).getResultList();
+		
 		if (result.size() > 0) {
 			Iterator<?> i = result.iterator();
 			while (i.hasNext()) {
 				Object[] temp = (Object[]) i.next();
 				creditModel = new CreditModel();
 
-				creditModel.setCreditID(((BigDecimal) temp[0]).intValue());
+				creditModel.setCreditID( ((BigDecimal) temp[0]).intValue());
 				creditModel.setCreditName((String) temp[1]);
-				creditModel.setObjectTypeID(Integer.decode(CreditQueries.finObjectTypeId));
-
-				creditModel.setCreditValue(((BigDecimal) temp[2]).intValue());
-				creditModel.setCreditBalance(((BigDecimal) temp[3]).intValue());
-				creditModel.setCreditPercent(((Double) temp[4]).doubleValue());
-				creditModel.setReceivingDate(((Timestamp) temp[5]).toString());
-				creditModel.setPayPeriod(((BigDecimal) temp[6]).intValue());
-
+				creditModel.setObjectTypeID(Integer.valueOf(CreditQueries.finObjectTypeId));
+				//creditModel.setParentID(((BigDecimal)temp[2]).longValue());
+				creditModel.setCreditValue(Integer.valueOf((String)temp[3]));
+				creditModel.setCreditPercent(Double.valueOf((String)temp[4]));
+				creditModel.setReceivingDate((String)temp[5]);
+				creditModel.setPayPeriod(Integer.valueOf((String)temp[6]));
+				
 				resultList.add(creditModel);
 			}
 		}
 		return resultList;
 	}
-
-	public void deleteCredit(int creditID) {
-
-		Query query = em.createNativeQuery(CreditQueries.deleteCredit);
-		query.setParameter(1, creditID);
-		query.executeUpdate();
-		query = em.createNativeQuery(CreditQueries.deleteCreditParams);
-		query.setParameter(1, creditID);
-	}
-
-	public void addCredit(CreditModel model, EntityUser user) {
-		Query query = em.createNativeQuery(CreditQueries.addCredit);
-		query.setParameter(1, model.getCreditName());
-		query.setParameter(2, user.getUserId());
-		query.executeUpdate();// ?
-	}
-
-	public void updateCredit(CreditModel model, EntityUser user) {
-		Query query = em.createNativeQuery(CreditQueries.updateCredit);
-		query.setParameter(1, model.getCreditName());
-		query.setParameter(2, user.getUserId());
-		query.setParameter(3, model.getCreditID());
-		query.executeUpdate();
-		query = em.createNativeQuery(CreditQueries.updateValue);
-		query.setParameter(1, model.getCreditValue());
-		query.setParameter(2, model.getCreditID());
-		query.executeUpdate();
-		query = em.createNativeQuery(CreditQueries.updateBalance);
-		query.setParameter(1, model.getCreditBalance());
-		query.setParameter(2, model.getCreditID());
-		query.executeUpdate();
-		query = em.createNativeQuery(CreditQueries.updatePercent);
-		query.setParameter(1, model.getCreditPercent());
-		query.setParameter(2, model.getCreditID());
-		query.executeUpdate();
-		query = em.createNativeQuery(CreditQueries.updateDate);
-		query.setParameter(1, model.getReceivingDate());
-		query.setParameter(2, model.getCreditID());
-		query.executeUpdate();
-		query = em.createNativeQuery(CreditQueries.updatePeriod);
-		query.setParameter(1, model.getPayPeriod());
-		query.setParameter(2, model.getCreditID());
-		query.executeUpdate();
-	}
-
-	// копипаста - переписать
-	public CreditModel getCredit(EntityUser user, int creditID) {
-		CreditModel creditModel = new CreditModel();
-
-		Query query = em.createNativeQuery(CreditQueries.getCreditById);
-		query.setParameter(1, user.getUserId());
-		query.setParameter(2, creditID);
-		List<?> result = query.getResultList();
-
-		Iterator<?> i = result.iterator();
-		while (i.hasNext()) {
-			Object[] temp = (Object[]) i.next();
-			creditModel = new CreditModel();
-
-			creditModel.setCreditID(((BigDecimal) temp[0]).intValue());
-			creditModel.setCreditName((String) temp[1]);
-			creditModel.setObjectTypeID(Integer.decode(CreditQueries.finObjectTypeId));
-
-			creditModel.setCreditValue(((BigDecimal) temp[2]).intValue());
-			creditModel.setCreditBalance(((BigDecimal) temp[3]).intValue());
-			creditModel.setCreditPercent(((Double) temp[4]).doubleValue());
-			creditModel.setReceivingDate(((Timestamp) temp[5]).toString());
-			creditModel.setPayPeriod(((BigDecimal) temp[6]).intValue());
-
+	//добавление кредита в базу
+	public void addCredit(CreditModel model, EntityUser user){
+		EntityParam param = new EntityParam();
+		EntityObject credit = new EntityObject();
+		EntityAttribute atr = new EntityAttribute();
+		if(model != null){
+			credit.setObjectName(model.getCreditName());
+			credit.setParentObject((EntityObject)getObject(EntityObject.class, model.getParentID()));
+			credit.setObjectType((EntityObjectType)getObject(EntityObjectType.class, model.getObjectTypeID()));
+			credit.setUser(user);
+			addObject(credit);
+			updateReferencesToObjects();
+			//сумма
+			atr = (EntityAttribute)getObject(EntityAttribute.class, 17);
+			param.setObject(credit);
+			param.setAttribute(atr);
+			param.setValue(String.valueOf(model.getCreditValue()));
+			addObject(param);
+			//процент
+			atr = (EntityAttribute)getObject(EntityAttribute.class, 18);
+			param.setObject(credit);
+			param.setAttribute(atr);
+			param.setValue(String.valueOf(model.getCreditPercent()));
+			addObject(param);
+			//дата получения
+			atr = (EntityAttribute)getObject(EntityAttribute.class, 19);
+			param.setObject(credit);
+			param.setAttribute(atr);
+			objContr.setParamDate(model.getReceivingDate(), param);
+			addObject(param);
+			//период
+			atr = (EntityAttribute)getObject(EntityAttribute.class, 20);
+			param.setObject(credit);
+			param.setAttribute(atr);
+			param.setValue(String.valueOf(model.getPayPeriod()));
+			addObject(param);
 		}
-
-		return creditModel;
+	}
+	
+	public void delCredit(long creditID){
+		EntityObject credit = (EntityObject) getObject(EntityObject.class, creditID);
+		for (EntityObject cred : credit.getChildObjects())
+			deleteObject(cred);
+		deleteObject(credit);
 	}
 
 	// Income

@@ -6,9 +6,8 @@ import javax.ejb.Stateful;
 
 @Stateful
 public class CreditModel {
-	private int creditValue;//Сумма кредита
 	
-	private int creditBalance;//Остаток выплат
+	private int creditValue;//Сумма кредита
 	
 	private double creditPercent;//процентная ставка
 	
@@ -19,36 +18,38 @@ public class CreditModel {
 	
 	
 	//то что можно наследовать от базовой модели
+	private long parentID;
 	private String creditName;
 	private int objectTypeID;
-	private int creditID;
+	private long creditID;
 	
 	public CreditModel(){
 		
 	}
 	
+	public long getParentID()
+	{
+		return this.parentID;
+	}
+	
+	public void setParentID(long parentId){
+		this.parentID = parentId;
+	}
+	
 	public String getCreditName(){
-		return creditName;
+		return this.creditName;
 	}
 
 	public int getCreditValue() {
-		return creditValue;
+		return this.creditValue;
 	}
 
 	public void setCreditValue(int creditValue) {
 		this.creditValue = creditValue;
 	}
 
-	public int getCreditBalance() {
-		return creditBalance;
-	}
-
-	public void setCreditBalance(int creditBalance) {
-		this.creditBalance = creditBalance;
-	}
-
 	public double getCreditPercent() {
-		return creditPercent;
+		return this.creditPercent;
 	}
 
 	public void setCreditPercent(double creditPercent) {
@@ -56,7 +57,7 @@ public class CreditModel {
 	}
 
 	public String getReceivingDate() {
-		return receivingDate;
+		return this.receivingDate;
 	}
 
 	public void setReceivingDate(String receivingDate) {
@@ -64,7 +65,7 @@ public class CreditModel {
 	}
 
 	public int getPayPeriod() {
-		return payPeriod;
+		return this.payPeriod;
 	}
 
 	public void setPayPeriod(int payPeriod) {
@@ -72,18 +73,18 @@ public class CreditModel {
 	}
 
 	public int getObjectTypeID() {
-		return objectTypeID;
+		return this.objectTypeID;
 	}
 
 	public void setObjectTypeID(int objectTypeID) {
 		this.objectTypeID = objectTypeID;
 	}
 
-	public int getCreditID() {
-		return creditID;
+	public long getCreditID() {
+		return this.creditID;
 	}
 
-	public void setCreditID(int creditID) {
+	public void setCreditID(long creditID) {
 		this.creditID = creditID;
 	}
 
