@@ -170,7 +170,11 @@ public class EjbDAO {
 				categoryModel.setCoeficient(Double.parseDouble((String) res[2]));
 				categoryModel.setMinPercent(Double.parseDouble((String) res[3]));
 				categoryModel.setMaxPercent(Double.parseDouble((String) res[4]));
-				categoryModel.setSumCategory(Double.parseDouble((String) res[5]));
+				if(res[4] != null){
+					categoryModel.setSumCategory(Double.parseDouble((String) res[4]));}else{
+						categoryModel.setSumCategory(0);
+					}
+				categoryModel.setSumCategory(((BigDecimal) res[5]).doubleValue());
 
 				categoryList.add(categoryModel);
 			}
