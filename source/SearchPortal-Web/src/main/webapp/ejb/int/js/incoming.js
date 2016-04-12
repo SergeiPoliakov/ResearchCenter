@@ -26,24 +26,42 @@ function addInvoice() {
 	}
 	return false;
 }
-	
+
 function deleteInvoice() {
-		var activeCases = document.getElementById('delete-invoice');
-		if (activeCases.style.visibility.valueOf() == 'hidden'.valueOf()) {
-			activeCases.style.visibility = 'visible';
-		} else {
-			activeCases.style.visibility = 'hidden';
-		}
+	var activeCases = document.getElementById('delete-invoice');
+	if (activeCases.style.visibility.valueOf() == 'hidden'.valueOf()) {
+		activeCases.style.visibility = 'visible';
+	} else {
+		activeCases.style.visibility = 'hidden';
+	}
+}
+
+function addConsumption() {
+	var activeCases = document.getElementById('add-consumption');
+	if (activeCases.style.visibility.valueOf() == 'hidden'.valueOf()) {
+		activeCases.style.visibility = 'visible';
+	} else {
+		activeCases.style.visibility = 'hidden';
+	}
+}
+
+function deleteConsumption() {
+	var activeCases = document.getElementById('delete-consumption');
+	if (activeCases.style.visibility.valueOf() == 'hidden'.valueOf()) {
+		activeCases.style.visibility = 'visible';
+	} else {
+		activeCases.style.visibility = 'hidden';
+	}
 }
 
 function showIncomes() {
-		var activeCases = document.getElementById('incomes');
-		if (activeCases.style.visibility.valueOf() == 'hidden'.valueOf()) {
-			activeCases.style.visibility = 'visible';
-		} else {
-				activeCases.style.visibility = 'hidden';
-		}
-		}
+	var activeCases = document.getElementById('incomes');
+	if (activeCases.style.visibility.valueOf() == 'hidden'.valueOf()) {
+		activeCases.style.visibility = 'visible';
+	} else {
+		activeCases.style.visibility = 'hidden';
+	}
+}
 
 function addIncome() {
 	var activeCases = document.getElementById('add-income');
@@ -62,4 +80,3 @@ function deleteIncome() {
 		activeCases.style.visibility = 'hidden';
 	}
 }
-	
