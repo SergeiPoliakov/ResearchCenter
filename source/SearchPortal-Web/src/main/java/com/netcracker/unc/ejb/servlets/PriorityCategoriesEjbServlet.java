@@ -38,12 +38,25 @@ public class PriorityCategoriesEjbServlet extends HttpServlet {
 
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		
+
 		user.setUser((EntityUser) request.getSession().getAttribute("user"));
-		
+
 		List categoryList = new ArrayList<CategoryModel>();
 		categoryList = controller.getPriorities(user.getUser());
 
-		request.getSession().setAttribute("categoryList", categoryList);
+		String[] categoryNameMass = new String[categoryList.size()];
+		double[] categoryPriorityMass = new double[categoryList.size()];
+
+		int i = 0;
+		for (Object object : categoryList) {
+			CategoryModel cm = (CategoryModel) object;
+			categoryNameMass[i] = cm.getObjectName();
+			categoryPriorityMass[i] = cm.getSumCategory();
+
+			i++;
+		}
+
+		request.getSession().setAttribute("categoryNameMass", categoryNameMass);
+		request.getSession().setAttribute("categoryPriorityMass", categoryPriorityMass);
 	}
 }

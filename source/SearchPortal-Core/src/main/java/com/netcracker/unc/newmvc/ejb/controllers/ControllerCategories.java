@@ -36,9 +36,11 @@ public class ControllerCategories {
 		// изменить селект так же получаем лист доходов отдельно
 		categoryList = new ArrayList<>(categoryModels);
 
-		if (categoryModels.isEmpty())
-			categoryModels = Collections.emptyList();
-		return categoryModels;
+		toCalculate();
+		
+		if (categoryList.isEmpty())
+			categoryList = Collections.emptyList();
+		return categoryList;
 	}
 
 	private List<CategoryModel> toCalculate() {
