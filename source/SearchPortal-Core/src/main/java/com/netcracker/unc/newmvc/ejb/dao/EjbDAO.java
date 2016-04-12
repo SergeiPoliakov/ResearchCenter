@@ -39,6 +39,7 @@ public class EjbDAO {
 	private final long objectTypeCase = 4; // Задача
 	private final long objectTypeInvoice = 5; // Счет
 	private final long objectTypeCategory = 1; // Категория
+	private final long objectTypeConsumption = 3; // Расход
 
 	//// database name object types
 	private String category1 = "Транспорт";
@@ -170,10 +171,11 @@ public class EjbDAO {
 				categoryModel.setCoeficient(Double.parseDouble((String) res[2]));
 				categoryModel.setMinPercent(Double.parseDouble((String) res[3]));
 				categoryModel.setMaxPercent(Double.parseDouble((String) res[4]));
-				if(res[4] != null){
-					categoryModel.setSumCategory(Double.parseDouble((String) res[4]));}else{
-						categoryModel.setSumCategory(0);
-					}
+				if (res[4] != null) {
+					categoryModel.setSumCategory(Double.parseDouble((String) res[4]));
+				} else {
+					categoryModel.setSumCategory(0);
+				}
 				categoryModel.setSumCategory(((BigDecimal) res[5]).doubleValue());
 
 				categoryList.add(categoryModel);
@@ -460,6 +462,43 @@ public class EjbDAO {
 
 	}
 
+	public void addConsumption(ConsumptionModel consJsp, EntityUser userJsp) {
+		EntityParam param = new EntityParam();
+		EntityAttribute atr = new EntityAttribute();
+		EntityObject cons = new EntityObject();
+		if (consJsp != null) {
+			cons.setObjectName(consJsp.getConsumptionName());
+			cons.setObjectType(em.getReference(EntityObjectType.class, objectTypeConsumption));
+			cons.setUser(userJsp);
+			cons.setParentObject(consJsp.getParentObj());
+			addObject(cons);
+			updateReferencesToObjects();
+
+			atr = (EntityAttribute) getObject(EntityAttribute.class, 7);
+			param = new EntityParam();
+			param.setObject(cons);
+			param.setAttribute(atr);
+			param.setValueDate(consJsp.getDateConsumption());
+			addObject(param);
+			updateReferencesToObjects();
+
+			atr = (EntityAttribute) getObject(EntityAttribute.class, 8);
+			param = new EntityParam();
+			param.setObject(cons);
+			param.setAttribute(atr);
+			param.setValue(String.valueOf(consJsp.getConsumptionSum()));
+			addObject(param);
+			updateReferencesToObjects();
+
+			atr = (EntityAttribute) getObject(EntityAttribute.class, 9);
+			param = new EntityParam();
+			param.setObject(cons);
+			param.setAttribute(atr);
+			param.setValue(String.valueOf(consJsp.isMonth()));
+			addObject(param);
+		}
+	}
+
 	public void updateBalance(InvoiceModel invoiceJsp) {
 		InvoiceModel invoice = invoiceJsp;
 		Query query = em.createNativeQuery(InvoiceQueries.updateBalance);
@@ -501,6 +540,11 @@ public class EjbDAO {
 	public void deleteIncome(int invoiceId) {
 		EntityObject invoiceObj = (EntityObject) getObject(EntityObject.class, invoiceId);
 		deleteObject(invoiceObj);
+	}
+
+	public void deleteConsumption(int consId) {
+		EntityObject consObj = (EntityObject) getObject(EntityObject.class, consId);
+		deleteObject(consObj);
 	}
 
 	public StatisticModel procentForPie(long userId) {
@@ -742,5 +786,52 @@ public class EjbDAO {
 			}
 		}
 		return listGetAllIncome;
+	}
+
+	public ArrayList<ConsumptionModel> getAllConsumption(EntityUser user) {
+		ConsumptionModel consumption;
+		ArrayList<ConsumptionModel> listGetAllConsumption = new ArrayList<ConsumptionModel>();
+		Query query = em.createNativeQuery(
+				"select distinct o.FIN_OBJECT_ID, o.OBJECT_NAME t, d.VALUE_DATE, s.VALUE a, m.VALUE b, o.PARENT_ID, i.OBJECT_NAME r\n"
+						+ "from SP_FIN_OBJECTS o, SP_PARAMS d, SP_PARAMS s, SP_PARAMS m, SP_FIN_OBJECTS i\n"
+						+ "where o.USER_ID=? \n"
+						+ "and o.FIN_OBJECT_ID=d.FIN_OBJECT_ID and o.FIN_OBJECT_ID=s.FIN_OBJECT_ID and o.FIN_OBJECT_ID=m.FIN_OBJECT_ID and o.PARENT_ID=i.FIN_OBJECT_ID\n"
+						+ "and s.ATTRIBUTE_ID=8 and m.ATTRIBUTE_ID=9 and d.ATTRIBUTE_ID=7\n"
+						+ "and o.FIN_OBJECT_TYPE_ID=" + objectTypeConsumption);
+		query.setParameter(1, user.getUserId());
+		List<?> result = query.getResultList();
+		System.out.println(result.size());
+		if (result.size() > 0) {
+			Iterator<?> i = result.iterator();
+			while (i.hasNext()) {
+				Object[] res = (Object[]) i.next();
+
+				consumption = new ConsumptionModel();
+				consumption.setConsumptionId(((BigDecimal) res[0]).intValue());
+				consumption.setConsumptionName((String) res[1]);
+				consumption.setDateConsumption(new Date(((Timestamp) res[2]).getTime()));
+				consumption.setConsumptionSum(Integer.valueOf((String) res[3]));
+				consumption.setMonth(Boolean.parseBoolean((String) res[4]));
+				// income.setIncomesInvoice(getInvoice((((BigDecimal)
+				// res[5])).intValue(), user));
+				EntityObject parent = (EntityObject) getObject(EntityObject.class, ((BigDecimal) res[5]).longValue());
+				parent.getChildObjects().size();
+				consumption.setParentObj(parent);
+				listGetAllConsumption.add(consumption);
+			}
+		}
+		return listGetAllConsumption;
+	}
+
+	public List<EntityObject> getUserCases(long userId) {
+		ArrayList<EntityObject> listObjects = new ArrayList<EntityObject>();
+		Query query = em.createNamedQuery("Objects.getCases");
+		query.setParameter("finObjectTypeId1", objectTypeCategory);
+		query.setParameter("finObjectTypeId2", objectTypeCase);
+		query.setParameter("userId", userId);
+		List<?> result = query.getResultList();
+		for (Object obj : result)
+			listObjects.add((EntityObject) obj);
+		return listObjects;
 	}
 }

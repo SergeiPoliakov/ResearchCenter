@@ -131,17 +131,14 @@
 			style="display: none">
 			<div class="block-title">Категории</div>
 			<div class="block-information" id="bi-category-module">
-				<jsp:include page="module-categories/module.jsp" />
+
 			</div>
 		</div>
 
 		<div class="module generalModule" id="credit-module"
 			style="display: none">
 			<div class="block-title">Кредиты</div>
-			<div class="block-information" id="credit-module">
-
-
-			</div>
+			<div class="block-information" id="credit-module"></div>
 		</div>
 
 
@@ -159,12 +156,20 @@
 			</div>
 		</div>
 
+		<div class="module generalModule" id="consumptionA"
+			style="display: none;">
+			<div class="block-title">Управление расходами</div>
+			<div class="block-information">
+				<jsp:include page="int/consumption.jsp" />
+			</div>
+		</div>
+
 
 		<div class="module generalModule" id="priority-module"
 			style="display: none">
 			<div class="block-title">Приоритеты</div>
 			<div class="block-information" id="bi-category-module">
-				<jsp:include page="module-priority/module.jsp" />
+
 			</div>
 		</div>
 
@@ -210,21 +215,22 @@
 	<c:set var="checkSalaryBro" value="${checkSalary}" scope="page" />
 	<c:if test="${checkSalaryBro == 'error'}">
 		<div id="helloCase">
-		<div style="margin-left: 5px;">
-			<label class="welcomeCase" id="welcomeCase1"><span style="margin-left: 40px"><b>Добро
-					пожаловать на сайт <span style="margin-left: 20px">приоритетов!</span>
-			</b></label>
-			<p>
-				<label class="welcomeCase" id="welcomeCase2">Пожалуйста,
-					введите вашу зарплату:</label>
-			</p>
-			<form action="../cust" onsubmit="return regularAddSalary()">
-				<input type="hidden" value="addSalary" name="custom" /> <input
-					type="text" id="welcomeCaseInput" name="salary"
-					onkeypress="validate(this)" /><label class="welcomeCase"
-					style="margin-left: 3px">руб.</label> <button class="btn btn-reset" type="submit"
-					 id="addSalarySubmit">Ввести</button>
-			</form>
+			<div style="margin-left: 5px;">
+				<label class="welcomeCase" id="welcomeCase1"><span
+					style="margin-left: 40px"><b>Добро пожаловать на сайт <span
+							style="margin-left: 20px">приоритетов!</span>
+					</b></label>
+				<p>
+					<label class="welcomeCase" id="welcomeCase2">Пожалуйста,
+						введите вашу зарплату:</label>
+				</p>
+				<form action="../cust" onsubmit="return regularAddSalary()">
+					<input type="hidden" value="addSalary" name="custom" /> <input
+						type="text" id="welcomeCaseInput" name="salary"
+						onkeypress="validate(this)" /><label class="welcomeCase"
+						style="margin-left: 3px">руб.</label>
+					<button class="btn btn-reset" type="submit" id="addSalarySubmit">Ввести</button>
+				</form>
 			</div>
 		</div>
 	</c:if>

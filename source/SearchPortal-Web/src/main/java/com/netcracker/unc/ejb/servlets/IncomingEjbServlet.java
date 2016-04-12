@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.netcracker.unc.newmvc.ejb.models.ConsumptionModel;
 import com.netcracker.unc.newmvc.ejb.models.IncomeModel;
 import com.netcracker.unc.newmvc.ejb.controllers.ControllerObjects;
 import com.netcracker.unc.newmvc.ejb.dao.EjbDAO;
+import com.netcracker.unc.newmvc.ejb.entities.EntityObject;
 import com.netcracker.unc.newmvc.ejb.entities.EntityUser;
 import com.netcracker.unc.newmvc.ejb.models.InvoiceModel;
 import com.netcracker.unc.newmvc.ejb.models.UserModel;
@@ -46,12 +48,19 @@ public class IncomingEjbServlet extends HttpServlet {
 		request.getSession().setAttribute("allIncome", ejb.getAllIncome(user.getUser()));
 	}
 
+	private void createConsumption(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.getSession().setAttribute("allConsumption", ejb.getAllConsumption(user.getUser()));
+		request.getSession().setAttribute("allCases", ejb.getUserCases(user.getUser().getUserId()));
+	}
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		user.setUser((EntityUser) request.getSession().getAttribute("user"));
 		createSumBalance(request, response);
 		createIncome(request, response);
+		createConsumption(request, response);
 
 		if (request.getParameter("incoming") != null) {
 			String incoming = request.getParameter("incoming");
@@ -225,11 +234,46 @@ public class IncomingEjbServlet extends HttpServlet {
 					response.sendRedirect("ejb/welcome.jsp");
 				}
 			}
-		} else
+		}
+		if (request.getParameter("consumptions") != null) {
+			if (request.getParameter("consumptions").equals("addConsumptions")) {
 
-		{
-			user.setUser((EntityUser) request.getSession().getAttribute("user"));
-			createSumBalance(request, response);
+				ConsumptionModel consumption = new ConsumptionModel();
+				String consumptionName = String.valueOf(request.getParameter("consumption-name"));
+				consumption.setConsumptionName(consumptionName);
+
+				int consumptionSum = Integer.valueOf(request.getParameter("consumption-balance"));
+				consumption.setConsumptionSum(consumptionSum);
+
+				String regularSalary = request.getParameter("consumption-regular");
+				consumption.setMonth(Boolean.parseBoolean(regularSalary));
+
+				Date consumptionDate = Date.valueOf(request.getParameter("consumption-date"));
+				consumption.setDateConsumption(consumptionDate);
+
+				EntityObject parent;
+				int parentId = Integer.valueOf(request.getParameter("consumption-parent"));
+				parent = (EntityObject) ejb.getObject(EntityObject.class, parentId);
+				consumption.setUserId((int) user.getUser().getUserId());
+				consumption.setParentObj(parent);
+
+				ejb.addConsumption(consumption, user.getUser());
+				response.sendRedirect("ejb/welcome.jsp");
+
+			} else if (request.getParameter("consumptions").equals("deleteConsumptions")) {
+				if (!request.getParameter("consumption-number").equals("")) {
+					Integer consNumber = Integer.valueOf(request.getParameter("consumption-number"));
+					try {
+						EntityObject obj = (EntityObject) ejb.getObject(EntityObject.class, consNumber);
+						ejb.deleteObject(obj);
+					} catch (Exception c) {
+						c.printStackTrace();
+					} finally {
+						response.sendRedirect("ejb/welcome.jsp");
+					}
+				} else
+					response.sendRedirect("ejb/welcome.jsp");
+			}
 		}
 	}
 }

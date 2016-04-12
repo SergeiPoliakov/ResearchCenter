@@ -92,6 +92,8 @@ function showHideModule(element) {
 		if (document.getElementById('createCase').style.display.valueOf() == 'none'
 				.valueOf()
 				&& document.getElementById('editCase').style.display.valueOf() == 'none'
+						.valueOf()
+				&& document.getElementById('consumptionA').style.display.valueOf() == 'none'
 						.valueOf()) {
 			stopLeftMenuAnimation();
 			document.getElementById('leftMenuDiv').style.marginLeft = '-10px';
@@ -106,13 +108,17 @@ function showHideModule(element) {
 
 			leftMenuButtons[0].setAttribute("title", "Создание задачи");
 			leftMenuButtons[1].setAttribute("title", "Активные задачи");
+			leftMenuButtons[2].setAttribute("title", "Управление расходами");
 			leftMenuButtons[0].setAttribute("onclick",
 					"showConsumptionDivs(this)");
 			leftMenuButtons[1].setAttribute("onclick",
 					"showConsumptionDivs(this)");
+			leftMenuButtons[2].setAttribute("onclick",
+					"showConsumptionDivs(this)");
 
 			leftMenuButtons[0].style.display = '';
 			leftMenuButtons[1].style.display = '';
+			leftMenuButtons[2].style.display = '';
 		} else {
 			for (var i = 0; i < generalModules.length; i++) {
 				generalModules[i].style.display = 'none';
@@ -372,10 +378,18 @@ function showConsumptionDivs(element) {
 	case '1'.valueOf():
 		document.getElementById('createCase').style.display = '';
 		document.getElementById('editCase').style.display = 'none';
+		document.getElementById('consumptionA').style.display = 'none';
 		break;
 	case '2'.valueOf():
 		document.getElementById('createCase').style.display = 'none';
 		document.getElementById('editCase').style.display = '';
+		document.getElementById('consumptionA').style.display = 'none';
+		break;
+	case '3'.valueOf():
+		document.getElementById('createCase').style.display = 'none';
+		document.getElementById('editCase').style.display = 'none';
+		document.getElementById('consumptionA').style.display = '';
+		break;
 	}
 }
 

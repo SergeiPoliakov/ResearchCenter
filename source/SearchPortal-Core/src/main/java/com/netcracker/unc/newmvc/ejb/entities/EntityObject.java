@@ -25,7 +25,8 @@ import javax.validation.constraints.NotNull;
 		@Index(name = "userId", columnList = "user_id") })
 @NamedQueries({
 		@NamedQuery(name = "Objects.getActiveObjectsByUserId", query = "SELECT a1 FROM EntityObject a1 JOIN a1.objectParams a2 JOIN a1.user a3 JOIN a1.objectType a4 WHERE a3.userId = :userId AND a2.valueDate IS NOT NULL AND a2.valueDate > CURRENT_DATE AND a4.finObjectTypeId = :objectType"),
-		@NamedQuery(name = "Objects.getGeneralObjects", query = "SELECT a1 FROM EntityObject a1 JOIN a1.objectType a2 JOIN a1.user a3 WHERE a2.finObjectTypeId = :finObjectTypeId AND a3.userId = :userId") })
+		@NamedQuery(name = "Objects.getGeneralObjects", query = "SELECT a1 FROM EntityObject a1 JOIN a1.objectType a2 JOIN a1.user a3 WHERE a2.finObjectTypeId = :finObjectTypeId AND a3.userId = :userId"),
+		@NamedQuery(name = "Objects.getCases", query = "SELECT a1 FROM EntityObject a1 JOIN a1.objectType a2 JOIN a1.user a3 WHERE a2.finObjectTypeId = :finObjectTypeId1 OR a2.finObjectTypeId = :finObjectTypeId2 AND a3.userId = :userId") })
 public class EntityObject implements Serializable {
 
 	/**
