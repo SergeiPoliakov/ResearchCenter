@@ -55,7 +55,7 @@
 			categoryList = (List<CategoryModel>) request.getSession().getAttribute("categoryList");
 			EntityUser user = (EntityUser) request.getSession().getAttribute("user");
 	%>
-	<%=HtmlConverter.toHtmlTableWithUpdateForms(CategoryModel.class, categoryList, user.getUserId())%>
+	<%=HtmlConverter.toSimpleHtmlTable(categoryList)%>
 	<%
 		}
 	%>
