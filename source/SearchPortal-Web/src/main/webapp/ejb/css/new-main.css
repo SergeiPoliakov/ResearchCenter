@@ -8391,13 +8391,15 @@ button.close {
 }
 
 .block-title {
+	color: #fef8a0;
+	font-weight: 700;
 	border: 2px solid #000;
 	background-color: #92D36E;
 	height: 70px;
 	width: 80%;
 	min-width: 400px;
 	text-align: center;
-	font-size: 18px;
+	font-size: 24px;
 	border-radius: 20px 20px 0 0;
 	padding: 15px 0 15px 0;
 	border-bottom: 0px;
@@ -8406,10 +8408,11 @@ button.close {
 }
 
 .block-information {
+	
 	height: 70%;
 	min-height: 200px;
 	min-width: 400px;
-	max-height: 1000px; /*ÑÐ°Ð·Ð¾Ð±ÑÐ°ÑÑÑÑ*/
+	max-height: 1000px; 
 	width: 80%;
 	border: 2px solid #000;
 	padding: 40px;

@@ -16,7 +16,7 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 <link rel="icon" href="../../favicon.ico" />
-<title>Сайт приоритетов</title>
+<title>Менеджер расходов</title>
 <link href="css/new-main.css" rel="stylesheet" />
 </head>
 <body>
