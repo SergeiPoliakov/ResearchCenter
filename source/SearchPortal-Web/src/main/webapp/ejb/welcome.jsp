@@ -134,13 +134,6 @@
 			</div>
 		</div>
 
-		<div class="module generalModule" id="credit-module"
-			style="display: none">
-			<div class="block-title">Кредиты</div>
-			<div class="block-information" id="credit-module"></div>
-		</div>
-
-
 		<div class="module generalModule" id="invoices" style="display: none">
 			<div class="block-title">Управление счетами</div>
 			<div class="block-information" id="bi-category-module">
@@ -163,7 +156,13 @@
 			</div>
 		</div>
 
-
+		<div class="module generalModule" id="credit-module"
+			style="display: none;">
+			<div class="block-title">Кредиты</div>
+			<div class="block-information">
+				<jsp:include page="int/credit.jsp" />
+			</div>
+		</div>
 		
 
 	<div class="module generalModule" id="incoming" style="display: none">

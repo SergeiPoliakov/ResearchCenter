@@ -9,7 +9,7 @@ function validate(input) {
 	var key = element.which;
 	key = String.fromCharCode(key);
 	var regex = /[0-9]/; // regular
-	if (!regex.test(key) || input1.value.length > 3) {
+	if (!regex.test(key) || input1.value.length > 9) {
 		if (element.preventDefault) { // cancel change by event screen
 			element.preventDefault();
 		} else {
@@ -25,19 +25,10 @@ if (document.getElementById('bankrupt') != null) {
 	var header1 = document.querySelector('.navbar-collapse');
 	var header2 = document.querySelector('.navbar-header');
 	var header3 = document.querySelector('#Insert_logo');
-	var headerm = document.querySelectorAll('.block-title');
-	var logo = document.getElementById('Insert_logo');
 	header1.style.backgroundColor = 'red';
 	header2.style.backgroundColor = 'red';
 	header3.style.backgroundColor = 'red';
-
-	for (var i = 0; i < headerm.length; i++) {
-		headerm[i].style.backgroundColor = 'red';
-		headerm[i].style.color = '#000';
-	}
-
 	footer.style.backgroundColor = 'red';
-	logo.setAttribute("src", "../img/logo-red.png");
 }
 
 // action for red big button
@@ -89,13 +80,6 @@ if (document.getElementById("controlSalaryMain") != null) {
 	}, 20);
 }
 
-// get left buttons icons
-var span1 = document.getElementById("butspan1");
-var span2 = document.getElementById("butspan2");
-var span3 = document.getElementById("butspan3");
-var span4 = document.getElementById("butspan4");
-var span5 = document.getElementById("butspan5");
-
 // show-hide general modules
 var leftMenuButtons = document.getElementsByClassName('leftMenuButton');
 function showHideModule(element) {
@@ -124,11 +108,6 @@ function showHideModule(element) {
 			document.getElementById('createCase').style.display = '';
 			showLeftMenuDiv();
 
-			span1.setAttribute("class", "glyphicon glyphicon-plus-sign");
-			span2.setAttribute("class", "glyphicon glyphicon-pencil");
-			span3.setAttribute("class", "glyphicon glyphicon-briefcase");
-			span4.setAttribute("class", "glyphicon glyphicon-hdd");
-
 			leftMenuButtons[0].setAttribute("title", "Создание задачи");
 			leftMenuButtons[1].setAttribute("title", "Активные задачи");
 			leftMenuButtons[2].setAttribute("title", "Управление расходами");
@@ -146,7 +125,31 @@ function showHideModule(element) {
 			leftMenuButtons[1].style.display = '';
 			leftMenuButtons[2].style.display = '';
 			leftMenuButtons[3].style.display = '';
-
+		} else {
+			for (var i = 0; i < generalModules.length; i++) {
+				generalModules[i].style.display = 'none';
+			}
+			for (var i = 0; i < leftMenuButtons.length; i++) {
+				leftMenuButtons[i].style.display = 'none';
+			}
+		}
+		break;
+	case 'incomeMinus'.valueOf():
+		if (document.getElementById('incomingMinus').style.display.valueOf() == 'none'
+				.valueOf()) {
+			stopLeftMenuAnimation();
+			document.getElementById('leftMenuDiv').style.marginLeft = '-10px';
+			for (var i = 0; i < generalModules.length; i++) {
+				generalModules[i].style.display = 'none';
+			}
+			for (var i = 0; i < leftMenuButtons.length; i++) {
+				leftMenuButtons[i].style.display = 'none';
+			}
+			showLeftMenuDiv();
+			document.getElementById('incomingMinus').style.display = '';
+			leftMenuButtons[0].setAttribute("onclick",
+					'showIncomeMinusDivs(this)');
+			leftMenuButtons[0].style.display = '';
 		} else {
 			for (var i = 0; i < generalModules.length; i++) {
 				generalModules[i].style.display = 'none';
@@ -167,8 +170,6 @@ function showHideModule(element) {
 			for (var i = 0; i < leftMenuButtons.length; i++) {
 				leftMenuButtons[i].style.display = 'none';
 			}
-			span1.setAttribute("class", "glyphicon glyphicon-credit-card");
-
 			showLeftMenuDiv();
 			leftMenuButtons[0].setAttribute("title", "Редактирование профиля");
 			document.getElementById('editUser').style.display = '';
@@ -197,10 +198,6 @@ function showHideModule(element) {
 			}
 			showLeftMenuDiv();
 			document.getElementById('priority-module').style.display = '';
-
-			span1.setAttribute("class", "glyphicon glyphicon-upload");
-			span2.setAttribute("class", "glyphicon glyphicon-signal");
-
 			leftMenuButtons[0].setAttribute("title", "Приоритеты");
 			leftMenuButtons[1].setAttribute("title", "Статистика бюджета");
 			leftMenuButtons[0].setAttribute("onclick",
@@ -231,10 +228,6 @@ function showHideModule(element) {
 			}
 			showLeftMenuDiv();
 			document.getElementById('category-module').style.display = '';
-
-			span1.setAttribute("class", "glyphicon glyphicon-send");
-			span2.setAttribute("class", "glyphicon glyphicon-transfer");
-
 			leftMenuButtons[0].setAttribute("title", "Категории");
 			leftMenuButtons[1].setAttribute("title", "Управление счетами");
 			leftMenuButtons[0]
@@ -264,11 +257,7 @@ function showHideModule(element) {
 				leftMenuButtons[i].style.display = 'none';
 			}
 			showLeftMenuDiv();
-
-			span1.setAttribute("class", "glyphicon glyphicon-plus");
-
 			document.getElementById('incoming').style.display = '';
-
 			leftMenuButtons[0].setAttribute("title",
 					"Пополнение денежных средств");
 			leftMenuButtons[0].setAttribute("onclick",
@@ -295,9 +284,6 @@ function showHideModule(element) {
 				leftMenuButtons[i].style.display = 'none';
 			}
 			showLeftMenuDiv();
-
-			span1.setAttribute("class", "glyphicon glyphicon-minus");
-
 			document.getElementById('incomingMinus').style.display = '';
 			leftMenuButtons[0].setAttribute("onclick",
 					'showIncomeMinusDivs(this)');
@@ -325,11 +311,6 @@ function showHideModule(element) {
 				leftMenuButtons[i].style.display = 'none';
 			}
 			showLeftMenuDiv();
-
-			span1
-					.setAttribute("class",
-							"glyphicon glyphicon-registration-mark");
-
 			document.getElementById('incomeA').style.display = '';
 			leftMenuButtons[0].setAttribute("onclick", 'showIncomesDivs(this)');
 			leftMenuButtons[0].setAttribute("title", "Управление доходами");
@@ -348,36 +329,36 @@ function showHideModule(element) {
 
 // show divs for incomes button
 function showIncomesDivs(element) {
-	switch (element.id.valueOf()) {
-	case 'butid1'.valueOf():
+	switch (element.innerHTML.valueOf()) {
+	case '1'.valueOf():
 		document.getElementById('incomeA').style.display = '';
 	}
 }
 
 // show divs for plus button
 function showIncomePlusDivs(element) {
-	switch (element.id.valueOf()) {
-	case 'butid1'.valueOf():
+	switch (element.innerHTML.valueOf()) {
+	case '1'.valueOf():
 		document.getElementById('incoming').style.display = '';
 	}
 }
 
 // show divs for minus button
 function showIncomeMinusDivs(element) {
-	switch (element.id.valueOf()) {
-	case 'butid1'.valueOf():
+	switch (element.innerHTML.valueOf()) {
+	case '1'.valueOf():
 		document.getElementById('incomingMinus').style.display = '';
 	}
 }
 
 // show divs for statistic button
 function showStatisticDivs(element) {
-	switch (element.id.valueOf()) {
-	case 'butid1'.valueOf():
+	switch (element.innerHTML.valueOf()) {
+	case '1'.valueOf():
 		document.getElementById('priority-module').style.display = '';
 		document.getElementById('statPie').style.display = 'none';
 		break;
-	case 'butid2'.valueOf():
+	case '2'.valueOf():
 		document.getElementById('priority-module').style.display = 'none';
 		document.getElementById('statPie').style.display = '';
 		break;
@@ -386,12 +367,12 @@ function showStatisticDivs(element) {
 
 // show divs for statistic button
 function showResourceDivs(element) {
-	switch (element.id.valueOf()) {
-	case 'butid1'.valueOf():
+	switch (element.innerHTML.valueOf()) {
+	case '1'.valueOf():
 		document.getElementById('category-module').style.display = '';
 		document.getElementById('invoices').style.display = 'none';
 		break;
-	case 'butid2'.valueOf():
+	case '2'.valueOf():
 		document.getElementById('category-module').style.display = 'none';
 		document.getElementById('invoices').style.display = '';
 	}
@@ -399,38 +380,38 @@ function showResourceDivs(element) {
 
 // show divs for consumption button
 function showConsumptionDivs(element) {
-	switch (element.id.valueOf()) {
-	case 'butid1'.valueOf():
+	switch (element.innerHTML.valueOf()) {
+	case '1'.valueOf():
 		document.getElementById('createCase').style.display = '';
+		document.getElementById('credit-module').style.display = 'none';
 		document.getElementById('editCase').style.display = 'none';
 		document.getElementById('consumptionA').style.display = 'none';
-		document.getElementById('credit-module').style.display = 'none';
 		break;
-	case 'butid2'.valueOf():
+	case '2'.valueOf():
 		document.getElementById('createCase').style.display = 'none';
+		document.getElementById('credit-module').style.display = 'none';
 		document.getElementById('editCase').style.display = '';
 		document.getElementById('consumptionA').style.display = 'none';
-		document.getElementById('credit-module').style.display = 'none';
 		break;
-	case 'butid3'.valueOf():
+	case '3'.valueOf():
 		document.getElementById('createCase').style.display = 'none';
+		document.getElementById('credit-module').style.display = 'none';
 		document.getElementById('editCase').style.display = 'none';
 		document.getElementById('consumptionA').style.display = '';
-		document.getElementById('credit-module').style.display = 'none';
 		break;
-	case 'butid4'.valueOf():
+	case '4'.valueOf():
 		document.getElementById('createCase').style.display = 'none';
+		document.getElementById('credit-module').style.display = '';
 		document.getElementById('editCase').style.display = 'none';
 		document.getElementById('consumptionA').style.display = 'none';
-		document.getElementById('credit-module').style.display = '';
 		break;
 	}
 }
 
 // show divs for personal area button
 function showPersonalAreaDivs(element) {
-	switch (element.id.valueOf()) {
-	case 'butid1'.valueOf():
+	switch (element.innerHTML.valueOf()) {
+	case '1'.valueOf():
 		document.getElementById('editUser').style.display = '';
 		break;
 	}
