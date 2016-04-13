@@ -27,16 +27,30 @@ audio, canvas, progress, video {
 
 audio
 
+
+
 :not
+
+
 
 (
 [
 controls
 ]
 
+
+
 ){
-display:none;
-height:0;
+display
+:none
+;
+
+
+height
+:
+0;
+
+
 }
 [hidden], template {
 	display: none;
@@ -97,16 +111,28 @@ img {
 
 svg
 
+
+
 :not
+
+
 
 (
 :root
 
+
+
 ){
 overflow
 
+
+
 :
+
+
 hidden
+
+
 ;
 }
 figure {
@@ -276,8 +302,8 @@ td, th {
 
 @font-face {
 	font-family: 'Glyphicons Halflings';
-	src: url('../../fonts/bootstrap/glyphicons-halflings-regular.eot ');
-	src: url('../../fonts/bootstrap/glyphicons-halflings-regular.eot ?#iefix')
+	src: url('../../fonts/glyphicons-halflings-regular.eot');
+	src: url('../../fonts/glyphicons-halflings-regular.eot?#iefix')
 		format('embedded-opentype'),
 		url('../../fonts/glyphicons-halflings-regular.woff2') format('woff2'),
 		url('../../fonts/glyphicons-halflings-regular.woff') format('woff'),
@@ -4015,7 +4041,11 @@ tbody.collapse.in {
 
 
 
+
+
 :not
+
+
 
 
 
@@ -4038,8 +4068,12 @@ tbody.collapse.in {
 
 
 
+
+
 )
 :not
+
+
 
 
 
@@ -4062,6 +4096,8 @@ tbody.collapse.in {
 
 
 
+
+
 )
 :not
 
@@ -4074,8 +4110,12 @@ tbody.collapse.in {
 
 
 
+
+
 (
 .dropdown-toggle
+
+
 
 
 
@@ -4099,7 +4139,11 @@ border-radius
 
 
 
+
+
 :
+
+
 
 
 
@@ -4129,6 +4173,8 @@ border-radius
 
 
 
+
+
 :first-child
 
 
@@ -4140,7 +4186,11 @@ border-radius
 
 
 
+
+
 :not
+
+
 
 
 
@@ -4163,6 +4213,8 @@ border-radius
 
 
 
+
+
 )
 :not
 
@@ -4175,8 +4227,12 @@ border-radius
 
 
 
+
+
 (
 .dropdown-toggle
+
+
 
 
 
@@ -4200,7 +4256,11 @@ border-top-right-radius
 
 
 
+
+
 :
+
+
 
 
 
@@ -4223,7 +4283,11 @@ border-bottom-right-radius
 
 
 
+
+
 :
+
+
 
 
 
@@ -4249,7 +4313,11 @@ border-bottom-right-radius
 
 
 
+
+
 :last-child
+
+
 
 
 
@@ -4271,8 +4339,12 @@ border-bottom-right-radius
 
 
 
+
+
 (
 :first-child
+
+
 
 
 
@@ -4297,7 +4369,11 @@ border-bottom-right-radius
 
 
 
+
+
 :not
+
+
 
 
 
@@ -4310,6 +4386,8 @@ border-bottom-right-radius
 
 (
 :first-child
+
+
 
 
 
@@ -4333,7 +4411,11 @@ border-top-left-radius
 
 
 
+
+
 :
+
+
 
 
 
@@ -4356,7 +4438,11 @@ border-bottom-left-radius
 
 
 
+
+
 :
+
+
 
 
 
@@ -4458,7 +4544,11 @@ border-bottom-left-radius
 
 
 
+
+
 :not
+
+
 
 
 
@@ -4481,6 +4571,8 @@ border-bottom-left-radius
 
 
 
+
+
 )
 :not
 
@@ -4493,8 +4585,12 @@ border-bottom-left-radius
 
 
 
+
+
 (
 :last-child
+
+
 
 
 
@@ -4518,7 +4614,11 @@ border-radius
 
 
 
+
+
 :
+
+
 
 
 
@@ -4544,7 +4644,11 @@ border-radius
 
 
 
+
+
 :first-child
+
+
 
 
 
@@ -4566,8 +4670,12 @@ border-radius
 
 
 
+
+
 (
 :last-child
+
+
 
 
 
@@ -4591,7 +4699,11 @@ border-top-left-radius
 
 
 
+
+
 :
+
+
 
 
 
@@ -4604,6 +4716,8 @@ border-top-left-radius
 
 4
 px
+
+
 
 
 
@@ -4626,7 +4740,11 @@ border-top-right-radius
 
 
 
+
+
 :
+
+
 
 
 
@@ -4649,6 +4767,8 @@ px
 
 
 
+
+
 ;
 border-bottom-right-radius
 
@@ -4661,7 +4781,11 @@ border-bottom-right-radius
 
 
 
+
+
 :
+
+
 
 
 
@@ -4684,7 +4808,11 @@ border-bottom-left-radius
 
 
 
+
+
 :
+
+
 
 
 
@@ -4710,7 +4838,11 @@ border-bottom-left-radius
 
 
 
+
+
 :last-child
+
+
 
 
 
@@ -4732,8 +4864,12 @@ border-bottom-left-radius
 
 
 
+
+
 (
 :first-child
+
+
 
 
 
@@ -4757,7 +4893,11 @@ border-top-left-radius
 
 
 
+
+
 :
+
+
 
 
 
@@ -4780,7 +4920,11 @@ border-top-right-radius
 
 
 
+
+
 :
+
+
 
 
 
@@ -4803,7 +4947,11 @@ border-bottom-right-radius
 
 
 
+
+
 :
+
+
 
 
 
@@ -4816,6 +4964,8 @@ border-bottom-right-radius
 
 4
 px
+
+
 
 
 
@@ -4838,7 +4988,11 @@ border-bottom-left-radius
 
 
 
+
+
 :
+
+
 
 
 
@@ -4851,6 +5005,8 @@ border-bottom-left-radius
 
 4
 px
+
+
 
 
 
@@ -4993,7 +5149,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
 :not
+
+
 
 
 
@@ -5016,6 +5176,8 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
 )
 :not
 
@@ -5028,8 +5190,12 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
 (
 :last-child
+
+
 
 
 
@@ -5052,7 +5218,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
 :not
+
+
 
 
 
@@ -5075,6 +5245,8 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
 )
 :not
 
@@ -5087,8 +5259,12 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
 (
 :last-child
+
+
 
 
 
@@ -5111,6 +5287,8 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
 .form-control
 
 
@@ -5122,7 +5300,11 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
 :not
+
+
 
 
 
@@ -5145,6 +5327,8 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
 )
 :not
 
@@ -5157,8 +5341,12 @@ textarea.input-group-sm>.form-control, textarea.input-group-sm>.input-group-addo
 
 
 
+
+
 (
 :last-child
+
+
 
 
 
@@ -5182,7 +5370,11 @@ border-radius
 
 
 
+
+
 :
+
+
 
 
 
@@ -8391,6 +8583,8 @@ button.close {
 }
 
 .block-title {
+	color: #fef8a0;
+	font-weight: 700;
 	border: 2px solid #000;
 	background-color: #92D36E;
 	height: 70px;
@@ -8409,7 +8603,7 @@ button.close {
 	height: 70%;
 	min-height: 200px;
 	min-width: 400px;
-	max-height: 1000px; /*ÑÐ°Ð·Ð¾Ð±ÑÐ°ÑÑÑÑ*/
+	max-height: 1000px;
 	width: 80%;
 	border: 2px solid #000;
 	padding: 40px;
@@ -8540,10 +8734,10 @@ progress.inoutProgress::-webkit-progress-value {
 }
 
 #controlSalaryButton {
-	width: 32%;
+	width: 25%;
 	font-size: 10px;
 	height: 20px;
-	margin-left: 2%;
+	margin-left: 7%;
 	margin-top: 5px;
 	margin-bottom: 5px;
 }
@@ -8554,7 +8748,7 @@ progress.inoutProgress::-webkit-progress-value {
 	height: 20px;
 	margin-left: 15px;
 	margin-right: 3px;
-	background: #fff;
+	background: #fef8a0;
 }
 
 #controlSalaryInputTable {
@@ -8606,21 +8800,10 @@ progress.inoutProgress::-webkit-progress-value {
 }
 
 #controlSalaryMain {
-	position: absolute;
-	margin-top: 25px;
-	width: 40%;
-	right: -25%;
-}
-
-.controlSalary {
 	position: fixed;
-	z-index: 6;
-	top: 210px;
-	right: 250px;
-}
-
-.controlSalaryDiv {
-	width: 100%;
+	margin-top: 25px;
+	width: 50%;
+	right: -25%;
 }
 
 #divMounthCheck {
@@ -8701,8 +8884,8 @@ progress.inoutProgress::-webkit-progress-value {
 #balTextCost {
 	width: 40%;
 	margin: 10px;
-	 font-size: 16px;
-	  line-height : 18px;
+	font-size: 16px;
+	line-height: 18px;
 }
 
 #balSelect {
@@ -8711,7 +8894,7 @@ progress.inoutProgress::-webkit-progress-value {
 }
 
 .main-container {
-	min-height: 53vh;
+	min-height: 69vh;
 }
 
 .btn-block:hover {
@@ -8737,16 +8920,14 @@ progress.inoutProgress::-webkit-progress-value {
 .reset-div {
 	padding-left: 10px;
 	padding-right: 10px;
-	text-align: center;
+	text-align: right;
 	width: 25%;
-	height: 25%;
+	height: 20%;
 	background-color: rgba(254, 248, 160, 0.7);
 	border: 1px #004949 groove;
 	margin: 10px;
 	border-bottom-right-radius: 18px;
 	border-bottom-left-radius: 18px;
-	border-top-right-radius: 18px;
-	border-top-left-radius: 18px;
 }
 
 #leftMenuDiv {
@@ -8758,7 +8939,6 @@ progress.inoutProgress::-webkit-progress-value {
 }
 
 .invoice-table-head {
-	
 	font-size: 17px;
 }
 
@@ -8786,7 +8966,7 @@ progress.inoutProgress::-webkit-progress-value {
 }
 
 #bi-category-module {
-	text-align:center;
+	text-align: center;
 }
 
 .btn-reset {
