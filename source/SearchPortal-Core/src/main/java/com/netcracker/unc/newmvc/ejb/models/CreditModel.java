@@ -4,6 +4,8 @@ import java.sql.Date;
 
 import javax.ejb.Stateful;
 
+import com.netcracker.unc.newmvc.ejb.entities.EntityObject;
+
 @Stateful
 public class CreditModel {
 	
@@ -11,14 +13,14 @@ public class CreditModel {
 	
 	private double creditPercent;//процентная ставка
 	
-	private String receivingDate;//дата получения кредита
+	private Date receivingDate;//дата получения кредита
 	
 	private int payPeriod;//срок платежа в днях
 	
 	
 	
 	//то что можно наследовать от базовой модели
-	private long parentID;
+	private EntityObject parentObj;
 	private String creditName;
 	private int objectTypeID;
 	private long creditID;
@@ -27,13 +29,13 @@ public class CreditModel {
 		
 	}
 	
-	public long getParentID()
+	public EntityObject getParentID()
 	{
-		return this.parentID;
+		return this.parentObj;
 	}
 	
-	public void setParentID(long parentId){
-		this.parentID = parentId;
+	public void setParentID(EntityObject parentObj){
+		this.parentObj = parentObj;
 	}
 	
 	public String getCreditName(){
@@ -56,11 +58,11 @@ public class CreditModel {
 		this.creditPercent = creditPercent;
 	}
 
-	public String getReceivingDate() {
+	public Date getReceivingDate() {
 		return this.receivingDate;
 	}
 
-	public void setReceivingDate(String receivingDate) {
+	public void setReceivingDate(Date receivingDate) {
 		this.receivingDate = receivingDate;
 	}
 

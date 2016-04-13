@@ -40,6 +40,7 @@ public class EjbDAO {
 	private final long objectTypeInvoice = 5; // Счет
 	private final long objectTypeCategory = 1; // Категория
 	private final long objectTypeConsumption = 3; // Расход
+	private final long objectTypeCredit = 6;
 
 	//// database name object types
 	private String category1 = "Транспорт";
@@ -632,47 +633,53 @@ public class EjbDAO {
 				//creditModel.setParentID(((BigDecimal)temp[2]).longValue());
 				creditModel.setCreditValue(Integer.valueOf((String)temp[3]));
 				creditModel.setCreditPercent(Double.valueOf((String)temp[4]));
-				creditModel.setReceivingDate((String)temp[5]);
+				creditModel.setReceivingDate(new Date(((Timestamp) temp[5]).getTime()));
 				creditModel.setPayPeriod(Integer.valueOf((String)temp[6]));
 				
 				resultList.add(creditModel);
 			}
 		}
 		return resultList;
-	}
+	}//работает
 	//добавление кредита в базу
 	public void addCredit(CreditModel model, EntityUser user){
 		EntityParam param = new EntityParam();
-		EntityObject credit = new EntityObject();
 		EntityAttribute atr = new EntityAttribute();
-		if(model != null){
-			credit.setObjectName(model.getCreditName());
-			credit.setParentObject((EntityObject)getObject(EntityObject.class, model.getParentID()));
-			credit.setObjectType((EntityObjectType)getObject(EntityObjectType.class, model.getObjectTypeID()));
-			credit.setUser(user);
-			addObject(credit);
+		EntityObject cons = new EntityObject();
+		if (model != null) {
+			cons.setObjectName(model.getCreditName());
+			cons.setObjectType(em.getReference(EntityObjectType.class, objectTypeCredit));
+			cons.setUser(user);
+			cons.setParentObject(model.getParentID());
+			addObject(cons);
 			updateReferencesToObjects();
-			//сумма
-			atr = (EntityAttribute)getObject(EntityAttribute.class, 17);
-			param.setObject(credit);
+
+			atr = (EntityAttribute) getObject(EntityAttribute.class, 17);
+			param = new EntityParam();
+			param.setObject(cons);
 			param.setAttribute(atr);
 			param.setValue(String.valueOf(model.getCreditValue()));
 			addObject(param);
-			//процент
-			atr = (EntityAttribute)getObject(EntityAttribute.class, 18);
-			param.setObject(credit);
+			updateReferencesToObjects();
+
+			atr = (EntityAttribute) getObject(EntityAttribute.class, 18);
+			param = new EntityParam();
+			param.setObject(cons);
 			param.setAttribute(atr);
 			param.setValue(String.valueOf(model.getCreditPercent()));
 			addObject(param);
-			//дата получения
-			atr = (EntityAttribute)getObject(EntityAttribute.class, 19);
-			param.setObject(credit);
+			updateReferencesToObjects();
+
+			atr = (EntityAttribute) getObject(EntityAttribute.class, 19);
+			param = new EntityParam();
+			param.setObject(cons);
 			param.setAttribute(atr);
-			objContr.setParamDate(model.getReceivingDate(), param);
+			param.setValueDate(model.getReceivingDate());
 			addObject(param);
-			//период
-			atr = (EntityAttribute)getObject(EntityAttribute.class, 20);
-			param.setObject(credit);
+			updateReferencesToObjects();
+			atr = (EntityAttribute) getObject(EntityAttribute.class, 20);
+			param = new EntityParam();
+			param.setObject(cons);
 			param.setAttribute(atr);
 			param.setValue(String.valueOf(model.getPayPeriod()));
 			addObject(param);
@@ -684,7 +691,8 @@ public class EjbDAO {
 		for (EntityObject cred : credit.getChildObjects())
 			deleteObject(cred);
 		deleteObject(credit);
-	}
+	}//работает
+
 
 	// Income
 
