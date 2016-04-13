@@ -16,14 +16,13 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 <link rel="icon" href="../../favicon.ico" />
-<title>Менеджер расходов</title>
+<title>Сайт приоритетов</title>
 <link href="css/new-main.css" rel="stylesheet" />
 </head>
 <body>
 
-	<c:set var="jsp" value="welcome" scope="request"></c:set>
-	<jsp:include page="/load" />
 	<c:set var="jsp" value="welcome" scope="request" />
+	<jsp:include page="/load" />
 	<c:if test="${page != 'page-ok'}">
 		<c:redirect url="../" />
 	</c:if>
@@ -169,43 +168,44 @@
 			style="display: none">
 			<div class="block-title">Приоритеты</div>
 			<div class="block-information" id="bi-category-module">
-				<jsp:include page="module-priority/module.jsp" /></div>
+				
 		</div>
+	</div>
 
-		<div class="module generalModule" id="incoming" style="display: none">
-			<div class="block-title">Мгновенное увеличение баланса</div>
-			<div class="block-information">
-				<jsp:include page="int/incoming.jsp" />
-			</div>
+	<div class="module generalModule" id="incoming" style="display: none">
+		<div class="block-title">Мгновенное увеличение баланса</div>
+		<div class="block-information">
+			<jsp:include page="int/incoming.jsp" />
 		</div>
-		<div class="module generalModule" id="incomingMinus"
-			style="display: none">
-			<div class="block-title">Мгновенное списание денежных средств</div>
-			<div class="block-information">
-				<jsp:include page="int/incomingMinus.jsp" />
-			</div>
+	</div>
+	<div class="module generalModule" id="incomingMinus"
+		style="display: none">
+		<div class="block-title">Мгновенное списание денежных средств</div>
+		<div class="block-information">
+			<jsp:include page="int/incomingMinus.jsp" />
 		</div>
+	</div>
 
-		<div class="module generalModule" id="editUser" style="display: none">
-			<div class="block-title">Редактирование профиля</div>
-			<div class="block-information">
-				<div id="editUser">
-					<jsp:include page="act/update_user.jsp"></jsp:include>
-				</div>
+	<div class="module generalModule" id="editUser" style="display: none">
+		<div class="block-title">Редактирование профиля</div>
+		<div class="block-information">
+			<div id="editUser">
+				<jsp:include page="act/update_user.jsp"></jsp:include>
 			</div>
 		</div>
+	</div>
 
-		<div class="module generalModule" id="statPie" style="display: none">
-			<div class="block-title">Статистика бюджета</div>
-			<div class="block-information">
-				<jsp:include page="vis/statistic.jsp"></jsp:include>
-			</div>
+	<div class="module generalModule" id="statPie" style="display: none">
+		<div class="block-title">Статистика бюджета</div>
+		<div class="block-information">
+			<jsp:include page="vis/statistic.jsp"></jsp:include>
 		</div>
-		<div class="module-right" id="income">
-			<div class="overlayInCons">
-				<jsp:include page="vis/income_consumption.jsp"></jsp:include>
-			</div>
+	</div>
+	<div class="module-right" id="income">
+		<div class="overlayInCons">
+			<jsp:include page="vis/income_consumption.jsp"></jsp:include>
 		</div>
+	</div>
 	</div>
 
 	<div class="controlSalary" id="controlSalaryMain">
@@ -216,9 +216,9 @@
 		<div id="helloCase">
 			<div style="margin-left: 5px;">
 				<label class="welcomeCase" id="welcomeCase1"><span
-					style="margin-left: 40px"><b>Добро пожаловать на сайт <span
-							style="margin-left: 20px">приоритетов!</span>
-					</b></label>
+					style="margin-left: 40px" /><b>Добро пожаловать на сайт <span
+						style="margin-left: 20px">приоритетов!</span>
+				</b></label>
 				<p>
 					<label class="welcomeCase" id="welcomeCase2">Пожалуйста,
 						введите вашу зарплату:</label>

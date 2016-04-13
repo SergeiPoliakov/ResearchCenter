@@ -11,7 +11,7 @@
 	</div>
 
 	<form action="../inc" method="get">
-		<input type="hidden" value="incomingBalance" name="incomingMinus" /> 
+		<input required type="hidden" value="incomingBalance" name="incomingMinus" /> 
 		<select	name="invoiceNumber">
 			<option disabled>Счёт</option>
 			<c:forEach var="invoice"
@@ -20,7 +20,7 @@
 			</c:forEach>
 		</select>
 		<input type="number" name="get-sum-val" value="0" min="0" size="5"
-			step="50" /> <input type="submit" value="вычесть" />
+			step="50" required/> <input type="submit" value="вычесть" />
 	</form>
 
 </div>

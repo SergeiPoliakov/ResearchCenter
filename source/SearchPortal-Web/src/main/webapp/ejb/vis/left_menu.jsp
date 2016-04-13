@@ -12,11 +12,11 @@
 <body>
 	<div style=" width : 33px;">
 	<div class="btn-group btn-group-vertical">
-		<button class="btn leftMenuButton" title="Создание новой задачи" onclick="leftMenuChoose(this)">1</button>
-		<button class="btn leftMenuButton" title="Редактирование задач" onclick="leftMenuChoose(this)">2</button>
-		<button class="btn leftMenuButton" onclick="leftMenuChoose(this)">3</button>
-		<button class="btn leftMenuButton" onclick="leftMenuChoose(this)">4</button>
-		<button class="btn leftMenuButton" onclick="leftMenuChoose(this)">5</button>
+		<button class="btn leftMenuButton" onclick="leftMenuChoose(this)" id="butid1"><span class="glyphicon glyphicon-plus-sign" id="butspan1"></span></button>
+		<button class="btn leftMenuButton" onclick="leftMenuChoose(this)" id="butid2"><span class="glyphicon glyphicon-pencil" id="butspan2"></span></button>
+		<button class="btn leftMenuButton" onclick="leftMenuChoose(this)" id="butid3"><span class="glyphicon glyphicon-briefcase" id="butspan3"></span></button>
+		<button class="btn leftMenuButton" onclick="leftMenuChoose(this)" id="butid4"><span class="glyphicon glyphicon-pencil" id="butspan4"></span></button>
+		<button class="btn leftMenuButton" onclick="leftMenuChoose(this)" id="butid5"><span class="glyphicon glyphicon-pencil" id="butspan5"></span></button>
 	</div>
 </div>
 </body>

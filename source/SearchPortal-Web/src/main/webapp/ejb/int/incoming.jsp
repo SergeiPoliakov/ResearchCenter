@@ -21,7 +21,7 @@
 				<option value="${invoice.getInvoiceId()}">${invoice.getInvoiceName()}</option>
 			</c:forEach>
 		</select>
-		<input type="number" name="add-sum-val" value="0" min="0" size="5"
+		<input required type="number" name="add-sum-val" value="0" min="0" size="5"
 			step="50" /> <input type="submit" value="добавить" />
 	</form>
 

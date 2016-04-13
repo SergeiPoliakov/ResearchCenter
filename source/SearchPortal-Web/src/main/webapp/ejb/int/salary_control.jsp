@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<div class="controlSalaryDiv">
 	<c:if test="${not empty controlSalary }">
 		<form action="../cust" method="get">
 			<input type="hidden" name="custom" value="controlSalary">
@@ -29,8 +29,8 @@
 						onclick="changeRadioControlSalary(this)" checked="checked"><label
 						class="controlSalaryLabel">да</label><input type="radio"
 						id="controlSalaryRadioNo" onclick="changeRadioControlSalary(this)"><label
-						class="controlSalaryLabel">нет</label> <input
-						id="controlSalaryButton" type="submit" value="подтвердить" />
+						class="controlSalaryLabel">нет</label> <button
+						id="controlSalaryButton" type="submit" class="btn-reset">подтвердить</button>
 
 				</div>
 				<div class="controlSalaryTableDiv" id="controlSalaryTableDiv">
@@ -48,7 +48,7 @@
 			</div>
 		</form>
 	</c:if>
-
+</div>
 
 
 </body>

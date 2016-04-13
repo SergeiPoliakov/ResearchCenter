@@ -26,7 +26,7 @@
 				<tr>
 					<td><label>Введите название задачи:</label></td>
 					<td><input type="text" name="name_case" class="form-control"
-						class="caseInput" id="nameCase" />
+						class="caseInput" id="nameCase" required />
 					<td><label id="nameError"></label></td>
 				</tr>
 				<tr>
@@ -69,12 +69,12 @@
 				<tr>
 					<td><label>Выберите дату окончания:</label></td>
 					<td><input type="date" class="form-control" id="date_case"
-						name="date_case"></td>
+						name="date_case" required></td>
 					<td><label id="dateError"></label></td>
 				</tr>
 				<tr>
 					<td><label>Введите стоимость:</label></td>
-					<td><input type="text" class="form-control" name="cost_case"
+					<td><input required type="text" class="form-control" name="cost_case"
 						id="cost_case" onkeypress="validate(this)" class="caseInput" /></td>
 					<td><label id="costError"></label></td>
 				</tr>

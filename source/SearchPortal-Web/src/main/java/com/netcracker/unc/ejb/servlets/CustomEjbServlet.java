@@ -1,6 +1,9 @@
 package com.netcracker.unc.ejb.servlets;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -65,7 +68,6 @@ public class CustomEjbServlet extends HttpServlet {
 			long objId = Long.valueOf(request.getParameter("balObjId"));
 			String cost = request.getParameter("balTextCost");
 			objContr.changeUserBalance(objId, cost);
-
 		}
 
 		response.sendRedirect(mainUrl);

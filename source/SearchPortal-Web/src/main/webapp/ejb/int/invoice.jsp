@@ -42,12 +42,12 @@
 			 onclick="deleteInvoice()">Удалить счёт</button> 
 
 			<form action="../inc" method="get">
-			<input type = "hidden" value='addInvoices' name="invoices">
+			<input type = "hidden" value='addInvoices' name="invoices" >
 				<div id="add-invoice" style="visibility: hidden;">
 					<!-- <input type="hidden" value="addInvoices" name="invoices" />  -->
-					<input type="text" name="invoice-name" size="5"
-						placeholder="Название счета" /> <input type="number"
-						name="invoice-balance" size="5" placeholder="баланс" /> <select
+					<input  type="text" name="invoice-name" size="5"
+						placeholder="Название счета" required/> <input type="number"
+						name="invoice-balance" size="5" placeholder="баланс" required /> <select
 						name="invoice-credit">
 						<option disabled>Кредитный?</option>
 						<option selected value="true">да</option>
@@ -61,7 +61,7 @@
 <form action="../inc" method="get">
 <input type = "hidden" value='deleteInvoices' name="invoicesDelete">	
 <div id="delete-invoice" style="visibility: hidden;">
-		      <input type="number" name="invoice-number"  placeholder="Номер счёта"/>
+		      <input required type="number" name="invoice-number"  placeholder="Номер счёта"/>
 		      <input type="submit" id='deleteInvoicesJsp' value="Удалить"/> 
 	</div>
 	</form>	

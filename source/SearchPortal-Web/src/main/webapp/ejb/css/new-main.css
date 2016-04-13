@@ -276,13 +276,13 @@ td, th {
 
 @font-face {
 	font-family: 'Glyphicons Halflings';
-	src: url('../fonts/glyphicons-halflings-regular.eot');
-	src: url('../fonts/glyphicons-halflings-regular.eot?#iefix')
+	src: url('../../fonts/bootstrap/glyphicons-halflings-regular.eot ');
+	src: url('../../fonts/bootstrap/glyphicons-halflings-regular.eot ?#iefix')
 		format('embedded-opentype'),
-		url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'),
-		url('../fonts/glyphicons-halflings-regular.woff') format('woff'),
-		url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'),
-		url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular')
+		url('../../fonts/glyphicons-halflings-regular.woff2') format('woff2'),
+		url('../../fonts/glyphicons-halflings-regular.woff') format('woff'),
+		url('../../fonts/glyphicons-halflings-regular.ttf') format('truetype'),
+		url('../../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular')
 		format('svg');
 }
 
@@ -8391,15 +8391,13 @@ button.close {
 }
 
 .block-title {
-	color: #fef8a0;
-	font-weight: 700;
 	border: 2px solid #000;
 	background-color: #92D36E;
 	height: 70px;
 	width: 80%;
 	min-width: 400px;
 	text-align: center;
-	font-size: 24px;
+	font-size: 18px;
 	border-radius: 20px 20px 0 0;
 	padding: 15px 0 15px 0;
 	border-bottom: 0px;
@@ -8408,11 +8406,10 @@ button.close {
 }
 
 .block-information {
-	
 	height: 70%;
 	min-height: 200px;
 	min-width: 400px;
-	max-height: 1000px; 
+	max-height: 1000px; /*ÑÐ°Ð·Ð¾Ð±ÑÐ°ÑÑÑÑ*/
 	width: 80%;
 	border: 2px solid #000;
 	padding: 40px;
@@ -8543,10 +8540,10 @@ progress.inoutProgress::-webkit-progress-value {
 }
 
 #controlSalaryButton {
-	width: 25%;
+	width: 32%;
 	font-size: 10px;
 	height: 20px;
-	margin-left: 7%;
+	margin-left: 2%;
 	margin-top: 5px;
 	margin-bottom: 5px;
 }
@@ -8557,7 +8554,7 @@ progress.inoutProgress::-webkit-progress-value {
 	height: 20px;
 	margin-left: 15px;
 	margin-right: 3px;
-	background: #fef8a0;
+	background: #fff;
 }
 
 #controlSalaryInputTable {
@@ -8609,10 +8606,21 @@ progress.inoutProgress::-webkit-progress-value {
 }
 
 #controlSalaryMain {
-	position: fixed;
+	position: absolute;
 	margin-top: 25px;
-	width: 50%;
+	width: 40%;
 	right: -25%;
+}
+
+.controlSalary {
+	position: fixed;
+	z-index: 6;
+	top: 210px;
+	right: 250px;
+}
+
+.controlSalaryDiv {
+	width: 100%;
 }
 
 #divMounthCheck {
@@ -8703,7 +8711,7 @@ progress.inoutProgress::-webkit-progress-value {
 }
 
 .main-container {
-	min-height: 69vh;
+	min-height: 53vh;
 }
 
 .btn-block:hover {
@@ -8729,14 +8737,16 @@ progress.inoutProgress::-webkit-progress-value {
 .reset-div {
 	padding-left: 10px;
 	padding-right: 10px;
-	text-align: right;
+	text-align: center;
 	width: 25%;
-	height: 20%;
+	height: 25%;
 	background-color: rgba(254, 248, 160, 0.7);
 	border: 1px #004949 groove;
 	margin: 10px;
 	border-bottom-right-radius: 18px;
 	border-bottom-left-radius: 18px;
+	border-top-right-radius: 18px;
+	border-top-left-radius: 18px;
 }
 
 #leftMenuDiv {

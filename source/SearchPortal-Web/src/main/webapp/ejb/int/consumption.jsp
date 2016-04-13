@@ -4,7 +4,8 @@
 
 <body>
 	<jsp:include page="/inc"></jsp:include>
-	<table border="1">
+	<div style="width: 100%">
+	<table border="1" class="table invoice-table">
 		<thead align="center">
 			<tr>
 				<th class="title">Номер Расхода</th>
@@ -30,6 +31,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	</div>
 
 	<button id="statistic-menu-button" class="button"
 		onclick="addConsumption()">Добавить расход</button>
@@ -42,13 +44,13 @@
 		<div id="add-consumption" style="visibility: hidden;">
 			<!-- <input type="hidden" value="addInvoices" name="invoices" />  -->
 			<input type="text" name="consumption-name" size="5"
-				placeholder="название" /> <input type="number"
-				name="consumption-balance" size="5" placeholder="сумма" step="50" />
+				placeholder="название" required /> <input type="number"
+				name="consumption-balance" size="5" required placeholder="сумма" step="50" />
 			<select name="consumption-regular">
 				<option disabled>Ежемесячный?</option>
 				<option selected value="true">да</option>
 				<option selected value="false">нет</option>
-			</select> <input type="date" name="consumption-date" placeholder="Дата" /> <select
+			</select> <input required type="date" name="consumption-date" placeholder="Дата" /> <select
 				name="consumption-parent">
 				<option disabled>Счёт</option>
 				<c:forEach var="invoice" items="${allCases}">
@@ -60,7 +62,7 @@
 	<form action="../inc" method="get">
 		<input type="hidden" value='deleteConsumptions' name="consumptions">
 		<div id="delete-consumption" style="visibility: hidden;">
-			<input type="number" name="consumption-number"
+			<input required type="number" name="consumption-number"
 				placeholder="Номер счёта" /> <input type="submit"
 				id='deleteconsumptionsJsp' value="Удалить" />
 		</div>
